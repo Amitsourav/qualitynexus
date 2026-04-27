@@ -1,0 +1,911 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroVisual from "../components/HeroVisual.astro";
+import StatsDashboard from "../components/StatsDashboard.astro";
+import Icon from "../components/Icon.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+
+const offerings = [
+  { icon: "users",          tag: "Consulting",     title: "Audit-defensible advisory",          body: "Senior consultants who know what auditors look for — because they've been auditors." },
+  { icon: "graduation-cap", tag: "Training",       title: "Internal capability that lasts",     body: "Practical auditor and lead-auditor programs your team will use long after we leave." },
+  { icon: "cog",            tag: "Implementation", title: "From gap to certificate",            body: "Documentation, controls, trial audits, and corrective actions — sequenced and executed." },
+];
+
+const process = [
+  { n: "01", icon: "search",          title: "Discover",  body: "Gap analysis against the standard's clauses." },
+  { n: "02", icon: "file-text",       title: "Document",  body: "Tailored QMS — procedures your team actually opens." },
+  { n: "03", icon: "graduation-cap",  title: "Train",     body: "Internal-auditor capability across roles." },
+  { n: "04", icon: "clipboard-check", title: "Audit",     body: "Trial audits + closed corrective actions." },
+  { n: "05", icon: "award",           title: "Certify",   body: "Stage 1 + Stage 2 certification, hand-held." },
+];
+
+const certs = [
+  { code: "ISO 9001",  blurb: "Quality Management",       icon: "check-circle" },
+  { code: "ISO 14001", blurb: "Environmental",            icon: "leaf" },
+  { code: "ISO 45001", blurb: "Occupational H&S",         icon: "hard-hat" },
+  { code: "ISO 27001", blurb: "Information Security",     icon: "lock" },
+  { code: "ISO 13485", blurb: "Medical Devices",          icon: "stethoscope" },
+  { code: "ISO 22000", blurb: "Food Safety",              icon: "utensils" },
+  { code: "ISO 27701", blurb: "Privacy Information",      icon: "eye-off" },
+  { code: "ISO 50001", blurb: "Energy Management",        icon: "battery" },
+  { code: "ISO 22301", blurb: "Business Continuity",      icon: "refresh" },
+  { code: "ISO 31000", blurb: "Risk Management",          icon: "alert-triangle" },
+  { code: "ISO 42001", blurb: "AI Management",            icon: "cpu" },
+  { code: "ISO 37001", blurb: "Anti-Bribery",             icon: "scale" },
+];
+
+const features = [
+  { icon: "rocket",       title: "Faster route to certificate",  body: "Tight, milestone-driven sprints — without skipping audit-defensibility." },
+  { icon: "headphones",   title: "Always-on advisory",            body: "Direct line to your lead consultant. No ticket queues." },
+  { icon: "shield-check", title: "Auditor-grade consultants",     body: "Our team has sat on both sides of the audit table." },
+  { icon: "file-text",    title: "Documentation built to use",    body: "SOPs your team opens — not 200-page binders." },
+];
+
+const trustWords = ["OIL & GAS", "POWER", "AEROSPACE & DEFENCE", "MINING", "BFSI", "INDUSTRIAL"];
+
+const clientPlaceholders = [
+  "IOCL", "HAL", "NHPC", "GAIL Gas",
+  "NRL", "Hindustan Copper", "Balmer Lawrie", "JRGB",
+];
+---
+<BaseLayout
+  title="QualityNexus — ISO Certification Consulting"
+  description="From gap to certificate. Consulting, training, and audits across 100+ international standards — delivered by senior auditors."
+>
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero-bg-grid" aria-hidden="true"></div>
+    <div class="hero-bg-glow hero-bg-glow--1" aria-hidden="true"></div>
+    <div class="hero-bg-glow hero-bg-glow--2" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="status-pill">
+          <span class="status-dot"><span></span></span>
+          Now booking Q2 2026 engagements
+        </span>
+        <span class="eyebrow">ISO Certification Consulting</span>
+        <h1>
+          From gap to certificate.<br/>
+          <span class="hero-accent">Without the busywork.</span>
+        </h1>
+        <p class="lede">
+          Consulting, training, and audits across 100+ international standards —
+          delivered by senior auditors, not junior staff.
+        </p>
+        <div class="hero-ctas">
+          <a href="/contact" class="btn btn-accent btn-shimmer">
+            Book a free call <Icon name="arrow-right" />
+          </a>
+          <a href="/certifications" class="btn btn-ghost">Browse standards</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong><span data-countup="100">0</span>+</strong><span>International standards</span></div>
+          <div><strong><span data-countup="8">0</span></strong><span>PSU &amp; enterprise clients</span></div>
+          <div><strong><span data-countup="12">0</span>+</strong><span>Years per lead consultant</span></div>
+        </div>
+      </div>
+      <HeroVisual />
+    </div>
+  </section>
+
+  <!-- ========== TRUST STRIP ========== -->
+  <section class="trust">
+    <div class="container">
+      <p class="trust-lede">Trusted by certified organizations across</p>
+      <div class="trust-words">
+        {trustWords.map((w) => <span class="trust-word">{w}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== OUR OFFERING ========== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">What we do</span>
+        <h2>Three engagements. One outcome.</h2>
+      </div>
+      <div class="offering-grid">
+        {offerings.map((o) => (
+          <article class="offering-card">
+            <span class="icon-halo"><Icon name={o.icon} /></span>
+            <span class="pill">{o.tag}</span>
+            <h3>{o.title}</h3>
+            <p>{o.body}</p>
+            <a href="/services" class="link-arrow">Learn more <Icon name="arrow-right" /></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROCESS TIMELINE ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">How it works</span>
+        <h2>Five steps. Average 60 days.</h2>
+        <p>A predictable path from kickoff to certificate — with the same lead consultant from start to finish.</p>
+      </div>
+      <ol class="process">
+        {process.map((p, i) => (
+          <li class="process-step">
+            <div class="process-num">{p.n}</div>
+            <div class="process-icon"><Icon name={p.icon} /></div>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+            {i < process.length - 1 && <span class="process-line" aria-hidden="true"></span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ========== TEAM / CREDIBILITY ========== -->
+  <section class="section team-section">
+    <div class="container team-grid">
+      <div class="team-copy">
+        <span class="eyebrow">The team behind the certificate</span>
+        <h2>Senior auditors. Same face, kickoff to certificate.</h2>
+        <p class="team-lede">
+          You won't be passed off to a junior after the kickoff call.
+          The lead consultant on day one is the lead consultant the day your certificate prints —
+          backed by a team that has sat on both sides of the audit table.
+        </p>
+        <ul class="team-creds">
+          <li><Icon name="shield-check" /> IRCA &amp; Exemplar-trained lead auditors</li>
+          <li><Icon name="award" /> 12+ years average sector experience</li>
+          <li><Icon name="globe" /> Engagements across multiple sectors pan-India</li>
+        </ul>
+        <a href="/about" class="btn btn-accent team-cta">Meet the team <Icon name="arrow-right" /></a>
+      </div>
+      <div class="team-visual">
+        <div class="team-photo">
+          <img src="/images/team-collab.jpg" alt="Two consultants reviewing audit documentation together" loading="lazy" decoding="async" width="800" height="900" />
+          <div class="team-photo-grain" aria-hidden="true"></div>
+        </div>
+        <div class="team-badge team-badge--top">
+          <span class="team-badge-num"><span data-countup="12">0</span>+</span>
+          <span class="team-badge-label">Years per<br/>consultant</span>
+        </div>
+        <div class="team-badge team-badge--bottom">
+          <span class="team-badge-icon"><Icon name="award" /></span>
+          <div>
+            <span class="team-badge-title">Lead Auditor · IRCA</span>
+            <span class="team-badge-sub">Certified by accredited bodies</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BY THE NUMBERS ========== -->
+  <StatsDashboard />
+
+  <!-- ========== CERT GRID ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Certifications we deliver</span>
+        <h2>Standards across quality, safety, security, and beyond.</h2>
+      </div>
+      <div class="cert-grid">
+        {certs.map((c) => (
+          <a class="cert-card" href={`/certifications/${c.code.toLowerCase().replace(/\s+/g, "-")}`}>
+            <span class="cert-icon"><Icon name={c.icon} /></span>
+            <span class="cert-code">{c.code}</span>
+            <span class="cert-blurb">{c.blurb}</span>
+            <span class="cert-arrow" aria-hidden="true">→</span>
+          </a>
+        ))}
+      </div>
+      <div class="cert-cta">
+        <a href="/certifications" class="btn btn-secondary">View all 100+ standards <Icon name="arrow-right" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY US (DARK) ========== -->
+  <section class="section section-dark">
+    <div class="container trusted-grid">
+      <div class="trusted-copy">
+        <span class="eyebrow eyebrow-on-dark">Why QualityNexus</span>
+        <h2>Senior consultants. Real engagement. No hand-offs.</h2>
+        <p class="trusted-lede">
+          The lead consultant on day one is the lead consultant the day your certificate prints.
+        </p>
+        <div class="trusted-stat">
+          <div><strong>IRCA</strong><span>&amp; Exemplar Global certified lead auditors only</span></div>
+        </div>
+      </div>
+      <ul class="feature-list">
+        {features.map((f) => (
+          <li class="feature-item">
+            <span class="feature-icon-halo"><Icon name={f.icon} /></span>
+            <div>
+              <h4>{f.title}</h4>
+              <p>{f.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== CLIENT MARQUEE ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Trusted by</span>
+        <h2>Operators, regulators, and category leaders.</h2>
+      </div>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        {[...clientPlaceholders, ...clientPlaceholders].map((c) => (
+          <div class="logo-tile">
+            <span class="logo-mark"><Icon name="globe" /></span>
+            <span class="logo-name">{c}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="container cert-cta">
+      <a href="/clients" class="btn btn-secondary">See full client list <Icon name="arrow-right" /></a>
+    </div>
+  </section>
+
+  <CtaStrip />
+</BaseLayout>
+
+<style>
+  /* ========== HERO ========== */
+  .hero {
+    position: relative;
+    padding: 96px 0 88px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-bg-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image:
+      linear-gradient(rgba(15,23,42,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15,23,42,0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
+  }
+  .hero-bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .hero-bg-glow--1 {
+    width: 50%; aspect-ratio: 1;
+    top: -15%; right: -8%;
+    background: radial-gradient(circle, rgba(16,185,129,0.18), transparent 65%);
+    animation: heroGlow1 14s ease-in-out infinite alternate;
+  }
+  .hero-bg-glow--2 {
+    width: 40%; aspect-ratio: 1;
+    bottom: -20%; left: -10%;
+    background: radial-gradient(circle, rgba(15,23,42,0.10), transparent 65%);
+    animation: heroGlow2 18s ease-in-out infinite alternate;
+  }
+  @keyframes heroGlow1 {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(-30px, 20px) scale(1.1); }
+  }
+  @keyframes heroGlow2 {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(40px, -20px) scale(1.05); }
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid rgba(16,185,129,0.30);
+    color: var(--color-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(16,185,129,0.10);
+    margin-bottom: 24px;
+    animation: pillIn .6s cubic-bezier(.2,.7,.2,1) backwards;
+  }
+  @keyframes pillIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .status-dot {
+    position: relative;
+    width: 8px; height: 8px;
+  }
+  .status-dot > span {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.6);
+    animation: heroLivePulse 1.6s ease-out infinite;
+  }
+  @keyframes heroLivePulse {
+    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  }
+
+  .hero-copy .eyebrow {
+    animation: heroSlideIn .6s cubic-bezier(.2,.7,.2,1) 0.05s backwards;
+  }
+  .hero-copy h1 {
+    margin: 14px 0 22px;
+    color: var(--color-heading);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+    animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.15s backwards;
+  }
+  .hero-accent {
+    background: linear-gradient(110deg, #E8C766 0%, #D4AF37 50%, #F4D580 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: heroShine 6s ease-in-out infinite;
+  }
+  @keyframes heroShine {
+    0%, 100% { background-position: 0% center; }
+    50%      { background-position: 100% center; }
+  }
+  @keyframes heroSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .lede {
+    font-size: 18px;
+    color: var(--color-text-muted);
+    max-width: 540px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+    animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.25s backwards;
+  }
+  .hero-ctas {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 44px;
+    animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.35s backwards;
+  }
+  .hero-ctas .qn-icon { font-size: 16px; margin-left: 2px; }
+
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-shimmer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
+    transform: translateX(-130%);
+    animation: btnShimmer 3.2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes btnShimmer {
+    0%   { transform: translateX(-130%); }
+    50%  { transform: translateX(130%); }
+    100% { transform: translateX(130%); }
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 36px;
+    animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.45s backwards;
+  }
+  .hero-stats > div { display: flex; flex-direction: column; }
+  .hero-stats strong {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--color-heading);
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .hero-stats span {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg-glow--1, .hero-bg-glow--2,
+    .hero-accent, .status-dot > span,
+    .btn-shimmer::before,
+    .status-pill, .hero-copy .eyebrow,
+    .hero-copy h1, .lede, .hero-ctas, .hero-stats { animation: none; }
+  }
+
+  /* ========== TRUST STRIP ========== */
+  .trust {
+    padding: 32px 0 16px;
+    border-top: 1px solid var(--color-border);
+    background: #fff;
+  }
+  .trust-lede {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .trust-words {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+  }
+  .trust-word {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.18em;
+    opacity: 0.75;
+  }
+
+  /* ========== OFFERING ========== */
+  .offering-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .offering-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 30px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .offering-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(16,185,129,0.30);
+  }
+  .icon-halo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    display: inline-grid;
+    place-items: center;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .offering-card .pill { align-self: flex-start; }
+  .offering-card h3 { margin-top: 4px; }
+  .offering-card p { color: var(--color-text); font-size: 15px; }
+  .offering-card .link-arrow { margin-top: auto; padding-top: 6px; }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--color-accent);
+    font-size: 14px;
+  }
+  .link-arrow .qn-icon { font-size: 16px; transition: transform .15s; }
+  .link-arrow:hover .qn-icon { transform: translateX(3px); }
+
+  /* ========== PROCESS TIMELINE ========== */
+  .process {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    counter-reset: step;
+    list-style: none;
+    margin-top: 40px;
+  }
+  .process-step {
+    position: relative;
+    text-align: center;
+    padding: 0 14px;
+  }
+  .process-num {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 12px;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .process-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: linear-gradient(160deg, #fff, #F8FAFC);
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+    display: grid;
+    place-items: center;
+    font-size: 28px;
+    margin: 0 auto 18px;
+    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    position: relative;
+    z-index: 2;
+  }
+  .process-step h3 { font-size: 17px; margin-bottom: 8px; }
+  .process-step p { color: var(--color-text-muted); font-size: 14px; line-height: 1.55; }
+  .process-line {
+    position: absolute;
+    top: 32px;
+    left: calc(50% + 36px);
+    right: calc(-50% + 36px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-border) 0%, var(--color-border) 50%, transparent 100%);
+    background-image: repeating-linear-gradient(90deg, var(--color-border) 0 6px, transparent 6px 12px);
+    z-index: 1;
+  }
+
+  /* ========== CERT GRID ========== */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .cert-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 14px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    text-decoration: none;
+    color: var(--color-heading);
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .cert-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .cert-icon {
+    grid-row: 1 / span 2;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+  }
+  .cert-code {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: var(--color-heading);
+    line-height: 1.1;
+  }
+  .cert-blurb {
+    display: block;
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+  .cert-arrow {
+    position: absolute;
+    right: 16px; top: 50%;
+    transform: translateY(-50%) translateX(0);
+    color: var(--color-accent);
+    opacity: 0;
+    transition: opacity .2s, transform .2s;
+    font-weight: 700;
+  }
+  .cert-card:hover .cert-arrow { opacity: 1; transform: translateY(-50%) translateX(2px); }
+  .cert-cta { display: flex; justify-content: center; margin-top: 36px; }
+  .cert-cta .qn-icon { font-size: 16px; }
+
+  /* ========== WHY US (DARK) ========== */
+  .trusted-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .eyebrow-on-dark { color: #34D399; }
+  .trusted-lede { color: #94A3B8; font-size: 17px; max-width: 440px; margin-top: 18px; }
+  .trusted-stat {
+    margin-top: 30px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+  .trusted-stat strong {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 44px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .trusted-stat span { color: #94A3B8; font-size: 14px; }
+
+  .feature-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 32px;
+  }
+  .feature-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+  }
+  .feature-icon-halo {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(16,185,129,0.18);
+    color: var(--color-accent);
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .feature-item h4 { color: #fff; margin-bottom: 6px; }
+  .feature-item p { color: #94A3B8; font-size: 14px; line-height: 1.55; }
+
+  /* ========== CLIENT MARQUEE ========== */
+  .marquee {
+    overflow: hidden;
+    padding: 24px 0;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+  }
+  .logo-tile {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    height: 76px;
+    padding: 0 26px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+    transition: color .2s, border-color .2s;
+  }
+  .logo-tile:hover { color: var(--color-heading); border-color: var(--color-accent); }
+  .logo-mark {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: var(--color-bg-section);
+    color: var(--color-accent);
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+
+  /* ========== TEAM / CREDIBILITY ========== */
+  .team-section { padding-top: 96px; padding-bottom: 96px; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .team-copy h2 { margin: 14px 0 18px; }
+  .team-lede {
+    font-size: 17px;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+    max-width: 480px;
+  }
+  .team-creds {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+  .team-creds li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-heading);
+  }
+  .team-creds .qn-icon {
+    font-size: 20px;
+    width: 36px; height: 36px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    border-radius: 9px;
+    padding: 8px;
+    box-sizing: content-box;
+  }
+  .team-cta .qn-icon { font-size: 16px; }
+
+  .team-visual {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    max-width: 520px;
+    margin-left: auto;
+  }
+  .team-photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+      0 30px 60px rgba(15, 23, 42, 0.20),
+      0 0 0 1px rgba(15, 23, 42, 0.06);
+    isolation: isolate;
+    background: var(--color-bg-section);
+  }
+  .team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.95) contrast(1.02);
+  }
+  .team-photo-grain {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 30%, rgba(15, 23, 42, 0.45) 100%);
+    pointer-events: none;
+  }
+
+  .team-badge {
+    position: absolute;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow:
+      0 18px 40px rgba(15, 23, 42, 0.16),
+      0 0 0 1px rgba(15, 23, 42, 0.04);
+    padding: 14px 18px;
+    z-index: 2;
+  }
+  .team-badge--top {
+    top: 24px;
+    left: -32px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    animation: teamFloat 6s ease-in-out infinite alternate;
+  }
+  .team-badge-num {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 30px;
+    color: var(--color-heading);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .team-badge-label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.3;
+  }
+
+  .team-badge--bottom {
+    bottom: 28px;
+    right: -28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    animation: teamFloat 6s ease-in-out 1s infinite alternate-reverse;
+  }
+  .team-badge-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .team-badge-title {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--color-heading);
+    letter-spacing: -0.01em;
+  }
+  .team-badge-sub {
+    display: block;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+
+  @keyframes teamFloat {
+    from { transform: translateY(-4px); }
+    to   { transform: translateY(4px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .team-badge { animation: none; }
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .offering-grid { grid-template-columns: 1fr; }
+    .process { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
+    .process-line { display: none; }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
+    .trusted-grid { grid-template-columns: 1fr; gap: 36px; }
+    .feature-list { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; gap: 56px; }
+    .team-visual { margin: 0 auto; max-width: 480px; }
+    .team-badge--top { left: -16px; }
+    .team-badge--bottom { right: -16px; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 64px 0 56px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+    .process { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .trust-words { gap: 10px 18px; }
+    .trust-word { font-size: 13px; letter-spacing: 0.14em; }
+    .team-section { padding-top: 64px; padding-bottom: 64px; }
+    .team-badge { padding: 10px 14px; }
+    .team-badge--top { left: -8px; top: 16px; }
+    .team-badge-num { font-size: 24px; }
+    .team-badge--bottom { right: -8px; bottom: 18px; }
+    .team-badge-icon { width: 32px; height: 32px; font-size: 16px; }
+  }
+</style>

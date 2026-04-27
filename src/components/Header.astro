@@ -1,0 +1,107 @@
+---
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/certifications", label: "Certifications" },
+  { href: "/clients", label: "Clients" },
+];
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label="QualityNexus home">
+      <span class="brand-mark" aria-hidden="true">QN</span>
+      <span class="brand-name">QualityNexus</span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      {links.map((l) => {
+        const active = l.href === "/" ? path === "/" : path.startsWith(l.href);
+        return (
+          <a href={l.href} class={active ? "active" : ""}>{l.label}</a>
+        );
+      })}
+    </nav>
+    <a href="/contact" class="btn btn-accent header-cta">Get in touch</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    color: var(--color-heading);
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--color-primary);
+    color: var(--color-gold);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+  .primary-nav {
+    display: flex;
+    gap: 28px;
+    margin-left: auto;
+  }
+  .primary-nav a {
+    color: var(--color-text);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .primary-nav a:hover { color: var(--color-heading); }
+  .primary-nav a.active {
+    color: var(--color-heading);
+    border-bottom-color: var(--color-accent);
+  }
+  .header-cta {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 880px) {
+    .header-inner { gap: 16px; flex-wrap: wrap; }
+    .primary-nav {
+      order: 3;
+      margin-left: 0;
+      width: 100%;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding-bottom: 6px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 12px;
+    }
+    .primary-nav a { font-size: 14px; }
+    .header-cta { margin-left: auto; }
+  }
+</style>

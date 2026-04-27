@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QualityNexus — Palette Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Page header for the preview itself */
+  .preview-bar {
+    position: sticky; top: 0; z-index: 50;
+    background: #0b1020; color: #fff;
+    padding: 14px 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .preview-bar h1 { font-size: 15px; font-weight: 600; letter-spacing: .02em; }
+  .preview-bar nav { display: flex; gap: 10px; margin-left: auto; }
+  .preview-bar a {
+    color: #fff; text-decoration: none; font-size: 13px;
+    padding: 6px 12px; border: 1px solid rgba(255,255,255,.2);
+    border-radius: 6px;
+  }
+  .preview-bar a:hover { background: rgba(255,255,255,.08); }
+
+  /* ---- Shared section layout ---- */
+  .palette {
+    padding: 0;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .palette .label-strip {
+    padding: 18px 24px;
+    font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    background: #0b1020; color: #fff; opacity: .9;
+  }
+  .palette .label-strip span { opacity: .6; font-weight: 400; text-transform: none; letter-spacing: .02em; margin-left: 10px; }
+
+  .swatches {
+    display: flex; gap: 0; flex-wrap: wrap;
+  }
+  .swatch {
+    flex: 1 1 140px;
+    padding: 18px 16px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+  }
+  .swatch .name { font-weight: 600; opacity: .85; margin-bottom: 4px; font-family: inherit; }
+  .swatch .hex { opacity: .8; }
+
+  .hero {
+    padding: 80px 24px 90px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: 16px; opacity: .85;
+  }
+  .hero h2 {
+    font-size: clamp(28px, 4.5vw, 46px);
+    font-weight: 800;
+    line-height: 1.15;
+    max-width: 820px; margin: 0 auto 18px;
+    letter-spacing: -.02em;
+  }
+  .hero p {
+    max-width: 640px; margin: 0 auto 32px;
+    font-size: 17px; opacity: .8;
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-secondary {
+    margin-left: 10px;
+    padding: 14px 26px; border-radius: 10px; font-weight: 600;
+    text-decoration: none; font-size: 15px;
+    border: 1.5px solid;
+  }
+
+  .cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px; padding: 0 24px 60px; max-width: 1100px; margin: 0 auto;
+  }
+  .card {
+    border-radius: 14px;
+    padding: 26px 22px;
+    border: 1px solid;
+  }
+  .card .card-tag {
+    display: inline-block; padding: 4px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    margin-bottom: 14px; text-transform: uppercase;
+  }
+  .card h3 { font-size: 18px; margin-bottom: 8px; font-weight: 700; }
+  .card p { font-size: 14px; opacity: .8; }
+
+  .footer-strip {
+    padding: 26px 24px; font-size: 13px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+
+  /* =====================================================
+     PALETTE A — Deep Teal + Muted Gold
+     ===================================================== */
+  .palette-a { background: #ffffff; color: #1a2733; }
+  .palette-a .label-strip { background: #0F4C5C; }
+  .palette-a .swatch.s1 { background: #0F4C5C; color: #fff; }
+  .palette-a .swatch.s2 { background: #E5B660; color: #1a2733; }
+  .palette-a .swatch.s3 { background: #0B1929; color: #fff; }
+  .palette-a .swatch.s4 { background: #475569; color: #fff; }
+  .palette-a .swatch.s5 { background: #F6F8FA; color: #1a2733; }
+  .palette-a .eyebrow { color: #0F4C5C; }
+  .palette-a .hero h2 { color: #0B1929; }
+  .palette-a .hero p { color: #475569; }
+  .palette-a .btn { background: #0F4C5C; color: #fff; box-shadow: 0 6px 20px rgba(15,76,92,.22); }
+  .palette-a .btn:hover { box-shadow: 0 10px 28px rgba(15,76,92,.32); }
+  .palette-a .btn-secondary { color: #0F4C5C; border-color: #0F4C5C; }
+  .palette-a .btn-secondary:hover { background: #F6F8FA; }
+  .palette-a .card { background: #F6F8FA; border-color: #e3e8ed; }
+  .palette-a .card h3 { color: #0B1929; }
+  .palette-a .card p { color: #475569; }
+  .palette-a .card-tag { background: rgba(229,182,96,.18); color: #8a6a1f; }
+  .palette-a .footer-strip { background: #0B1929; color: #cbd5e1; }
+  .palette-a .footer-strip strong { color: #E5B660; }
+
+  /* =====================================================
+     PALETTE B — Charcoal + Emerald
+     ===================================================== */
+  .palette-b { background: #ffffff; color: #1a2733; }
+  .palette-b .label-strip { background: #0F172A; }
+  .palette-b .swatch.s1 { background: #0F172A; color: #fff; }
+  .palette-b .swatch.s2 { background: #059669; color: #fff; }
+  .palette-b .swatch.s3 { background: #334155; color: #fff; }
+  .palette-b .swatch.s4 { background: #F1F5F9; color: #0F172A; }
+  .palette-b .swatch.s5 { background: #ffffff; color: #0F172A; border: 1px solid #e2e8f0; }
+  .palette-b .eyebrow { color: #059669; }
+  .palette-b .hero h2 { color: #0F172A; }
+  .palette-b .hero p { color: #334155; }
+  .palette-b .btn { background: #0F172A; color: #fff; box-shadow: 0 6px 20px rgba(15,23,42,.18); }
+  .palette-b .btn:hover { box-shadow: 0 10px 28px rgba(15,23,42,.28); }
+  .palette-b .btn-secondary { color: #059669; border-color: #059669; }
+  .palette-b .btn-secondary:hover { background: rgba(5,150,105,.08); }
+  .palette-b .card { background: #F1F5F9; border-color: #e2e8f0; }
+  .palette-b .card h3 { color: #0F172A; }
+  .palette-b .card p { color: #334155; }
+  .palette-b .card-tag { background: rgba(5,150,105,.14); color: #047857; }
+  .palette-b .footer-strip { background: #0F172A; color: #cbd5e1; }
+  .palette-b .footer-strip strong { color: #34d399; }
+
+  /* =====================================================
+     PALETTE C — Royal + Sky + Cream
+     ===================================================== */
+  .palette-c { background: #FAF7F2; color: #1a2733; }
+  .palette-c .label-strip { background: #1E3A8A; }
+  .palette-c .swatch.s1 { background: #1E3A8A; color: #fff; }
+  .palette-c .swatch.s2 { background: #0EA5E9; color: #fff; }
+  .palette-c .swatch.s3 { background: #FAF7F2; color: #1a2733; border-right: 1px solid #ece6da; }
+  .palette-c .swatch.s4 { background: #334155; color: #fff; }
+  .palette-c .swatch.s5 { background: #ffffff; color: #1a2733; border: 1px solid #ece6da; }
+  .palette-c .eyebrow { color: #1E3A8A; }
+  .palette-c .hero h2 { color: #0B1648; }
+  .palette-c .hero p { color: #334155; }
+  .palette-c .btn { background: #1E3A8A; color: #fff; box-shadow: 0 6px 20px rgba(30,58,138,.22); }
+  .palette-c .btn:hover { box-shadow: 0 10px 28px rgba(30,58,138,.32); }
+  .palette-c .btn-secondary { color: #1E3A8A; border-color: #1E3A8A; }
+  .palette-c .btn-secondary:hover { background: rgba(30,58,138,.06); }
+  .palette-c .card { background: #ffffff; border-color: #ece6da; }
+  .palette-c .card h3 { color: #0B1648; }
+  .palette-c .card p { color: #334155; }
+  .palette-c .card-tag { background: rgba(14,165,233,.14); color: #0369a1; }
+  .palette-c .footer-strip { background: #0B1648; color: #c7d2fe; }
+  .palette-c .footer-strip strong { color: #38bdf8; }
+</style>
+</head>
+<body>
+
+<div class="preview-bar">
+  <h1>QualityNexus — palette preview</h1>
+  <nav>
+    <a href="#a">A — Teal + Gold</a>
+    <a href="#b">B — Charcoal + Emerald</a>
+    <a href="#c">C — Royal + Sky</a>
+  </nav>
+</div>
+
+<!-- ============== PALETTE A ============== -->
+<section class="palette palette-a" id="a">
+  <div class="label-strip">Palette A — Deep Teal + Muted Gold <span>my recommendation</span></div>
+  <div class="swatches">
+    <div class="swatch s1"><div class="name">Primary</div><div class="hex">#0F4C5C</div></div>
+    <div class="swatch s2"><div class="name">Accent</div><div class="hex">#E5B660</div></div>
+    <div class="swatch s3"><div class="name">Heading</div><div class="hex">#0B1929</div></div>
+    <div class="swatch s4"><div class="name">Body</div><div class="hex">#475569</div></div>
+    <div class="swatch s5"><div class="name">Section BG</div><div class="hex">#F6F8FA</div></div>
+  </div>
+  <div class="hero">
+    <div class="eyebrow">ISO Certification Consulting</div>
+    <h2>Your partner in ISO compliance — from gap to certificate</h2>
+    <p>QualityNexus guides organizations through every standard, every audit, every milestone — without the noise.</p>
+    <a href="#" class="btn">Get a free consultation</a>
+    <a href="#" class="btn-secondary">View certifications</a>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag">Consulting</span>
+      <h3>End-to-end advisory</h3>
+      <p>From gap analysis to surveillance audits — a single team that owns the outcome.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Training</span>
+      <h3>Build internal capability</h3>
+      <p>Internal-auditor and lead-auditor training that translates standards into daily practice.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Implementation</span>
+      <h3>Documented & defensible</h3>
+      <p>We design QMS documentation your team will actually use — not shelfware.</p>
+    </div>
+  </div>
+  <div class="footer-strip">
+    <span><strong>QualityNexus</strong> — clean, calm, considered.</span>
+    <span>This palette: confident, premium, slightly distinctive.</span>
+  </div>
+</section>
+
+<!-- ============== PALETTE B ============== -->
+<section class="palette palette-b" id="b">
+  <div class="label-strip">Palette B — Charcoal + Emerald</div>
+  <div class="swatches">
+    <div class="swatch s1"><div class="name">Primary</div><div class="hex">#0F172A</div></div>
+    <div class="swatch s2"><div class="name">Accent</div><div class="hex">#059669</div></div>
+    <div class="swatch s3"><div class="name">Body</div><div class="hex">#334155</div></div>
+    <div class="swatch s4"><div class="name">Section BG</div><div class="hex">#F1F5F9</div></div>
+    <div class="swatch s5"><div class="name">Page BG</div><div class="hex">#FFFFFF</div></div>
+  </div>
+  <div class="hero">
+    <div class="eyebrow">ISO Certification Consulting</div>
+    <h2>Your partner in ISO compliance — from gap to certificate</h2>
+    <p>QualityNexus guides organizations through every standard, every audit, every milestone — without the noise.</p>
+    <a href="#" class="btn">Get a free consultation</a>
+    <a href="#" class="btn-secondary">View certifications</a>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag">Consulting</span>
+      <h3>End-to-end advisory</h3>
+      <p>From gap analysis to surveillance audits — a single team that owns the outcome.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Training</span>
+      <h3>Build internal capability</h3>
+      <p>Internal-auditor and lead-auditor training that translates standards into daily practice.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Implementation</span>
+      <h3>Documented & defensible</h3>
+      <p>We design QMS documentation your team will actually use — not shelfware.</p>
+    </div>
+  </div>
+  <div class="footer-strip">
+    <span><strong>QualityNexus</strong> — sharp, modern, technical.</span>
+    <span>This palette: minimal, "passed the audit" green signals trust.</span>
+  </div>
+</section>
+
+<!-- ============== PALETTE C ============== -->
+<section class="palette palette-c" id="c">
+  <div class="label-strip">Palette C — Royal + Sky + Cream</div>
+  <div class="swatches">
+    <div class="swatch s1"><div class="name">Primary</div><div class="hex">#1E3A8A</div></div>
+    <div class="swatch s2"><div class="name">Accent</div><div class="hex">#0EA5E9</div></div>
+    <div class="swatch s3"><div class="name">Section BG</div><div class="hex">#FAF7F2</div></div>
+    <div class="swatch s4"><div class="name">Body</div><div class="hex">#334155</div></div>
+    <div class="swatch s5"><div class="name">Card BG</div><div class="hex">#FFFFFF</div></div>
+  </div>
+  <div class="hero">
+    <div class="eyebrow">ISO Certification Consulting</div>
+    <h2>Your partner in ISO compliance — from gap to certificate</h2>
+    <p>QualityNexus guides organizations through every standard, every audit, every milestone — without the noise.</p>
+    <a href="#" class="btn">Get a free consultation</a>
+    <a href="#" class="btn-secondary">View certifications</a>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <span class="card-tag">Consulting</span>
+      <h3>End-to-end advisory</h3>
+      <p>From gap analysis to surveillance audits — a single team that owns the outcome.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Training</span>
+      <h3>Build internal capability</h3>
+      <p>Internal-auditor and lead-auditor training that translates standards into daily practice.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Implementation</span>
+      <h3>Documented & defensible</h3>
+      <p>We design QMS documentation your team will actually use — not shelfware.</p>
+    </div>
+  </div>
+  <div class="footer-strip">
+    <span><strong>QualityNexus</strong> — warm, classic, approachable.</span>
+    <span>This palette: corporate trust + a softer, friendlier ground tone.</span>
+  </div>
+</section>
+
+</body>
+</html>

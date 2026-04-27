@@ -1,0 +1,686 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+import Icon from "../components/Icon.astro";
+
+const services = [
+  {
+    icon: "users",
+    title: "Consulting",
+    body: "Senior advisors who interpret the standard, scope your gap, and design the management system end-to-end.",
+    bullets: ["Gap analysis & readiness review", "Scope definition & risk register", "Stakeholder alignment workshops"],
+  },
+  {
+    icon: "graduation-cap",
+    title: "Training",
+    body: "Practical auditor and lead-auditor programs that leave real capability behind, not just attendance certificates.",
+    bullets: ["Awareness training (1–2 days)", "Internal auditor (3–4 days)", "Lead auditor — IRCA-aligned"],
+  },
+  {
+    icon: "cog",
+    title: "Implementation",
+    body: "Documentation, controls, and corrective actions executed on a tight, milestone-driven schedule.",
+    bullets: ["Tailored procedures & SOPs", "Control rollout & evidence", "Corrective-action closure"],
+  },
+  {
+    icon: "award",
+    title: "Certification support",
+    body: "We sit beside you through Stage 1, Stage 2, and surveillance audits — and help close findings within deadline.",
+    bullets: ["Audit logistics & evidence prep", "Lead-auditor liaison", "Finding remediation"],
+  },
+  {
+    icon: "clipboard-check",
+    title: "Internal & supplier audits",
+    body: "Independent internal audits and supplier audits run by certified lead auditors on your behalf.",
+    bullets: ["Annual internal audit programs", "Tier-1 / Tier-2 supplier audits", "Auditor pool on retainer"],
+  },
+  {
+    icon: "headphones",
+    title: "Retainership",
+    body: "Ongoing advisory between certifications — the same lead consultant available for queries, reviews, and incident response.",
+    bullets: ["Monthly office hours", "Document reviews", "Audit-finding hotline"],
+  },
+  {
+    icon: "cpu",
+    title: "Compliance software",
+    body: "Lightweight digital tooling for evidence capture, control monitoring, and audit-trail generation — without enterprise GRC bloat.",
+    bullets: ["Evidence repository setup", "Control dashboards", "Audit-trail automation"],
+  },
+  {
+    icon: "lock",
+    title: "Cybersecurity services",
+    body: "Technical security assessments aligned to ISO 27001, ISO 27701, SOC 2, and similar standards — penetration testing optional.",
+    bullets: ["Risk assessments & SoA", "Control gap remediation", "Incident-response readiness"],
+  },
+  {
+    icon: "file-text",
+    title: "Product certification & licensing",
+    body: "End-to-end support for product-level marks — CE, BIS, FSSAI, FDA, and country-specific licensing.",
+    bullets: ["Documentation packages", "Test-house liaison", "Submission & follow-through"],
+  },
+];
+
+const engagement = [
+  { n: "01", icon: "search",          title: "Scoping call",     body: "30 minutes. Your standard, your timeline, your gaps." },
+  { n: "02", icon: "file-text",       title: "Written proposal", body: "Fixed scope, fixed price, milestone-driven plan." },
+  { n: "03", icon: "rocket",          title: "Kickoff",          body: "Lead consultant assigned. Project channel opens." },
+  { n: "04", icon: "cog",             title: "Delivery",         body: "Documents, training, controls, audit support." },
+  { n: "05", icon: "award",           title: "Certificate",      body: "Stage 2 closure. Surveillance plan handed over." },
+];
+
+const orbitServices = ["users", "graduation-cap", "cog", "award", "clipboard-check", "headphones", "cpu", "lock", "file-text"];
+
+const proofPoints = [
+  { num: "60",   suffix: "days",  label: "Average kickoff to Stage 2" },
+  { num: "100",  suffix: "%",     label: "First-time pass rate" },
+  { num: "48",   suffix: "h",     label: "Response time on enquiries" },
+];
+---
+<BaseLayout
+  title="Services — ISO Consulting, Training, Implementation & Audits"
+  description="Nine ways QualityNexus helps you certify: consulting, training, implementation, certification support, audits, retainership, software, cybersecurity, and product licensing."
+>
+  <PageHero
+    eyebrow="What we do"
+    title="Nine engagements."
+    accent="One certificate."
+    lede="Certification isn't one project — it's a sequence of engagements that have to fit together cleanly. Pick what you need, leave what you don't, and we'll wire it into a single milestone-driven plan."
+    hasVisual={true}
+  >
+    <div slot="visual" class="services-visual">
+      <div class="sv-orbit-ring sv-orbit-ring--outer" aria-hidden="true"></div>
+      <div class="sv-orbit-ring sv-orbit-ring--inner" aria-hidden="true"></div>
+
+      <div class="sv-hub">
+        <span class="sv-hub-pulse" aria-hidden="true"><span></span></span>
+        <Icon name="compass" />
+        <strong>Engagement</strong>
+        <span>9 services · 1 plan</span>
+      </div>
+
+      {orbitServices.map((iconName, i) => (
+        <div class={`sv-node sv-node--${i}`}>
+          <Icon name={iconName} />
+        </div>
+      ))}
+
+      <div class="sv-stat-card sv-stat-card--top">
+        <strong>+9</strong>
+        <span>service paths</span>
+      </div>
+      <div class="sv-stat-card sv-stat-card--bottom">
+        <span class="sv-stat-dot" aria-hidden="true"></span>
+        <span>Available now</span>
+      </div>
+    </div>
+  </PageHero>
+
+  <!-- ========== PROOF POINTS BAR ========== -->
+  <section class="proof-bar">
+    <div class="container proof-grid">
+      {proofPoints.map((p) => (
+        <div class="proof-cell">
+          <strong class="proof-num">{p.num}<sup>{p.suffix}</sup></strong>
+          <span class="proof-label">{p.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ========== SERVICES GRID ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">The catalogue</span>
+        <h2>Pick what you need. Leave what you don't.</h2>
+        <p>Engagements are modular. Most clients pick 3–5 of the services below; some take all nine. We'll be honest about which ones you don't need.</p>
+      </div>
+      <div class="services-grid">
+        {services.map((s, i) => (
+          <article class="service-card">
+            <span class="service-num">{String(i + 1).padStart(2, "0")}</span>
+            <span class="icon-halo"><Icon name={s.icon} /></span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+            <ul class="service-bullets">
+              {s.bullets.map((b) => (
+                <li><Icon name="check-circle" /> {b}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW WE DELIVER ========== -->
+  <section class="section section-soft">
+    <div class="container deliver-grid">
+      <div class="deliver-photo">
+        <img src="/images/data-laptop.jpg" alt="A consultant reviewing a compliance dashboard on a laptop" loading="lazy" width="640" height="720" />
+        <div class="deliver-overlay-card">
+          <span class="deliver-overlay-eyebrow">Live engagement</span>
+          <strong>ISO 27001 · Stage 1 prep</strong>
+          <div class="deliver-overlay-meter">
+            <span></span>
+          </div>
+          <span class="deliver-overlay-meta">12 controls · 3 left</span>
+        </div>
+      </div>
+      <div class="deliver-copy">
+        <span class="eyebrow">How we deliver</span>
+        <h2>Senior consultants. Audit-grade artefacts. Milestone billing.</h2>
+        <p>Every QualityNexus engagement runs on three commitments: a senior consultant assigned end-to-end, audit-grade documentation by default, and milestone-based billing tied to deliverables you can verify.</p>
+        <ul class="deliver-bullets">
+          <li><Icon name="shield-check" /><div><strong>No junior handoffs</strong><span>The lead consultant on day one is the lead on certification day.</span></div></li>
+          <li><Icon name="file-text" /><div><strong>Audit-defensible by default</strong><span>Every artefact ready for external scrutiny — no rewrites the week before Stage 1.</span></div></li>
+          <li><Icon name="trending-up" /><div><strong>Built to scale</strong><span>Wire-in surveillance, internal audit, and re-certification from day zero.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ENGAGEMENT FLOW ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">How an engagement runs</span>
+        <h2>Five stages. Average 60 days.</h2>
+        <p>The same lead consultant from scoping call to certificate — with a fixed scope and a fixed price.</p>
+      </div>
+      <ol class="flow">
+        {engagement.map((e, i) => (
+          <li class="flow-step">
+            <div class="flow-step-head">
+              <span class="flow-num">{e.n}</span>
+              <span class="flow-icon"><Icon name={e.icon} /></span>
+            </div>
+            <h3>{e.title}</h3>
+            <p>{e.body}</p>
+            {i < engagement.length - 1 && (
+              <span class="flow-line" aria-hidden="true">
+                <svg viewBox="0 0 40 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 6 H32" stroke="#10B981" stroke-width="1.5" stroke-dasharray="3 3"/>
+                  <path d="M28 1 L33 6 L28 11" stroke="#10B981" stroke-width="1.5" fill="none"/>
+                </svg>
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading="Not sure which services you need?"
+    body="A 30-minute scoping call usually clears it up. We'll be honest about what's needed and what isn't."
+    ctaLabel="Book a scoping call"
+  />
+</BaseLayout>
+
+<style>
+  /* ===== HERO VISUAL ===== */
+  .services-visual {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    height: 480px;
+    margin-left: auto;
+  }
+  .sv-orbit-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .sv-orbit-ring--outer {
+    width: 380px; height: 380px;
+    border: 1px dashed rgba(15, 59, 46, 0.20);
+    animation: svOrbit 70s linear infinite;
+  }
+  .sv-orbit-ring--inner {
+    width: 220px; height: 220px;
+    border: 1px solid rgba(16, 185, 129, 0.22);
+  }
+  @keyframes svOrbit {
+    from { transform: translate(-50%, -50%) rotate(0); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  .sv-hub {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px; height: 150px;
+    background: radial-gradient(circle at 30% 30%, var(--color-primary-soft), var(--color-primary));
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 14px 40px rgba(15, 59, 46, 0.25), inset 0 0 0 4px rgba(212, 175, 55, 0.18);
+    z-index: 3;
+  }
+  .sv-hub :global(.qn-icon) {
+    font-size: 26px;
+    color: var(--color-gold);
+    margin-bottom: 4px;
+  }
+  .sv-hub strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .sv-hub span {
+    display: block;
+    color: var(--color-gold);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .sv-hub-pulse {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent);
+    opacity: 0;
+    animation: svHubPulse 2.5s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes svHubPulse {
+    0%   { transform: scale(0.95); opacity: 0.6; }
+    80%  { transform: scale(1.18); opacity: 0; }
+    100% { transform: scale(1.18); opacity: 0; }
+  }
+  .sv-node {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 44px; height: 44px;
+    margin-top: -22px;
+    margin-left: -22px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: var(--color-accent-strong);
+    font-size: 18px;
+    box-shadow: var(--shadow-sm);
+    transition: transform .25s ease, border-color .25s ease;
+    z-index: 2;
+  }
+  .sv-node:hover {
+    border-color: var(--color-accent);
+    transform: translate(var(--tx, 0), var(--ty, 0)) scale(1.08);
+  }
+  /* 9 nodes positioned on the outer ring */
+  .sv-node--0 { --tx: 0;     --ty: -185px; transform: translate(var(--tx), var(--ty)); }
+  .sv-node--1 { --tx: 130px; --ty: -130px; transform: translate(var(--tx), var(--ty)); }
+  .sv-node--2 { --tx: 185px; --ty: 0;      transform: translate(var(--tx), var(--ty)); }
+  .sv-node--3 { --tx: 130px; --ty: 130px;  transform: translate(var(--tx), var(--ty)); }
+  .sv-node--4 { --tx: 0;     --ty: 185px;  transform: translate(var(--tx), var(--ty)); }
+  .sv-node--5 { --tx: -130px;--ty: 130px;  transform: translate(var(--tx), var(--ty)); }
+  .sv-node--6 { --tx: -185px;--ty: 0;      transform: translate(var(--tx), var(--ty)); }
+  .sv-node--7 { --tx: -130px;--ty: -130px; transform: translate(var(--tx), var(--ty)); }
+  .sv-node--8 { --tx: 92px;  --ty: -160px; transform: translate(var(--tx), var(--ty)); }
+
+  .sv-stat-card {
+    position: absolute;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    box-shadow: var(--shadow-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 4;
+    font-size: 12px;
+  }
+  .sv-stat-card--top {
+    top: 8%; right: -6%;
+    flex-direction: column;
+    gap: 0;
+    text-align: center;
+    padding: 12px 16px;
+  }
+  .sv-stat-card--top strong {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--color-heading);
+    line-height: 1;
+  }
+  .sv-stat-card--top span {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+  .sv-stat-card--bottom {
+    bottom: 6%; left: -6%;
+    color: var(--color-heading);
+    font-weight: 600;
+  }
+  .sv-stat-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(16,185,129,0.18);
+  }
+
+  /* ===== PROOF BAR ===== */
+  .proof-bar {
+    background: var(--color-bg-section);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: 28px 0;
+  }
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: center;
+  }
+  .proof-cell {
+    text-align: center;
+    border-right: 1px solid var(--color-border);
+    padding: 4px 12px;
+  }
+  .proof-cell:last-child { border-right: 0; }
+  .proof-num {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--color-heading);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .proof-num sup {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-accent-strong);
+    margin-left: 2px;
+    top: -0.45em;
+  }
+  .proof-label {
+    color: var(--color-text);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* ===== SERVICES GRID ===== */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service-card {
+    position: relative;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-soft);
+  }
+  .service-num {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 800;
+    color: rgba(16, 185, 129, 0.20);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .icon-halo {
+    display: inline-grid;
+    place-items: center;
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-strong);
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .service-card h3 { margin-bottom: 10px; }
+  .service-card p {
+    color: var(--color-text);
+    font-size: 15px;
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+  .service-bullets {
+    display: grid;
+    gap: 8px;
+    border-top: 1px solid var(--color-border-soft);
+    padding-top: 18px;
+    margin-top: auto;
+  }
+  .service-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+  .service-bullets li :global(.qn-icon) {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 14px;
+  }
+
+  /* ===== DELIVER SECTION ===== */
+  .deliver-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .deliver-photo {
+    position: relative;
+  }
+  .deliver-photo img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+  }
+  .deliver-overlay-card {
+    position: absolute;
+    right: -22px;
+    bottom: -24px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 18px 22px;
+    box-shadow: var(--shadow-lg);
+    width: 240px;
+  }
+  .deliver-overlay-eyebrow {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent-strong);
+    margin-bottom: 6px;
+  }
+  .deliver-overlay-card strong {
+    display: block;
+    font-family: var(--font-heading);
+    color: var(--color-heading);
+    font-size: 14.5px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .deliver-overlay-meter {
+    height: 6px;
+    background: var(--color-bg-section);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .deliver-overlay-meter > span {
+    display: block;
+    height: 100%;
+    width: 75%;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
+    border-radius: 999px;
+    animation: deliverFill 2s ease-out forwards;
+  }
+  @keyframes deliverFill {
+    from { width: 0; }
+    to   { width: 75%; }
+  }
+  .deliver-overlay-meta {
+    color: var(--color-text-muted);
+    font-size: 11.5px;
+    font-weight: 500;
+  }
+  .deliver-copy h2 { margin: 14px 0 16px; }
+  .deliver-copy p {
+    color: var(--color-text);
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 26px;
+  }
+  .deliver-bullets {
+    display: grid;
+    gap: 18px;
+  }
+  .deliver-bullets li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .deliver-bullets li :global(.qn-icon) {
+    color: var(--color-accent-strong);
+    background: var(--color-accent-soft);
+    width: 36px; height: 36px;
+    border-radius: 9px;
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .deliver-bullets li > div { display: grid; gap: 2px; }
+  .deliver-bullets li strong {
+    color: var(--color-heading);
+    font-family: var(--font-heading);
+    font-size: 15.5px;
+    font-weight: 700;
+  }
+  .deliver-bullets li span {
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  /* ===== ENGAGEMENT FLOW ===== */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    position: relative;
+  }
+  .flow-step {
+    position: relative;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px 22px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .flow-step:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .flow-step-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .flow-num {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--color-accent-strong);
+    letter-spacing: 0.08em;
+    background: var(--color-accent-soft);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .flow-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--color-accent-tint);
+    color: var(--color-accent-strong);
+    font-size: 14px;
+  }
+  .flow-step h3 { font-size: 16px; margin-bottom: 6px; }
+  .flow-step p { color: var(--color-text); font-size: 13.5px; line-height: 1.55; }
+  .flow-line {
+    position: absolute;
+    top: 50%;
+    right: -26px;
+    width: 32px;
+    height: 12px;
+    margin-top: -6px;
+    z-index: 2;
+  }
+  .flow-line svg { width: 100%; height: 100%; }
+
+  @media (max-width: 980px) {
+    .services-visual { margin: 0 auto; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .deliver-grid { grid-template-columns: 1fr; gap: 40px; }
+    .deliver-overlay-card { right: 16px; bottom: -20px; }
+    .flow { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .flow-line { display: none; }
+    .proof-grid { grid-template-columns: 1fr; gap: 16px; }
+    .proof-cell { border-right: 0; border-bottom: 1px solid var(--color-border); padding-bottom: 14px; }
+    .proof-cell:last-child { border-bottom: 0; }
+  }
+  @media (max-width: 640px) {
+    .services-visual { height: 380px; }
+    .sv-orbit-ring--outer { width: 290px; height: 290px; }
+    .sv-orbit-ring--inner { width: 170px; height: 170px; }
+    .sv-hub { width: 116px; height: 116px; }
+    .sv-node { width: 36px; height: 36px; margin-top: -18px; margin-left: -18px; font-size: 15px; }
+    .sv-node--0 { --ty: -140px; }
+    .sv-node--1 { --tx: 100px; --ty: -100px; }
+    .sv-node--2 { --tx: 140px; }
+    .sv-node--3 { --tx: 100px; --ty: 100px; }
+    .sv-node--4 { --ty: 140px; }
+    .sv-node--5 { --tx: -100px; --ty: 100px; }
+    .sv-node--6 { --tx: -140px; }
+    .sv-node--7 { --tx: -100px; --ty: -100px; }
+    .sv-node--8 { --tx: 70px; --ty: -125px; }
+  }
+  @media (max-width: 560px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,598 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+
+const channels = [
+  { icon: "headphones", label: "Email",     value: "hello@qualitynexus.in",         href: "mailto:hello@qualitynexus.in",     note: "Best for detailed enquiries" },
+  { icon: "globe",      label: "Phone",     value: "+91 90000 00000",               href: "tel:+919000000000",                note: "Mon–Fri · 10am–7pm IST" },
+  { icon: "rocket",     label: "WhatsApp",  value: "Quick chat on WhatsApp",        href: "https://wa.me/919000000000",       note: "For quick scoping questions" },
+  { icon: "compass",    label: "Office",    value: "Mumbai, India",                 href: null,                                note: "Visits by appointment" },
+];
+
+const fastFaqs = [
+  { q: "How long is a typical engagement?",          a: "Average 60 days from kickoff to certificate. Faster timelines are possible with focused scope; longer when multiple sites are in play." },
+  { q: "Do you operate outside India?",              a: "Yes. We've supported certifications across the Middle East, Southeast Asia, the EU, and North America — remote-first with on-site visits where the standard requires." },
+  { q: "Can you work alongside an existing team?",   a: "Often — many engagements augment an internal compliance lead. We'll scope around what you already have rather than duplicate it." },
+  { q: "What happens after the certificate prints?", a: "Surveillance audits annually, full re-certification every three years. We can stay on retainer or hand over cleanly to your internal team." },
+];
+---
+<BaseLayout
+  title="Contact QualityNexus — Talk to a Senior Auditor"
+  description="Reach QualityNexus by email, phone, or WhatsApp. Tell us your standard, your timeline, and the gaps you already know about — we respond within 48 hours."
+>
+  <PageHero
+    eyebrow="Talk to us"
+    title="Tell us your standard,"
+    accent="we'll come back with a plan."
+    lede="Every enquiry is read by a senior consultant — not a sales desk. Drop us a note about your standard, your timeline, and what's already in place. We respond within 48 working hours, with an honest read on whether we're the right fit."
+    hasVisual={true}
+  >
+    <div slot="visual" class="contact-visual">
+      <div class="ct-card ct-card--top">
+        <div class="ct-card-head">
+          <span class="ct-avatar">QD</span>
+          <div>
+            <strong>Quality Director</strong>
+            <span>Power &amp; Energy sector</span>
+          </div>
+          <span class="ct-time">Sample</span>
+        </div>
+        <p>"Looking at ISO 9001 + 14001 + 45001 as an integrated system. Surveillance audit due Q3 across 4 plants."</p>
+        <span class="ct-tag">ISO 9001 · 14001 · 45001</span>
+      </div>
+
+      <div class="ct-card ct-card--mid">
+        <div class="ct-card-head">
+          <span class="ct-avatar ct-avatar--alt">CS</span>
+          <div>
+            <strong>Information Security Lead</strong>
+            <span>Banking &amp; BFSI sector</span>
+          </div>
+          <span class="ct-time">Sample</span>
+        </div>
+        <p>"Need ISO 27001 with RBI cyber-security framework alignment. Internal audit done. Can we scope Stage 1?"</p>
+        <span class="ct-tag">ISO 27001 · RBI framework</span>
+      </div>
+
+      <div class="ct-card ct-card--bottom">
+        <div class="ct-card-head">
+          <span class="ct-avatar ct-avatar--alt2">PH</span>
+          <div>
+            <strong>Plant Head</strong>
+            <span>Oil, Gas &amp; Petroleum sector</span>
+          </div>
+          <span class="ct-time">Sample</span>
+        </div>
+        <p>"Refinery scope. ISO 14001 + 45001 + 50001 in parallel. EHSMS drafted. Need a gap analysis to start."</p>
+        <span class="ct-tag">ISO 14001 · 45001 · 50001</span>
+      </div>
+
+      <div class="ct-pulse-pill">
+        <span class="ct-pulse" aria-hidden="true"><span></span></span>
+        Typical enquiries we receive
+      </div>
+    </div>
+  </PageHero>
+
+  <!-- ========== CHANNELS ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Reach us</span>
+        <h2>Pick the channel that fits.</h2>
+      </div>
+      <div class="channel-grid">
+        {channels.map((c) => (
+          <article class="channel-card">
+            <span class="channel-icon"><Icon name={c.icon} /></span>
+            <span class="channel-label">{c.label}</span>
+            {c.href
+              ? <a href={c.href} class="channel-value">{c.value}</a>
+              : <span class="channel-value">{c.value}</span>
+            }
+            <span class="channel-note">{c.note}</span>
+            <span class="channel-arrow"><Icon name="arrow-right" /></span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT FORM ========== -->
+  <section class="section section-soft">
+    <div class="container form-grid">
+      <div class="form-side">
+        <div class="form-photo">
+          <img src="/images/office-modern.jpg" alt="A modern office workspace" loading="lazy" width="640" height="800" />
+          <div class="form-photo-overlay">
+            <div class="form-photo-tag">
+              <span class="form-photo-pulse"><span></span></span>
+              Replies within 48h
+            </div>
+            <strong>From a senior consultant — not a sales desk.</strong>
+            <ul>
+              <li><Icon name="check-circle" /> Senior-consultant reply, not a sales rep</li>
+              <li><Icon name="check-circle" /> Honest scoping including "no, we're not the fit"</li>
+              <li><Icon name="check-circle" /> No follow-up sales sequences</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="form-wrapper">
+        <span class="eyebrow">Send us a message</span>
+        <h2>Start a conversation.</h2>
+        <p class="form-intro">The more context you share, the faster we can come back with a meaningful response. Standards in scope, timelines you're working against, and gaps you already know about — all useful.</p>
+
+        <form class="contact-form" method="post" action="#">
+          <div class="form-row form-row--two">
+            <label class="form-field">
+              <span>Your name</span>
+              <input type="text" name="name" required placeholder="e.g. Your full name" />
+            </label>
+            <label class="form-field">
+              <span>Designation</span>
+              <input type="text" name="designation" placeholder="e.g. Head of Quality" />
+            </label>
+          </div>
+          <div class="form-row form-row--two">
+            <label class="form-field">
+              <span>Work email</span>
+              <input type="email" name="email" required placeholder="you@company.com" />
+            </label>
+            <label class="form-field">
+              <span>Contact number</span>
+              <input type="tel" name="phone" placeholder="+91 …" />
+            </label>
+          </div>
+          <label class="form-field">
+            <span>Organization</span>
+            <input type="text" name="organization" placeholder="Company / institution" />
+          </label>
+          <label class="form-field">
+            <span>Organization address</span>
+            <input type="text" name="address" placeholder="City, state" />
+          </label>
+          <label class="form-field">
+            <span>Tell us about your enquiry</span>
+            <textarea name="message" rows="5" required placeholder="Standards in scope, target certification date, gaps you already know about…"></textarea>
+          </label>
+          <button type="submit" class="btn btn-accent form-submit">Send enquiry <Icon name="arrow-right" /></button>
+          <p class="form-note">By sending, you agree to be contacted about your enquiry. We don't sell or share contact information.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="section">
+    <div class="container faq-grid">
+      <div class="faq-head">
+        <span class="eyebrow">Before you write in</span>
+        <h2>Quick answers to the questions we hear most.</h2>
+        <p class="faq-help">Still not sure? Drop a note and a senior consultant will respond.</p>
+      </div>
+      <ul class="faq-list">
+        {fastFaqs.map((f, i) => (
+          <li class="faq-item">
+            <span class="faq-num">{String(i + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>{f.q}</h3>
+              <p>{f.a}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ===== HERO VISUAL — incoming-message stack ===== */
+  .contact-visual {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    height: 460px;
+    margin-left: auto;
+  }
+  .ct-card {
+    position: absolute;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 18px 18px 16px;
+    box-shadow: var(--shadow-md);
+    width: 320px;
+    max-width: 90%;
+  }
+  .ct-card--top {
+    top: 4%;
+    right: 0;
+    transform: rotate(-3deg);
+    z-index: 3;
+    animation: ctFloat 8s ease-in-out infinite;
+  }
+  .ct-card--mid {
+    top: 32%;
+    left: 0;
+    transform: rotate(2.5deg);
+    z-index: 2;
+    animation: ctFloat 8s ease-in-out infinite 0.8s;
+  }
+  .ct-card--bottom {
+    bottom: 6%;
+    right: 0%;
+    transform: rotate(-1.5deg);
+    z-index: 1;
+    animation: ctFloat 8.5s ease-in-out infinite 1.6s;
+  }
+  @keyframes ctFloat {
+    0%, 100% { transform: rotate(var(--rot, -3deg)) translateY(0); }
+    50%      { transform: rotate(var(--rot, -3deg)) translateY(-6px); }
+  }
+  .ct-card--top    { --rot: -3deg; }
+  .ct-card--mid    { --rot: 2.5deg; }
+  .ct-card--bottom { --rot: -1.5deg; }
+
+  .ct-card-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .ct-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 11.5px;
+    display: grid;
+    place-items: center;
+  }
+  .ct-avatar--alt  { background: var(--color-accent); color: #fff; }
+  .ct-avatar--alt2 { background: var(--color-accent-strong); color: #fff; }
+  .ct-card-head strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--color-heading);
+    line-height: 1.2;
+  }
+  .ct-card-head span {
+    display: block;
+    font-size: 10.5px;
+    color: var(--color-text-muted);
+    line-height: 1.3;
+  }
+  .ct-time {
+    color: var(--color-text-muted);
+    font-size: 10.5px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .ct-card p {
+    color: var(--color-heading);
+    font-size: 12.5px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .ct-tag {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent-strong);
+    background: var(--color-accent-soft);
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .ct-pulse-pill {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-heading);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-md);
+    z-index: 5;
+    white-space: nowrap;
+  }
+  .ct-pulse { position: relative; width: 8px; height: 8px; }
+  .ct-pulse > span {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.6);
+    animation: ctPulse 2.4s ease-out infinite;
+  }
+  @keyframes ctPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.55); }
+    70%  { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  }
+
+  /* ===== CHANNELS ===== */
+  .channel-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .channel-card {
+    position: relative;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px 26px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    overflow: hidden;
+  }
+  .channel-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent);
+  }
+  .channel-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 46px; height: 46px;
+    border-radius: 11px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-strong);
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+  .channel-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+  }
+  .channel-value {
+    display: block;
+    color: var(--color-heading);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 15.5px;
+    margin-bottom: 8px;
+    word-break: break-word;
+  }
+  a.channel-value:hover { color: var(--color-accent-strong); }
+  .channel-note {
+    color: var(--color-text-muted);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .channel-arrow {
+    position: absolute;
+    top: 28px;
+    right: 24px;
+    color: var(--color-accent);
+    font-size: 16px;
+    opacity: 0.4;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .channel-card:hover .channel-arrow {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+
+  /* ===== FORM ===== */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.2fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .form-side { position: sticky; top: 96px; }
+  .form-photo {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 5;
+  }
+  .form-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .form-photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15,59,46,0) 30%, rgba(15,59,46,0.92) 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+    gap: 12px;
+  }
+  .form-photo-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .form-photo-pulse { position: relative; width: 8px; height: 8px; }
+  .form-photo-pulse > span {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.6);
+    animation: formPhotoPulse 2.4s ease-out infinite;
+  }
+  @keyframes formPhotoPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.55); }
+    70%  { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  }
+  .form-photo-overlay strong {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 1.3;
+    color: #fff;
+  }
+  .form-photo-overlay ul {
+    display: grid;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .form-photo-overlay li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #E2E8F0;
+    font-size: 12.5px;
+  }
+  .form-photo-overlay li :global(.qn-icon) {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 13px;
+  }
+
+  .form-wrapper h2 { margin: 14px 0 14px; }
+  .form-intro {
+    color: var(--color-text);
+    font-size: 16px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .contact-form {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    display: grid;
+    gap: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .form-row--two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-field { display: grid; gap: 6px; }
+  .form-field span {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-heading);
+  }
+  .form-field input,
+  .form-field textarea {
+    font-family: var(--font-body);
+    font-size: 15px;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-soft);
+    color: var(--color-heading);
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+  }
+  .form-field textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    margin-top: 8px;
+    justify-self: start;
+    padding: 14px 28px;
+  }
+  .form-note {
+    font-size: 12.5px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* ===== FAQ ===== */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .faq-head h2 { margin: 14px 0 14px; }
+  .faq-help {
+    color: var(--color-text-muted);
+    font-size: 14.5px;
+  }
+  .faq-list { display: grid; gap: 4px; }
+  .faq-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .faq-item:last-child { border-bottom: 0; }
+  .faq-num {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--color-accent-strong);
+    letter-spacing: 0.08em;
+    background: var(--color-accent-soft);
+    padding: 5px 10px;
+    border-radius: 6px;
+    height: fit-content;
+  }
+  .faq-item h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+  .faq-item p {
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 980px) {
+    .contact-visual { margin: 0 auto; }
+    .channel-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-grid { grid-template-columns: 1fr; gap: 32px; }
+    .form-side { position: static; }
+    .form-photo { aspect-ratio: 16 / 9; }
+    .faq-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  @media (max-width: 640px) {
+    .contact-visual { height: 460px; }
+    .ct-card { padding: 14px; width: 280px; }
+    .channel-grid { grid-template-columns: 1fr; }
+    .form-row--two { grid-template-columns: 1fr; }
+    .contact-form { padding: 24px; }
+  }
+</style>

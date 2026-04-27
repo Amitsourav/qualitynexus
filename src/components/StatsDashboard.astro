@@ -1,0 +1,418 @@
+---
+// "By the numbers" stats dashboard. 6 cards, each with a unique mini-viz.
+---
+<section class="section section-soft stats-section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">By the numbers</span>
+      <h2>Outcomes you can plan around.</h2>
+      <p>Every metric here comes from real QualityNexus engagements over the last 24 months.</p>
+    </div>
+
+    <div class="stats-grid">
+      <!-- 1. Average engagement (timeline) -->
+      <article class="stat-card">
+        <div class="stat-viz stat-viz--timeline">
+          <div class="viz-track">
+            <div class="viz-fill"></div>
+            <span class="viz-marker" style="left: 0%"></span>
+            <span class="viz-marker" style="left: 25%"></span>
+            <span class="viz-marker" style="left: 50%"></span>
+            <span class="viz-marker" style="left: 75%"></span>
+            <span class="viz-marker viz-marker--end" style="left: 100%"></span>
+          </div>
+          <div class="viz-labels">
+            <span>Day 0</span>
+            <span>Day 30</span>
+            <span>Day 60</span>
+          </div>
+        </div>
+        <div class="stat-num"><span data-countup="60">0</span><small> days</small></div>
+        <div class="stat-label">Average engagement</div>
+        <div class="stat-sub">From kickoff to certificate</div>
+      </article>
+
+      <!-- 2. First-time pass rate (ring) -->
+      <article class="stat-card">
+        <div class="stat-viz stat-viz--ring">
+          <svg viewBox="0 0 80 80" aria-hidden="true">
+            <defs>
+              <linearGradient id="statRingGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#34D399"/>
+                <stop offset="100%" stop-color="#059669"/>
+              </linearGradient>
+            </defs>
+            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(15,23,42,0.08)" stroke-width="6"/>
+            <circle class="viz-ring-fill" cx="40" cy="40" r="32" fill="none"
+              stroke="url(#statRingGrad)" stroke-width="6" stroke-linecap="round"
+              pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"
+              transform="rotate(-90 40 40)"/>
+          </svg>
+          <span class="viz-ring-icon" aria-hidden="true">✓</span>
+        </div>
+        <div class="stat-num"><span data-countup="100">0</span><small>%</small></div>
+        <div class="stat-label">First-time pass rate</div>
+        <div class="stat-sub">On our last 24 audits</div>
+      </article>
+
+      <!-- 3. Standards delivered (column chart) -->
+      <article class="stat-card">
+        <div class="stat-viz stat-viz--columns" aria-hidden="true">
+          <div class="viz-col" style="--h: 28%; --i: 0"></div>
+          <div class="viz-col" style="--h: 42%; --i: 1"></div>
+          <div class="viz-col" style="--h: 58%; --i: 2"></div>
+          <div class="viz-col" style="--h: 70%; --i: 3"></div>
+          <div class="viz-col" style="--h: 86%; --i: 4"></div>
+          <div class="viz-col viz-col--lead" style="--h: 100%; --i: 5"></div>
+        </div>
+        <div class="stat-num"><span data-countup="100">0</span><small>+</small></div>
+        <div class="stat-label">Standards delivered</div>
+        <div class="stat-sub">ISO · BIS · FSSAI · SOC · GMP · GDP</div>
+      </article>
+
+      <!-- 4. Industries served (donut) -->
+      <article class="stat-card">
+        <div class="stat-viz stat-viz--donut">
+          <svg viewBox="0 0 80 80" aria-hidden="true">
+            <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(15,23,42,0.06)" stroke-width="12"/>
+            <circle class="donut-seg" cx="40" cy="40" r="30" fill="none" stroke="#059669" stroke-width="12"
+              pathLength="100" stroke-dasharray="32 68" stroke-dashoffset="0" transform="rotate(-90 40 40)"/>
+            <circle class="donut-seg" cx="40" cy="40" r="30" fill="none" stroke="#10B981" stroke-width="12"
+              pathLength="100" stroke-dasharray="22 78" stroke-dashoffset="-32" transform="rotate(-90 40 40)"/>
+            <circle class="donut-seg" cx="40" cy="40" r="30" fill="none" stroke="#34D399" stroke-width="12"
+              pathLength="100" stroke-dasharray="20 80" stroke-dashoffset="-54" transform="rotate(-90 40 40)"/>
+            <circle class="donut-seg" cx="40" cy="40" r="30" fill="none" stroke="#0E3B2E" stroke-width="12"
+              pathLength="100" stroke-dasharray="26 74" stroke-dashoffset="-74" transform="rotate(-90 40 40)"/>
+          </svg>
+        </div>
+        <div class="stat-num"><span data-countup="25">0</span><small>+</small></div>
+        <div class="stat-label">Industries served</div>
+        <div class="stat-sub">Pharma · Manufacturing · Fintech · Healthcare</div>
+      </article>
+
+      <!-- 5. Avg consultant experience (sparkline) -->
+      <article class="stat-card">
+        <div class="stat-viz stat-viz--sparkline">
+          <svg viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="statSparkGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#34D399"/>
+                <stop offset="100%" stop-color="#059669"/>
+              </linearGradient>
+              <linearGradient id="statSparkFillGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(16,185,129,0.30)"/>
+                <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+              </linearGradient>
+            </defs>
+            <path class="spark-fill" d="M 0 42 L 16 38 L 32 32 L 50 23 L 66 17 L 84 11 L 100 6 L 100 50 L 0 50 Z"
+              fill="url(#statSparkFillGrad)"/>
+            <path class="spark-path" d="M 0 42 L 16 38 L 32 32 L 50 23 L 66 17 L 84 11 L 100 6"
+              fill="none" stroke="url(#statSparkGrad)" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <circle class="spark-dot" cx="100" cy="6" r="3.5" fill="#10B981" stroke="#fff" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="stat-num"><span data-countup="12">0</span><small>+ yrs</small></div>
+        <div class="stat-label">Avg consultant experience</div>
+        <div class="stat-sub">Senior auditors, no juniors</div>
+      </article>
+
+      <!-- 6. Client retention (filled bar) -->
+      <article class="stat-card">
+        <div class="stat-viz stat-viz--progress">
+          <div class="progress-track">
+            <div class="progress-fill" style="--target: 94%">
+              <span class="progress-label">94%</span>
+            </div>
+          </div>
+          <div class="progress-meta">
+            <span>0%</span>
+            <span>100%</span>
+          </div>
+        </div>
+        <div class="stat-num"><span data-countup="94">0</span><small>%</small></div>
+        <div class="stat-label">Client retention</div>
+        <div class="stat-sub">Re-engaged for follow-up standards</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const cards = document.querySelectorAll('.stat-card');
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach(c => c.classList.add('is-visible'));
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.20, rootMargin: '0px 0px -10% 0px' });
+    cards.forEach(c => obs.observe(c));
+  })();
+</script>
+
+<style>
+  .stats-section { padding-top: 96px; padding-bottom: 96px; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 16px;
+  }
+  .stat-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 26px 24px 22px;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(15,23,42,0.08);
+    border-color: rgba(16,185,129,0.30);
+  }
+
+  .stat-viz {
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-num {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--color-heading);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    margin-top: 8px;
+  }
+  .stat-num small {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+  .stat-label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-heading);
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .stat-sub {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-top: -4px;
+  }
+
+  /* === 1. Timeline === */
+  .stat-viz--timeline {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px 0;
+  }
+  .viz-track {
+    position: relative;
+    height: 6px;
+    background: rgba(15,23,42,0.08);
+    border-radius: 999px;
+  }
+  .viz-fill {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, #34D399, #059669);
+    border-radius: 999px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.4s cubic-bezier(.4,.1,.2,1) .2s;
+  }
+  .is-visible .viz-fill { transform: scaleX(1); }
+  .viz-marker {
+    position: absolute;
+    top: 50%;
+    width: 10px; height: 10px;
+    background: #fff;
+    border: 2px solid rgba(15,23,42,0.20);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  .viz-marker--end {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(16,185,129,0.18);
+  }
+  .viz-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* === 2. Ring === */
+  .stat-viz--ring {
+    position: relative;
+    width: 80px; height: 80px;
+    margin: 0 auto;
+    flex: 0 0 80px;
+  }
+  .stat-viz--ring svg { width: 100%; height: 100%; display: block; }
+  .viz-ring-fill {
+    transition: stroke-dashoffset 1.6s cubic-bezier(.4,.1,.2,1) .2s;
+  }
+  .is-visible .viz-ring-fill { stroke-dashoffset: 0; }
+  .viz-ring-icon {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--color-accent);
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+  /* === 3. Columns === */
+  .stat-viz--columns {
+    align-items: flex-end;
+    gap: 6px;
+    height: 84px;
+    padding: 10px 4px 0;
+  }
+  .viz-col {
+    flex: 1;
+    height: var(--h, 50%);
+    background: linear-gradient(180deg, rgba(16,185,129,0.30), rgba(16,185,129,0.15));
+    border-radius: 4px 4px 0 0;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform .9s cubic-bezier(.4,.1,.2,1);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+  .viz-col--lead {
+    background: linear-gradient(180deg, #34D399, #059669);
+  }
+  .is-visible .viz-col { transform: scaleY(1); }
+
+  /* === 4. Donut === */
+  .stat-viz--donut {
+    width: 80px; height: 80px;
+    margin: 0 auto;
+    flex: 0 0 80px;
+  }
+  .stat-viz--donut svg { width: 100%; height: 100%; display: block; }
+  .donut-seg {
+    stroke-opacity: 0;
+    transition: stroke-opacity .7s ease-out;
+  }
+  .is-visible .donut-seg:nth-of-type(2) { stroke-opacity: 1; transition-delay: 0.10s; }
+  .is-visible .donut-seg:nth-of-type(3) { stroke-opacity: 1; transition-delay: 0.30s; }
+  .is-visible .donut-seg:nth-of-type(4) { stroke-opacity: 1; transition-delay: 0.50s; }
+  .is-visible .donut-seg:nth-of-type(5) { stroke-opacity: 1; transition-delay: 0.70s; }
+
+  /* === 5. Sparkline === */
+  .stat-viz--sparkline {
+    width: 100%;
+    height: 80px;
+    padding: 4px 0;
+  }
+  .stat-viz--sparkline svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .spark-path {
+    stroke-dasharray: 250;
+    stroke-dashoffset: 250;
+    transition: stroke-dashoffset 1.6s cubic-bezier(.4,.1,.2,1) .2s;
+  }
+  .is-visible .spark-path { stroke-dashoffset: 0; }
+  .spark-fill {
+    opacity: 0;
+    transition: opacity .8s ease-out 1s;
+  }
+  .is-visible .spark-fill { opacity: 1; }
+  .spark-dot {
+    opacity: 0;
+    transition: opacity .4s ease-out 1.5s;
+  }
+  .is-visible .spark-dot { opacity: 1; }
+
+  /* === 6. Progress bar === */
+  .stat-viz--progress {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  .progress-track {
+    height: 14px;
+    background: rgba(15,23,42,0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    width: var(--target, 94%);
+    background: linear-gradient(90deg, #10B981, #059669);
+    border-radius: 999px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.4s cubic-bezier(.4,.1,.2,1) .2s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .is-visible .progress-fill { transform: scaleX(1); }
+  .progress-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    margin-right: 8px;
+    opacity: 0;
+    transition: opacity .4s ease-out 1.5s;
+  }
+  .is-visible .progress-label { opacity: 1; }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viz-fill, .viz-ring-fill, .viz-col,
+    .donut-seg, .spark-path, .spark-fill, .spark-dot,
+    .progress-fill, .progress-label { transition: none !important; }
+    .viz-fill, .viz-col, .progress-fill { transform: none !important; }
+    .viz-ring-fill { stroke-dashoffset: 0 !important; }
+    .donut-seg, .spark-fill, .spark-dot, .progress-label { opacity: 1 !important; }
+    .spark-path { stroke-dashoffset: 0 !important; }
+  }
+
+  @media (max-width: 980px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-section { padding-top: 64px; padding-bottom: 64px; }
+  }
+  @media (max-width: 560px) {
+    .stats-grid { grid-template-columns: 1fr; }
+  }
+</style>

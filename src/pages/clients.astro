@@ -1,0 +1,632 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+import Icon from "../components/Icon.astro";
+
+const clients = [
+  { abbr: "IOCL", name: "Indian Oil Corporation Ltd",  sector: "Oil, Gas & Petroleum" },
+  { abbr: "HAL",  name: "Hindustan Aeronautics Ltd",   sector: "Aerospace & Defence" },
+  { abbr: "NHPC", name: "NHPC Limited",                sector: "Power & Energy" },
+  { abbr: "GAIL", name: "GAIL Gas Limited",            sector: "Oil, Gas & Petroleum" },
+  { abbr: "NRL",  name: "Numaligarh Refinery Ltd",     sector: "Oil, Gas & Petroleum" },
+  { abbr: "HCL",  name: "Hindustan Copper Ltd",        sector: "Mining & Metals" },
+  { abbr: "BL",   name: "Balmer Lawrie & Co. Ltd",     sector: "Industrial / Logistics" },
+  { abbr: "JRGB", name: "Jharkhand Rajya Gramin Bank", sector: "Banking & BFSI" },
+];
+
+const sectors = [
+  { icon: "battery",     label: "Oil, Gas & Petroleum",   count: 3 },
+  { icon: "zap",         label: "Power & Energy",         count: 1 },
+  { icon: "rocket",      label: "Aerospace & Defence",    count: 1 },
+  { icon: "hard-hat",    label: "Mining & Metals",        count: 1 },
+  { icon: "cog",         label: "Industrial / Logistics", count: 1 },
+  { icon: "lock",        label: "Banking & BFSI",         count: 1 },
+];
+const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
+
+---
+<BaseLayout
+  title="Clients — Organizations We've Helped Certify"
+  description="A snapshot of the organizations QualityNexus has helped move from gap to certificate, across pharma, manufacturing, fintech, healthcare, energy, and more."
+>
+  <PageHero
+    eyebrow="Our clients"
+    title="From boutique to enterprise."
+    accent="Certified, all of them."
+    lede="A cross-section of the organizations QualityNexus has helped move from gap analysis to issued certificate. Some you'll recognize, some you won't — what they have in common is a clean Stage 2 audit and a system they actually use."
+    hasVisual={true}
+  >
+    <div slot="visual" class="clients-visual">
+      <article class="log-card" data-log>
+        <span class="log-corner log-corner--tl" aria-hidden="true"></span>
+        <span class="log-corner log-corner--tr" aria-hidden="true"></span>
+        <span class="log-corner log-corner--bl" aria-hidden="true"></span>
+        <span class="log-corner log-corner--br" aria-hidden="true"></span>
+
+        <header class="log-head">
+          <div class="log-title">
+            <span class="log-pulse" aria-hidden="true"><span></span></span>
+            <span class="log-eyebrow">Trusted PSU &amp; enterprise clients</span>
+          </div>
+          <span class="log-count">
+            <strong>{clients.length}</strong>
+            <span class="log-count-label">featured</span>
+          </span>
+        </header>
+
+        <ol class="log-list">
+          {clients.map((entry, i) => (
+            <li class={`log-row ${i === 0 ? "is-active" : ""}`} data-log-i={i}>
+              <span class="log-bar" aria-hidden="true"></span>
+              <div class="log-row-main">
+                <span class="log-avatar">{entry.abbr}</span>
+                <div class="log-meta">
+                  <strong class="log-name">{entry.name}</strong>
+                  <span class="log-sector">{entry.sector}</span>
+                </div>
+                <span class="log-standard">
+                  <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;vertical-align:-2px;">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  Certified
+                </span>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <footer class="log-foot">
+          <span class="log-tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </span>
+          <span class="log-foot-text">Public-sector and enterprise certifications across India</span>
+        </footer>
+      </article>
+    </div>
+  </PageHero>
+
+  <!-- ========== CLIENT WORDMARKS ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Our clients</span>
+        <h2>Public-sector and enterprise organizations we've worked with.</h2>
+        <p>A selection of QualityNexus engagements across India's public-sector undertakings and enterprises. Logos will replace these wordmarks once added.</p>
+      </div>
+      <div class="client-grid">
+        {clients.map((c) => (
+          <div class="client-cell">
+            <span class="client-mark" data-len={c.abbr.length}>{c.abbr}</span>
+            <span class="client-name">{c.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTOR BREAKDOWN ========== -->
+  <section class="section section-soft">
+    <div class="container sector-section-grid">
+      <div class="sector-copy">
+        <span class="eyebrow">Sectors we serve</span>
+        <h2>Where our work lands.</h2>
+        <p>Sector mix across our featured engagements. Each is led by a consultant with sector context, not a generic auditor — because the same standard reads very differently across these industries.</p>
+        <a href="/about" class="link-arrow">Read about our sector matching <Icon name="arrow-right" /></a>
+      </div>
+      <div class="sector-bars">
+        {sectors.map((s) => (
+          <div class="sector-bar-row">
+            <div class="sector-bar-label">
+              <span class="sector-bar-icon"><Icon name={s.icon} /></span>
+              <span class="sector-bar-name">{s.label}</span>
+              <span class="sector-bar-count">{s.count}</span>
+            </div>
+            <div class="sector-bar-track">
+              <span class="sector-bar-fill" style={`--w:${(s.count / sectorMaxCount) * 100}%`}></span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading="Want to be on this list next quarter?"
+    body="Tell us your standard and the gaps you already know about. We'll come back with a plan within 48 hours."
+    ctaLabel="Start a conversation"
+  />
+</BaseLayout>
+
+<script>
+  const card = document.querySelector<HTMLElement>("[data-log]");
+  if (card) {
+    const rows = card.querySelectorAll<HTMLElement>("[data-log-i]");
+    const TICK = 2200;
+    let current = 0;
+    let timer: number | null = null;
+
+    const setActive = (i: number) => {
+      const target = ((i % rows.length) + rows.length) % rows.length;
+      rows.forEach((el, j) => el.classList.toggle("is-active", j === target));
+      current = target;
+    };
+
+    const startTimer = () => {
+      if (timer !== null) return;
+      timer = window.setInterval(() => setActive(current + 1), TICK);
+    };
+    const stopTimer = () => {
+      if (timer !== null) { clearInterval(timer); timer = null; }
+    };
+
+    card.addEventListener("mouseenter", stopTimer);
+    card.addEventListener("mouseleave", startTimer);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stopTimer(); else startTimer();
+    });
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      startTimer();
+    }
+  }
+</script>
+
+<style>
+  /* ===== HERO VISUAL — recently-certified activity card (simple · alive) ===== */
+  .clients-visual {
+    width: 100%;
+    max-width: 480px;
+    margin-left: auto;
+  }
+  .log-card {
+    position: relative;
+    background: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 22px 22px 16px;
+    box-shadow: 0 30px 70px rgba(15, 59, 46, 0.10), 0 2px 6px rgba(15, 59, 46, 0.04);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Decorative emerald corner ornaments */
+  .log-corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .log-corner--tl { top: 10px; left: 10px;
+    border-top: 1.5px solid var(--color-accent);
+    border-left: 1.5px solid var(--color-accent);
+    border-top-left-radius: 4px;
+  }
+  .log-corner--tr { top: 10px; right: 10px;
+    border-top: 1.5px solid var(--color-accent);
+    border-right: 1.5px solid var(--color-accent);
+    border-top-right-radius: 4px;
+  }
+  .log-corner--bl { bottom: 10px; left: 10px;
+    border-bottom: 1.5px solid var(--color-accent);
+    border-left: 1.5px solid var(--color-accent);
+    border-bottom-left-radius: 4px;
+  }
+  .log-corner--br { bottom: 10px; right: 10px;
+    border-bottom: 1.5px solid var(--color-accent);
+    border-right: 1.5px solid var(--color-accent);
+    border-bottom-right-radius: 4px;
+  }
+
+  /* Header row */
+  .log-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px 14px;
+    border-bottom: 1px solid var(--color-border-soft);
+    position: relative;
+    z-index: 1;
+  }
+  .log-title { display: inline-flex; align-items: center; gap: 9px; }
+  .log-pulse { position: relative; width: 8px; height: 8px; }
+  .log-pulse > span {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.55);
+    animation: logPulse 2.4s ease-out infinite;
+  }
+  @keyframes logPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  }
+  .log-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent-strong);
+  }
+  .log-count {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .log-count strong {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--color-heading);
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+  .log-count-plus { color: var(--color-accent-strong); margin-left: 1px; }
+  .log-count-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+  }
+
+  /* List of certifications */
+  .log-list {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0 0;
+    display: grid;
+    gap: 2px;
+    position: relative;
+    z-index: 1;
+  }
+  .log-row {
+    position: relative;
+    display: grid;
+    gap: 0;
+    padding: 10px 12px 10px 18px;
+    border-radius: 10px;
+    transition: background .5s ease, padding .35s ease;
+  }
+  .log-row-main {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+  }
+  .log-row-detail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0;
+    padding-left: 48px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height .4s ease, opacity .4s ease, margin-top .4s ease;
+  }
+  .log-row.is-active .log-row-detail {
+    max-height: 60px;
+    opacity: 1;
+    margin-top: 8px;
+  }
+
+  /* Left vertical bar that fills with gold for active row */
+  .log-bar {
+    position: absolute;
+    left: 7px;
+    top: 16px;
+    width: 3px;
+    height: 22px;
+    border-radius: 2px;
+    background: transparent;
+    transition: background .35s ease, height .35s ease;
+  }
+  .log-row.is-active {
+    background: linear-gradient(90deg, rgba(16,185,129,0.10) 0%, rgba(16,185,129,0) 85%);
+    padding-bottom: 14px;
+  }
+  .log-row.is-active .log-bar {
+    background: var(--color-accent);
+    height: 100%;
+    top: 8px;
+    bottom: 8px;
+    height: auto;
+  }
+  .log-row + .log-row::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 12px;
+    height: 1px;
+    background: var(--color-border-soft);
+  }
+  .log-row.is-active + .log-row::before,
+  .log-row + .log-row.is-active::before {
+    background: transparent;
+  }
+
+  .log-avatar {
+    display: inline-grid;
+    place-items: center;
+    width: 36px; height: 36px;
+    border-radius: 9px;
+    background: var(--color-primary);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+    transition: transform .35s ease, box-shadow .35s ease;
+  }
+  .log-row.is-active .log-avatar {
+    box-shadow: 0 6px 14px rgba(16, 185, 129, 0.30);
+  }
+  .log-meta { display: grid; gap: 1px; min-width: 0; }
+  .log-name {
+    font-family: var(--font-heading);
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--color-heading);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .log-sector {
+    font-size: 11.5px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+  .log-standard {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-heading);
+    background: var(--color-bg-section);
+    border: 1px solid var(--color-border);
+    padding: 4px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
+    transition: border-color .35s ease, color .35s ease, background .35s ease;
+    white-space: nowrap;
+  }
+  .log-row.is-active .log-standard {
+    border-color: var(--color-accent);
+    color: var(--color-accent-strong);
+    background: rgba(16, 185, 129, 0.08);
+  }
+  .log-when {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* Detail chips (revealed only on active row) */
+  .log-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background: var(--color-bg-section);
+    border: 1px solid var(--color-border-soft);
+    padding: 3px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .log-chip svg { stroke: currentColor; }
+  .log-chip--pass {
+    background: var(--color-accent-soft);
+    border-color: rgba(16, 185, 129, 0.30);
+    color: var(--color-accent-strong);
+    font-weight: 700;
+  }
+
+  /* Footer microcopy */
+  .log-foot {
+    margin-top: 8px;
+    padding: 12px 10px 4px;
+    border-top: 1px solid var(--color-border-soft);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .log-foot-text { flex: 1; }
+  .log-tick {
+    display: inline-grid;
+    place-items: center;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-strong);
+    flex-shrink: 0;
+  }
+  .log-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-accent-strong);
+    background: rgba(16, 185, 129, 0.10);
+    border: 1px solid rgba(16, 185, 129, 0.30);
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .log-pulse > span { animation: none; }
+    .log-row, .log-bar, .log-standard, .log-row-detail, .log-avatar { transition: none; }
+  }
+
+  /* ===== CLIENT GRID ===== */
+  .client-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .client-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 16px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .client-cell:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+  .client-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: var(--color-primary);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 13px;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+  }
+  .client-mark[data-len="2"] { font-size: 15px; letter-spacing: 0.02em; }
+  .client-mark[data-len="3"] { font-size: 13px; }
+  .client-mark[data-len="4"] { font-size: 11px; letter-spacing: 0.02em; }
+  .client-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-heading);
+    line-height: 1.3;
+  }
+
+  /* ===== SECTOR BARS ===== */
+  .sector-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .sector-copy h2 { margin: 14px 0 16px; }
+  .sector-copy p {
+    color: var(--color-text);
+    font-size: 16px;
+    line-height: 1.65;
+    margin-bottom: 22px;
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-accent-strong);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .link-arrow:hover { gap: 10px; }
+
+  .sector-bars {
+    display: grid;
+    gap: 18px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+  }
+  .sector-bar-row {
+    display: grid;
+    gap: 8px;
+  }
+  .sector-bar-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sector-bar-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-strong);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .sector-bar-name {
+    font-family: var(--font-heading);
+    color: var(--color-heading);
+    font-size: 14.5px;
+    font-weight: 700;
+    flex: 1;
+  }
+  .sector-bar-count {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--color-accent-strong);
+  }
+  .sector-bar-track {
+    height: 8px;
+    background: var(--color-bg-section);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .sector-bar-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
+    border-radius: 999px;
+    animation: sectorFill 1.6s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  @keyframes sectorFill {
+    from { width: 0; }
+    to   { width: var(--w); }
+  }
+
+  @media (max-width: 860px) {
+    .clients-visual { margin: 0 auto; }
+    .client-grid { grid-template-columns: repeat(2, 1fr); }
+    .sector-section-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  @media (max-width: 640px) {
+    .clients-visual { max-width: 420px; }
+    .log-card { padding: 18px 16px 12px; }
+    .log-row { padding: 10px 10px 10px 16px; }
+    .log-row-main {
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto auto;
+      row-gap: 4px;
+    }
+    .log-row-main .log-when { grid-column: 3; grid-row: 1; }
+    .log-row-main .log-standard { grid-column: 2 / span 2; grid-row: 2; justify-self: start; }
+    .log-row-detail { padding-left: 0; }
+    .log-row.is-active .log-row-detail { max-height: 90px; }
+  }
+  @media (max-width: 560px) {
+    .client-grid { grid-template-columns: 1fr; }
+    .sector-bars { padding: 20px; }
+  }
+</style>

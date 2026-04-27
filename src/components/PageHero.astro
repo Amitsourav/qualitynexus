@@ -1,0 +1,123 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  accent?: string;
+  lede?: string;
+  hasVisual?: boolean;
+}
+const { eyebrow, title, accent, lede, hasVisual = false } = Astro.props;
+---
+<section class={`page-hero ${hasVisual ? "has-visual" : ""}`}>
+  <div class="page-hero-bg-grid" aria-hidden="true"></div>
+  <div class="page-hero-glow page-hero-glow--1" aria-hidden="true"></div>
+  <div class="page-hero-glow page-hero-glow--2" aria-hidden="true"></div>
+
+  <div class="container page-hero-inner">
+    <div class="page-hero-copy">
+      <span class="eyebrow">{eyebrow}</span>
+      <h1>
+        {title}
+        {accent && <><br/><span class="page-hero-accent">{accent}</span></>}
+      </h1>
+      {lede && <p class="page-hero-lede">{lede}</p>}
+      <slot name="ctas" />
+    </div>
+    {hasVisual && (
+      <div class="page-hero-visual">
+        <slot name="visual" />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: 88px 0 72px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .page-hero-bg-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image:
+      linear-gradient(rgba(15,23,42,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15,23,42,0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
+  }
+  .page-hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .page-hero-glow--1 {
+    top: -20%; right: -8%;
+    width: 50%; aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.16), transparent 65%);
+    animation: pageHeroGlow 14s ease-in-out infinite alternate;
+  }
+  .page-hero-glow--2 {
+    bottom: -25%; left: -10%;
+    width: 40%; aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(15, 59, 46, 0.10), transparent 65%);
+    animation: pageHeroGlow 18s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes pageHeroGlow {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(-30px, 20px) scale(1.1); }
+  }
+
+  .page-hero-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .page-hero.has-visual .page-hero-inner {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 40px;
+  }
+  .page-hero-copy { max-width: 720px; }
+  .page-hero h1 {
+    font-size: clamp(2.1rem, 4.4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    margin: 14px 0 18px;
+  }
+  .page-hero-accent {
+    background: linear-gradient(110deg, #E8C766 0%, #D4AF37 50%, #F4D580 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  .page-hero-lede {
+    color: var(--color-text);
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 680px;
+  }
+
+  .page-hero-visual {
+    position: relative;
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .page-hero.has-visual .page-hero-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+  @media (max-width: 640px) {
+    .page-hero { padding: 56px 0 48px; }
+  }
+</style>
