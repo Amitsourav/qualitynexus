@@ -5,14 +5,14 @@ import CtaStrip from "../components/CtaStrip.astro";
 import Icon from "../components/Icon.astro";
 
 const clients = [
-  { abbr: "IOCL", name: "Indian Oil Corporation Ltd",  sector: "Oil, Gas & Petroleum" },
-  { abbr: "HAL",  name: "Hindustan Aeronautics Ltd",   sector: "Aerospace & Defence" },
-  { abbr: "NHPC", name: "NHPC Limited",                sector: "Power & Energy" },
-  { abbr: "GAIL", name: "GAIL Gas Limited",            sector: "Oil, Gas & Petroleum" },
-  { abbr: "NRL",  name: "Numaligarh Refinery Ltd",     sector: "Oil, Gas & Petroleum" },
-  { abbr: "HCL",  name: "Hindustan Copper Ltd",        sector: "Mining & Metals" },
-  { abbr: "BL",   name: "Balmer Lawrie & Co. Ltd",     sector: "Industrial / Logistics" },
-  { abbr: "JRGB", name: "Jharkhand Rajya Gramin Bank", sector: "Banking & BFSI" },
+  { abbr: "IOCL", name: "Indian Oil Corporation Ltd",  sector: "Oil, Gas & Petroleum",  logo: "/images/clients/iocl.png" },
+  { abbr: "HAL",  name: "Hindustan Aeronautics Ltd",   sector: "Aerospace & Defence",   logo: "/images/clients/hal.jpeg" },
+  { abbr: "NHPC", name: "NHPC Limited",                sector: "Power & Energy",        logo: "/images/clients/nhpc.png" },
+  { abbr: "GAIL", name: "GAIL Gas Limited",            sector: "Oil, Gas & Petroleum",  logo: "/images/clients/gail.png" },
+  { abbr: "NRL",  name: "Numaligarh Refinery Ltd",     sector: "Oil, Gas & Petroleum",  logo: "/images/clients/nrl.jpeg" },
+  { abbr: "HCL",  name: "Hindustan Copper Ltd",        sector: "Mining & Metals",       logo: "/images/clients/hindustan-copper.jpg" },
+  { abbr: "BL",   name: "Balmer Lawrie & Co. Ltd",     sector: "Industrial / Logistics", logo: "/images/clients/balmer-lawrie.jpg" },
+  { abbr: "JRGB", name: "Jharkhand Rajya Gramin Bank", sector: "Banking & BFSI",        logo: null },
 ];
 
 const sectors = [
@@ -98,9 +98,14 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
       </div>
       <div class="client-grid">
         {clients.map((c) => (
-          <div class="client-cell">
-            <span class="client-mark" data-len={c.abbr.length}>{c.abbr}</span>
-            <span class="client-name">{c.name}</span>
+          <div class={`client-cell ${c.logo ? "client-cell--logo" : "client-cell--abbr"}`}>
+            {c.logo
+              ? <img src={c.logo} alt={`${c.name} logo`} class="client-logo" loading="lazy" decoding="async" />
+              : <>
+                  <span class="client-mark" data-len={c.abbr.length}>{c.abbr}</span>
+                  <span class="client-name">{c.name}</span>
+                </>
+            }
           </div>
         ))}
       </div>
@@ -487,18 +492,40 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
     gap: 14px;
   }
   .client-cell {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 18px 16px;
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    transition: border-color .2s ease, transform .2s ease;
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    min-height: 120px;
   }
   .client-cell:hover {
     border-color: var(--color-accent);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+  /* Logo cells: clean white, centered, generous padding */
+  .client-cell--logo {
+    display: grid;
+    place-items: center;
+    padding: 20px 24px;
+  }
+  .client-logo {
+    max-width: 100%;
+    max-height: 64px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: filter .2s ease, transform .2s ease;
+  }
+  .client-cell--logo:hover .client-logo {
+    transform: scale(1.04);
+  }
+  /* Abbreviation cells (fallback for clients without logo files) */
+  .client-cell--abbr {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 16px;
   }
   .client-mark {
     display: inline-grid;

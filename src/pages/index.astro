@@ -43,9 +43,15 @@ const features = [
 
 const trustWords = ["OIL & GAS", "POWER", "AEROSPACE & DEFENCE", "MINING", "BFSI", "INDUSTRIAL"];
 
-const clientPlaceholders = [
-  "IOCL", "HAL", "NHPC", "GAIL Gas",
-  "NRL", "Hindustan Copper", "Balmer Lawrie", "JRGB",
+const clientLogos = [
+  { name: "Indian Oil Corporation Ltd",  logo: "/images/clients/iocl.png" },
+  { name: "Hindustan Aeronautics Ltd",   logo: "/images/clients/hal.jpeg" },
+  { name: "NHPC Limited",                logo: "/images/clients/nhpc.png" },
+  { name: "GAIL Gas Limited",            logo: "/images/clients/gail.png" },
+  { name: "Numaligarh Refinery Ltd",     logo: "/images/clients/nrl.jpeg" },
+  { name: "Balmer Lawrie & Co. Ltd",     logo: "/images/clients/balmer-lawrie.jpg" },
+  { name: "Hindustan Copper Ltd",        logo: "/images/clients/hindustan-copper.jpg" },
+  { name: "Jharkhand Rajya Gramin Bank", logo: null, abbr: "JRGB" },
 ];
 ---
 <BaseLayout
@@ -243,10 +249,15 @@ const clientPlaceholders = [
     </div>
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        {[...clientPlaceholders, ...clientPlaceholders].map((c) => (
+        {[...clientLogos, ...clientLogos].map((c) => (
           <div class="logo-tile">
-            <span class="logo-mark"><Icon name="globe" /></span>
-            <span class="logo-name">{c}</span>
+            {c.logo
+              ? <img src={c.logo} alt={`${c.name} logo`} class="logo-img" loading="lazy" decoding="async" />
+              : <>
+                  <span class="logo-mark">{c.abbr}</span>
+                  <span class="logo-name">{c.name}</span>
+                </>
+            }
           </div>
         ))}
       </div>
@@ -701,9 +712,11 @@ const clientPlaceholders = [
   .logo-tile {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
-    height: 76px;
-    padding: 0 26px;
+    height: 88px;
+    min-width: 180px;
+    padding: 12px 28px;
     background: #fff;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -713,17 +726,29 @@ const clientPlaceholders = [
     font-size: 15px;
     letter-spacing: -0.01em;
     flex-shrink: 0;
-    transition: color .2s, border-color .2s;
+    transition: color .2s, border-color .2s, transform .2s;
   }
-  .logo-tile:hover { color: var(--color-heading); border-color: var(--color-accent); }
+  .logo-tile:hover { color: var(--color-heading); border-color: var(--color-accent); transform: translateY(-2px); }
+  .logo-img {
+    max-height: 56px;
+    max-width: 160px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
   .logo-mark {
-    width: 28px; height: 28px;
-    border-radius: 8px;
-    background: var(--color-bg-section);
-    color: var(--color-accent);
-    display: grid;
+    display: inline-grid;
     place-items: center;
-    font-size: 16px;
+    min-width: 48px;
+    height: 38px;
+    padding: 0 10px;
+    border-radius: 8px;
+    background: var(--color-primary);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
   }
 
   @keyframes marquee {
