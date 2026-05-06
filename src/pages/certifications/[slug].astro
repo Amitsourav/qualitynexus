@@ -18,13 +18,51 @@ const cat = standard.category;
 
 const benefitIcons = ["users", "settings", "compass", "trending-up"];
 const whyIcons = ["check-circle", "shield-check", "graduation-cap", "scale", "rocket"];
+
+function trimMeta(text: string, max = 158): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return cut.slice(0, lastSpace > 0 ? lastSpace : max).replace(/[,;:.\s]+$/, "") + "…";
+}
+
+const metaDescription = hasDetail
+  ? trimMeta(detail.intro)
+  : `${standard.code} (${standard.name}) consulting, training, implementation, and audit support from QualityNexus.`;
+
+const canonicalPath = `/certifications/${standard.slug}/`;
+const canonicalUrl = `https://www.qualitynexus.in${canonicalPath}`;
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home",           "item": "https://www.qualitynexus.in/" },
+    { "@type": "ListItem", "position": 2, "name": "Certifications", "item": "https://www.qualitynexus.in/certifications/" },
+    { "@type": "ListItem", "position": 3, "name": cat.title,         "item": `https://www.qualitynexus.in/certifications/#${cat.id}` },
+    { "@type": "ListItem", "position": 4, "name": standard.code,     "item": canonicalUrl },
+  ],
+};
+
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": `${standard.name} Certification Consulting`,
+  "name": `${standard.code} — ${standard.name} Consulting & Implementation`,
+  "description": metaDescription,
+  "provider": { "@id": "https://www.qualitynexus.in/#organization" },
+  "areaServed": { "@type": "Country", "name": "India" },
+  ...(hasDetail && detail.audience ? { "audience": { "@type": "BusinessAudience", "audienceType": detail.audience } } : {}),
+  "url": canonicalUrl,
+  "category": cat.title,
+};
 ---
 <BaseLayout
   title={`${standard.code} — ${standard.name} | QualityNexus`}
-  description={hasDetail
-    ? detail.intro.slice(0, 155)
-    : `${standard.code} (${standard.name}) consulting, training, implementation, and audit support from QualityNexus.`}
+  description={metaDescription}
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceLd)} />
   <!-- ========== HERO ========== -->
   <section class="cert-hero">
     <div class="cert-hero-bg" aria-hidden="true">

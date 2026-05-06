@@ -26,6 +26,10 @@ const popularStandards = [
           <span class="brand-name">QualityNexus</span>
         </a>
         <p>Trusted partner for ISO Certification, NABL &amp; NABH Accreditation, audits, training, and business support — delivered across India.</p>
+        <address class="footer-address">
+          Trade Centre, 1st Floor, Main Road, SSVM School,<br/>
+          Ormanjhi, Ranchi 835219, Jharkhand, India
+        </address>
         <p class="contact-line">
           <a href="mailto:Qualitynexusofficial@gmail.com">Qualitynexusofficial@gmail.com</a>
         </p>
@@ -34,6 +38,11 @@ const popularStandards = [
           <span aria-hidden="true">·</span>
           <a href="tel:+917717762084">+91 77177 62084</a>
         </p>
+        <ul class="footer-ids" aria-label="Statutory identifiers">
+          <li><span>CIN</span><strong>U70200JH2025PTC024534</strong></li>
+          <li><span>GSTIN</span><strong>20AABCQ1018L1ZW</strong></li>
+          <li><span>UDYAM</span><strong>UDYAM-JH-20-0101391</strong></li>
+        </ul>
       </div>
 
       <div class="footer-col">
@@ -118,6 +127,42 @@ const popularStandards = [
     flex-wrap: wrap;
     color: #CBD5E1;
     font-size: 14px;
+  }
+  .footer-address {
+    color: #CBD5E1;
+    font-size: 14px;
+    line-height: 1.55;
+    font-style: normal;
+    margin-bottom: 14px;
+    max-width: 320px;
+  }
+  .footer-ids {
+    margin-top: 16px;
+    display: grid;
+    gap: 4px;
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 12px;
+  }
+  .footer-ids li {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 10px;
+    font-size: 12px;
+    align-items: baseline;
+  }
+  .footer-ids li span {
+    color: #64748B;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .footer-ids li strong {
+    color: #CBD5E1;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
   }
 
   .footer-col h4 {

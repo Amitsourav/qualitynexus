@@ -4,12 +4,18 @@ import PageHero from "../../components/PageHero.astro";
 import CtaStrip from "../../components/CtaStrip.astro";
 import Icon from "../../components/Icon.astro";
 import { categories, slugify, totalStandards } from "../../data/certifications";
+import { breadcrumbLd } from "../../lib/schema";
 
+const crumbs = breadcrumbLd([
+  { name: "Home",           href: "/" },
+  { name: "Certifications", href: "/certifications/" },
+]);
 ---
 <BaseLayout
   title="Certifications — 100+ International Standards"
   description="QualityNexus supports 100+ international standards across quality, security, environment, health & safety, food, medical, AI, and risk management. Browse the full directory."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
   <PageHero
     eyebrow="Certifications directory"
     title="100+ international standards."

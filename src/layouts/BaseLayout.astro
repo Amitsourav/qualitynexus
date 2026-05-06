@@ -7,33 +7,106 @@ interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  image?: string;
+  type?: "website" | "article" | "profile";
 }
 
 const {
   title = "QualityNexus — ISO Certification Consulting",
-  description = "Your partner in ISO compliance — from gap to certificate. Consulting, training, implementation, and audits across 100+ international standards.",
+  description = "Audit-ready consulting for quality, compliance, and industrial excellence. ISO certification, NABL & NABH accreditation, training, and audits across India.",
   canonical,
+  image = "/og/default.jpg",
+  type = "website",
 } = Astro.props;
 
 const pageTitle = title.includes("QualityNexus")
   ? title
   : `${title} · QualityNexus`;
+
+const canonicalUrl = canonical
+  ? new URL(canonical, Astro.site).href
+  : new URL(Astro.url.pathname, Astro.site).href;
+
+const ogImage = new URL(image, Astro.site).href;
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.qualitynexus.in/#organization",
+  "name": "QualityNexus",
+  "legalName": "QualityNexus Private Limited",
+  "url": "https://www.qualitynexus.in",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.qualitynexus.in/logo-256.png",
+    "width": 256,
+    "height": 256,
+  },
+  "email": "Qualitynexusofficial@gmail.com",
+  "telephone": "+91-9798082076",
+  "foundingDate": "2025-04-09",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Trade Centre, 1st Floor, Main Road, SSVM School, Ormanjhi",
+    "addressLocality": "Ranchi",
+    "addressRegion": "Jharkhand",
+    "postalCode": "835219",
+    "addressCountry": "IN",
+  },
+  "identifier": [
+    { "@type": "PropertyValue", "propertyID": "CIN",   "value": "U70200JH2025PTC024534" },
+    { "@type": "PropertyValue", "propertyID": "GSTIN", "value": "20AABCQ1018L1ZW" },
+    { "@type": "PropertyValue", "propertyID": "UDYAM", "value": "UDYAM-JH-20-0101391" },
+  ],
+  "areaServed": { "@type": "Country", "name": "India" },
+  "sameAs": [
+    "https://sites.google.com/view/qualitynexus/home",
+  ],
+};
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="generator" content={Astro.generator} />
   <meta name="theme-color" content="#0E3B2E" />
+
+  <title>{pageTitle}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+
+  <!-- hreflang (English / India default) -->
+  <link rel="alternate" hreflang="en-IN" href={canonicalUrl} />
+  <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={type} />
   <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  {canonical && <link rel="canonical" href={canonical} />}
-  <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="apple-touch-icon" href="/logo-256.png" />
-  <title>{pageTitle}</title>
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="QualityNexus" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="256x256" href="/logo-256.png" />
+
+  <!-- Organization JSON-LD (site-wide) -->
+  <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
+
+  <slot name="head" />
 </head>
 <body>
   <Header />

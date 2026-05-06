@@ -3,6 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 import Icon from "../components/Icon.astro";
+import { breadcrumbLd } from "../lib/schema";
+
+const crumbs = breadcrumbLd([
+  { name: "Home",     href: "/" },
+  { name: "Services", href: "/services/" },
+]);
 
 const services = [
   {
@@ -63,6 +69,7 @@ const proofPoints = [
   title="Services — ISO, NABL, Audits, Training & Business Support"
   description="QualityNexus offers ISO Certification, NABL & NABH Accreditation, Cybersecurity, ESG, Safety Audits, Lean Six Sigma, Financial Services, and Legal Compliance across India."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
   <PageHero
     eyebrow="What we do"
     title="Six service lines."

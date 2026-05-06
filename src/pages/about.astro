@@ -3,6 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 import Icon from "../components/Icon.astro";
+import { breadcrumbLd } from "../lib/schema";
+
+const crumbs = breadcrumbLd([
+  { name: "Home",  href: "/" },
+  { name: "About", href: "/about/" },
+]);
 
 const principles = [
   { icon: "shield-check", title: "Audit-defensible by design",  body: "Every artefact we produce can withstand external scrutiny — because our consultants have written the same notes from the auditor's seat." },
@@ -40,6 +46,7 @@ const credentialBadges = [
   title="About QualityNexus — ISO Consulting from Senior Auditors"
   description="QualityNexus is an ISO certification consulting firm built by senior IRCA-trained lead auditors. We help organizations move from gap analysis to certificate across 100+ international standards."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
   <PageHero
     eyebrow="About QualityNexus"
     title="A trusted consultancy and"

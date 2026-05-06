@@ -3,6 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 import Icon from "../components/Icon.astro";
+import { breadcrumbLd } from "../lib/schema";
+
+const crumbs = breadcrumbLd([
+  { name: "Home",    href: "/" },
+  { name: "Clients", href: "/clients/" },
+]);
 
 const clients = [
   { abbr: "IOCL", name: "Indian Oil Corporation Ltd",  sector: "Oil, Gas & Petroleum",      logo: "/images/clients/iocl.png" },
@@ -34,6 +40,7 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
   title="Clients — Organizations We've Helped Certify"
   description="A snapshot of the organizations QualityNexus has helped move from gap to certificate, across pharma, manufacturing, fintech, healthcare, energy, and more."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
   <PageHero
     eyebrow="Our clients"
     title="From boutique to enterprise."

@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import Icon from "../components/Icon.astro";
+import { breadcrumbLd } from "../lib/schema";
 
 const channels = [
   { icon: "headphones", label: "Email",    value: "Qualitynexusofficial@gmail.com",   href: "mailto:Qualitynexusofficial@gmail.com", note: "Best for detailed enquiries" },
@@ -16,11 +17,62 @@ const fastFaqs = [
   { q: "Can you work alongside an existing team?",   a: "Often — many engagements augment an internal compliance lead. We'll scope around what you already have rather than duplicate it." },
   { q: "What happens after the certificate prints?", a: "Surveillance audits annually, full re-certification every three years. We can stay on retainer or hand over cleanly to your internal team." },
 ];
+
+const crumbs = breadcrumbLd([
+  { name: "Home",    href: "/" },
+  { name: "Contact", href: "/contact/" },
+]);
+
+const localBusinessLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://www.qualitynexus.in/contact/#localbusiness",
+  "name": "QualityNexus",
+  "image": "https://www.qualitynexus.in/og/default.jpg",
+  "url": "https://www.qualitynexus.in",
+  "telephone": "+91-9798082076",
+  "email": "Qualitynexusofficial@gmail.com",
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Trade Centre, 1st Floor, Main Road, SSVM School, Ormanjhi",
+    "addressLocality": "Ranchi",
+    "addressRegion": "Jharkhand",
+    "postalCode": "835219",
+    "addressCountry": "IN",
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "23.5045",
+    "longitude": "85.6319",
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "10:00",
+    "closes": "18:00",
+  }],
+  "areaServed": { "@type": "Country", "name": "India" },
+  "parentOrganization": { "@id": "https://www.qualitynexus.in/#organization" },
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": fastFaqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
 ---
 <BaseLayout
   title="Contact QualityNexus — Talk to a Senior Auditor"
   description="Reach QualityNexus by email, phone, or WhatsApp. Tell us your standard, your timeline, and the gaps you already know about — we respond within 48 hours."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(localBusinessLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />
   <PageHero
     eyebrow="Talk to us"
     title="Tell us your standard,"
