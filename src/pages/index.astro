@@ -41,8 +41,6 @@ const features = [
   { icon: "file-text",    title: "Documentation built to use",    body: "SOPs your team opens — not 200-page binders." },
 ];
 
-const trustWords = ["OIL & GAS", "POWER", "AEROSPACE & DEFENCE", "MINING", "BFSI", "INDUSTRIAL"];
-
 const clientLogos = [
   { name: "Indian Oil Corporation Ltd",  logo: "/images/clients/iocl.png" },
   { name: "Hindustan Aeronautics Ltd",   logo: "/images/clients/hal.jpeg" },
@@ -68,16 +66,17 @@ const clientLogos = [
       <div class="hero-copy">
         <span class="status-pill">
           <span class="status-dot"><span></span></span>
-          Now booking Q2 2026 engagements
+          MSME · DIPP · GST · MCA registered
         </span>
-        <span class="eyebrow">ISO Certification Consulting</span>
+        <span class="eyebrow">Certified for Success</span>
         <h1>
-          From gap to certificate.<br/>
-          <span class="hero-accent">Without the busywork.</span>
+          Your Trusted Partner for<br/>
+          <span class="hero-accent">ISO, NABL, Training &amp; Business Support</span>
         </h1>
         <p class="lede">
-          Consulting, training, and audits across 100+ international standards —
-          delivered by senior auditors, not junior staff.
+          A trusted consultancy and training company offering ISO Certification, NABL &amp; NABH Accreditation,
+          Cybersecurity, ESG, Safety Audits, Lean Six Sigma, Financial Services, and Digital
+          solutions — delivered across India by certified professionals.
         </p>
         <div class="hero-ctas">
           <a href="/contact" class="btn btn-accent btn-shimmer">
@@ -93,14 +92,27 @@ const clientLogos = [
       </div>
       <HeroVisual />
     </div>
-  </section>
 
-  <!-- ========== TRUST STRIP ========== -->
-  <section class="trust">
-    <div class="container">
-      <p class="trust-lede">Trusted by certified organizations across</p>
-      <div class="trust-words">
-        {trustWords.map((w) => <span class="trust-word">{w}</span>)}
+    <!-- Trusted-by logo carousel: full-width band inside the hero section -->
+    <div class="hero-marquee">
+      <div class="container hero-marquee-head">
+        <span class="eyebrow">Trusted by</span>
+        <span class="hero-marquee-sub">Public-sector and enterprise organizations</span>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          {[...clientLogos, ...clientLogos].map((c) => (
+            <div class="logo-tile">
+              {c.logo
+                ? <img src={c.logo} alt={`${c.name} logo`} class="logo-img" loading="lazy" decoding="async" />
+                : <>
+                    <span class="logo-mark">{c.abbr}</span>
+                    <span class="logo-name">{c.name}</span>
+                  </>
+              }
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -239,34 +251,6 @@ const clientLogos = [
     </div>
   </section>
 
-  <!-- ========== CLIENT MARQUEE ========== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow">Trusted by</span>
-        <h2>Operators, regulators, and category leaders.</h2>
-      </div>
-    </div>
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        {[...clientLogos, ...clientLogos].map((c) => (
-          <div class="logo-tile">
-            {c.logo
-              ? <img src={c.logo} alt={`${c.name} logo`} class="logo-img" loading="lazy" decoding="async" />
-              : <>
-                  <span class="logo-mark">{c.abbr}</span>
-                  <span class="logo-name">{c.name}</span>
-                </>
-            }
-          </div>
-        ))}
-      </div>
-    </div>
-    <div class="container cert-cta">
-      <a href="/clients" class="btn btn-secondary">See full client list <Icon name="arrow-right" /></a>
-    </div>
-  </section>
-
   <CtaStrip />
 </BaseLayout>
 
@@ -274,7 +258,7 @@ const clientLogos = [
   /* ========== HERO ========== */
   .hero {
     position: relative;
-    padding: 96px 0 88px;
+    padding: 36px 0 28px;
     background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
     overflow: hidden;
     isolation: isolate;
@@ -335,10 +319,10 @@ const clientLogos = [
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.01em;
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 999px;
     box-shadow: 0 4px 14px rgba(16,185,129,0.10);
-    margin-bottom: 24px;
+    margin-bottom: 10px;
     animation: pillIn .6s cubic-bezier(.2,.7,.2,1) backwards;
   }
   @keyframes pillIn {
@@ -366,10 +350,10 @@ const clientLogos = [
     animation: heroSlideIn .6s cubic-bezier(.2,.7,.2,1) 0.05s backwards;
   }
   .hero-copy h1 {
-    margin: 14px 0 22px;
+    margin: 10px 0 14px;
     color: var(--color-heading);
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    line-height: 1.04;
+    font-size: clamp(2rem, 4.4vw, 3.3rem);
+    line-height: 1.05;
     letter-spacing: -0.035em;
     font-weight: 800;
     animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.15s backwards;
@@ -392,15 +376,15 @@ const clientLogos = [
   }
 
   .lede {
-    font-size: 18px;
+    font-size: 17px;
     color: var(--color-text-muted);
     max-width: 540px;
-    margin-bottom: 32px;
-    line-height: 1.6;
+    margin-bottom: 22px;
+    line-height: 1.55;
     animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.25s backwards;
   }
   .hero-ctas {
-    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 44px;
+    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 26px;
     animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.35s backwards;
   }
   .hero-ctas .qn-icon { font-size: 16px; margin-left: 2px; }
@@ -428,17 +412,17 @@ const clientLogos = [
   .hero-stats {
     display: grid;
     grid-template-columns: repeat(3, auto);
-    gap: 36px;
+    gap: 32px;
     animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.45s backwards;
   }
   .hero-stats > div { display: flex; flex-direction: column; }
   .hero-stats strong {
     font-family: var(--font-heading);
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 800;
     color: var(--color-heading);
     line-height: 1;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     letter-spacing: -0.02em;
   }
   .hero-stats span {
@@ -455,35 +439,28 @@ const clientLogos = [
     .hero-copy h1, .lede, .hero-ctas, .hero-stats { animation: none; }
   }
 
-  /* ========== TRUST STRIP ========== */
-  .trust {
-    padding: 32px 0 16px;
+  /* ========== HERO MARQUEE (logo carousel inside hero, below 2-col layout) ========== */
+  .hero-marquee {
+    margin-top: 36px;
+    padding-top: 24px;
     border-top: 1px solid var(--color-border);
-    background: #fff;
+    position: relative;
+    z-index: 1;
   }
-  .trust-lede {
+  .hero-marquee-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 18px;
     text-align: center;
+  }
+  .hero-marquee-sub {
     color: var(--color-text-muted);
     font-size: 13px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
+    font-weight: 500;
   }
-  .trust-words {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px 32px;
-  }
-  .trust-word {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 15px;
-    color: var(--color-text-muted);
-    letter-spacing: 0.18em;
-    opacity: 0.75;
-  }
+  .hero-marquee-head .eyebrow { font-size: 11px; }
 
   /* ========== OFFERING ========== */
   .offering-grid {
@@ -713,10 +690,10 @@ const clientLogos = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    height: 88px;
+    gap: 10px;
+    height: 96px;
     min-width: 180px;
-    padding: 12px 28px;
+    padding: 14px 28px;
     background: #fff;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -730,7 +707,7 @@ const clientLogos = [
   }
   .logo-tile:hover { color: var(--color-heading); border-color: var(--color-accent); transform: translateY(-2px); }
   .logo-img {
-    max-height: 56px;
+    max-height: 64px;
     max-width: 160px;
     width: auto;
     height: auto;
@@ -924,8 +901,8 @@ const clientLogos = [
     .hero-stats { grid-template-columns: 1fr 1fr; gap: 18px 24px; }
     .process { grid-template-columns: 1fr; }
     .cert-grid { grid-template-columns: 1fr; }
-    .trust-words { gap: 10px 18px; }
-    .trust-word { font-size: 13px; letter-spacing: 0.14em; }
+    .hero-marquee { margin-top: 40px; padding-top: 22px; }
+    .hero-marquee-head { flex-direction: column; gap: 6px; margin-bottom: 16px; }
     .team-section { padding-top: 64px; padding-bottom: 64px; }
     .team-badge { padding: 10px 14px; }
     .team-badge--top { left: -8px; top: 16px; }

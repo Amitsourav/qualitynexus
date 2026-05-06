@@ -137,14 +137,15 @@ button { font: inherit; cursor: pointer; }
   color: #FFFFFF;
 }
 .btn-accent {
-  background: var(--color-gold);
+  background: var(--color-accent-strong);
   color: #FFFFFF;
-  box-shadow: var(--shadow-gold);
+  box-shadow: var(--shadow-accent);
 }
 .btn-accent:hover {
-  background: var(--color-gold-strong);
+  background: var(--color-primary);
   transform: translateY(-2px);
   color: #FFFFFF;
+  box-shadow: 0 12px 28px rgba(5, 150, 105, 0.30);
 }
 .btn-secondary {
   background: transparent;

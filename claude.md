@@ -43,12 +43,12 @@ A marketing website for **QualityNexus** — an ISO certification consulting bus
 - [x] ~~Color palette~~ — **switched to M (refined)**. Now: **Palette M — Hunter Green primary + Emerald accent + Gold buttons-only**. Primary `#0E3B2E`, primary-soft `#1F5538`, accent `#10B981` (emerald), accent-strong `#059669`, gold `#D4AF37` (CTA buttons only), gold-strong `#B8902E`, body `#475569`, headings `#0F172A`. Section bg `#F1F5F9`, bg-soft `#F8FAFC`, border `#E2E8F0`. *(palette swap history: B → D → A → B → C → D → E → F → H → M → M-refined. User saw initial M and rejected gold-everywhere ("why there is full gold acent i just need gold in buttons and primarly is green"). Refactored: introduced `--color-gold` / `--color-gold-strong` tokens used ONLY by `.btn-accent`, while `--color-accent` is now emerald green and powers everything else (eyebrows, pills, halos, hero gradient, gauge ring, mini-vizes, pulse dots, brand-mark text, donut). Other proposed-but-not-tried: G/Burgundy+Champagne, I/Navy+Mustard, J/Anthracite+Lime, K/Plum+Peach, L/Terracotta+Cream)*
 - [x] ~~Stack~~ — **Astro** locked in
 - [ ] Logo — user will provide later
-- [ ] Real contact info — user will provide later
-- [x] ~~Hero tagline~~ — locked: **"Your partner in ISO compliance — from gap to certificate"** (current home uses sharper "From gap to certificate. Without the busywork.")
+- [x] ~~Real contact info~~ — **DONE 2026-05-05**. Sourced from Google Sites + cross-verified via 4 govt registration certificates (MCA/MSME/GST/StartupIndia). Email: Qualitynexusofficial@gmail.com. Phones: +91 97980 82076 (primary), +91 77177 62084, +91 82526 68667. Office: Trade Centre, 1st Floor, Main Road, SSVM School, Ormanjhi, Ranchi 835219, Jharkhand. CIN U70200JH2025PTC024534, GSTIN 20AABCQ1018L1ZW, UDYAM-JH-20-0101391.
+- [x] ~~Hero tagline~~ — locked 2026-05-05: **"Your Trusted Partner for ISO, NABL, Training & Business Support"** (matches Google Sites; kept "Certified for Success" eyebrow). Earlier candidates "From gap to certificate. Without the busywork." and "ISO, NABL & PSU Consultancy – Fast Certification with Expert Support" rejected.
 - [ ] Form handler — user will provide later
 - [ ] **Stats Dashboard refinement** — built (`src/components/StatsDashboard.astro`) but user said "we do this later". Revisit copy / numbers / visualizations.
 - [x] ~~Build out remaining pages (About, Services, Clients, Contact, Certifications listing)~~ — **DONE 2026-04-27**. All 5 stubs replaced with full content sections matching the homepage design language. Reusable `PageHero` and `CtaStrip` components introduced. CTA strip in `index.astro` refactored to use the shared component. Cert detail template still pending — listing page links to `/certifications/<slug>` which 404s for now.
-- [ ] **Cert detail template** (single data-driven Astro page generating ~120 cert pages from JSON) — pending
+- [x] ~~Cert detail template~~ — **DONE 2026-05-05**. Built `src/pages/certifications/[slug].astro` reading from `src/data/certifications.ts`. 91 unique standards (deduplicated across categories) → 91 detail pages. 8 flagship standards (ISO 9001, 14001, 45001, 27001, 13485, 22000, 50001, 17025) hand-authored with rich content (intro / 4–6 principles / 5 why-cards / 4 benefit-cards / audience). Other 83 fall back to a clean stub explaining detailed reference is in progress + 3 deliverables (gap analysis / roadmap / audit support) + CTA. Listing page now imports `categories` + `slugify` from the shared data module to avoid duplication. Build: 97 pages total in 703ms.
 
 ---
 
@@ -91,10 +91,10 @@ A marketing website for **QualityNexus** — an ISO certification consulting bus
 
 When resuming:
 1. Read this file.
-2. Ask user for the pending decisions in section 3 (palette, stack, logo, contact info, tagline, form handler).
-3. Once locked, propose folder structure + start building Home page first.
-4. Build order: Home → About → Services → Contact → Clients → Certifications listing → Cert detail template → polish + responsive pass.
-5. Test contact form submission end-to-end before declaring done.
+2. Outstanding decisions: **logo** (user provides), **form handler** (Formspree/Web3Forms/Getform pick), **JRGB logo** asset.
+3. Outstanding builds: **cert detail template** — single Astro page reading from cert JSON to generate ~95 detail pages (currently `/certifications/<slug>` 404s). **Stats Dashboard refinement** (deferred). Cycling client photo/logo carousel could use real images for the rest.
+4. Push pending: ~10 uncommitted files since last `bbc51f6`. Wait for explicit "push it" before pushing.
+5. Test contact form submission end-to-end once form handler is wired.
 
 ---
 
@@ -131,6 +131,15 @@ When resuming:
 - **All 5 stub pages built (2026-04-27)** — User: "now make all pages with as homepage design". Built About, Services, Clients, Contact, Certifications listing with consistent design system. Two new shared components introduced: (1) `src/components/PageHero.astro` — eyebrow + title + optional gold-gradient accent + lede, with the same grid-bg + glow treatment as the home hero but smaller padding. (2) `src/components/CtaStrip.astro` — extracted from index.astro, takes optional heading/body/ctaLabel/ctaHref props. index.astro refactored to import and use `<CtaStrip />` (cleaner). Page content: **About** (page hero → story 2-col with founder-quote sticky card → 4 principles grid → 8 industry chips → dark "by the numbers" section with 4 stats → CTA), **Services** (page hero → 9-card grid 3×3 with bullets → 5-step engagement flow → CTA), **Clients** (page hero → 24-cell client wordmark grid using initials in green/gold mark + name → 6-card sector breakdown with counts → 3-card testimonial grid with gold quote-mark → CTA), **Contact** (page hero → 4-card channel grid Email/Phone/WhatsApp/Office → split form-grid with promises list + full contact form name/designation/email/phone/org/address/message → FAQ split layout, no CTA strip on contact since the page IS the CTA), **Certifications listing** (page hero → sticky category nav with 11 anchor links + total-count label → 11 alternating section-soft category sections each with icon + eyebrow + h2 + blurb + 3-col cert grid where each card is a link to /certifications/&lt;slug&gt; showing code-pill + name + arrow → CTA). Total ~95 standards listed across 11 categories. Certs link to detail pages that don't exist yet (will 404; cert detail template is the next pending task).
 - **Inner page visual upgrade (2026-04-27)** — User: "all pages are not look like homepage and except homepage there is no image, ghraphics and illustrator we have to put that". Two-step upgrade: (1) Refactored `PageHero.astro` to support a `hasVisual` prop + named `visual` slot — when set, the hero becomes a 2-column grid with the right side reserved for a custom illustration, mirroring the home hero pattern. Added gold + emerald glow blobs (alternating animation) to all page heros. (2) Built a unique hero illustration for each inner page, all CSS-only with reduced-motion support: **About** — central "Senior · Lead Auditor" gold-on-green seal inside two dashed orbital rings, four floating credential badges (ISO 9001/27001/14001/45001) at corners, top pill "IRCA · Exemplar Global certified" with pulsing dot, bottom pill "12+ years average sector experience". **Services** — orbital constellation: 9 service icons positioned around a dashed outer ring + solid inner ring, central "Engagement · 9 services · 1 plan" hub with pulsing ripple, top stat card "+9 service paths", bottom "Available now" indicator. **Clients** — inline SVG globe with gradient fill + 4 ellipse latitude/longitude lines + 6 pulsing gold dots representing client locations, 5 floating client cards with QN-style initials marks at orbital positions, bottom "Live · 4 active engagements" pulsing pill. **Contact** — 3-card incoming-message stack (Priya/Rohan/Sara) with avatars, time stamps, enquiry preview, and ISO-tag chips, slightly rotated and animated with vertical float, bottom "Live · 3 enquiries today" pulsing pill. **Certifications** — central featured "ISO 9001 Certified" certificate card with gold accent border + meta strip (Issued 2026 / 3yr Validity) + green seal, two smaller rotated cert cards (ISO 27001, ISO 14001) behind it, top "Stage 2 audit · Passed" pill, bottom "100+ standards covered" pulsing pill. Content section enhancements: **About** — story section now has handshake.jpg photo with overlapping dark founder-quote card + checkmark bullet list; principles cards got gold ghost numbers (01–04); industries now in a side-by-side intro+grid layout with link-arrow CTA; dark "by the numbers" section now uses team-meeting.jpg as 10%-opacity background with frosted-glass cred cards. **Services** — added a "proof bar" strip just below hero (60 days / 100% / 48h with gold supnumbers), service cards got ghost numbers, new "How we deliver" section with data-laptop.jpg photo + animated overlay card showing "ISO 27001 Stage 1 prep" progress meter + 3 commitment bullets with green icon halos, engagement flow steps now have icons + dashed gold SVG arrows between cards. **Clients** — "reach bar" with 350+/24/11/98% strip below hero, client cells unchanged, sectors now visualized as horizontal progress bars (gradient green fill, animated on load) instead of static cards, testimonials section now has team-collab.jpg as faded background + circular avatars on each testimonial. **Contact** — channels got bigger icon halos + gold arrow indicators, contact form now in 2-col layout with sticky office-modern.jpg side-card (overlapping gradient + "Replies within 48h" pulsing tag + checklist), FAQ items got numbered chips. All visuals are CSS-only (no client JS), respect reduced-motion, work on mobile (heros stack to single column at 980px, simplified positioning at 640px). Build verified clean.
 
+**Session 2 (2026-05-05) — Real photos + verified address from Google Sites:**
+- User: "can you download that" (referring to seminar/hall photos from https://sites.google.com/view/qualitynexus/home). Earlier curl attempts hit Google's 403 (URLs are short-lived signed `lh3.googleusercontent.com/sitesv/...` tokens that need a fresh session). Fix that worked: (1) fetch the Sites page WITH a cookie jar (`-c`/`-b`), (2) extract URLs in same shell pass, (3) immediately download each image using the same cookie jar + `Sec-Fetch-Dest: image`, `Sec-Fetch-Mode: no-cors`, `Sec-Fetch-Site: cross-site`, and `Referer: https://sites.google.com/view/qualitynexus/home`. All 22 images downloaded successfully (18KB–676KB range).
+- Curated 22 → 7 keepers. Real photos: `seminar-training.jpg` (training-hall U-shape with projector — the only legit seminar shot), `field-engineer.jpg` (consultant in helmet at power plant), `lab-audit.jpg` (laboratory bench). Real govt certs: `cert-msme-udyam.jpg`, `cert-startup-india.jpg`, `cert-mca-incorp.jpg`, `cert-gst.jpg`. Deleted: 15 stock graphics (Export/Training/Risk Assessment text overlays), ISO logos, QN logo render, generic illustrations.
+- Rebuilt `about.astro` events gallery: dropped the 6-tile placeholder bento, replaced with 3-tile gallery (1 feature + 2 standard) using only the real photos. Each tile has gradient caption overlay tagging it (Training session / On-site audit / NABL accreditation). Added new "Recognized & registered" section after — 4-up grid of govt cert thumbnails with subtle frame + caption, fall back to 2-up at 860px and 1-up at 480px.
+- **Verified office address surfaced from cert images.** MCA Certificate of Incorporation revealed: CIN U70200JH2025PTC024534, incorporated 09/04/2025, registered office "TRADE CENTRE, FIRST FLOOR, MAIN ROAD, SSVM SCHOOL, Ormanjhi, Ranchi- 835219, Jharkhand". MSME Udyam: UDYAM-JH-20-0101391. GSTIN: 20AABCQ1018L1ZW. PAN: AABCQ1018L. All confirm the same Ormanjhi/Ranchi location. Updated `contact.astro`: replaced "More numbers" channel with "Office" pointing to a Google Maps query for the Trade Centre address; alt phone numbers (+91 77177 62084, +91 82526 68667) moved into the Phone channel's note.
+- Build clean (6 pages, 582ms). All 7 image references resolve. Couldn't visually verify in browser (Chrome extension not connected). User instruction "use all data except Quality Nexus Private Limited" interpreted as: keep "QualityNexus" brand (no "Private Limited" suffix) but legitimately use the verified address/registration numbers from the official documents.
+- **Pending push to GitHub** — uncommitted files since last push (Google Sites data integration + gallery + cert detail template). Awaiting user "push it" before pushing.
+- **Cert detail template (autonomous loop, same session)** — Built `src/pages/certifications/[slug].astro` + `src/data/certifications.ts`. Listing page's inline `categories` array moved to the data module so listing and detail share one source of truth. `getStaticPaths` over `allStandards` (deduped — ISO 13485 etc. appear in multiple categories but generate one page). 8 flagship standards (ISO 9001, 14001, 45001, 27001, 13485, 22000, 50001, 17025) authored with structured content per section 4 site-map: intro paragraph, 4–6 key principles, 5 "why it matters" cards, 4 audience-segmented benefit cards, audience paragraph. Content written from genuine understanding (per CLAUDE.md rule 3 — no marketing-speak); each standard's intro is specific to what that standard actually requires. Other 83 standards render a clean stub: "Detailed reference in progress" + 3 service-deliverable cards (gap analysis / roadmap / audit support) + CTA — honest about being unauthored rather than auto-generating filler. Page structure: hero with breadcrumb + gold-gradient code + emerald-tagged category + side info card with seal + meta strip → principles list (2-col bullet grid) → why cards (3-col) → benefits cards (4-col, hunter-green icon halos) → dark gradient audience block → CtaStrip. Stub variant skips middle sections (hero + stub-card + CtaStrip only). Build: 97 pages in 703ms.
+
 ---
 
 ## 9. Working directory
@@ -146,7 +155,11 @@ qualitynexus/
 ├── tsconfig.json
 ├── .gitignore
 ├── public/
-│   └── favicon.svg                 # placeholder QN mark, replace when real logo arrives
+│   ├── favicon.svg                 # placeholder QN mark, replace when real logo arrives
+│   └── images/
+│       ├── *.jpg                   # Unsplash stock (team-collab, data-laptop, office-modern, handshake, team-meeting)
+│       ├── clients/                # Real PSU client logos (IOCL, HAL, NHPC, GAIL, NRL, HCL, Balmer Lawrie); JRGB pending
+│       └── events/                 # 3 real photos (seminar/field/lab) + 4 govt certs (MCA/MSME/GST/StartupIndia)
 ├── src/
 │   ├── styles/
 │   │   └── global.css              # design tokens (palette B), base styles, utilities
@@ -160,15 +173,18 @@ qualitynexus/
 │   │   ├── StatsDashboard.astro    # home "by the numbers" with 6 mini-vizes
 │   │   ├── PageHero.astro          # shared inner-page hero (used on About/Services/Clients/Contact/Certs)
 │   │   └── CtaStrip.astro          # shared bottom-of-page CTA strip
+│   ├── data/
+│   │   └── certifications.ts       # categories + standards + flagship details (shared between listing + [slug])
 │   └── pages/
 │       ├── index.astro             # FULL home page
-│       ├── about.astro             # FULL — story / 4 principles / industries / dark "by the numbers"
+│       ├── about.astro             # FULL — story / 4 principles / industries / events gallery / cert proof / dark "by the numbers"
 │       ├── services.astro          # FULL — 9-card grid / 5-step engagement flow
 │       ├── clients.astro           # FULL — 24 client wordmarks / 6 sector cards / 3 testimonials
 │       ├── contact.astro           # FULL — 4 channels / contact form / FAQ
 │       └── certifications/
-│           └── index.astro         # FULL — sticky cat-nav / 11 categories / ~95 standards
-├── dist/                           # build output (gitignored)
+│           ├── index.astro         # FULL — sticky cat-nav / 11 categories / 91 standards
+│           └── [slug].astro        # dynamic — 91 detail pages (8 hand-authored, 83 stub fallback)
+├── dist/                           # build output (gitignored, 97 pages)
 └── node_modules/                   # gitignored
 ```
 
