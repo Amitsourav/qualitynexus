@@ -11,7 +11,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 <header class="site-header">
   <div class="container header-inner">
     <a href="/" class="brand" aria-label="QualityNexus home">
-      <span class="brand-mark" aria-hidden="true">QN</span>
+      <img src="/logo-256.png" class="brand-mark" alt="" width="40" height="40" />
       <span class="brand-name">QualityNexus</span>
     </a>
     <nav class="primary-nav" aria-label="Primary">
@@ -55,16 +55,11 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
     text-decoration: none;
   }
   .brand-mark {
-    display: inline-grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-    background: var(--color-primary);
-    color: var(--color-gold);
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
   }
   .primary-nav {
     display: flex;

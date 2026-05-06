@@ -22,7 +22,7 @@ const popularStandards = [
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="brand">
-          <span class="brand-mark" aria-hidden="true">QN</span>
+          <img src="/logo-256.png" class="brand-mark" alt="" width="40" height="40" />
           <span class="brand-name">QualityNexus</span>
         </a>
         <p>Trusted partner for ISO Certification, NABL &amp; NABH Accreditation, audits, training, and business support — delivered across India.</p>
@@ -100,14 +100,11 @@ const popularStandards = [
     margin-bottom: 18px;
   }
   .footer-brand .brand-mark {
-    display: inline-grid;
-    place-items: center;
-    width: 34px; height: 34px;
-    background: rgba(212, 175, 55, 0.16);
-    color: var(--color-gold);
-    border-radius: 9px;
-    font-weight: 800;
-    font-size: 13px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
   }
   .footer-brand p {
     color: #94A3B8;
