@@ -6,17 +6,18 @@ import Icon from "../components/Icon.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 
 const offerings = [
-  { icon: "users",          tag: "Consulting",     title: "Audit-defensible advisory",          body: "Senior consultants who know what auditors look for — because they've been auditors." },
-  { icon: "graduation-cap", tag: "Training",       title: "Internal capability that lasts",     body: "Practical auditor and lead-auditor programs your team will use long after we leave." },
-  { icon: "cog",            tag: "Implementation", title: "From gap to certificate",            body: "Documentation, controls, trial audits, and corrective actions — sequenced and executed." },
+  { icon: "search",          tag: "Phase 01", title: "Gap Analysis",                          body: "Clause-by-clause assessment against the target standard. Documented findings, prioritized risks, and a realistic implementation plan." },
+  { icon: "cog",             tag: "Phase 02", title: "Implementation",                        body: "Tailored procedures, controls, and operating routines designed for the auditor's seat — and for the team that uses them every day." },
+  { icon: "clipboard-check", tag: "Phase 03", title: "Internal Audit",                        body: "A formal internal audit cycle that surfaces non-conformances early and closes them with documented corrective action." },
+  { icon: "award",           tag: "Phase 04", title: "Stage 1 & 2 Audit and Certification",   body: "Stage 1 readiness review, Stage 2 audit support, and post-audit closure — hand-held all the way to a printed certificate." },
 ];
 
 const process = [
-  { n: "01", icon: "search",          title: "Discover",  body: "Gap analysis against the standard's clauses." },
-  { n: "02", icon: "file-text",       title: "Document",  body: "Tailored QMS — procedures your team actually opens." },
-  { n: "03", icon: "graduation-cap",  title: "Train",     body: "Internal-auditor capability across roles." },
-  { n: "04", icon: "clipboard-check", title: "Audit",     body: "Trial audits + closed corrective actions." },
-  { n: "05", icon: "award",           title: "Certify",   body: "Stage 1 + Stage 2 certification, hand-held." },
+  { n: "01", icon: "search",          title: "Gap Analysis",        body: "Clause-by-clause assessment against the target standard." },
+  { n: "02", icon: "cog",             title: "Implementation",      body: "Documents, controls, and routines built for daily use." },
+  { n: "03", icon: "clipboard-check", title: "Internal Audit",      body: "Trial audit cycle. Findings closed before Stage 1." },
+  { n: "04", icon: "shield-check",    title: "Stage 1 & 2 Audit",   body: "Readiness review and the certification body audit." },
+  { n: "05", icon: "award",           title: "Certification",       body: "Certificate issued. Surveillance plan handed over." },
 ];
 
 const certs = [
@@ -64,19 +65,14 @@ const clientLogos = [
 
     <div class="container hero-inner">
       <div class="hero-copy">
-        <span class="status-pill">
-          <span class="status-dot"><span></span></span>
-          MSME · DIPP · GST · MCA registered
-        </span>
         <span class="eyebrow">Certified for Success</span>
         <h1>
-          Your Trusted Partner for<br/>
-          <span class="hero-accent">ISO, NABL, Training &amp; Business Support</span>
+          Audit-Ready Consulting for<br/>
+          <span class="hero-accent">Quality, Compliance &amp; Industrial Excellence</span>
         </h1>
         <p class="lede">
-          A trusted consultancy and training company offering ISO Certification, NABL &amp; NABH Accreditation,
-          Cybersecurity, ESG, Safety Audits, Lean Six Sigma, Financial Services, and Digital
-          solutions — delivered across India by certified professionals.
+          A trusted consultancy delivering audit, certification, cybersecurity and compliance
+          solutions across industries and public-sector organizations.
         </p>
         <div class="hero-ctas">
           <a href="/contact" class="btn btn-accent btn-shimmer">
@@ -85,9 +81,9 @@ const clientLogos = [
           <a href="/certifications" class="btn btn-ghost">Browse standards</a>
         </div>
         <div class="hero-stats">
-          <div><strong><span data-countup="100">0</span>+</strong><span>International standards</span></div>
-          <div><strong><span data-countup="8">0</span></strong><span>PSU &amp; enterprise clients</span></div>
-          <div><strong><span data-countup="12">0</span>+</strong><span>Years per lead consultant</span></div>
+          <div><strong>100+</strong><span>International standards</span></div>
+          <div><strong>50+</strong><span>PSU &amp; enterprise clients</span></div>
+          <div><strong>12+</strong><span>Years per lead consultant</span></div>
         </div>
       </div>
       <HeroVisual />
@@ -122,7 +118,8 @@ const clientLogos = [
     <div class="container">
       <div class="section-head center">
         <span class="eyebrow">What we do</span>
-        <h2>Three engagements. One outcome.</h2>
+        <h2>Four phases. One certificate.</h2>
+        <p>The path every QualityNexus engagement runs on — from your first gap to your printed certificate.</p>
       </div>
       <div class="offering-grid">
         {offerings.map((o) => (
@@ -157,44 +154,6 @@ const clientLogos = [
           </li>
         ))}
       </ol>
-    </div>
-  </section>
-
-  <!-- ========== TEAM / CREDIBILITY ========== -->
-  <section class="section team-section">
-    <div class="container team-grid">
-      <div class="team-copy">
-        <span class="eyebrow">The team behind the certificate</span>
-        <h2>Senior auditors. Same face, kickoff to certificate.</h2>
-        <p class="team-lede">
-          You won't be passed off to a junior after the kickoff call.
-          The lead consultant on day one is the lead consultant the day your certificate prints —
-          backed by a team that has sat on both sides of the audit table.
-        </p>
-        <ul class="team-creds">
-          <li><Icon name="shield-check" /> IRCA &amp; Exemplar-trained lead auditors</li>
-          <li><Icon name="award" /> 12+ years average sector experience</li>
-          <li><Icon name="globe" /> Engagements across multiple sectors pan-India</li>
-        </ul>
-        <a href="/about" class="btn btn-accent team-cta">Meet the team <Icon name="arrow-right" /></a>
-      </div>
-      <div class="team-visual">
-        <div class="team-photo">
-          <img src="/images/team-collab.jpg" alt="Two consultants reviewing audit documentation together" loading="lazy" decoding="async" width="800" height="900" />
-          <div class="team-photo-grain" aria-hidden="true"></div>
-        </div>
-        <div class="team-badge team-badge--top">
-          <span class="team-badge-num"><span data-countup="12">0</span>+</span>
-          <span class="team-badge-label">Years per<br/>consultant</span>
-        </div>
-        <div class="team-badge team-badge--bottom">
-          <span class="team-badge-icon"><Icon name="award" /></span>
-          <div>
-            <span class="team-badge-title">Lead Auditor · IRCA</span>
-            <span class="team-badge-sub">Certified by accredited bodies</span>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -465,8 +424,11 @@ const clientLogos = [
   /* ========== OFFERING ========== */
   .offering-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 1100px) {
+    .offering-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
   }
   .offering-card {
     background: #fff;

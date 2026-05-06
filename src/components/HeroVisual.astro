@@ -1,556 +1,264 @@
 ---
-// Compliance "command center" hero illustration. Pure HTML+CSS+SVG.
+const slides = [
+  { src: "/images/hero/hero-1.jpeg", alt: "QualityNexus consultant and NHPC officials at an engagement meeting",         tag: "NHPC engagement" },
+  { src: "/images/hero/hero-2.jpeg", alt: "QualityNexus team with client staff and on-site safety officers",              tag: "Client site visit" },
+  { src: "/images/hero/hero-3.jpeg", alt: "Training session at Numaligarh Refinery Ltd with delegates working on laptops", tag: "NRL training cohort" },
+  { src: "/images/hero/hero-4.jpeg", alt: "Certificate handover ceremony with QualityNexus consultant and client team",   tag: "Certificate handover" },
+  { src: "/images/hero/hero-5.jpeg", alt: "Audit session in progress at NRL Learning Centre with delegates around a long table", tag: "On-site audit · NRL" },
+  { src: "/images/hero/hero-6.jpeg", alt: "QualityNexus internal training meeting around a conference table",             tag: "Internal training" },
+  { src: "/images/hero/hero-7.jpeg", alt: "Group photo of QualityNexus consultants with a client team after engagement", tag: "Post-engagement group" },
+];
 ---
-<div class="hv" aria-hidden="true">
-  <!-- Background pattern + glows -->
-  <div class="hv-grid"></div>
-  <div class="hv-glow hv-glow--1"></div>
-  <div class="hv-glow hv-glow--2"></div>
+<div class="hero-carousel" data-hero-carousel>
+  <div class="hc-frame">
+    {slides.map((s, i) => (
+      <figure class={`hc-slide ${i === 0 ? "is-active" : ""}`} data-hc-slide>
+        <img
+          src={s.src}
+          alt={s.alt}
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding={i === 0 ? "sync" : "async"}
+          fetchpriority={i === 0 ? "high" : "low"}
+        />
+        <figcaption class="hc-cap">
+          <span class="hc-cap-tag">{s.tag}</span>
+        </figcaption>
+      </figure>
+    ))}
 
-  <!-- Concentric decorative rings -->
-  <div class="hv-ring hv-ring--outer"></div>
-  <div class="hv-ring hv-ring--inner"></div>
-
-  <!-- Connection lines (center → orbit cards) -->
-  <svg class="hv-lines" viewBox="0 0 600 500" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="hvLineGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#10B981" stop-opacity="0"/>
-        <stop offset="50%" stop-color="#10B981" stop-opacity="0.55"/>
-        <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <path class="hv-line" d="M 300 250 L 159 109"/>
-    <path class="hv-line" d="M 300 250 L 441 109"/>
-    <path class="hv-line" d="M 300 250 L 159 391"/>
-    <path class="hv-line" d="M 300 250 L 441 391"/>
-  </svg>
-
-  <!-- CENTER: audit-readiness gauge -->
-  <div class="hv-center">
-    <svg class="hv-gauge" viewBox="0 0 240 240">
-      <defs>
-        <linearGradient id="hvGaugeGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#34D399"/>
-          <stop offset="100%" stop-color="#059669"/>
-        </linearGradient>
-      </defs>
-      <circle cx="120" cy="120" r="106" fill="none" stroke="rgba(15,23,42,0.05)" stroke-width="1"/>
-      <circle cx="120" cy="120" r="92" fill="none" stroke="rgba(15,23,42,0.08)" stroke-width="14"/>
-      <circle class="hv-gauge-fill" cx="120" cy="120" r="92"
-        fill="none" stroke="url(#hvGaugeGrad)" stroke-width="14"
-        stroke-linecap="round"
-        pathLength="100" stroke-dasharray="100"
-        stroke-dashoffset="100"
-        transform="rotate(-90 120 120)"/>
-    </svg>
-    <div class="hv-center-info">
-      <span class="hv-center-eyebrow">Audit readiness</span>
-      <span class="hv-center-num">
-        <span data-countup="82">0</span><small>%</small>
-      </span>
-      <span class="hv-center-sub">ISO 27001:2022</span>
+    <div class="hc-overlay-pill">
+      <span class="hc-pulse" aria-hidden="true"><span></span></span>
+      Live · trusted partner across India
     </div>
+
+    <div class="hc-corner hc-corner--tl" aria-hidden="true"></div>
+    <div class="hc-corner hc-corner--br" aria-hidden="true"></div>
   </div>
 
-  <!-- Orbiting standard badges -->
-  <div class="hv-orbit hv-orbit--tl">
-    <div class="hv-mini">
-      <span class="hv-mini-tick">✓</span>
-      <div>
-        <span class="hv-mini-iso">ISO 14001</span>
-        <span class="hv-mini-name">Environment</span>
-      </div>
-    </div>
+  <div class="hc-dots" role="tablist" aria-label="Hero photo carousel">
+    {slides.map((_, i) => (
+      <button
+        type="button"
+        class={`hc-dot ${i === 0 ? "is-active" : ""}`}
+        data-hc-dot={i}
+        role="tab"
+        aria-label={`Show slide ${i + 1}`}
+        aria-selected={i === 0 ? "true" : "false"}
+      ></button>
+    ))}
   </div>
-  <div class="hv-orbit hv-orbit--tr">
-    <div class="hv-mini hv-mini--active">
-      <span class="hv-mini-pulse"><span></span></span>
-      <div>
-        <span class="hv-mini-iso">ISO 27001</span>
-        <span class="hv-mini-name">In progress</span>
-      </div>
-    </div>
-  </div>
-  <div class="hv-orbit hv-orbit--bl">
-    <div class="hv-mini">
-      <span class="hv-mini-tick">✓</span>
-      <div>
-        <span class="hv-mini-iso">ISO 45001</span>
-        <span class="hv-mini-name">Health &amp; Safety</span>
-      </div>
-    </div>
-  </div>
-  <div class="hv-orbit hv-orbit--br">
-    <div class="hv-mini">
-      <span class="hv-mini-tick">✓</span>
-      <div>
-        <span class="hv-mini-iso">ISO 9001</span>
-        <span class="hv-mini-name">Quality</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Floating widgets -->
-  <div class="hv-widget hv-widget--live">
-    <span class="hv-live-dot"><span></span></span>
-    <span class="hv-live-text">Live monitoring</span>
-  </div>
-
-  <div class="hv-widget hv-widget--metric">
-    <span class="hv-metric-num">+<span data-countup="24">0</span></span>
-    <span class="hv-metric-label">Controls<br/>last 30 days</span>
-  </div>
-
-  <div class="hv-widget hv-widget--toast">
-    <span class="hv-toast-tick">✓</span>
-    <div>
-      <span class="hv-toast-title">Stage 2 audit · Passed</span>
-      <span class="hv-toast-sub">2 days ago · QN-2026-0114</span>
-    </div>
-  </div>
-
-  <!-- Sparkles -->
-  <span class="hv-sparkle hv-sparkle--1">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l1.6 8.4 8.4 1.6-8.4 1.6L12 24l-1.6-8.4L2 14l8.4-1.6z"/></svg>
-  </span>
-  <span class="hv-sparkle hv-sparkle--2">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l1.6 8.4 8.4 1.6-8.4 1.6L12 24l-1.6-8.4L2 14l8.4-1.6z"/></svg>
-  </span>
-  <span class="hv-sparkle hv-sparkle--3">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l1.6 8.4 8.4 1.6-8.4 1.6L12 24l-1.6-8.4L2 14l8.4-1.6z"/></svg>
-  </span>
 </div>
 
 <script>
-  (() => {
-    // Count-up animations for any [data-countup] elements
-    const counts = document.querySelectorAll('[data-countup]');
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const animate = (el) => {
-      const target = parseFloat(el.dataset.countup || '0');
-      if (reduce.matches) { el.textContent = String(target); return; }
-      const dur = 1400;
-      const start = performance.now();
-      const tick = (t) => {
-        const p = Math.min((t - start) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = String(Math.round(target * eased));
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
+  const root = document.querySelector<HTMLElement>("[data-hero-carousel]");
+  if (root) {
+    const slides = root.querySelectorAll<HTMLElement>("[data-hc-slide]");
+    const dots = root.querySelectorAll<HTMLButtonElement>("[data-hc-dot]");
+    const TICK = 4500;
+    let current = 0;
+    let timer: number | null = null;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const setActive = (i: number) => {
+      const target = ((i % slides.length) + slides.length) % slides.length;
+      slides.forEach((el, j) => el.classList.toggle("is-active", j === target));
+      dots.forEach((el, j) => {
+        el.classList.toggle("is-active", j === target);
+        el.setAttribute("aria-selected", j === target ? "true" : "false");
+      });
+      current = target;
     };
-    if ('IntersectionObserver' in window) {
-      const obs = new IntersectionObserver((entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            animate(e.target);
-            obs.unobserve(e.target);
-          }
-        }
-      }, { threshold: 0.3 });
-      counts.forEach((el) => obs.observe(el));
-    } else {
-      counts.forEach((el) => animate(el));
-    }
-  })();
+
+    const start = () => {
+      if (reduce || timer !== null) return;
+      timer = window.setInterval(() => setActive(current + 1), TICK);
+    };
+    const stop = () => {
+      if (timer !== null) { clearInterval(timer); timer = null; }
+    };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        setActive(i);
+        stop();
+        start();
+      });
+    });
+
+    root.addEventListener("mouseenter", stop);
+    root.addEventListener("mouseleave", start);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stop(); else start();
+    });
+
+    start();
+  }
 </script>
 
 <style>
-  .hv {
+  .hero-carousel {
     position: relative;
     width: 100%;
-    height: 440px;
     max-width: 560px;
     margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .hc-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--color-bg-section);
+    box-shadow:
+      0 30px 70px rgba(15, 59, 46, 0.18),
+      0 4px 14px rgba(15, 59, 46, 0.06),
+      0 0 0 1px rgba(15, 59, 46, 0.06);
     isolation: isolate;
   }
 
-  /* ===== Background grid ===== */
-  .hv-grid {
+  .hc-slide {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(15,23,42,0.18) 1px, transparent 1px);
-    background-size: 22px 22px;
-    -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 50%, #000 22%, transparent 78%);
-            mask-image: radial-gradient(ellipse 78% 78% at 50% 50%, #000 22%, transparent 78%);
-    z-index: 0;
-    pointer-events: none;
+    margin: 0;
+    opacity: 0;
+    transform: scale(1.04);
+    transition: opacity 700ms ease, transform 6000ms ease-out;
+    will-change: opacity, transform;
   }
-
-  /* ===== Glow blobs ===== */
-  .hv-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    z-index: 0;
-    pointer-events: none;
+  .hc-slide.is-active {
+    opacity: 1;
+    transform: scale(1);
   }
-  .hv-glow--1 {
-    width: 60%; height: 60%;
-    top: -8%; right: -8%;
-    background: radial-gradient(circle, rgba(16,185,129,0.55), transparent 65%);
-    animation: hvGlow1 9s ease-in-out infinite alternate;
-  }
-  .hv-glow--2 {
-    width: 55%; height: 55%;
-    bottom: -10%; left: -10%;
-    background: radial-gradient(circle, rgba(15,23,42,0.22), transparent 70%);
-    animation: hvGlow2 11s ease-in-out infinite alternate;
-  }
-  @keyframes hvGlow1 {
-    from { transform: translate(0, 0)        scale(1);    opacity: 0.85; }
-    to   { transform: translate(-15px, 12px) scale(1.10); opacity: 1; }
-  }
-  @keyframes hvGlow2 {
-    from { transform: translate(0, 0)        scale(1);    opacity: 0.7; }
-    to   { transform: translate(20px, -10px) scale(1.05); opacity: 0.9; }
-  }
-
-  /* ===== Concentric rings ===== */
-  .hv-ring {
-    position: absolute;
-    top: 50%; left: 50%;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 1;
-  }
-  .hv-ring--outer {
-    width: 88%; aspect-ratio: 1; height: auto;
-    border: 1px dashed rgba(16,185,129,0.22);
-    transform: translate(-50%, -50%);
-    animation: hvSpin 60s linear infinite;
-  }
-  .hv-ring--inner {
-    width: 62%; aspect-ratio: 1; height: auto;
-    border: 1px solid rgba(15,23,42,0.06);
-    transform: translate(-50%, -50%);
-  }
-  @keyframes hvSpin {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  /* ===== Connection lines ===== */
-  .hv-lines {
-    position: absolute;
-    inset: 0;
+  .hc-slide img {
     width: 100%;
     height: 100%;
-    z-index: 2;
-    pointer-events: none;
-  }
-  .hv-line {
-    fill: none;
-    stroke: url(#hvLineGrad);
-    stroke-width: 1.5;
-    stroke-dasharray: 4 6;
-    animation: hvLineFlow 3s linear infinite;
-  }
-  @keyframes hvLineFlow {
-    to { stroke-dashoffset: -40; }
-  }
-
-  /* ===== Center gauge ===== */
-  .hv-center {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 240px;
-    height: 240px;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-  }
-  .hv-gauge {
-    width: 100%;
-    height: 100%;
+    object-fit: cover;
+    object-position: center;
     display: block;
-    filter: drop-shadow(0 18px 40px rgba(15,23,42,0.10));
+    filter: saturate(1.02) contrast(1.02);
   }
-  .hv-gauge-fill { animation: hvGaugeDraw 1.8s cubic-bezier(.4,.2,.2,1) 0.3s forwards; }
-  @keyframes hvGaugeDraw {
-    to { stroke-dashoffset: 18; }
-  }
-  .hv-center-info {
+
+  .hc-cap {
     position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    left: 0; right: 0; bottom: 0;
+    padding: 56px 22px 18px;
+    background: linear-gradient(180deg, rgba(14, 59, 46, 0) 0%, rgba(14, 59, 46, 0.55) 60%, rgba(14, 59, 46, 0.85) 100%);
     pointer-events: none;
   }
-  .hv-center-eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .hv-center-num {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 58px;
-    color: var(--color-heading);
-    line-height: 1;
-    letter-spacing: -0.04em;
+  .hc-cap-tag {
     display: inline-flex;
-    align-items: baseline;
-  }
-  .hv-center-num small {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--color-accent);
-    margin-left: 2px;
-  }
-  .hv-center-sub {
-    margin-top: 10px;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 13px;
-    color: var(--color-text-muted);
-    letter-spacing: -0.01em;
-  }
-
-  /* ===== Orbit cards ===== */
-  .hv-orbit {
-    position: absolute;
-    width: 170px;
-    z-index: 6;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    animation: hvFadeIn .6s ease-out forwards;
-  }
-  .hv-orbit--tl { top: 22%; left: 26%;  animation-delay: 0.5s; }
-  .hv-orbit--tr { top: 22%; left: 74%;  animation-delay: 0.7s; }
-  .hv-orbit--bl { top: 78%; left: 26%;  animation-delay: 0.9s; }
-  .hv-orbit--br { top: 78%; left: 74%;  animation-delay: 0.6s; }
-  @keyframes hvFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  .hv-mini {
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: 13px;
-    padding: 10px 14px;
-    display: flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 12px 28px rgba(15,23,42,0.10);
-    animation: hvFloat 5s ease-in-out infinite alternate;
-  }
-  .hv-orbit--tl .hv-mini { animation-delay: 0.2s; }
-  .hv-orbit--tr .hv-mini { animation-delay: 0.6s; }
-  .hv-orbit--bl .hv-mini { animation-delay: 0.9s; }
-  .hv-orbit--br .hv-mini { animation-delay: 0.3s; }
-  @keyframes hvFloat {
-    from { transform: translateY(-5px); }
-    to   { transform: translateY(5px); }
-  }
-  .hv-mini-tick {
-    display: grid;
-    place-items: center;
-    width: 28px; height: 28px;
-    border-radius: 8px;
-    background: var(--color-accent-soft);
-    color: var(--color-accent-strong);
-    font-weight: 800;
-    font-size: 13px;
-    flex-shrink: 0;
-  }
-  .hv-mini-iso {
-    display: block;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 13px;
-    color: var(--color-heading);
-    letter-spacing: -0.01em;
-  }
-  .hv-mini-name {
-    display: block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #fff;
     font-size: 11px;
-    color: var(--color-text-muted);
-    margin-top: 1px;
-  }
-  .hv-mini--active {
-    border-color: rgba(16,185,129,0.40);
-    box-shadow: 0 12px 28px rgba(16,185,129,0.20), 0 0 0 4px rgba(16,185,129,0.06);
-  }
-  .hv-mini-pulse {
-    display: grid;
-    place-items: center;
-    width: 28px; height: 28px;
-    border-radius: 8px;
-    background: var(--color-accent);
-    flex-shrink: 0;
-    position: relative;
-  }
-  .hv-mini-pulse > span {
-    display: block;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #fff;
-    animation: hvPulse 1.6s ease-in-out infinite;
-  }
-  @keyframes hvPulse {
-    0%, 100% { transform: scale(0.8); opacity: 0.7; }
-    50%      { transform: scale(1.15); opacity: 1; }
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
 
-  /* ===== Floating widgets ===== */
-  .hv-widget {
+  .hc-overlay-pill {
     position: absolute;
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: 14px;
-    box-shadow: 0 18px 40px rgba(15,23,42,0.14);
-    padding: 12px 16px;
-    z-index: 7;
-    display: flex;
+    top: 14px;
+    left: 14px;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-    opacity: 0;
-    animation: hvFadeIn .7s ease-out forwards;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(15, 59, 46, 0.10);
+    color: var(--color-heading);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 6px 12px;
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(15, 59, 46, 0.14);
+    z-index: 3;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
-  .hv-widget--live {
-    top: -2%;
-    right: 4%;
-    animation-delay: 1.0s;
-    padding: 8px 14px;
-  }
-  .hv-widget--metric {
-    top: 50%;
-    right: -4%;
-    transform: translateY(-50%);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 12px 16px;
-    animation-delay: 1.2s;
-  }
-  .hv-widget--toast {
-    bottom: 0;
-    left: -2%;
-    animation-delay: 1.4s;
-  }
-
-  .hv-live-dot {
+  .hc-pulse {
     position: relative;
-    display: block;
-    width: 10px; height: 10px;
-    flex-shrink: 0;
+    width: 8px; height: 8px;
   }
-  .hv-live-dot > span {
+  .hc-pulse > span {
     position: absolute; inset: 0;
     border-radius: 50%;
     background: #10B981;
-    box-shadow: 0 0 0 0 rgba(16,185,129,0.6);
-    animation: hvLivePulse 1.6s ease-out infinite;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+    animation: hcLivePulse 1.6s ease-out infinite;
   }
-  @keyframes hvLivePulse {
-    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.55); }
-    70%  { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
-    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
-  }
-  .hv-live-text {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 12px;
-    color: var(--color-heading);
-    letter-spacing: -0.01em;
-    white-space: nowrap;
+  @keyframes hcLivePulse {
+    0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
   }
 
-  .hv-metric-num {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    color: var(--color-heading);
-    font-size: 26px;
-    line-height: 1;
-  }
-  .hv-metric-label {
-    font-size: 11px;
-    color: var(--color-text-muted);
-    margin-top: 4px;
-    line-height: 1.35;
-  }
-
-  .hv-toast-tick {
-    display: grid;
-    place-items: center;
-    width: 32px; height: 32px;
-    border-radius: 9px;
-    background: var(--color-accent);
-    color: #fff;
-    font-weight: 800;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-  .hv-toast-title {
-    display: block;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    color: var(--color-heading);
-    font-size: 13px;
-    letter-spacing: -0.01em;
-  }
-  .hv-toast-sub {
-    display: block;
-    color: var(--color-text-muted);
-    font-size: 11px;
-    margin-top: 1px;
-  }
-
-  /* ===== Sparkles ===== */
-  .hv-sparkle {
+  /* Decorative gold corner accents */
+  .hc-corner {
     position: absolute;
-    display: block;
-    color: var(--color-accent);
-    z-index: 8;
-    opacity: 0;
-    animation: hvSparkle 3s ease-in-out infinite;
+    width: 28px; height: 28px;
     pointer-events: none;
+    z-index: 2;
   }
-  .hv-sparkle svg {
-    display: block;
-    width: 100%;
-    height: 100%;
+  .hc-corner--tl {
+    top: 14px; right: 14px;
+    border-top: 2px solid var(--color-gold);
+    border-right: 2px solid var(--color-gold);
+    border-top-right-radius: 8px;
   }
-  .hv-sparkle--1 { top: 10%; left: 50%; width: 14px; height: 14px; animation-delay: 0.4s; }
-  .hv-sparkle--2 { top: 60%; left: 14%; width: 10px; height: 10px; animation-delay: 1.4s; }
-  .hv-sparkle--3 { top: 38%; right: 16%; width: 16px; height: 16px; animation-delay: 2.2s; }
-  @keyframes hvSparkle {
-    0%, 100% { opacity: 0; transform: scale(0.6) rotate(0deg); }
-    50%      { opacity: 1; transform: scale(1)   rotate(45deg); }
+  .hc-corner--br {
+    bottom: 14px; right: 14px;
+    border-bottom: 2px solid var(--color-gold);
+    border-right: 2px solid var(--color-gold);
+    border-bottom-right-radius: 8px;
+  }
+
+  /* Dot indicators */
+  .hc-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0 2px;
+  }
+  .hc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(15, 59, 46, 0.18);
+    cursor: pointer;
+    padding: 0;
+    transition: background-color .25s ease, transform .25s ease, width .3s ease;
+  }
+  .hc-dot:hover { background: rgba(15, 59, 46, 0.32); }
+  .hc-dot.is-active {
+    background: var(--color-primary);
+    width: 22px;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hv-glow--1, .hv-glow--2, .hv-ring--outer, .hv-line,
-    .hv-mini, .hv-mini-pulse > span, .hv-live-dot > span,
-    .hv-sparkle, .hv-orbit, .hv-widget,
-    .hv-gauge-fill { animation: none; }
-    .hv-orbit, .hv-widget { opacity: 1; }
-    .hv-gauge-fill { stroke-dashoffset: 18; }
+    .hc-slide,
+    .hc-pulse > span {
+      transition: none;
+      animation: none;
+    }
   }
 
   @media (max-width: 980px) {
-    .hv { margin: 8px auto 0; max-width: 520px; height: 440px; }
+    .hero-carousel { max-width: 100%; margin: 0 auto; }
   }
-  @media (max-width: 560px) {
-    .hv { height: 420px; max-width: 100%; }
-    .hv-orbit { width: 130px; }
-    .hv-mini { padding: 8px 10px; gap: 8px; }
-    .hv-mini-tick, .hv-mini-pulse { width: 24px; height: 24px; }
-    .hv-mini-iso { font-size: 11px; }
-    .hv-mini-name { font-size: 10px; }
-    .hv-center { width: 180px; height: 180px; }
-    .hv-center-num { font-size: 42px; }
-    .hv-center-num small { font-size: 18px; }
-    .hv-widget--live { padding: 6px 10px; right: 2%; top: 0; }
-    .hv-widget--metric { padding: 10px 12px; right: 0; }
-    .hv-metric-num { font-size: 20px; }
-    .hv-widget--toast { padding: 10px 12px; left: 0; bottom: 0; }
-    .hv-toast-tick { width: 26px; height: 26px; font-size: 12px; }
+  @media (max-width: 640px) {
+    .hc-frame { aspect-ratio: 4 / 3; border-radius: 18px; }
+    .hc-overlay-pill { font-size: 10.5px; padding: 5px 10px; }
+    .hc-cap { padding: 42px 16px 14px; }
   }
 </style>

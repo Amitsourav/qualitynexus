@@ -44,15 +44,10 @@ const credentialBadges = [
     eyebrow="About QualityNexus"
     title="A trusted consultancy and"
     accent="training company across India."
-    lede="QualityNexus is a trusted consultancy and training company offering expert services in ISO Certification (9001, 14001, 45001, etc.), NABL & NABH Accreditation, Cybersecurity Audits, ESG, Safety Audits, T4S, Water Audit, and Lean Six Sigma — alongside Business Coaching, Financial Services, Legal Compliance, and Digital solutions."
+    lede="QualityNexus is a trusted consultancy and training company offering expert services in ISO Certification (9001, 14001, 45001, etc.), NABL & NABH Accreditation, Cybersecurity Audits, ESG, Safety Audits, 5S, Water Audit, and Lean Six Sigma — alongside Business Coaching, Financial Services, Legal Compliance, and Digital solutions."
     hasVisual={true}
   >
     <div slot="visual" class="about-visual">
-      <div class="about-pill about-pill--top">
-        <span class="about-pulse" aria-hidden="true"><span></span></span>
-        MSME · DIPP · GST · MCA registered
-      </div>
-
       <div class="about-stage">
         <div class="about-orbit about-orbit--outer" aria-hidden="true"></div>
         <div class="about-orbit about-orbit--inner" aria-hidden="true"></div>
@@ -117,47 +112,6 @@ const credentialBadges = [
           </figcaption>
         </figure>
       </div>
-    </div>
-  </section>
-
-  <!-- ========== PRINCIPLES ========== -->
-  <section class="section section-soft">
-    <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow">How we work</span>
-        <h2>Four principles. One outcome.</h2>
-        <p>The rules we run our engagements by — drawn from a decade of audit findings we've watched, written, and closed.</p>
-      </div>
-      <div class="principles-grid">
-        {principles.map((p, i) => (
-          <article class="principle-card">
-            <span class="principle-num">{String(i + 1).padStart(2, "0")}</span>
-            <span class="icon-halo"><Icon name={p.icon} /></span>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== INDUSTRIES ========== -->
-  <section class="section">
-    <div class="container industry-section-grid">
-      <div class="industry-copy">
-        <span class="eyebrow">Sectors we operate in</span>
-        <h2>Industry context, not generic templates.</h2>
-        <p>Each engagement is led by a consultant whose background matches your sector — because the same standard reads very differently inside a hospital, a bank, and a battery plant.</p>
-        <a href="/services" class="link-arrow">See how we engage <Icon name="arrow-right" /></a>
-      </div>
-      <ul class="industry-grid">
-        {industries.map((i) => (
-          <li class="industry-card">
-            <span class="industry-icon"><Icon name={i.icon} /></span>
-            <span class="industry-label">{i.label}</span>
-          </li>
-        ))}
-      </ul>
     </div>
   </section>
 

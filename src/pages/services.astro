@@ -21,7 +21,7 @@ const services = [
     icon: "graduation-cap",
     title: "Training & Improvement",
     body: "Practical capability-building, not attendance certificates.",
-    bullets: ["T4S — Training for Business Growth", "Lean Six Sigma", "Business Coaching"],
+    bullets: ["5S — Workplace Organization", "Lean Six Sigma", "Business Coaching"],
   },
   {
     icon: "leaf",
@@ -41,12 +41,6 @@ const services = [
     body: "Tax and statutory filings handled by certified professionals.",
     bullets: ["GST Filing", "Income Tax Returns (ITR)", "TDS Compliance"],
   },
-  {
-    icon: "cpu",
-    title: "Digital Solutions",
-    body: "Online presence and software, built and maintained.",
-    bullets: ["Digital Marketing", "Software & Mobile App Development", "Website Development"],
-  },
 ];
 
 const engagement = [
@@ -57,23 +51,23 @@ const engagement = [
   { n: "05", icon: "award",           title: "Certificate",      body: "Stage 2 closure. Surveillance plan handed over." },
 ];
 
-const orbitServices = ["award", "shield-check", "graduation-cap", "leaf", "rocket", "scale", "cpu"];
+const orbitServices = ["award", "shield-check", "graduation-cap", "leaf", "rocket", "scale"];
 
 const proofPoints = [
-  { num: "23",   suffix: "+",    label: "Service lines under one roof" },
+  { num: "20",   suffix: "+",    label: "Service lines under one roof" },
   { num: "Pan",  suffix: "-India", label: "Coverage across all states" },
   { num: "48",   suffix: "h",    label: "Response time on enquiries" },
 ];
 ---
 <BaseLayout
   title="Services — ISO, NABL, Audits, Training & Business Support"
-  description="QualityNexus offers ISO Certification, NABL & NABH Accreditation, Cybersecurity, ESG, Safety Audits, Lean Six Sigma, Financial Services, Legal Compliance, and Digital Solutions across India."
+  description="QualityNexus offers ISO Certification, NABL & NABH Accreditation, Cybersecurity, ESG, Safety Audits, Lean Six Sigma, Financial Services, and Legal Compliance across India."
 >
   <PageHero
     eyebrow="What we do"
-    title="Seven service lines."
+    title="Six service lines."
     accent="One trusted partner."
-    lede="From ISO certification and NABL accreditation to financial filings, legal compliance, training, and digital solutions — we deliver compliance, efficiency, and growth as a single engagement, not three vendors."
+    lede="From ISO certification and NABL accreditation to financial filings, legal compliance, and training — we deliver compliance, efficiency, and growth as a single engagement, not three vendors."
     hasVisual={true}
   >
     <div slot="visual" class="services-visual">
@@ -94,7 +88,7 @@ const proofPoints = [
       ))}
 
       <div class="sv-stat-card sv-stat-card--top">
-        <strong>23+</strong>
+        <strong>20+</strong>
         <span>services</span>
       </div>
       <div class="sv-stat-card sv-stat-card--bottom">
@@ -121,7 +115,7 @@ const proofPoints = [
     <div class="container">
       <div class="section-head center">
         <span class="eyebrow">The full catalogue</span>
-        <h2>Seven categories. Twenty-three service lines.</h2>
+        <h2>Six categories. Twenty service lines.</h2>
         <p>Compliance, audits, training, financial filings, legal work, business setup, and digital — under one accountability. Pick what you need; we'll be honest about what you don't.</p>
       </div>
       <div class="services-grid">
@@ -409,7 +403,6 @@ const proofPoints = [
     gap: 24px;
   }
   /* Center the lone 7th card on the last row */
-  .services-grid > .service-card:nth-child(7):last-child { grid-column: 2; }
   .service-card {
     position: relative;
     background: var(--color-bg);
