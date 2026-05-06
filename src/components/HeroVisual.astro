@@ -1,24 +1,36 @@
 ---
+import { Image } from "astro:assets";
+import hero1 from "../assets/hero/hero-1.jpeg";
+import hero2 from "../assets/hero/hero-2.jpeg";
+import hero3 from "../assets/hero/hero-3.jpeg";
+import hero4 from "../assets/hero/hero-4.jpeg";
+import hero5 from "../assets/hero/hero-5.jpeg";
+import hero6 from "../assets/hero/hero-6.jpeg";
+import hero7 from "../assets/hero/hero-7.jpeg";
+
 const slides = [
-  { src: "/images/hero/hero-1.jpeg", alt: "QualityNexus consultant and NHPC officials at an engagement meeting",         tag: "NHPC engagement" },
-  { src: "/images/hero/hero-2.jpeg", alt: "QualityNexus team with client staff and on-site safety officers",              tag: "Client site visit" },
-  { src: "/images/hero/hero-3.jpeg", alt: "Training session at Numaligarh Refinery Ltd with delegates working on laptops", tag: "NRL training cohort" },
-  { src: "/images/hero/hero-4.jpeg", alt: "Certificate handover ceremony with QualityNexus consultant and client team",   tag: "Certificate handover" },
-  { src: "/images/hero/hero-5.jpeg", alt: "Audit session in progress at NRL Learning Centre with delegates around a long table", tag: "On-site audit · NRL" },
-  { src: "/images/hero/hero-6.jpeg", alt: "QualityNexus internal training meeting around a conference table",             tag: "Internal training" },
-  { src: "/images/hero/hero-7.jpeg", alt: "Group photo of QualityNexus consultants with a client team after engagement", tag: "Post-engagement group" },
+  { src: hero1, alt: "QualityNexus consultant and NHPC officials at an engagement meeting",         tag: "NHPC engagement" },
+  { src: hero2, alt: "QualityNexus team with client staff and on-site safety officers",              tag: "Client site visit" },
+  { src: hero3, alt: "Training session at Numaligarh Refinery Ltd with delegates working on laptops", tag: "NRL training cohort" },
+  { src: hero4, alt: "Certificate handover ceremony with QualityNexus consultant and client team",   tag: "Certificate handover" },
+  { src: hero5, alt: "Audit session in progress at NRL Learning Centre with delegates around a long table", tag: "On-site audit · NRL" },
+  { src: hero6, alt: "QualityNexus internal training meeting around a conference table",             tag: "Internal training" },
+  { src: hero7, alt: "Group photo of QualityNexus consultants with a client team after engagement", tag: "Post-engagement group" },
 ];
 ---
 <div class="hero-carousel" data-hero-carousel>
   <div class="hc-frame">
     {slides.map((s, i) => (
       <figure class={`hc-slide ${i === 0 ? "is-active" : ""}`} data-hc-slide>
-        <img
+        <Image
           src={s.src}
           alt={s.alt}
+          widths={[640, 960, 1280]}
+          sizes="(max-width: 640px) 100vw, (max-width: 980px) 80vw, 560px"
+          formats={["avif", "webp"]}
+          quality={70}
           loading={i === 0 ? "eager" : "lazy"}
           decoding={i === 0 ? "sync" : "async"}
-          fetchpriority={i === 0 ? "high" : "low"}
         />
         <figcaption class="hc-cap">
           <span class="hc-cap-tag">{s.tag}</span>
@@ -49,51 +61,7 @@ const slides = [
   </div>
 </div>
 
-<script>
-  const root = document.querySelector<HTMLElement>("[data-hero-carousel]");
-  if (root) {
-    const slides = root.querySelectorAll<HTMLElement>("[data-hc-slide]");
-    const dots = root.querySelectorAll<HTMLButtonElement>("[data-hc-dot]");
-    const TICK = 4500;
-    let current = 0;
-    let timer: number | null = null;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const setActive = (i: number) => {
-      const target = ((i % slides.length) + slides.length) % slides.length;
-      slides.forEach((el, j) => el.classList.toggle("is-active", j === target));
-      dots.forEach((el, j) => {
-        el.classList.toggle("is-active", j === target);
-        el.setAttribute("aria-selected", j === target ? "true" : "false");
-      });
-      current = target;
-    };
-
-    const start = () => {
-      if (reduce || timer !== null) return;
-      timer = window.setInterval(() => setActive(current + 1), TICK);
-    };
-    const stop = () => {
-      if (timer !== null) { clearInterval(timer); timer = null; }
-    };
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        setActive(i);
-        stop();
-        start();
-      });
-    });
-
-    root.addEventListener("mouseenter", stop);
-    root.addEventListener("mouseleave", start);
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) stop(); else start();
-    });
-
-    start();
-  }
-</script>
+<script src="/scripts/hero-carousel.js" defer></script>
 
 <style>
   .hero-carousel {

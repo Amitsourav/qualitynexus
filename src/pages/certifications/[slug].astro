@@ -60,6 +60,7 @@ const serviceLd = {
 <BaseLayout
   title={`${standard.code} — ${standard.name} | QualityNexus`}
   description={metaDescription}
+  noindex={!hasDetail}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbLd)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceLd)} />

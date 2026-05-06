@@ -9,6 +9,7 @@ interface Props {
   canonical?: string;
   image?: string;
   type?: "website" | "article" | "profile";
+  noindex?: boolean;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   canonical,
   image = "/og/default.jpg",
   type = "website",
+  noindex = false,
 } = Astro.props;
 
 const pageTitle = title.includes("QualityNexus")
@@ -75,7 +77,7 @@ const organizationLd = {
   <title>{pageTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="robots" content={noindex ? "noindex,follow" : "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"} />
 
   <!-- hreflang (English / India default) -->
   <link rel="alternate" hreflang="en-IN" href={canonicalUrl} />

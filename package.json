@@ -8,12 +8,17 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "a11y": "axe http://localhost:4321/ http://localhost:4321/about/ http://localhost:4321/services/ http://localhost:4321/clients/ http://localhost:4321/contact/ http://localhost:4321/certifications/ http://localhost:4321/certifications/iso-9001/ --tags wcag2aa,wcag2a,wcag21aa --exit",
+    "indexnow": "node scripts/indexnow-ping.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
     "@fontsource/inter": "^5.1.0",
     "@fontsource/plus-jakarta-sans": "^5.1.0",
     "astro": "^5.1.0"
+  },
+  "devDependencies": {
+    "@axe-core/cli": "^4.11.3"
   }
 }

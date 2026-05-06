@@ -111,7 +111,7 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
         {clients.map((c) => (
           <div class={`client-cell ${c.logo ? "client-cell--logo" : "client-cell--abbr"}`}>
             {c.logo
-              ? <img src={c.logo} alt={`${c.name} logo`} class="client-logo" loading="lazy" decoding="async" />
+              ? <img src={c.logo} alt={`${c.name} logo`} class="client-logo" loading="lazy" decoding="async" width="240" height="120" />
               : <>
                   <span class="client-mark" data-len={c.abbr.length}>{c.abbr}</span>
                   <span class="client-name">{c.name}</span>
@@ -156,39 +156,7 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
   />
 </BaseLayout>
 
-<script>
-  const card = document.querySelector<HTMLElement>("[data-log]");
-  if (card) {
-    const rows = card.querySelectorAll<HTMLElement>("[data-log-i]");
-    const TICK = 2200;
-    let current = 0;
-    let timer: number | null = null;
-
-    const setActive = (i: number) => {
-      const target = ((i % rows.length) + rows.length) % rows.length;
-      rows.forEach((el, j) => el.classList.toggle("is-active", j === target));
-      current = target;
-    };
-
-    const startTimer = () => {
-      if (timer !== null) return;
-      timer = window.setInterval(() => setActive(current + 1), TICK);
-    };
-    const stopTimer = () => {
-      if (timer !== null) { clearInterval(timer); timer = null; }
-    };
-
-    card.addEventListener("mouseenter", stopTimer);
-    card.addEventListener("mouseleave", startTimer);
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) stopTimer(); else startTimer();
-    });
-
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      startTimer();
-    }
-  }
-</script>
+<script src="/scripts/clients-log.js" defer></script>
 
 <style>
   /* ===== HERO VISUAL — recently-certified activity card (simple · alive) ===== */
