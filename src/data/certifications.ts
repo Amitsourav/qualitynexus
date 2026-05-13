@@ -30,6 +30,7 @@ export const categories: Category[] = [
       { code: "AS 9100",       name: "Aerospace QMS — Manufacturers" },
       { code: "AS 9110",       name: "Aerospace QMS — Maintenance" },
       { code: "AS 9120",       name: "Aerospace QMS — Distributors" },
+      { code: "5S",            name: "Workplace Organization — Lean Foundation" },
     ],
   },
   {
@@ -256,6 +257,33 @@ export const details: Record<string, CertDetail> = {
     ],
     audience:
       "ISO 9001 fits any organization — from a 10-person services firm to a 10,000-person manufacturer. It is most commonly the first management-system standard adopted, and forms the foundation other standards (14001, 45001, 13485, 27001) integrate cleanly with.",
+  },
+  "5s": {
+    intro:
+      "5S is the foundational workplace organization methodology of Lean manufacturing — Sort, Set in Order, Shine, Standardize, and Sustain. It is not an ISO certificate but a hands-on operational discipline: a shop floor, lab, warehouse, or office is physically restructured so that waste, defects, and search time become visually obvious. Done well, 5S is the prerequisite that makes Kaizen, TPM, and Six Sigma initiatives actually stick instead of decaying back to the old state within a quarter.",
+    principles: [
+      "Sort (Seiri) — remove what is not needed from the work area; red-tag the doubtful and decide within a fixed window",
+      "Set in Order (Seiton) — a designated place for everything, located by frequency of use, labelled and shadow-boarded",
+      "Shine (Seiso) — daily cleaning that doubles as inspection; abnormalities surface when surfaces stay clean",
+      "Standardize (Seiketsu) — written standards, visual controls, photographs of the target state on every workstation",
+      "Sustain (Shitsuke) — audit cadence, leader walks, and visual scoreboards that prevent slow drift back to baseline",
+      "Safety (often added) — hazards eliminated during the first three S's instead of layered on afterward",
+    ],
+    why: [
+      { title: "Foundation for Lean", body: "Six Sigma, TPM, and Kaizen initiatives fail when launched on a disorganized floor. 5S removes that excuse before the bigger programs begin." },
+      { title: "Visible waste reduction", body: "Walking distance, searching time, defective tools, and obsolete stock become measurable losses — not background noise." },
+      { title: "Safer workplaces", body: "Tripping hazards, blocked exits, unlabelled chemicals, and unsafe storage are eliminated in the first two S's, not deferred to a safety audit." },
+      { title: "Cheap to start", body: "Unlike most management systems, 5S delivers visible results in 30–60 days with no capex — just discipline, paint, labels, and a published audit score." },
+      { title: "Audit-ready optics", body: "Customer, regulator, and PSU visit teams form their impression of operations in the first 30 seconds. A 5S floor passes that test before a word is spoken." },
+    ],
+    benefits: [
+      { title: "For customers", body: "Visit tours and audits land cleanly — what customers see matches the quality claims you make on paper." },
+      { title: "For operations", body: "Search time, walk distance, and tool-finding losses collapse; new operators ramp up faster because every workstation is self-explanatory." },
+      { title: "For management", body: "A weekly 5S audit score gives leadership a single objective number to track shop-floor health — no opinion, no spin." },
+      { title: "For finance", body: "Reduced inventory holding, fewer lost tools, lower accident rates, and measurably higher OEE — the ROI shows up in the first quarter, not the third year." },
+    ],
+    audience:
+      "5S applies wherever physical work happens — manufacturing plants, NABL testing labs, warehouses, healthcare facilities, automotive workshops, food production, even back-office paper flows. It is typically the first improvement program QualityNexus deploys before layering ISO 9001, IATF 16949, or Lean Six Sigma on top.",
   },
   "iso-14001": {
     intro:
