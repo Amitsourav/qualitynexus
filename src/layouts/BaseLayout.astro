@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import FloatingContact from "../components/FloatingContact.astro";
 
 interface Props {
   title?: string;
@@ -115,5 +116,6 @@ const organizationLd = {
   <Header />
   <main id="main"><slot /></main>
   <Footer />
+  <FloatingContact />
 </body>
 </html>

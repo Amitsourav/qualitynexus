@@ -6,6 +6,8 @@ interface Props {
   body?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
 }
 
 const {
@@ -13,6 +15,8 @@ const {
   body = "Tell us your standard and timeline. We'll come back with a plan within 48 hours.",
   ctaLabel = "Book a free consultation",
   ctaHref = "/contact",
+  secondaryLabel,
+  secondaryHref = "/contact",
 } = Astro.props;
 ---
 <section class="cta-strip">
@@ -21,7 +25,12 @@ const {
       <h2>{heading}</h2>
       <p>{body}</p>
     </div>
-    <a href={ctaHref} class="btn btn-accent cta-btn">{ctaLabel} <Icon name="arrow-right" /></a>
+    <div class="cta-actions">
+      <a href={ctaHref} class="btn btn-accent cta-btn">{ctaLabel} <Icon name="arrow-right" /></a>
+      {secondaryLabel && (
+        <a href={secondaryHref} class="btn cta-btn cta-btn--ghost">{secondaryLabel}</a>
+      )}
+    </div>
   </div>
 </section>
 
@@ -64,7 +73,22 @@ const {
   }
   .cta-strip h2 { color: #fff; max-width: 640px; }
   .cta-strip p { color: #94A3B8; max-width: 640px; margin-top: 10px; font-size: 16px; }
+  .cta-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
   .cta-btn { padding: 16px 30px; font-size: 15px; }
+  .cta-btn--ghost {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+  .cta-btn--ghost:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.55);
+    color: #fff;
+  }
 
   @media (max-width: 640px) {
     .cta-inner { flex-direction: column; align-items: flex-start; }

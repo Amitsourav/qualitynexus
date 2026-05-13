@@ -11,23 +11,25 @@ const crumbs = breadcrumbLd([
 ]);
 
 const clients = [
-  { abbr: "IOCL", name: "Indian Oil Corporation Ltd",  sector: "Oil, Gas & Petroleum",      logo: "/images/clients/iocl.png" },
-  { abbr: "HAL",  name: "Hindustan Aeronautics Ltd",   sector: "Aerospace & Defence",       logo: "/images/clients/hal.jpeg" },
-  { abbr: "NHPC", name: "NHPC Limited",                sector: "Power & Energy",            logo: "/images/clients/nhpc.png" },
-  { abbr: "GAIL", name: "GAIL Gas Limited",            sector: "Oil, Gas & Petroleum",      logo: "/images/clients/gail.png" },
-  { abbr: "NRL",  name: "Numaligarh Refinery Ltd",     sector: "Oil, Gas & Petroleum",      logo: "/images/clients/nrl.jpeg" },
-  { abbr: "HCL",  name: "Hindustan Copper Ltd",        sector: "Mining & Metals",           logo: "/images/clients/hindustan-copper.jpg" },
-  { abbr: "IR",   name: "Indian Railways",             sector: "Transport & Infrastructure", logo: "/images/clients/Indian-Railway.png" },
-  { abbr: "BL",   name: "Balmer Lawrie & Co. Ltd",     sector: "Industrial & Manufacturing", logo: "/images/clients/balmer-lawrie.jpg" },
-  { abbr: "DB",   name: "Duckback (India)",            sector: "Industrial & Manufacturing", logo: "/images/clients/Duckback-India.jpeg" },
-  { abbr: "EC",   name: "Exemplar Cordage LLP",        sector: "Industrial & Manufacturing", logo: "/images/clients/EXEMPLAR-CORDAGE-LLP.jpeg" },
-  { abbr: "JRGB", name: "Jharkhand Rajya Gramin Bank", sector: "Banking & BFSI",            logo: "/images/clients/JRGB.jpeg" },
+  { abbr: "IOCL",   name: "Indian Oil Corporation Ltd",         sector: "Oil, Gas & Petroleum",       logo: "/images/clients/iocl.png" },
+  { abbr: "HAL",    name: "Hindustan Aeronautics Ltd",          sector: "Aerospace & Defence",        logo: "/images/clients/hal.jpeg" },
+  { abbr: "NHPC",   name: "NHPC Limited",                       sector: "Power & Energy",             logo: "/images/clients/nhpc.png" },
+  { abbr: "NTPC",   name: "NTPC Limited",                       sector: "Power & Energy",             logo: null },
+  { abbr: "NEEPCO", name: "North Eastern Electric Power Corp",  sector: "Power & Energy",             logo: null },
+  { abbr: "GAIL",   name: "GAIL Gas Limited",                   sector: "Oil, Gas & Petroleum",       logo: "/images/clients/gail.png" },
+  { abbr: "NRL",    name: "Numaligarh Refinery Ltd",            sector: "Oil, Gas & Petroleum",       logo: "/images/clients/nrl.jpeg" },
+  { abbr: "HCL",    name: "Hindustan Copper Ltd",               sector: "Mining & Metals",            logo: "/images/clients/hindustan-copper.jpg" },
+  { abbr: "IR",     name: "Indian Railways",                    sector: "Transport & Infrastructure", logo: "/images/clients/Indian-Railway.png" },
+  { abbr: "BL",     name: "Balmer Lawrie & Co. Ltd",            sector: "Industrial & Manufacturing", logo: "/images/clients/balmer-lawrie.jpg" },
+  { abbr: "DB",     name: "Duckback (India)",                   sector: "Industrial & Manufacturing", logo: "/images/clients/Duckback-India.jpeg" },
+  { abbr: "EC",     name: "Exemplar Cordage LLP",               sector: "Industrial & Manufacturing", logo: "/images/clients/EXEMPLAR-CORDAGE-LLP.jpeg" },
+  { abbr: "JRGB",   name: "Jharkhand Rajya Gramin Bank",        sector: "Banking & BFSI",             logo: "/images/clients/JRGB.jpeg" },
 ];
 
 const sectors = [
+  { icon: "zap",         label: "Power & Energy",             count: 3 },
   { icon: "battery",     label: "Oil, Gas & Petroleum",       count: 3 },
   { icon: "cog",         label: "Industrial & Manufacturing", count: 3 },
-  { icon: "zap",         label: "Power & Energy",             count: 1 },
   { icon: "rocket",      label: "Aerospace & Defence",        count: 1 },
   { icon: "hard-hat",    label: "Mining & Metals",            count: 1 },
   { icon: "globe",       label: "Transport & Infrastructure", count: 1 },
@@ -67,7 +69,7 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
         </header>
 
         <ol class="log-list">
-          {clients.map((entry, i) => (
+          {clients.slice(0, 6).map((entry, i) => (
             <li class={`log-row ${i === 0 ? "is-active" : ""}`} data-log-i={i}>
               <span class="log-bar" aria-hidden="true"></span>
               <div class="log-row-main">
@@ -85,6 +87,11 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
               </div>
             </li>
           ))}
+          {clients.length > 6 && (
+            <li class="log-more">
+              <span>+ {clients.length - 6} more featured engagements below</span>
+            </li>
+          )}
         </ol>
 
         <footer class="log-foot">
@@ -268,6 +275,16 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
     gap: 2px;
     position: relative;
     z-index: 1;
+  }
+  .log-more {
+    margin-top: 6px;
+    padding: 10px 12px;
+    text-align: center;
+    border-top: 1px dashed var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
   .log-row {
     position: relative;

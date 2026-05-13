@@ -1,64 +1,94 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroVisual from "../components/HeroVisual.astro";
-import StatsDashboard from "../components/StatsDashboard.astro";
 import Icon from "../components/Icon.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 
-const offerings = [
-  { icon: "search",          tag: "Phase 01", title: "Gap Analysis",                          body: "Clause-by-clause assessment against the target standard. Documented findings, prioritized risks, and a realistic implementation plan." },
-  { icon: "cog",             tag: "Phase 02", title: "Implementation",                        body: "Tailored procedures, controls, and operating routines designed for the auditor's seat — and for the team that uses them every day." },
-  { icon: "clipboard-check", tag: "Phase 03", title: "Internal Audit",                        body: "A formal internal audit cycle that surfaces non-conformances early and closes them with documented corrective action." },
-  { icon: "award",           tag: "Phase 04", title: "Stage 1 & 2 Audit and Certification",   body: "Stage 1 readiness review, Stage 2 audit support, and post-audit closure — hand-held all the way to a printed certificate." },
+const coreServices = [
+  {
+    icon: "award",
+    title: "ISO Consultancy",
+    bullets: ["ISO 9001", "ISO 14001", "ISO 45001", "ISO 27001", "ISO 50001", "ISO 37001"],
+  },
+  {
+    icon: "stethoscope",
+    title: "NABL Consultancy",
+    bullets: ["ISO/IEC 17025", "Laboratory Documentation", "Internal Audit", "Technical Implementation Support"],
+  },
+  {
+    icon: "lock",
+    title: "IT Security & Cyber Security Services",
+    bullets: ["IT Security Audit", "VAPT Coordination", "Cyber Security Compliance Support", "ISO 27001 Implementation", "Risk Assessment", "Information Security Documentation"],
+  },
+  {
+    icon: "cog",
+    title: "Management Systems & Audits",
+    bullets: ["5S Management System", "Water Audit", "External Health & Safety Audit", "Process Improvement Audit", "Workplace Management System"],
+  },
+  {
+    icon: "file-text",
+    title: "Audit, Documentation & Compliance",
+    bullets: ["Internal Audit", "Compliance Audit", "SOP Preparation", "Process Documentation", "Risk Assessment", "Compliance Support", "Regulatory Documentation"],
+  },
+  {
+    icon: "graduation-cap",
+    title: "Training & Capacity Building",
+    bullets: ["Lead Auditor Training", "Awareness Training", "Compliance Training", "Industrial Safety Training", "Capacity Building Programs"],
+  },
 ];
 
-const process = [
-  { n: "01", icon: "search",          title: "Gap Analysis",        body: "Clause-by-clause assessment against the target standard." },
-  { n: "02", icon: "cog",             title: "Implementation",      body: "Documents, controls, and routines built for daily use." },
-  { n: "03", icon: "clipboard-check", title: "Internal Audit",      body: "Trial audit cycle. Findings closed before Stage 1." },
-  { n: "04", icon: "shield-check",    title: "Stage 1 & 2 Audit",   body: "Readiness review and the certification body audit." },
-  { n: "05", icon: "award",           title: "Certification",       body: "Certificate issued. Surveillance plan handed over." },
+const whyChooseUs = [
+  { icon: "users",          title: "Experienced Industry Consultants",     body: "Senior consultants with sector-specific backgrounds across power, manufacturing, BFSI, healthcare, and labs." },
+  { icon: "rocket",         title: "Practical Implementation Approach",    body: "We build systems your team will actually use — not 200-page binders that gather dust." },
+  { icon: "shield-check",   title: "End-to-End Compliance Support",        body: "Gap analysis to certificate, plus surveillance and re-certification — one accountable partner." },
+  { icon: "globe",          title: "PAN India Services",                   body: "Consultants travel on-site across India — from Ranchi HQ to client sites in any state." },
+  { icon: "file-text",      title: "Audit-Ready Documentation",            body: "Every artefact survives third-party scrutiny — SOPs, registers, and records aligned to clauses." },
+  { icon: "graduation-cap", title: "Professional Training & Guidance",     body: "Lead-auditor and awareness programs delivered by IRCA / Exemplar Global associated professionals." },
+  { icon: "compass",        title: "Industry-Focused Solutions",           body: "PSU, manufacturing, lab, healthcare, and IT engagements — sector context, not generic templates." },
+  { icon: "lock",           title: "IT Security & Compliance Expertise",   body: "ISO 27001, VAPT coordination, and cybersecurity audits delivered alongside management systems." },
 ];
 
-const certs = [
-  { code: "ISO 9001",  blurb: "Quality Management",       icon: "check-circle" },
-  { code: "ISO 14001", blurb: "Environmental",            icon: "leaf" },
-  { code: "ISO 45001", blurb: "Occupational H&S",         icon: "hard-hat" },
-  { code: "ISO 27001", blurb: "Information Security",     icon: "lock" },
-  { code: "ISO 13485", blurb: "Medical Devices",          icon: "stethoscope" },
-  { code: "ISO 22000", blurb: "Food Safety",              icon: "utensils" },
-  { code: "ISO 27701", blurb: "Privacy Information",      icon: "eye-off" },
-  { code: "ISO 50001", blurb: "Energy Management",        icon: "battery" },
-  { code: "ISO 22301", blurb: "Business Continuity",      icon: "refresh" },
-  { code: "ISO 31000", blurb: "Risk Management",          icon: "alert-triangle" },
-  { code: "ISO 42001", blurb: "AI Management",            icon: "cpu" },
-  { code: "ISO 37001", blurb: "Anti-Bribery",             icon: "scale" },
+const recognitions = [
+  { label: "Startup India",                  sub: "DIPP recognized" },
+  { label: "MSME · Udyam",                   sub: "Govt. of India" },
+  { label: "IRCA Associated Professionals",  sub: "Lead-auditor certified" },
 ];
 
-const features = [
-  { icon: "rocket",       title: "Faster route to certificate",  body: "Tight, milestone-driven sprints — without skipping audit-defensibility." },
-  { icon: "headphones",   title: "Always-on advisory",            body: "Direct line to your lead consultant. No ticket queues." },
-  { icon: "shield-check", title: "Auditor-grade consultants",     body: "Our team has sat on both sides of the audit table." },
-  { icon: "file-text",    title: "Documentation built to use",    body: "SOPs your team opens — not 200-page binders." },
+const industries = [
+  { icon: "zap",          label: "Power Sector" },
+  { icon: "stethoscope",  label: "Laboratories" },
+  { icon: "cog",          label: "Manufacturing" },
+  { icon: "compass",      label: "Engineering" },
+  { icon: "shield-check", label: "Healthcare" },
+  { icon: "globe",        label: "Infrastructure" },
+  { icon: "scale",        label: "Government Organizations" },
+  { icon: "rocket",       label: "Railways" },
+  { icon: "hard-hat",     label: "Industrial Plants" },
+  { icon: "cpu",          label: "IT & Service Sector" },
 ];
 
-const clientLogos = [
-  { name: "Indian Oil Corporation Ltd",  logo: "/images/clients/iocl.png" },
-  { name: "Hindustan Aeronautics Ltd",   logo: "/images/clients/hal.jpeg" },
-  { name: "NHPC Limited",                logo: "/images/clients/nhpc.png" },
-  { name: "GAIL Gas Limited",            logo: "/images/clients/gail.png" },
-  { name: "Numaligarh Refinery Ltd",     logo: "/images/clients/nrl.jpeg" },
-  { name: "Indian Railways",             logo: "/images/clients/Indian-Railway.png" },
-  { name: "Balmer Lawrie & Co. Ltd",     logo: "/images/clients/balmer-lawrie.jpg" },
-  { name: "Hindustan Copper Ltd",        logo: "/images/clients/hindustan-copper.jpg" },
-  { name: "Duckback (India)",            logo: "/images/clients/Duckback-India.jpeg" },
-  { name: "Exemplar Cordage LLP",        logo: "/images/clients/EXEMPLAR-CORDAGE-LLP.jpeg" },
-  { name: "Jharkhand Rajya Gramin Bank", logo: "/images/clients/JRGB.jpeg" },
+const trustedClients = [
+  { name: "NEEPCO",                                logo: null,                                            abbr: "NEEPCO" },
+  { name: "NHPC Limited",                          logo: "/images/clients/nhpc.png" },
+  { name: "NTPC Limited",                          logo: null,                                            abbr: "NTPC" },
+  { name: "Hindustan Aeronautics Ltd",             logo: "/images/clients/hal.jpeg" },
+  { name: "Indian Oil Corporation Ltd",            logo: "/images/clients/iocl.png" },
+  { name: "GAIL Gas Limited",                      logo: "/images/clients/gail.png" },
+  { name: "Numaligarh Refinery Ltd",               logo: "/images/clients/nrl.jpeg" },
+  { name: "Hindustan Copper Ltd",                  logo: "/images/clients/hindustan-copper.jpg" },
+  { name: "Indian Railways",                       logo: "/images/clients/Indian-Railway.png" },
+  { name: "Balmer Lawrie & Co. Ltd",               logo: "/images/clients/balmer-lawrie.jpg" },
+  { name: "Duckback (India)",                      logo: "/images/clients/Duckback-India.jpeg" },
+  { name: "Exemplar Cordage LLP",                  logo: "/images/clients/EXEMPLAR-CORDAGE-LLP.jpeg" },
+  { name: "Jharkhand Rajya Gramin Bank",           logo: "/images/clients/JRGB.jpeg" },
 ];
+
+// Subset used in the hero marquee (auto-scrolling band)
+const clientLogos = trustedClients.filter((c) => c.logo);
 ---
 <BaseLayout
-  title="QualityNexus — ISO Certification Consulting"
-  description="From gap to certificate. Consulting, training, and audits across 100+ international standards — delivered by senior auditors."
+  title="ISO, NABL, IT Security & Compliance Consultancy in India · QualityNexus"
+  description="QualityNexus — ISO certification consultancy, NABL implementation, IT security audit, VAPT, 5S, water audit, and compliance training across India. Based in Ranchi."
 >
   <!-- ========== HERO ========== -->
   <section class="hero">
@@ -68,20 +98,20 @@ const clientLogos = [
 
     <div class="container hero-inner">
       <div class="hero-copy">
-        <span class="eyebrow">Certified for Success</span>
+        <span class="eyebrow">Quality Nexus Private Limited</span>
         <h1>
-          Audit-Ready Consulting for<br/>
-          <span class="hero-accent">Quality, Compliance &amp; Industrial Excellence</span>
+          ISO, NABL, IT Security &amp; Compliance<br/>
+          <span class="hero-accent">Consultancy Services Across India</span>
         </h1>
         <p class="lede">
-          A trusted consultancy delivering audit, certification, cybersecurity and compliance
-          solutions across industries and public-sector organizations.
+          Helping Industries, Laboratories &amp; Organizations achieve audit readiness, compliance excellence,
+          process improvement &amp; information security — with confidence.
         </p>
         <div class="hero-ctas">
           <a href="/contact" class="btn btn-accent btn-shimmer">
-            Book a free call <Icon name="arrow-right" />
+            Get Consultation <Icon name="arrow-right" />
           </a>
-          <a href="/certifications" class="btn btn-ghost">Browse standards</a>
+          <a href="/contact" class="btn btn-ghost">Contact Us</a>
         </div>
         <div class="hero-stats">
           <div><strong>100+</strong><span>International standards</span></div>
@@ -102,13 +132,7 @@ const clientLogos = [
         <div class="marquee-track">
           {[...clientLogos, ...clientLogos].map((c) => (
             <div class="logo-tile">
-              {c.logo
-                ? <img src={c.logo} alt={`${c.name} logo`} class="logo-img" loading="lazy" decoding="async" width="160" height="64" />
-                : <>
-                    <span class="logo-mark">{c.abbr}</span>
-                    <span class="logo-name">{c.name}</span>
-                  </>
-              }
+              <img src={c.logo} alt={`${c.name} logo`} class="logo-img" loading="lazy" decoding="async" width="160" height="64" />
             </div>
           ))}
         </div>
@@ -116,92 +140,56 @@ const clientLogos = [
     </div>
   </section>
 
-  <!-- ========== OUR OFFERING ========== -->
+  <!-- ========== ABOUT BLURB ========== -->
   <section class="section section-soft">
+    <div class="container about-blurb">
+      <span class="eyebrow">About us</span>
+      <h2>About Quality Nexus Private Limited</h2>
+      <p>
+        Quality Nexus Private Limited is a professional consultancy company based in Ranchi, India, providing
+        ISO certification consultancy, NABL implementation support, IT security audits, VAPT coordination,
+        5S management system consultancy, health &amp; safety audits, water audits, compliance consulting,
+        training, documentation, and business process improvement services across multiple industries.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== CORE SERVICES (6 CATEGORIES) ========== -->
+  <section class="section">
     <div class="container">
       <div class="section-head center">
-        <span class="eyebrow">What we do</span>
-        <h2>Four phases. One certificate.</h2>
-        <p>The path every QualityNexus engagement runs on — from your first gap to your printed certificate.</p>
+        <span class="eyebrow">What we deliver</span>
+        <h2>Our Core Services</h2>
+        <p>End-to-end consultancy, audits, training, and compliance — across the standards and frameworks Indian industries actually need.</p>
       </div>
-      <div class="offering-grid">
-        {offerings.map((o) => (
-          <article class="offering-card">
-            <span class="icon-halo"><Icon name={o.icon} /></span>
-            <span class="pill">{o.tag}</span>
-            <h3>{o.title}</h3>
-            <p>{o.body}</p>
-            <a href="/services" class="link-arrow">Learn more <Icon name="arrow-right" /></a>
+      <div class="core-services-grid">
+        {coreServices.map((s, i) => (
+          <article class="core-service-card">
+            <span class="core-service-num">{String(i + 1).padStart(2, "0")}</span>
+            <span class="icon-halo"><Icon name={s.icon} /></span>
+            <h3>{s.title}</h3>
+            <ul class="core-service-bullets">
+              {s.bullets.map((b) => (
+                <li><Icon name="check-circle" /> {b}</li>
+              ))}
+            </ul>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ========== PROCESS TIMELINE ========== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow">How it works</span>
-        <h2>Five steps. Average 60 days.</h2>
-        <p>A predictable path from kickoff to certificate — with the same lead consultant from start to finish.</p>
-      </div>
-      <ol class="process">
-        {process.map((p, i) => (
-          <li class="process-step">
-            <div class="process-num">{p.n}</div>
-            <div class="process-icon"><Icon name={p.icon} /></div>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
-            {i < process.length - 1 && <span class="process-line" aria-hidden="true"></span>}
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <!-- ========== BY THE NUMBERS ========== -->
-  <StatsDashboard />
-
-  <!-- ========== CERT GRID ========== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow">Certifications we deliver</span>
-        <h2>Standards across quality, safety, security, and beyond.</h2>
-      </div>
-      <div class="cert-grid">
-        {certs.map((c) => (
-          <a class="cert-card" href={`/certifications/${c.code.toLowerCase().replace(/\s+/g, "-")}`}>
-            <span class="cert-icon"><Icon name={c.icon} /></span>
-            <span class="cert-code">{c.code}</span>
-            <span class="cert-blurb">{c.blurb}</span>
-            <span class="cert-arrow" aria-hidden="true">→</span>
-          </a>
-        ))}
-      </div>
-      <div class="cert-cta">
-        <a href="/certifications" class="btn btn-secondary">View all 100+ standards <Icon name="arrow-right" /></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== WHY US (DARK) ========== -->
+  <!-- ========== WHY CHOOSE US ========== -->
   <section class="section section-dark">
-    <div class="container trusted-grid">
-      <div class="trusted-copy">
-        <span class="eyebrow eyebrow-on-dark">Why QualityNexus</span>
-        <h2>Senior consultants. Real engagement. No hand-offs.</h2>
-        <p class="trusted-lede">
-          The lead consultant on day one is the lead consultant the day your certificate prints.
-        </p>
-        <div class="trusted-stat">
-          <div><strong>IRCA</strong><span>&amp; Exemplar Global certified lead auditors only</span></div>
-        </div>
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow eyebrow-on-dark">Why us</span>
+        <h2>Why Choose Quality Nexus?</h2>
+        <p class="why-lede">Eight reasons clients keep coming back — and bringing their next certification with us.</p>
       </div>
-      <ul class="feature-list">
-        {features.map((f) => (
-          <li class="feature-item">
+      <ul class="why-grid">
+        {whyChooseUs.map((f) => (
+          <li class="why-item">
             <span class="feature-icon-halo"><Icon name={f.icon} /></span>
             <div>
               <h4>{f.title}</h4>
@@ -213,7 +201,58 @@ const clientLogos = [
     </div>
   </section>
 
-  <CtaStrip />
+  <!-- ========== TRUSTED BY LEADING ORGANIZATIONS ========== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Trust</span>
+        <h2>Trusted By Leading Organizations</h2>
+        <p>Engagements with India's leading public-sector and enterprise organizations — including <strong>NEEPCO</strong>, <strong>NHPC</strong>, <strong>NTPC</strong>, <strong>HAL</strong>, <strong>IOCL</strong>, <strong>GAIL</strong>, <strong>Indian Railways</strong>, and more.</p>
+      </div>
+      <div class="recognition-row">
+        {recognitions.map((r) => (
+          <div class="recognition-badge">
+            <span class="recognition-tick" aria-hidden="true"><Icon name="check-circle" /></span>
+            <div>
+              <strong>{r.label}</strong>
+              <span>{r.sub}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="trust-cta">
+        <a href="/clients" class="link-arrow">See all featured clients <Icon name="arrow-right" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INDUSTRIES WE SERVE ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Sectors</span>
+        <h2>Industries We Serve</h2>
+        <p>Engagements led by consultants with sector context — because every standard reads differently across industries.</p>
+      </div>
+      <ul class="industries-grid">
+        {industries.map((i) => (
+          <li class="industry-chip">
+            <span class="industry-chip-icon"><Icon name={i.icon} /></span>
+            <span class="industry-chip-label">{i.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading="Ready to Strengthen Your Compliance & Security System?"
+    body="Connect with our experts for ISO, NABL, IT security audit, compliance, 5S implementation, and industrial consultancy services."
+    ctaLabel="Request Proposal"
+    ctaHref="/contact"
+    secondaryLabel="Talk To Expert"
+    secondaryHref="/contact"
+  />
 </BaseLayout>
 
 <style>
@@ -270,55 +309,13 @@ const clientLogos = [
     gap: 56px;
     align-items: center;
   }
-
-  .status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #fff;
-    border: 1px solid rgba(16,185,129,0.30);
-    color: var(--color-heading);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    padding: 5px 12px;
-    border-radius: 999px;
-    box-shadow: 0 4px 14px rgba(16,185,129,0.10);
-    margin-bottom: 10px;
-    animation: pillIn .6s cubic-bezier(.2,.7,.2,1) backwards;
-  }
-  @keyframes pillIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .status-dot {
-    position: relative;
-    width: 8px; height: 8px;
-  }
-  .status-dot > span {
-    position: absolute; inset: 0;
-    border-radius: 50%;
-    background: #10B981;
-    box-shadow: 0 0 0 0 rgba(16,185,129,0.6);
-    animation: heroLivePulse 1.6s ease-out infinite;
-  }
-  @keyframes heroLivePulse {
-    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.55); }
-    70%  { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
-    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
-  }
-
-  .hero-copy .eyebrow {
-    animation: heroSlideIn .6s cubic-bezier(.2,.7,.2,1) 0.05s backwards;
-  }
   .hero-copy h1 {
     margin: 10px 0 14px;
     color: var(--color-heading);
-    font-size: clamp(2rem, 4.4vw, 3.3rem);
-    line-height: 1.05;
-    letter-spacing: -0.035em;
+    font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
     font-weight: 800;
-    animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.15s backwards;
   }
   .hero-accent {
     background: linear-gradient(110deg, #E8C766 0%, #D4AF37 50%, #F4D580 100%);
@@ -332,24 +329,16 @@ const clientLogos = [
     0%, 100% { background-position: 0% center; }
     50%      { background-position: 100% center; }
   }
-  @keyframes heroSlideIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   .lede {
     font-size: 17px;
     color: var(--color-text-muted);
-    max-width: 540px;
+    max-width: 580px;
     margin-bottom: 22px;
-    line-height: 1.55;
-    animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.25s backwards;
+    line-height: 1.6;
   }
   .hero-ctas {
     display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 26px;
-    animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.35s backwards;
   }
-  .hero-ctas .qn-icon { font-size: 16px; margin-left: 2px; }
 
   .btn-shimmer {
     position: relative;
@@ -375,7 +364,6 @@ const clientLogos = [
     display: grid;
     grid-template-columns: repeat(3, auto);
     gap: 32px;
-    animation: heroSlideIn .7s cubic-bezier(.2,.7,.2,1) 0.45s backwards;
   }
   .hero-stats > div { display: flex; flex-direction: column; }
   .hero-stats strong {
@@ -393,15 +381,7 @@ const clientLogos = [
     letter-spacing: 0.02em;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .hero-bg-glow--1, .hero-bg-glow--2,
-    .hero-accent, .status-dot > span,
-    .btn-shimmer::before,
-    .status-pill, .hero-copy .eyebrow,
-    .hero-copy h1, .lede, .hero-ctas, .hero-stats { animation: none; }
-  }
-
-  /* ========== HERO MARQUEE (logo carousel inside hero, below 2-col layout) ========== */
+  /* ========== HERO MARQUEE (logo carousel inside hero) ========== */
   .hero-marquee {
     margin-top: 36px;
     padding-top: 24px;
@@ -424,221 +404,6 @@ const clientLogos = [
   }
   .hero-marquee-head .eyebrow { font-size: 11px; }
 
-  /* ========== OFFERING ========== */
-  .offering-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-  }
-  @media (max-width: 1100px) {
-    .offering-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
-  }
-  .offering-card {
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 30px 26px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-  }
-  .offering-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(16,185,129,0.30);
-  }
-  .icon-halo {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: var(--color-accent-soft);
-    color: var(--color-accent);
-    display: inline-grid;
-    place-items: center;
-    font-size: 22px;
-    margin-bottom: 6px;
-  }
-  .offering-card .pill { align-self: flex-start; }
-  .offering-card h3 { margin-top: 4px; }
-  .offering-card p { color: var(--color-text); font-size: 15px; }
-  .offering-card .link-arrow { margin-top: auto; padding-top: 6px; }
-  .link-arrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 600;
-    color: var(--color-accent);
-    font-size: 14px;
-  }
-  .link-arrow .qn-icon { font-size: 16px; transition: transform .15s; }
-  .link-arrow:hover .qn-icon { transform: translateX(3px); }
-
-  /* ========== PROCESS TIMELINE ========== */
-  .process {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-    counter-reset: step;
-    list-style: none;
-    margin-top: 40px;
-  }
-  .process-step {
-    position: relative;
-    text-align: center;
-    padding: 0 14px;
-  }
-  .process-num {
-    display: inline-block;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 12px;
-    color: var(--color-accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 12px;
-  }
-  .process-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 16px;
-    background: linear-gradient(160deg, #fff, #F8FAFC);
-    border: 1px solid var(--color-border);
-    color: var(--color-accent);
-    display: grid;
-    place-items: center;
-    font-size: 28px;
-    margin: 0 auto 18px;
-    box-shadow: 0 6px 18px rgba(15,23,42,0.06);
-    position: relative;
-    z-index: 2;
-  }
-  .process-step h3 { font-size: 17px; margin-bottom: 8px; }
-  .process-step p { color: var(--color-text-muted); font-size: 14px; line-height: 1.55; }
-  .process-line {
-    position: absolute;
-    top: 32px;
-    left: calc(50% + 36px);
-    right: calc(-50% + 36px);
-    height: 2px;
-    background: linear-gradient(90deg, var(--color-border) 0%, var(--color-border) 50%, transparent 100%);
-    background-image: repeating-linear-gradient(90deg, var(--color-border) 0 6px, transparent 6px 12px);
-    z-index: 1;
-  }
-
-  /* ========== CERT GRID ========== */
-  .cert-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-  }
-  .cert-card {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto;
-    column-gap: 14px;
-    align-items: center;
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 18px 20px;
-    text-decoration: none;
-    color: var(--color-heading);
-    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
-  }
-  .cert-card:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-  }
-  .cert-icon {
-    grid-row: 1 / span 2;
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: var(--color-accent-soft);
-    color: var(--color-accent);
-    display: grid;
-    place-items: center;
-    font-size: 18px;
-  }
-  .cert-code {
-    display: block;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 16px;
-    letter-spacing: -0.01em;
-    color: var(--color-heading);
-    line-height: 1.1;
-  }
-  .cert-blurb {
-    display: block;
-    font-size: 12px;
-    color: var(--color-text-muted);
-  }
-  .cert-arrow {
-    position: absolute;
-    right: 16px; top: 50%;
-    transform: translateY(-50%) translateX(0);
-    color: var(--color-accent);
-    opacity: 0;
-    transition: opacity .2s, transform .2s;
-    font-weight: 700;
-  }
-  .cert-card:hover .cert-arrow { opacity: 1; transform: translateY(-50%) translateX(2px); }
-  .cert-cta { display: flex; justify-content: center; margin-top: 36px; }
-  .cert-cta .qn-icon { font-size: 16px; }
-
-  /* ========== WHY US (DARK) ========== */
-  .trusted-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 64px;
-    align-items: start;
-  }
-  .eyebrow-on-dark { color: #34D399; }
-  .trusted-lede { color: #94A3B8; font-size: 17px; max-width: 440px; margin-top: 18px; }
-  .trusted-stat {
-    margin-top: 30px;
-    padding-top: 26px;
-    border-top: 1px solid rgba(255,255,255,0.10);
-  }
-  .trusted-stat strong {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 44px;
-    color: #fff;
-    line-height: 1;
-    display: block;
-    margin-bottom: 8px;
-  }
-  .trusted-stat span { color: #94A3B8; font-size: 14px; }
-
-  .feature-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px 32px;
-  }
-  .feature-item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 16px;
-  }
-  .feature-icon-halo {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: rgba(16,185,129,0.18);
-    color: var(--color-accent);
-    display: grid;
-    place-items: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-  .feature-item h4 { color: #fff; margin-bottom: 6px; }
-  .feature-item p { color: #94A3B8; font-size: 14px; line-height: 1.55; }
-
-  /* ========== CLIENT MARQUEE ========== */
   .marquee {
     overflow: hidden;
     padding: 24px 0;
@@ -662,15 +427,10 @@ const clientLogos = [
     background: #fff;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    color: var(--color-text-muted);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: -0.01em;
     flex-shrink: 0;
-    transition: color .2s, border-color .2s, transform .2s;
+    transition: border-color .2s, transform .2s;
   }
-  .logo-tile:hover { color: var(--color-heading); border-color: var(--color-accent); transform: translateY(-2px); }
+  .logo-tile:hover { border-color: var(--color-accent); transform: translateY(-2px); }
   .logo-img {
     max-height: 64px;
     max-width: 160px;
@@ -678,21 +438,6 @@ const clientLogos = [
     height: auto;
     object-fit: contain;
   }
-  .logo-mark {
-    display: inline-grid;
-    place-items: center;
-    min-width: 48px;
-    height: 38px;
-    padding: 0 10px;
-    border-radius: 8px;
-    background: var(--color-primary);
-    color: #fff;
-    font-family: var(--font-heading);
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-  }
-
   @keyframes marquee {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
@@ -701,178 +446,279 @@ const clientLogos = [
     .marquee-track { animation: none; }
   }
 
-  /* ========== TEAM / CREDIBILITY ========== */
-  .team-section { padding-top: 96px; padding-bottom: 96px; }
-  .team-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.05fr;
-    gap: 64px;
-    align-items: center;
+  /* ========== ABOUT BLURB ========== */
+  .about-blurb {
+    max-width: 820px;
+    text-align: center;
   }
-  .team-copy h2 { margin: 14px 0 18px; }
-  .team-lede {
+  .about-blurb h2 {
+    margin: 10px 0 16px;
+  }
+  .about-blurb p {
+    color: var(--color-text);
     font-size: 17px;
-    color: var(--color-text-muted);
-    margin-bottom: 24px;
-    max-width: 480px;
+    line-height: 1.7;
+    margin: 0 auto;
+    max-width: 720px;
   }
-  .team-creds {
+
+  /* ========== CORE SERVICES GRID ========== */
+  .core-services-grid {
     display: grid;
-    gap: 12px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
-  .team-creds li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--color-heading);
-  }
-  .team-creds .qn-icon {
-    font-size: 20px;
-    width: 36px; height: 36px;
-    background: var(--color-accent-soft);
-    color: var(--color-accent);
-    border-radius: 9px;
-    padding: 8px;
-    box-sizing: content-box;
-  }
-  .team-cta .qn-icon { font-size: 16px; }
-
-  .team-visual {
+  .core-service-card {
     position: relative;
-    aspect-ratio: 4 / 5;
-    max-width: 520px;
-    margin-left: auto;
-  }
-  .team-photo {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow:
-      0 30px 60px rgba(15, 23, 42, 0.20),
-      0 0 0 1px rgba(15, 23, 42, 0.06);
-    isolation: isolate;
-    background: var(--color-bg-section);
-  }
-  .team-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: saturate(0.95) contrast(1.02);
-  }
-  .team-photo-grain {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg, transparent 30%, rgba(15, 23, 42, 0.45) 100%);
-    pointer-events: none;
-  }
-
-  .team-badge {
-    position: absolute;
     background: #fff;
-    border-radius: 14px;
-    box-shadow:
-      0 18px 40px rgba(15, 23, 42, 0.16),
-      0 0 0 1px rgba(15, 23, 42, 0.04);
-    padding: 14px 18px;
-    z-index: 2;
-  }
-  .team-badge--top {
-    top: 24px;
-    left: -32px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 26px 22px 22px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    animation: teamFloat 6s ease-in-out infinite alternate;
+    gap: 12px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
   }
-  .team-badge-num {
+  .core-service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(16,185,129,0.32);
+  }
+  .core-service-num {
+    position: absolute;
+    top: 18px; right: 22px;
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 30px;
-    color: var(--color-heading);
+    font-size: 38px;
     line-height: 1;
+    color: rgba(212, 175, 55, 0.20);
     letter-spacing: -0.02em;
   }
-  .team-badge-label {
-    font-size: 12px;
-    color: var(--color-text-muted);
+  .core-service-card h3 {
+    color: var(--color-heading);
+    font-size: 18px;
+    font-weight: 700;
     line-height: 1.3;
+    padding-right: 32px;
+  }
+  .core-service-bullets {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .core-service-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .core-service-bullets li :global(svg) {
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--color-accent-strong);
   }
 
-  .team-badge--bottom {
-    bottom: 28px;
-    right: -28px;
+  /* ========== WHY CHOOSE US (DARK) ========== */
+  .why-lede {
+    color: #94A3B8;
+    margin-top: 12px;
+    max-width: 560px;
+  }
+  .why-grid {
+    list-style: none;
+    margin: 36px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .why-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .feature-icon-halo {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(16, 185, 129, 0.18);
+    color: var(--color-accent);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .feature-icon-halo :global(svg) { width: 20px; height: 20px; }
+  .why-item h4 {
+    color: #fff;
+    margin-bottom: 6px;
+    font-size: 16px;
+  }
+  .why-item p {
+    color: #94A3B8;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  /* ========== TRUSTED BY ========== */
+  .trust-logos {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin: 8px 0 30px;
+  }
+  .trust-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 88px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .trust-logo:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+  .trust-logo img {
+    max-height: 56px;
+    max-width: 140px;
+    width: auto; height: auto;
+    object-fit: contain;
+  }
+  .trust-logo--abbr {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
+    border-color: var(--color-primary);
+  }
+  .trust-abbr {
+    color: var(--color-gold);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+  }
+
+  .recognition-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-border);
+  }
+  .trust-cta {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+  }
+  .trust-cta .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-accent-strong);
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .trust-cta .link-arrow:hover { color: var(--color-primary); }
+  .trust-cta .link-arrow :global(svg) {
+    width: 16px; height: 16px;
+    transition: transform .15s ease;
+  }
+  .trust-cta .link-arrow:hover :global(svg) { transform: translateX(2px); }
+  .recognition-badge {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 18px;
-    animation: teamFloat 6s ease-in-out 1s infinite alternate-reverse;
+    padding: 10px 18px;
+    background: #fff;
+    border: 1px solid rgba(16, 185, 129, 0.22);
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(15, 59, 46, 0.05);
   }
-  .team-badge-icon {
-    width: 38px; height: 38px;
-    border-radius: 10px;
+  .recognition-tick {
+    width: 28px; height: 28px;
+    border-radius: 8px;
     background: var(--color-accent-soft);
-    color: var(--color-accent);
-    display: grid;
-    place-items: center;
-    font-size: 20px;
+    color: var(--color-accent-strong);
+    display: grid; place-items: center;
     flex-shrink: 0;
   }
-  .team-badge-title {
+  .recognition-tick :global(svg) { width: 16px; height: 16px; }
+  .recognition-badge strong {
     display: block;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 13px;
     color: var(--color-heading);
-    letter-spacing: -0.01em;
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.2;
   }
-  .team-badge-sub {
+  .recognition-badge span {
     display: block;
-    font-size: 11px;
     color: var(--color-text-muted);
+    font-size: 11.5px;
     margin-top: 2px;
   }
 
-  @keyframes teamFloat {
-    from { transform: translateY(-4px); }
-    to   { transform: translateY(4px); }
+  /* ========== INDUSTRIES GRID ========== */
+  .industries-grid {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .team-badge { animation: none; }
+  .industry-chip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 18px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .industry-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: rgba(16, 185, 129, 0.32);
+  }
+  .industry-chip-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-strong);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .industry-chip-icon :global(svg) { width: 18px; height: 18px; }
+  .industry-chip-label {
+    color: var(--color-heading);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.25;
   }
 
   /* ========== RESPONSIVE ========== */
+  @media (max-width: 1100px) {
+    .core-services-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-logos { grid-template-columns: repeat(4, 1fr); }
+    .industries-grid { grid-template-columns: repeat(3, 1fr); }
+  }
   @media (max-width: 980px) {
     .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-    .offering-grid { grid-template-columns: 1fr; }
-    .process { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
-    .process-line { display: none; }
-    .cert-grid { grid-template-columns: repeat(2, 1fr); }
-    .trusted-grid { grid-template-columns: 1fr; gap: 36px; }
-    .feature-list { grid-template-columns: 1fr; }
-    .team-grid { grid-template-columns: 1fr; gap: 56px; }
-    .team-visual { margin: 0 auto; max-width: 480px; }
-    .team-badge--top { left: -16px; }
-    .team-badge--bottom { right: -16px; }
   }
   @media (max-width: 640px) {
-    .hero { padding: 64px 0 56px; }
+    .hero { padding: 56px 0 40px; }
     .hero-stats { grid-template-columns: 1fr 1fr; gap: 18px 24px; }
-    .process { grid-template-columns: 1fr; }
-    .cert-grid { grid-template-columns: 1fr; }
-    .hero-marquee { margin-top: 40px; padding-top: 22px; }
-    .hero-marquee-head { flex-direction: column; gap: 6px; margin-bottom: 16px; }
-    .team-section { padding-top: 64px; padding-bottom: 64px; }
-    .team-badge { padding: 10px 14px; }
-    .team-badge--top { left: -8px; top: 16px; }
-    .team-badge-num { font-size: 24px; }
-    .team-badge--bottom { right: -8px; bottom: 18px; }
-    .team-badge-icon { width: 32px; height: 32px; font-size: 16px; }
+    .core-services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .trust-logos { grid-template-columns: repeat(2, 1fr); }
+    .industries-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>

@@ -1,0 +1,151 @@
+---
+// Floating quick-contact buttons — WhatsApp, Phone, Email
+// Positioned bottom-right, site-wide via BaseLayout.
+---
+<aside class="float-contact" aria-label="Quick contact">
+  <a
+    href="https://wa.me/917717762084?text=Hi%20QualityNexus%2C%20I%27d%20like%20to%20enquire%20about%20your%20consultancy%20services."
+    class="float-btn float-btn--whatsapp"
+    aria-label="Chat on WhatsApp"
+    target="_blank"
+    rel="noopener"
+  >
+    <span class="float-label" aria-hidden="true">WhatsApp</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.464 3.488"/>
+    </svg>
+  </a>
+
+  <a
+    href="tel:+919798082076"
+    class="float-btn float-btn--phone"
+    aria-label="Call us"
+  >
+    <span class="float-label" aria-hidden="true">Call</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/>
+    </svg>
+  </a>
+
+  <a
+    href="https://mail.google.com/mail/?view=cm&fs=1&to=Qualitynexusofficial@gmail.com&su=Enquiry%20from%20website"
+    class="float-btn float-btn--email"
+    aria-label="Email us"
+    target="_blank"
+    rel="noopener"
+  >
+    <span class="float-label" aria-hidden="true">Email</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+      <polyline points="22,6 12,13 2,6"/>
+    </svg>
+  </a>
+</aside>
+
+<style>
+  .float-contact {
+    position: fixed;
+    right: 18px;
+    bottom: 22px;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+  }
+  .float-btn {
+    pointer-events: auto;
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 8px 22px rgba(15, 59, 46, 0.28), 0 2px 6px rgba(15, 59, 46, 0.12);
+    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    animation: floatIn .6s cubic-bezier(.2,.7,.2,1) backwards;
+  }
+  .float-btn:nth-child(1) { animation-delay: .15s; }
+  .float-btn:nth-child(2) { animation-delay: .25s; }
+  .float-btn:nth-child(3) { animation-delay: .35s; }
+  .float-btn:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 28px rgba(15, 59, 46, 0.32);
+    filter: brightness(1.05);
+  }
+  .float-btn--whatsapp { background: #25D366; }
+  .float-btn--phone    { background: var(--color-accent-strong); }
+  .float-btn--email    { background: var(--color-primary); }
+
+  /* Pulsing ring on WhatsApp — gentle attention pull */
+  .float-btn--whatsapp::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+    animation: floatPulse 2.4s ease-out infinite;
+    pointer-events: none;
+  }
+
+  .float-label {
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+    background: var(--color-heading);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .18s ease, transform .18s ease;
+    pointer-events: none;
+    box-shadow: 0 6px 14px rgba(15, 59, 46, 0.2);
+  }
+  .float-label::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-left-color: var(--color-heading);
+  }
+  .float-btn:hover .float-label,
+  .float-btn:focus-visible .float-label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  @keyframes floatPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+    70%  { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  }
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateX(14px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .float-btn,
+    .float-btn--whatsapp::before { animation: none; }
+    .float-btn:hover { transform: none; }
+  }
+
+  @media (max-width: 640px) {
+    .float-contact {
+      right: 14px;
+      bottom: 14px;
+      gap: 10px;
+    }
+    .float-btn { width: 48px; height: 48px; }
+    /* On mobile, the tap target is the button itself — hide labels */
+    .float-label { display: none; }
+  }
+</style>

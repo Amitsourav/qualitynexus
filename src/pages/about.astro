@@ -31,7 +31,7 @@ const industries = [
 const credentials = [
   { num: "12+",   label: "Years average sector experience per lead consultant" },
   { num: "100+",  label: "International standards covered across our team" },
-  { num: "11",    label: "Featured PSU &amp; enterprise client engagements" },
+  { num: "13",    label: "Featured PSU &amp; enterprise client engagements" },
   { num: "7",     label: "Industry sectors served, pan-India" },
 ];
 
@@ -165,22 +165,34 @@ const credentialBadges = [
         <p>Government of India registrations and recognitions held by QualityNexus.</p>
       </div>
       <div class="recog-grid">
-        <figure class="recog-tile">
-          <img src="/images/events/cert-mca-incorp.jpg" alt="Ministry of Corporate Affairs Certificate of Incorporation issued by the Government of India to QualityNexus" loading="lazy" width="582" height="766" />
-          <figcaption>MCA Certificate of Incorporation</figcaption>
-        </figure>
-        <figure class="recog-tile">
-          <img src="/images/events/cert-msme-udyam.jpg" alt="MSME Udyam Registration Certificate issued by the Ministry of Micro, Small and Medium Enterprises to QualityNexus" loading="lazy" width="575" height="790" />
-          <figcaption>MSME · Udyam Registration</figcaption>
-        </figure>
-        <figure class="recog-tile">
-          <img src="/images/events/cert-startup-india.jpg" alt="Department for Promotion of Industry and Internal Trade (DIPP) Startup India Certificate of Recognition issued to QualityNexus" loading="lazy" width="1110" height="768" />
-          <figcaption>DIPP · Startup India recognition</figcaption>
-        </figure>
-        <figure class="recog-tile">
-          <img src="/images/events/cert-gst.jpg" alt="GST Registration Certificate issued by the Government of India to QualityNexus" loading="lazy" width="1280" height="1280" />
-          <figcaption>GST Registration · Form REG-06</figcaption>
-        </figure>
+        <article class="recog-badge">
+          <span class="recog-badge-icon" aria-hidden="true"><Icon name="award" /></span>
+          <strong class="recog-badge-label">MCA Incorporation</strong>
+          <span class="recog-badge-sub">Ministry of Corporate Affairs</span>
+          <code class="recog-badge-id">CIN · U70200JH2025PTC024534</code>
+          <a href="/images/events/cert-mca-incorp.jpg" target="_blank" rel="noopener" class="recog-badge-link">View certificate <Icon name="arrow-right" /></a>
+        </article>
+        <article class="recog-badge">
+          <span class="recog-badge-icon" aria-hidden="true"><Icon name="shield-check" /></span>
+          <strong class="recog-badge-label">MSME · Udyam</strong>
+          <span class="recog-badge-sub">Ministry of MSME</span>
+          <code class="recog-badge-id">UDYAM · JH-20-0101391</code>
+          <a href="/images/events/cert-msme-udyam.jpg" target="_blank" rel="noopener" class="recog-badge-link">View certificate <Icon name="arrow-right" /></a>
+        </article>
+        <article class="recog-badge">
+          <span class="recog-badge-icon" aria-hidden="true"><Icon name="rocket" /></span>
+          <strong class="recog-badge-label">Startup India</strong>
+          <span class="recog-badge-sub">DPIIT recognized</span>
+          <code class="recog-badge-id">Certificate of Recognition</code>
+          <a href="/images/events/cert-startup-india.jpg" target="_blank" rel="noopener" class="recog-badge-link">View certificate <Icon name="arrow-right" /></a>
+        </article>
+        <article class="recog-badge">
+          <span class="recog-badge-icon" aria-hidden="true"><Icon name="file-text" /></span>
+          <strong class="recog-badge-label">GST Registration</strong>
+          <span class="recog-badge-sub">Form REG-06</span>
+          <code class="recog-badge-id">GSTIN · 20AABCQ1018L1ZW</code>
+          <a href="/images/events/cert-gst.jpg" target="_blank" rel="noopener" class="recog-badge-link">View certificate <Icon name="arrow-right" /></a>
+        </article>
       </div>
     </div>
   </section>
@@ -618,45 +630,94 @@ const credentialBadges = [
     .event-tile--feature { grid-row: span 1; }
   }
 
-  /* ===== RECOGNITION GRID (govt cert thumbnails) ===== */
+  /* ===== RECOGNITION GRID (branded badge cards) ===== */
   .recog-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 18px;
   }
-  .recog-tile {
-    margin: 0;
+  .recog-badge {
+    position: relative;
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: 16px 16px 14px;
+    padding: 26px 22px 20px;
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    transition: transform .2s ease, box-shadow .2s ease;
+    gap: 6px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    overflow: hidden;
   }
-  .recog-tile:hover {
+  .recog-badge::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 90px; height: 90px;
+    background: radial-gradient(closest-side, rgba(212, 175, 55, 0.18), transparent);
+    pointer-events: none;
+  }
+  .recog-badge:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
+    border-color: rgba(212, 175, 55, 0.38);
   }
-  .recog-tile img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    object-position: top center;
-    border-radius: 8px;
-    border: 1px solid var(--color-border);
-    background: #F8FAFC;
-    display: block;
+  .recog-badge-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-soft));
+    color: var(--color-gold);
+    display: grid; place-items: center;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
   }
-  .recog-tile figcaption {
+  .recog-badge-icon :global(svg) { width: 22px; height: 22px; }
+  .recog-badge-label {
     color: var(--color-heading);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .recog-badge-sub {
+    color: var(--color-text-muted);
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .recog-badge-id {
+    display: inline-block;
+    width: fit-content;
+    margin-top: 4px;
+    padding: 4px 10px;
+    background: var(--color-bg-section);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-heading);
+    font-family: var(--font-heading);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+  }
+  .recog-badge-link {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-accent-strong);
     font-size: 13px;
     font-weight: 600;
-    text-align: center;
-    line-height: 1.35;
+    text-decoration: none;
+    transition: color .15s ease;
   }
+  .recog-badge-link:hover { color: var(--color-primary); }
+  .recog-badge-link :global(svg) {
+    width: 14px; height: 14px;
+    transition: transform .15s ease;
+  }
+  .recog-badge-link:hover :global(svg) { transform: translateX(2px); }
   @media (max-width: 860px) {
     .recog-grid { grid-template-columns: repeat(2, 1fr); }
   }
