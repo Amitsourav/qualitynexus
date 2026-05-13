@@ -8,7 +8,7 @@ const channels = [
   { icon: "headphones", label: "Email",    value: "Qualitynexusofficial@gmail.com",   href: "mailto:Qualitynexusofficial@gmail.com", note: "Best for detailed enquiries" },
   { icon: "globe",      label: "Phone",    value: "+91 97980 82076",                  href: "tel:+919798082076",                     note: "Alt: +91 77177 62084 · +91 82526 68667" },
   { icon: "rocket",     label: "WhatsApp", value: "Chat with us on WhatsApp",         href: "https://wa.me/919798082076",            note: "Quick scoping questions" },
-  { icon: "compass",    label: "Office",   value: "Trade Centre, 1st Floor, Ormanjhi", href: "https://maps.google.com/?q=Trade+Centre+Ormanjhi+Ranchi+835219", note: "Main Road, SSVM School, Ranchi 835219, Jharkhand" },
+  { icon: "compass",    label: "Office",   value: "Trade Centre, 1st Floor, Ormanjhi", href: "https://maps.app.goo.gl/28dYT4Ua476vPSfw7", note: "Main Road, SSVM School, Ranchi 835219, Jharkhand" },
 ];
 
 const fastFaqs = [
@@ -43,8 +43,8 @@ const localBusinessLd = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "23.5045",
-    "longitude": "85.6319",
+    "latitude": "23.489231",
+    "longitude": "85.478647",
   },
   "openingHoursSpecification": [{
     "@type": "OpeningHoursSpecification",
@@ -54,6 +54,10 @@ const localBusinessLd = {
   }],
   "areaServed": { "@type": "Country", "name": "India" },
   "parentOrganization": { "@id": "https://www.qualitynexus.in/#organization" },
+  "sameAs": [
+    "https://maps.app.goo.gl/28dYT4Ua476vPSfw7",
+  ],
+  "hasMap": "https://maps.app.goo.gl/28dYT4Ua476vPSfw7",
 };
 
 const faqLd = {
@@ -147,6 +151,34 @@ const faqLd = {
             <span class="channel-arrow"><Icon name="arrow-right" /></span>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MAP ========== -->
+  <section class="section map-section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Find us</span>
+        <h2>Our office in Ranchi.</h2>
+        <p>Trade Centre, 1st Floor, Main Road, SSVM School, Ormanjhi, Ranchi 835219, Jharkhand.</p>
+      </div>
+      <div class="map-frame">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.2020419213018!2d85.478647875533!3d23.489231098752285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4fb39aba5c223%3A0xcac8338851bf9e12!2sQUALITY%20NEXUS%20PRIVATE%20LIMITED!5e0!3m2!1sen!2sin!4v1778656716164!5m2!1sen!2sin"
+          title="QualityNexus office on Google Maps"
+          width="600"
+          height="450"
+          style="border:0;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <div class="map-actions">
+        <a href="https://maps.app.goo.gl/28dYT4Ua476vPSfw7" target="_blank" rel="noopener" class="btn btn-accent">
+          Open in Google Maps <Icon name="arrow-right" />
+        </a>
       </div>
     </div>
   </section>
@@ -588,6 +620,37 @@ const faqLd = {
     font-size: 12.5px;
     color: var(--color-text-muted);
     line-height: 1.5;
+  }
+
+  /* ===== MAP ===== */
+  .map-section .section-head { margin-bottom: 28px; }
+  .map-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-width: 980px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 18px 50px rgba(15, 59, 46, 0.16), 0 0 0 1px var(--color-border);
+    background: var(--color-bg-section);
+  }
+  .map-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .map-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+  }
+  .map-actions .qn-icon { font-size: 16px; }
+  @media (max-width: 640px) {
+    .map-frame { aspect-ratio: 4 / 3; }
   }
 
   /* ===== FAQ ===== */
