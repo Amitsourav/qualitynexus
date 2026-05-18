@@ -111,6 +111,18 @@ const organizationLd = {
   <!-- Organization JSON-LD (site-wide) -->
   <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
 
+  {import.meta.env.PROD && (
+    <Fragment>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQVMDT64XJ"></script>
+      <script is:inline set:html={`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CQVMDT64XJ');
+      `}></script>
+    </Fragment>
+  )}
+
   <slot name="head" />
 </head>
 <body>

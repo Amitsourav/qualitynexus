@@ -56,6 +56,32 @@ const serviceLd = {
   "url": canonicalUrl,
   "category": cat.title,
 };
+
+// Article schema — emitted only for flagship (hand-authored) cert pages.
+// datePublished: when the flagship detail content first shipped (2026-05-05).
+// dateModified:  bump this when content is updated; freshness signal for Google.
+const CERT_PUBLISHED = "2026-05-05";
+const CERT_MODIFIED  = "2026-05-18";
+
+const articleLd = hasDetail ? {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `${canonicalUrl}#article`,
+  "headline": `${standard.code} — ${standard.name}`,
+  "description": metaDescription,
+  "author":     { "@id": "https://www.qualitynexus.in/#organization" },
+  "publisher":  { "@id": "https://www.qualitynexus.in/#organization" },
+  "datePublished": CERT_PUBLISHED,
+  "dateModified":  CERT_MODIFIED,
+  "mainEntityOfPage": canonicalUrl,
+  "image": "https://www.qualitynexus.in/og/default.jpg",
+  "about": [
+    { "@type": "Thing", "name": standard.code },
+    { "@type": "Thing", "name": standard.name },
+    { "@type": "Thing", "name": cat.title },
+  ],
+  "inLanguage": "en-IN",
+} : null;
 ---
 <BaseLayout
   title={`${standard.code} — ${standard.name} | QualityNexus`}
@@ -64,6 +90,9 @@ const serviceLd = {
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbLd)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceLd)} />
+  {articleLd && (
+    <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleLd)} />
+  )}
   <!-- ========== HERO ========== -->
   <section class="cert-hero">
     <div class="cert-hero-bg" aria-hidden="true">
@@ -234,6 +263,7 @@ const serviceLd = {
     heading={`Ready to scope a ${standard.code} engagement?`}
     body="Tell us your starting point, your timeline, and the gaps you already know about. We come back within 48 hours with an honest read on whether we're a fit."
     ctaLabel="Start a conversation"
+    source={`cert-${standard.slug}`}
   />
 </BaseLayout>
 

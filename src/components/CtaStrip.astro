@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import { withUtm } from "../lib/utm";
 
 interface Props {
   heading?: string;
@@ -8,6 +9,8 @@ interface Props {
   ctaHref?: string;
   secondaryLabel?: string;
   secondaryHref?: string;
+  /** Campaign label for UTM tracking — e.g. "home", "psu-pillar", "ranchi-lp" */
+  source?: string;
 }
 
 const {
@@ -17,7 +20,11 @@ const {
   ctaHref = "/contact",
   secondaryLabel,
   secondaryHref = "/contact",
+  source = "cta-strip",
 } = Astro.props;
+
+const ctaHrefFinal       = withUtm(ctaHref,       { medium: "cta-strip-primary",   campaign: source });
+const secondaryHrefFinal = withUtm(secondaryHref, { medium: "cta-strip-secondary", campaign: source });
 ---
 <section class="cta-strip">
   <div class="container cta-inner">
@@ -26,9 +33,9 @@ const {
       <p>{body}</p>
     </div>
     <div class="cta-actions">
-      <a href={ctaHref} class="btn btn-accent cta-btn">{ctaLabel} <Icon name="arrow-right" /></a>
+      <a href={ctaHrefFinal} class="btn btn-accent cta-btn">{ctaLabel} <Icon name="arrow-right" /></a>
       {secondaryLabel && (
-        <a href={secondaryHref} class="btn cta-btn cta-btn--ghost">{secondaryLabel}</a>
+        <a href={secondaryHrefFinal} class="btn cta-btn cta-btn--ghost">{secondaryLabel}</a>
       )}
     </div>
   </div>

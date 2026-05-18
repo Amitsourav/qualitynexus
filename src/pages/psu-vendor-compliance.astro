@@ -1,0 +1,733 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+import Icon from "../components/Icon.astro";
+import { breadcrumbLd, SITE } from "../lib/schema";
+
+const stats = [
+  { num: "₹13L+ Cr", label: "Annual PSU procurement value (India)" },
+  { num: "300+",     label: "Central PSUs and PSE bodies" },
+  { num: "100+",     label: "ISO and sector standards we cover" },
+  { num: "13+",      label: "Active PSU engagements" },
+];
+
+const sectors = [
+  {
+    icon: "zap",
+    name: "Power & Energy",
+    psus: "NTPC · NHPC · NEEPCO · DVC · PowerGrid · NLC India · SJVN · THDC · BHEL",
+    typicalStack: ["ISO 9001", "ISO 14001", "ISO 45001", "ISO 27001 (control rooms)", "ISO 50001 (energy)", "Sector-specific QA plans"],
+    notes: "Thermal, hydro, and transmission contractors face the deepest QA plan scrutiny. Welder certification, material traceability, and weld inspection records are commonly inspected. ISO 3834 (welding) is increasingly cited.",
+  },
+  {
+    icon: "battery",
+    name: "Oil, Gas & Petroleum",
+    psus: "IOCL · ONGC · GAIL · NRL · BPCL · HPCL · Engineers India · OIL · IOCL Petronas",
+    typicalStack: ["ISO 9001", "ISO 14001", "ISO 45001", "API specs (API 6A, 6D, Q1)", "ISO 29001 (petroleum QMS)", "OISD compliance"],
+    notes: "OISD (Oil Industry Safety Directorate) standards layer on top of ISO. API monogramming is common for upstream equipment. PESO (Petroleum & Explosives Safety) clearances are tender-critical for hazardous storage and handling equipment.",
+  },
+  {
+    icon: "rocket",
+    name: "Defence & Aerospace",
+    psus: "HAL · BEL · BEML · BDL · MIDHANI · Mazagon Dock · GRSE · Garden Reach",
+    typicalStack: ["ISO 9001 + AS 9100/AS 9120", "ISO 14001", "ISO 45001", "ISO 27001", "MIL-STD references", "DGAQA / DGNAI inspection"],
+    notes: "Defence vendors face an additional layer beyond ISO — DGAQA (for army/DRDO supply), DGNAI (naval), CEMILAC (aerospace airworthiness). AS 9100 is non-negotiable for aerospace. Component traceability documentation is heavily inspected.",
+  },
+  {
+    icon: "hard-hat",
+    name: "Steel, Mining & Metals",
+    psus: "SAIL · NMDC · MOIL · KIOCL · Hindustan Copper · NALCO · Coal India · CCL · SCCL",
+    typicalStack: ["ISO 9001", "ISO 14001", "ISO 45001", "DGMS approvals (mining)", "BIS marks on output", "ISO 50001"],
+    notes: "DGMS (Director General of Mines Safety) approvals are mandatory for equipment supplied to coal and metalliferous mines. BIS product certification (ISI mark) is often a separate parallel track from ISO 9001 quality systems certification.",
+  },
+  {
+    icon: "compass",
+    name: "Railways & Transport",
+    psus: "Indian Railways · RDSO · ICF · RCF · MCF · DLW · IRCON · RVNL · DMRC · KMRC",
+    typicalStack: ["ISO 9001", "ISO/TS 22163 (IRIS — rail QMS)", "ISO 14001", "ISO 45001", "RDSO product approvals", "Vendor directory listing"],
+    notes: "RDSO (Research Designs & Standards Organisation) vendor approval is the gateway for most rolling stock, signalling, and track components. RDSO Part-1 and Part-2 vendor categories carry different audit depths. IRIS (ISO/TS 22163) is increasingly required.",
+  },
+  {
+    icon: "cog",
+    name: "Heavy Engineering & Capital Goods",
+    psus: "BHEL · HEC · BEML · MIDHANI · IDPL · HMT · HSL · CIL contractors",
+    typicalStack: ["ISO 9001", "ISO 14001", "ISO 45001", "ASME / IBR / PED if pressure vessels", "Welding qualification (ISO 3834)", "NABL-accredited test reports"],
+    notes: "Pressure parts, boiler components, and large fabrication contracts require IBR (Indian Boiler Regulations) compliance and welder qualification. NABL-accredited material test certificates from steel mills are inspection-critical.",
+  },
+];
+
+const journey = [
+  {
+    n: "01",
+    title: "Pre-qualification readiness assessment",
+    body: "We start by reading the actual tender documents or vendor enlistment criteria — not generic checklists. Each PSU publishes specific clauses on quality systems, financial turnover, technical experience, and HSE requirements. We map your current state against those clauses and produce a gap report with timeline estimates.",
+  },
+  {
+    n: "02",
+    title: "Certification stack rollout",
+    body: "Most PSU tenders require ISO 9001 as baseline, plus 14001 + 45001 (the integrated EHS triad), and increasingly ISO 27001 for IT/OT supply. We sequence the rollout based on tender deadlines — fastest path to certificate without compromising audit defensibility.",
+  },
+  {
+    n: "03",
+    title: "Quality Assurance Plan (QAP) authoring",
+    body: "Most PSU contracts ask for a contract-specific QAP — a document mapping every manufacturing/inspection stage, the standard referenced, the responsible party, and the record evidence. We author the QAP, get customer approval, and align internal SOPs to match.",
+  },
+  {
+    n: "04",
+    title: "Inspection, test, and audit support",
+    body: "We accompany PSU customer inspections (often Third Party Inspection agencies like RITES, TUV, BVQI, Lloyd's), pre-dispatch inspections, and surveillance audits. The goal is zero non-conformances at inspection — anything raised is closed inside the same visit.",
+  },
+];
+
+const tenderClauses = [
+  { title: "ISO 9001 baseline", body: "Almost every Central PSU tender lists ISO 9001:2015 as mandatory pre-qualification. Non-accredited certificates (those not issued by IAF/NABCB-recognized CBs) are rejected at scrutiny." },
+  { title: "EHS triad", body: "ISO 14001 + ISO 45001 are typically required for any on-site work, manufacturing supply, or hazardous handling. Increasingly required even for office-based services." },
+  { title: "Financial turnover", body: "Most tenders require 3-year average turnover ≥30% of estimated contract value. Audited financial statements + GST returns mandatory." },
+  { title: "Similar-work experience", body: "Past completion of similar-value contracts (50–80% of estimate) for any govt/PSU is the most common technical clause. Performance certificates from past customers are accepted." },
+  { title: "Manufacturing capacity / lab capacity", body: "On-site verification of declared capacity. NABL accreditation of in-house labs (ISO/IEC 17025) raises the credibility floor." },
+  { title: "GST + EPF + ESIC compliance", body: "Active GST registration, EPF & ESIC compliance certificates, and clearance from PF/ESI on past dues. CIN and MSME/Udyam registration accepted as supplementary." },
+  { title: "Solvency certificate", body: "From scheduled bank, typically 25–50% of contract value. PSU contracts almost universally require this for security." },
+  { title: "BIS / sector-specific licences", body: "For products under BIS mandatory certification or sector-specific approvals (DGMS, PESO, DGAQA, RDSO, IBR), vendor must hold the licence in active state on tender submission date." },
+];
+
+const qapElements = [
+  "Manufacturing stage list — raw material in to finished good out",
+  "Standard/specification referenced at each stage",
+  "Inspection method (visual / dimensional / NDT / functional / metallurgical)",
+  "Inspection sample plan (100% / AQL / batch)",
+  "Inspection agency (manufacturer / customer rep / Third Party Inspection)",
+  "Acceptance criteria",
+  "Record evidence format (mill TC / inspection report / certificate)",
+  "Hold / witness / surveillance / review classification per stage",
+];
+
+const psuFaqs = [
+  {
+    q: "Which ISO certifications are mandatory for PSU vendor registration in India?",
+    a: "Almost every Central and State PSU mandates ISO 9001:2015 issued by an IAF/NABCB-recognized certification body as the baseline quality-system requirement. For supply contracts that involve on-site work, hazardous material handling, or manufacturing, ISO 14001 (environmental) and ISO 45001 (occupational H&S) are increasingly mandatory in addition. Sector-specific overlays apply: AS 9100 for aerospace (HAL/BEL), ISO/TS 22163 for railways (RDSO), ISO 27001 for IT/OT supply, and ISO 13485 for medical devices.",
+  },
+  {
+    q: "What is a Quality Assurance Plan (QAP) and why do PSUs require one?",
+    a: "A QAP is a contract-specific document that maps every manufacturing or service stage to the applicable standard, the inspection method, the sampling plan, the responsible party, and the record evidence. PSUs require a customer-approved QAP before the first inspection because it operationalizes the contract's quality clauses — generic ISO 9001 documentation is not enough. A typical QAP for a PSU supply contract has 15–40 line items spanning raw material in to finished good dispatch.",
+  },
+  {
+    q: "Can MSMEs and startups become PSU vendors?",
+    a: "Yes. The Public Procurement Policy for MSMEs 2012 mandates that Central PSUs procure at least 25% of their total annual purchases from MSMEs (with sub-quotas for SC/ST and women-led units). Udyam registration is the eligibility gate. GeM (Government e-Marketplace) and individual PSU vendor portals are the registration channels. ISO 9001 is still required, but turnover and similar-work-experience clauses are often relaxed for MSMEs.",
+  },
+  {
+    q: "How does GeM portal registration relate to PSU vendor compliance?",
+    a: "GeM (Government e-Marketplace) is a unified procurement portal where Central and State Government buyers — including most PSUs — issue tenders. Vendor registration on GeM is free but requires PAN, GST, bank, Udyam (if MSME), and uploaded ISO certificates where applicable. GeM does not replace individual PSU vendor enlistment for high-value or specialized contracts — for those, you still need to register directly with the PSU (NTPC, IOCL, ONGC, HAL, etc.) through their vendor portal.",
+  },
+  {
+    q: "What is RDSO vendor approval and how does it differ from ISO certification?",
+    a: "RDSO (Research Designs & Standards Organisation) is Indian Railways' technical authority. RDSO vendor approval is product-and-source-specific: a vendor is approved to supply a specific item from a specific manufacturing facility, after RDSO inspects the facility and approves the manufacturing process. This is separate from and additional to ISO 9001 certification — ISO certifies your management system; RDSO approves your right to supply a specific item. Most railway tenders require both.",
+  },
+  {
+    q: "How long does it take to become a PSU vendor from a standing start?",
+    a: "Realistic timeline is 6–12 months from decision to first eligible-to-bid status. ISO 9001 certification: 8–12 weeks. Additional ISO 14001/45001: parallel or 4–6 more weeks. Sector approvals (DGMS, PESO, DGAQA, RDSO): 16–40 weeks depending on agency and inspection scheduling. Individual PSU vendor enlistment: 4–16 weeks after documents submitted. We help compress this by running parallel workstreams.",
+  },
+  {
+    q: "Do PSU tenders accept any ISO 9001 certificate, or only specific ones?",
+    a: "Only certificates issued by certification bodies accredited by IAF members are accepted. In India, NABCB (National Accreditation Board for Certification Bodies) is the IAF-recognized accreditor. Most PSU tenders explicitly state \"ISO 9001 from NABCB-accredited or equivalent IAF-recognized accreditation body\" — non-accredited or self-issued certificates are rejected at the bid scrutiny stage. We only work with CBs that hold valid IAF/NABCB accreditation.",
+  },
+  {
+    q: "What is the cost range to become PSU-tender-ready for a Jharkhand MSME?",
+    a: "Indicative cost for a Jharkhand-based MSME starting from no certification: ISO 9001 (consultancy + CB fee) ₹70,000–₹1,80,000; adding ISO 14001 + 45001 incremental cost ₹50,000–₹1,20,000; QAP authoring per contract ₹15,000–₹40,000; sector approvals (DGMS/PESO/RDSO) range widely depending on product. Total first-year compliance investment for a typical Jharkhand engineering MSME aiming at PSU tenders: ₹1.5 lakh – ₹4 lakh. Recovered on first awarded tender in most cases.",
+  },
+  {
+    q: "How do you support PSU customer inspections and Third Party Inspections (TPI)?",
+    a: "Our consultants attend customer and TPI inspections on-site. We rehearse the inspection beforehand: walk-through of the QAP, evidence file review, equipment calibration check, operator readiness. During the inspection we close any minor observation inside the visit — material substitution justification, missing record retrieval, calibration certificate cross-check. The goal is a clean inspection report on day one. Common TPI agencies: RITES, TUV Nord, BVQI, Lloyd's Register, DNV, SGS, Intertek.",
+  },
+  {
+    q: "Which PSU sectors does QualityNexus have the most depth in?",
+    a: "Our deepest sector experience is in Power & Energy (NTPC, NHPC, NEEPCO, DVC contractors and suppliers), Oil & Gas (IOCL distribution and depot operations, NRL refinery suppliers), Steel/Mining/Metals (HCL Ghatsila, SAIL ancillaries, Coal India suppliers), and Indian Railways (East Central Railway vendor base). These sectors anchor the East-India PSU corridor, which is our primary delivery footprint, with pan-India support for aerospace (HAL), heavy engineering (BHEL/HEC), and defence components.",
+  },
+];
+
+// ---------- Schema ----------
+const PAGE_URL = `${SITE}/psu-vendor-compliance/`;
+
+const crumbs = breadcrumbLd([
+  { name: "Home",                  href: "/" },
+  { name: "PSU Vendor Compliance", href: "/psu-vendor-compliance/" },
+]);
+
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${PAGE_URL}#service`,
+  "serviceType": "PSU Vendor Compliance Consultancy",
+  "name": "PSU Vendor Compliance Consultancy in India",
+  "description": "ISO 9001, 14001, 45001 certification and contract-specific Quality Assurance Plan (QAP) authoring for vendors targeting Indian PSU tenders — NTPC, IOCL, HAL, ONGC, BHEL, SAIL, HCL, Indian Railways, NHPC, NEEPCO and more.",
+  "provider": { "@id": `${SITE}/#organization` },
+  "areaServed": { "@type": "Country", "name": "India" },
+  "url": PAGE_URL,
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Manufacturers, contractors, and service providers targeting Indian public-sector enterprise (PSU) tenders and vendor enlistment",
+  },
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": psuFaqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `${PAGE_URL}#article`,
+  "headline": "PSU Vendor Compliance in India — A 2026 Implementation Guide",
+  "description": "Definitive guide to ISO certifications, Quality Assurance Plans, and sector-specific compliance required to qualify as a vendor for Indian Public Sector Undertakings.",
+  "author": { "@id": `${SITE}/#organization` },
+  "publisher": { "@id": `${SITE}/#organization` },
+  "datePublished": "2026-05-18",
+  "dateModified": "2026-05-18",
+  "mainEntityOfPage": PAGE_URL,
+  "image": `${SITE}/og/default.jpg`,
+};
+---
+<BaseLayout
+  title="PSU Vendor Compliance in India — ISO 9001, QAP & Sector Approvals Guide"
+  description="Complete 2026 guide to ISO certifications, Quality Assurance Plans, and sector-specific compliance (DGMS, PESO, DGAQA, RDSO) needed to qualify as a vendor for NTPC, IOCL, HAL, ONGC, SAIL, Indian Railways, and other Indian PSUs."
+  canonical="/psu-vendor-compliance/"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />
+
+  <PageHero
+    eyebrow="Pillar guide · India · 2026"
+    title="PSU vendor compliance"
+    accent="without the guesswork."
+    lede="A practical, current guide to ISO certification, Quality Assurance Plans, and sector-specific approvals needed to qualify for tenders and vendor enlistment with India's central and state Public Sector Undertakings — across power, oil & gas, defence, aerospace, railways, steel, mining, and heavy engineering."
+    hasVisual={false}
+  />
+
+  <!-- ===== STATS STRIP ===== -->
+  <section class="section section-soft psu-stats-section">
+    <div class="container psu-stats">
+      {stats.map((s) => (
+        <div class="psu-stat">
+          <strong>{s.num}</strong>
+          <span>{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== INTRO ===== -->
+  <section class="section">
+    <div class="container psu-prose">
+      <h2 id="overview">What "PSU vendor compliance" actually means</h2>
+      <p>
+        India's 300+ Central Public Sector Enterprises (CPSEs) and several hundred State PSUs together procure goods, services, and works worth more than ₹13 lakh crore every year. To bid for or supply on those contracts, your organization has to clear a pre-qualification layer that is unmistakably different from a private enterprise tender. The clauses are explicit, documentation-heavy, and inspected — and a single missing certificate disqualifies an otherwise winning bid.
+      </p>
+      <p>
+        Three documents form the spine of that compliance layer: <strong>(1)</strong> a recognized accredited <a href="/certifications/iso-9001/">ISO 9001</a> management-system certificate, <strong>(2)</strong> typically <a href="/certifications/iso-14001/">ISO 14001</a> + <a href="/certifications/iso-45001/">ISO 45001</a> alongside, and <strong>(3)</strong> a contract-specific Quality Assurance Plan (QAP) approved by the customer. Layered on top are sector-specific approvals — DGMS for mining, PESO for petroleum, RDSO for railways, DGAQA for defence — and product-specific certifications (BIS marks, API monograms).
+      </p>
+      <p>
+        This page maps the territory: which standards each PSU sector typically requires, how the 4-stage vendor-readiness journey works, what goes into a QAP, the common pre-qualification clauses we see in tender documents, and how MSMEs in particular can use the Public Procurement Policy to enter the PSU supply chain. If you've read past it once and want to start, <a href="/contact/">talk to us</a> — first scoping call is free.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== 6 SECTORS ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">PSU sector compliance map</span>
+        <h2>Six PSU sectors and the certification stack each demands</h2>
+        <p>Generic ISO 9001 alone is rarely enough. Each PSU sector adds its own overlay — DGMS for mining, RDSO for railways, OISD for oil &amp; gas, DGAQA for defence. Below is the realistic compliance stack we see in current tender documents.</p>
+      </div>
+      <div class="psu-sector-grid">
+        {sectors.map((s) => (
+          <article class="psu-sector-card">
+            <div class="psu-sector-head">
+              <span class="icon-halo"><Icon name={s.icon} /></span>
+              <h3>{s.name}</h3>
+            </div>
+            <p class="psu-sector-psus"><strong>Key PSUs:</strong> {s.psus}</p>
+            <div class="psu-stack">
+              <strong class="psu-stack-label">Typical stack</strong>
+              <ul>
+                {s.typicalStack.map((c) => (
+                  <li><Icon name="check-circle" /> {c}</li>
+                ))}
+              </ul>
+            </div>
+            <p class="psu-sector-note">{s.notes}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4-STAGE JOURNEY ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">How we deliver</span>
+        <h2>The 4-stage PSU vendor readiness journey</h2>
+        <p>The same engagement framework used for our active PSU clients — from gap to first awarded tender.</p>
+      </div>
+      <ol class="psu-journey">
+        {journey.map((j) => (
+          <li class="psu-journey-step">
+            <span class="psu-journey-num">{j.n}</span>
+            <div>
+              <h3>{j.title}</h3>
+              <p>{j.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== TENDER CLAUSES ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">What tender documents actually ask for</span>
+        <h2>The 8 most common pre-qualification clauses</h2>
+        <p>Composite picture from current Central PSU tender documents across sectors. The exact wording varies; the substance is consistent.</p>
+      </div>
+      <div class="psu-clause-grid">
+        {tenderClauses.map((c) => (
+          <article class="psu-clause-card">
+            <span class="icon-halo"><Icon name="clipboard-check" /></span>
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QAP DEEP DIVE ===== -->
+  <section class="section">
+    <div class="container psu-prose">
+      <h2 id="qap">Anatomy of a Quality Assurance Plan (QAP)</h2>
+      <p>
+        The QAP is the single document PSU customers care most about during execution, because it is the contract translated into inspectable action. A generic ISO 9001 manual does not substitute. A well-authored QAP has eight discrete elements for every manufacturing or service stage.
+      </p>
+      <ul class="psu-qap-list">
+        {qapElements.map((e, i) => (
+          <li><span class="psu-qap-num">{String(i + 1).padStart(2, "0")}</span> {e}</li>
+        ))}
+      </ul>
+      <p>
+        Each stage is then classified into one of four categories: <strong>Hold</strong> (manufacturer must not proceed past this stage without customer/TPI clearance), <strong>Witness</strong> (customer is invited; can proceed if they don't attend after notice), <strong>Surveillance</strong> (random sampling by customer), or <strong>Review</strong> (record review only, no physical presence). Most contested non-conformances we close on behalf of clients arise from miscategorizing a stage. We get that right at authoring time.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== INTERNAL LINK BLOCK ===== -->
+  <section class="section section-soft">
+    <div class="container psu-cross-links">
+      <div class="section-head center">
+        <span class="eyebrow">Related deep dives</span>
+        <h2>Standards we most often deliver into PSU contracts</h2>
+      </div>
+      <div class="psu-cross-grid">
+        <a href="/certifications/iso-9001/" class="psu-cross-card">
+          <strong>ISO 9001</strong>
+          <span>Quality Management Systems</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/certifications/iso-14001/" class="psu-cross-card">
+          <strong>ISO 14001</strong>
+          <span>Environmental Management</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/certifications/iso-45001/" class="psu-cross-card">
+          <strong>ISO 45001</strong>
+          <span>Occupational Health &amp; Safety</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/certifications/iso-27001/" class="psu-cross-card">
+          <strong>ISO 27001</strong>
+          <span>Information Security (IT/OT supply)</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/certifications/5s/" class="psu-cross-card">
+          <strong>5S</strong>
+          <span>Workplace organization (audit-ready optics)</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/clients/" class="psu-cross-card">
+          <strong>Our PSU portfolio</strong>
+          <span>13+ active PSU and enterprise engagements</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQS ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Most-asked questions</span>
+        <h2>FAQs about PSU vendor compliance</h2>
+        <p>The questions we hear from manufacturers, contractors, and MSMEs preparing for their first PSU tender bid.</p>
+      </div>
+      <div class="psu-faqs">
+        {psuFaqs.map((f, i) => (
+          <details class="psu-faq" open={i === 0}>
+            <summary><span class="psu-faq-num">{String(i + 1).padStart(2, "0")}</span> {f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading="Bid-ready for your next PSU tender."
+    body="Tell us the tender, the PSU, and the deadline. We come back with a gap report and a sequenced certification plan within 48 hours — fixed-price, no surprises."
+    ctaLabel="Get a PSU readiness plan"
+    ctaHref="/contact/"
+    secondaryLabel="See our PSU clients"
+    secondaryHref="/clients/"
+    source="psu-pillar"
+  />
+</BaseLayout>
+
+<style>
+  /* ===== Stats strip ===== */
+  .psu-stats-section { padding: 32px 0; }
+  .psu-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    text-align: center;
+  }
+  .psu-stat {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 22px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .psu-stat strong {
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--color-gold-strong);
+    line-height: 1.1;
+  }
+  .psu-stat span {
+    font-size: 13px;
+    color: var(--color-body);
+  }
+
+  /* ===== Prose blocks ===== */
+  .psu-prose {
+    max-width: 880px;
+  }
+  .psu-prose h2 {
+    margin-top: 8px;
+  }
+  .psu-prose p {
+    color: var(--color-body);
+    line-height: 1.78;
+    font-size: 16.5px;
+    margin-bottom: 16px;
+  }
+  .psu-prose a {
+    color: var(--color-accent-strong);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .psu-prose a:hover { color: var(--color-primary); }
+  .psu-prose strong { color: var(--color-heading); }
+
+  /* ===== Sector grid ===== */
+  .psu-sector-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .psu-sector-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    padding: 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .psu-sector-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .psu-sector-head h3 {
+    margin: 0;
+    font-size: 19px;
+    color: var(--color-heading);
+  }
+  .psu-sector-psus {
+    margin: 0;
+    color: var(--color-body);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .psu-sector-psus strong {
+    color: var(--color-heading);
+  }
+  .psu-stack {
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+  }
+  .psu-stack-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-gold-strong);
+    margin-bottom: 8px;
+  }
+  .psu-stack ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 14px;
+  }
+  .psu-stack li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--color-body);
+  }
+  .psu-stack li :global(svg) {
+    width: 14px;
+    height: 14px;
+    color: var(--color-accent-strong);
+    flex-shrink: 0;
+  }
+  .psu-sector-note {
+    margin: 0;
+    color: var(--color-body);
+    font-size: 14px;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ===== Journey ===== */
+  .psu-journey {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .psu-journey-step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 24px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 26px 28px;
+    align-items: flex-start;
+  }
+  .psu-journey-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--color-gold-strong);
+    line-height: 1;
+  }
+  .psu-journey-step h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: var(--color-heading);
+  }
+  .psu-journey-step p {
+    margin: 0;
+    color: var(--color-body);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ===== Clauses ===== */
+  .psu-clause-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .psu-clause-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .psu-clause-card h3 {
+    margin: 6px 0 0;
+    font-size: 16.5px;
+    color: var(--color-heading);
+  }
+  .psu-clause-card p {
+    margin: 0;
+    color: var(--color-body);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ===== QAP list ===== */
+  .psu-qap-list {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 22px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 18px;
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 22px 24px;
+  }
+  .psu-qap-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14.5px;
+    color: var(--color-body);
+    line-height: 1.55;
+  }
+  .psu-qap-num {
+    font-family: var(--font-display);
+    color: var(--color-gold-strong);
+    font-weight: 800;
+    flex-shrink: 0;
+    font-size: 13px;
+    margin-top: 1px;
+  }
+
+  /* ===== Cross-links ===== */
+  .psu-cross-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .psu-cross-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 4px 14px;
+    text-decoration: none;
+    color: var(--color-body);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .psu-cross-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent-strong);
+    box-shadow: 0 10px 24px rgba(15,23,42,.08);
+  }
+  .psu-cross-card strong {
+    grid-column: 1;
+    font-family: var(--font-display);
+    color: var(--color-primary);
+    font-size: 16px;
+  }
+  .psu-cross-card span:nth-of-type(1) {
+    grid-column: 1;
+    font-size: 13.5px;
+    color: var(--color-body);
+  }
+  .psu-cross-arrow {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    color: var(--color-accent-strong);
+  }
+  .psu-cross-arrow :global(svg) { width: 18px; height: 18px; }
+
+  /* ===== FAQs ===== */
+  .psu-faqs {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .psu-faq {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+  }
+  .psu-faq summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 20px 24px;
+    font-weight: 600;
+    color: var(--color-heading);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 15.5px;
+  }
+  .psu-faq summary::-webkit-details-marker { display: none; }
+  .psu-faq[open] summary { border-bottom: 1px solid var(--color-border); }
+  .psu-faq-num {
+    font-family: var(--font-display);
+    color: var(--color-gold-strong);
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .psu-faq p {
+    margin: 0;
+    padding: 18px 24px 24px;
+    color: var(--color-body);
+    line-height: 1.7;
+    font-size: 14.5px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 980px) {
+    .psu-stats { grid-template-columns: repeat(2, 1fr); }
+    .psu-sector-grid,
+    .psu-clause-grid { grid-template-columns: 1fr; }
+    .psu-cross-grid { grid-template-columns: repeat(2, 1fr); }
+    .psu-qap-list { grid-template-columns: 1fr; }
+    .psu-stack ul { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .psu-stats { grid-template-columns: 1fr; }
+    .psu-cross-grid { grid-template-columns: 1fr; }
+    .psu-journey-step { grid-template-columns: 1fr; gap: 10px; }
+    .psu-journey-num { font-size: 26px; }
+  }
+</style>

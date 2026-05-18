@@ -108,10 +108,10 @@ const clientLogos = trustedClients.filter((c) => c.logo);
           Process Improvement &amp; Information Security with Confidence.
         </p>
         <div class="hero-ctas">
-          <a href="/contact" class="btn btn-accent btn-shimmer">
+          <a href="/contact?utm_source=site&utm_medium=hero-primary&utm_campaign=home" class="btn btn-accent btn-shimmer">
             Get Consultation <Icon name="arrow-right" />
           </a>
-          <a href="/contact" class="btn btn-ghost">Contact Us</a>
+          <a href="/contact?utm_source=site&utm_medium=hero-secondary&utm_campaign=home" class="btn btn-ghost">Contact Us</a>
         </div>
         <div class="hero-stats">
           <div><strong>100+</strong><span>International standards</span></div>
@@ -222,6 +222,7 @@ const clientLogos = trustedClients.filter((c) => c.logo);
       </div>
       <div class="trust-cta">
         <a href="/clients" class="link-arrow">See all featured clients <Icon name="arrow-right" /></a>
+        <a href="/psu-vendor-compliance/" class="link-arrow">PSU vendor compliance guide <Icon name="arrow-right" /></a>
       </div>
     </div>
   </section>
@@ -252,6 +253,7 @@ const clientLogos = trustedClients.filter((c) => c.logo);
     ctaHref="/contact"
     secondaryLabel="Talk To Expert"
     secondaryHref="/contact"
+    source="home"
   />
 </BaseLayout>
 
@@ -614,6 +616,8 @@ const clientLogos = trustedClients.filter((c) => c.logo);
     margin-top: 28px;
     display: flex;
     justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
   }
   .trust-cta .link-arrow {
     display: inline-flex;

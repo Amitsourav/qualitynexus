@@ -2,12 +2,15 @@
 const year = new Date().getFullYear();
 
 const quickLinks = [
-  { href: "/",               label: "Home" },
-  { href: "/about",          label: "About" },
-  { href: "/services",       label: "Services" },
-  { href: "/certifications", label: "Certifications" },
-  { href: "/clients",        label: "Clients" },
-  { href: "/contact",        label: "Contact" },
+  { href: "/",                          label: "Home" },
+  { href: "/about",                     label: "About" },
+  { href: "/team",                      label: "Our Team" },
+  { href: "/services",                  label: "Services" },
+  { href: "/certifications",            label: "Certifications" },
+  { href: "/clients",                   label: "Clients" },
+  { href: "/iso-consultant-ranchi",     label: "ISO Consultant in Ranchi" },
+  { href: "/psu-vendor-compliance",     label: "PSU Vendor Compliance" },
+  { href: "/contact",                   label: "Contact" },
 ];
 
 const serviceLinks = [
@@ -25,6 +28,13 @@ const socials = [
   { name: "Facebook",  href: "#", icon: "facebook" },
   { name: "Instagram", href: "#", icon: "instagram" },
   { name: "X",         href: "#", icon: "x" },
+];
+
+const trustBadges = [
+  { label: "MCA Incorporated",      sub: "Pvt. Ltd. · Ministry of Corporate Affairs", id: "CIN · U70200JH2025PTC024534" },
+  { label: "MSME · Udyam Registered", sub: "Ministry of MSME, Govt. of India",          id: "UDYAM-JH-20-0101391" },
+  { label: "Startup India",         sub: "DPIIT-recognized startup",                  id: "Govt. of India" },
+  { label: "GST Compliant",         sub: "Active GST registration",                   id: "GSTIN · 20AABCQ1018L1ZW" },
 ];
 ---
 <footer class="site-footer">
@@ -107,6 +117,21 @@ const socials = [
           </li>
         </ul>
       </div>
+    </div>
+
+    <div class="footer-trust" aria-label="Government registrations">
+      {trustBadges.map((b) => (
+        <div class="footer-trust-card">
+          <span class="footer-trust-tick" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <div>
+            <strong>{b.label}</strong>
+            <span class="footer-trust-sub">{b.sub}</span>
+            <span class="footer-trust-id">{b.id}</span>
+          </div>
+        </div>
+      ))}
     </div>
 
     <div class="footer-bottom">
@@ -220,6 +245,63 @@ const socials = [
     text-transform: uppercase;
   }
 
+  /* ===== Trust badges row ===== */
+  .footer-trust {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 24px 0 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .footer-trust-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 12px 14px;
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .footer-trust-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(212, 175, 55, 0.35);
+  }
+  .footer-trust-tick {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.16);
+    color: var(--color-gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .footer-trust-card strong {
+    display: block;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.2;
+    font-family: var(--font-display);
+    margin-bottom: 3px;
+  }
+  .footer-trust-sub {
+    display: block;
+    color: #94A3B8;
+    font-size: 11.5px;
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .footer-trust-id {
+    display: block;
+    color: var(--color-gold);
+    font-size: 11px;
+    font-family: var(--font-heading);
+    letter-spacing: 0.01em;
+    word-break: break-all;
+  }
+
   .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -241,9 +323,11 @@ const socials = [
       grid-template-columns: 1fr 1fr;
       gap: 36px;
     }
+    .footer-trust { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 560px) {
     .site-footer { padding: 56px 0 22px; }
     .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-trust { grid-template-columns: 1fr; }
   }
 </style>

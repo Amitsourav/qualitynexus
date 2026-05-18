@@ -1,0 +1,661 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+import Icon from "../components/Icon.astro";
+import { breadcrumbLd, SITE } from "../lib/schema";
+
+const services = [
+  { icon: "check-circle", code: "ISO 9001",  title: "Quality Management",            body: "End-to-end ISO 9001:2015 implementation for Ranchi manufacturers, service firms, and PSU vendors — gap analysis, documentation, internal audits, and certification body coordination." },
+  { icon: "lock",         code: "ISO 27001", title: "Information Security",          body: "ISO 27001:2022 ISMS rollout for Jharkhand IT/ITeS firms, BFSI back-offices, and SaaS exporters. Includes Annex A 2022 controls and DPDP Act 2023 alignment." },
+  { icon: "leaf",         code: "ISO 14001", title: "Environmental Management",      body: "Environmental management systems for mining, steel, power, and chemicals — the sectors that dominate Jharkhand's industrial base. Compliance with JSPCB obligations built in." },
+  { icon: "hard-hat",     code: "ISO 45001", title: "Occupational Health & Safety",  body: "Worker-safety management systems for high-risk industries — mining (HCL, CCL), steel (Bokaro, Jamshedpur), construction, and heavy engineering. DGMS-aligned where applicable." },
+  { icon: "scale",        code: "NABL",      title: "NABL & NABH Accreditation",     body: "ISO/IEC 17025 testing/calibration lab accreditation and NABH for healthcare establishments — for Ranchi medical labs, pathology centres, and quality testing facilities." },
+  { icon: "shield-check", code: "VAPT",      title: "VAPT & Cybersecurity Audit",    body: "Vulnerability assessment and penetration testing coordination — for Jharkhand banks, fintech, government departments, and IT services firms tendering for state contracts." },
+];
+
+const whyLocal = [
+  { icon: "compass",       title: "On-site within hours, not days", body: "From our Ormanjhi office we can be at your plant in Tupudana, Adityapur, Jamshedpur, Bokaro, or Dhanbad the same working day. Stage-1 and gap audits require physical evidence — local presence makes that feasible." },
+  { icon: "users",         title: "Familiarity with regional CBs",  body: "We know the regional offices of the certification bodies (TUV Nord, BSI, BVQI, DNV, Intertek, IRQS) that serve Eastern India — including their audit calendars, lead auditors' style, and common non-conformance patterns in Jharkhand industries." },
+  { icon: "trending-up",   title: "Built for the regional economy", body: "Mining, steel, thermal power, public-sector engineering, MSME manufacturing — the standard reads differently in each. Our team has implemented across all of them in Jharkhand and the East-India PSU corridor." },
+];
+
+const industries = [
+  { icon: "hard-hat",    label: "Mining & Metals",              note: "HCL Ghatsila, CCL collieries, SAIL Bokaro ancillaries, iron-ore beneficiation" },
+  { icon: "zap",         label: "Power & Energy",               note: "NTPC Patratu, DVC plants, NHPC subsidiaries, transmission contractors" },
+  { icon: "cog",         label: "Manufacturing & MSME",         note: "Adityapur GIDA, Tupudana Industrial Area, Bokaro Industrial Area" },
+  { icon: "stethoscope", label: "Pharma & Healthcare",          note: "Patratu Pharma Park, Ranchi diagnostic labs, NABH-track hospitals" },
+  { icon: "cpu",         label: "IT, ITeS & SaaS",              note: "Software Tech Park of India (STPI) Ranchi, BIT Mesra ecosystem firms" },
+  { icon: "file-text",   label: "Government & PSU Tendering",   note: "CMPDI, HEC, RPCL, Jharkhand Govt departments — ISO requirements in pre-qualification" },
+];
+
+const featuredPsus = [
+  { code: "HCL",   name: "Hindustan Copper Ltd",        logo: "/images/clients/hindustan-copper.jpg", link: "Operates in Ghatsila, East Singhbhum — Jharkhand's only integrated copper producer" },
+  { code: "NTPC",  name: "NTPC Limited",                logo: "/images/clients/ntpc.png",             link: "Patratu Super Thermal Power Project — 4,000 MW under construction in Jharkhand" },
+  { code: "IOCL",  name: "Indian Oil Corporation Ltd",  logo: "/images/clients/iocl.png",             link: "Distribution and depot operations across Jharkhand; Barauni refinery serves the state" },
+  { code: "IR",    name: "Indian Railways",             logo: "/images/clients/Indian-Railway.png",   link: "East Central Railway zone covers Jharkhand; supplier base spans Ranchi, Jamshedpur, Dhanbad" },
+  { code: "HAL",   name: "Hindustan Aeronautics Ltd",   logo: "/images/clients/hal.jpeg",             link: "Components and ancillary supply chain extends into Jharkhand engineering MSMEs" },
+  { code: "NHPC",  name: "NHPC Limited",                logo: "/images/clients/nhpc.png",             link: "Hydro projects across NE India serviced from Eastern engineering base" },
+];
+
+const localFaqs = [
+  {
+    q: "Do you only serve clients in Ranchi?",
+    a: "No. Ranchi is our base, but we deliver engagements across India — Patna, Kolkata, Bhubaneswar, Jamshedpur, Dhanbad, Bokaro, Guwahati, and the metros. Roughly 60% of active engagements are in Jharkhand and the Eastern PSU corridor; the remainder span pan-India.",
+  },
+  {
+    q: "How long does ISO 9001 certification take in Jharkhand?",
+    a: "Typical timeline is 6–12 weeks for a single-site SME from kickoff to certificate. The gap-analysis phase is week 1–2, documentation and process implementation runs weeks 3–7, internal audit and management review in week 8, certification body Stage-1 + Stage-2 audits in weeks 9–12. Multi-site or PSU contractor engagements can extend to 16–20 weeks because of the document volume.",
+  },
+  {
+    q: "Is ISO certification mandatory for Jharkhand state tenders or PSU vendor registration?",
+    a: "For most major tenders — yes, in practice. CMPDI, HEC, JBVNL, JSEB, and Jharkhand state PSU tenders increasingly list ISO 9001 (and often ISO 14001 / 45001 for industrial supply) as pre-qualification criteria. NTPC, NHPC, IOCL, and other central PSUs operating in Jharkhand have similar requirements in their vendor onboarding. We help you map the exact certification stack each tender expects.",
+  },
+  {
+    q: "Can you visit our plant in Jamshedpur, Dhanbad, or Bokaro?",
+    a: "Yes — on-site presence is part of every engagement we run in the region. Same-day travel from Ranchi to Jamshedpur (130 km), Dhanbad (160 km), or Bokaro (110 km) is routine. We schedule full-day or multi-day on-site blocks for gap audits, document walks, internal audits, and CB audit preparation.",
+  },
+  {
+    q: "What does ISO certification cost in Ranchi compared to Delhi or Mumbai?",
+    a: "Consultancy fees are typically 25–40% lower than metro rates for comparable scope, because operating overheads in Ranchi are lower. The certification body fee (paid separately to TUV / BSI / BVQI / DNV / Intertek etc.) is uniform across India, so the savings are entirely on consulting. For a single-standard SME engagement, total certification cost in Jharkhand typically lands between ₹65,000–₹2,50,000 depending on scope, scale, and chosen CB.",
+  },
+  {
+    q: "Which certification bodies do you work with in Eastern India?",
+    a: "We're CB-neutral and have working relationships with all the major accredited bodies operating in Eastern India: TUV Nord, TUV SUD, BSI, BVQI (Bureau Veritas), DNV, Intertek, IRQS, RINA, URS, and SGS. The right CB depends on your customer base, export markets, and accreditation expectations — we recommend, you decide.",
+  },
+  {
+    q: "Can you help with NABL accreditation for a Ranchi-based testing lab?",
+    a: "Yes. NABL accreditation against ISO/IEC 17025 is one of our specialist services. The engagement covers scope definition, technical and management documentation per NABL 100/112 series, equipment calibration traceability, proficiency testing planning, method validation, and on-site assessment readiness. Typical NABL engagement runs 16–24 weeks for a new lab.",
+  },
+  {
+    q: "Do you offer training for internal teams in Ranchi?",
+    a: "Yes — we conduct ISO 9001 / 27001 / 14001 / 45001 awareness training and internal auditor training (IRCA-aligned) at client sites in Ranchi, Jamshedpur, and the wider Jharkhand region. Public batches are scheduled periodically at our Ormanjhi office for individual professionals.",
+  },
+];
+
+// ---------- Schema ----------
+const PAGE_URL = `${SITE}/iso-consultant-ranchi/`;
+
+const crumbs = breadcrumbLd([
+  { name: "Home",                    href: "/" },
+  { name: "ISO Consultant in Ranchi", href: "/iso-consultant-ranchi/" },
+]);
+
+const localBusinessLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${PAGE_URL}#localbusiness`,
+  "name": "QualityNexus — ISO Consultant in Ranchi",
+  "image": `${SITE}/og/default.jpg`,
+  "url": PAGE_URL,
+  "telephone": "+91-9798082076",
+  "email": "Qualitynexusofficial@gmail.com",
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Trade Centre, 1st Floor, Main Road, SSVM School, Ormanjhi",
+    "addressLocality": "Ranchi",
+    "addressRegion": "Jharkhand",
+    "postalCode": "835219",
+    "addressCountry": "IN",
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": "23.489231", "longitude": "85.478647" },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "10:00",
+    "closes": "18:00",
+  }],
+  "areaServed": [
+    { "@type": "City", "name": "Ranchi" },
+    { "@type": "City", "name": "Jamshedpur" },
+    { "@type": "City", "name": "Dhanbad" },
+    { "@type": "City", "name": "Bokaro" },
+    { "@type": "City", "name": "Hazaribagh" },
+    { "@type": "City", "name": "Ramgarh" },
+    { "@type": "State", "name": "Jharkhand" },
+    { "@type": "State", "name": "Bihar" },
+    { "@type": "State", "name": "West Bengal" },
+    { "@type": "State", "name": "Odisha" },
+  ],
+  "parentOrganization": { "@id": `${SITE}/#organization` },
+  "sameAs": ["https://maps.app.goo.gl/28dYT4Ua476vPSfw7"],
+  "hasMap": "https://maps.app.goo.gl/28dYT4Ua476vPSfw7",
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": localFaqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${PAGE_URL}#service`,
+  "serviceType": "ISO Certification Consultancy",
+  "name": "ISO Certification Consultancy in Ranchi, Jharkhand",
+  "description": "ISO 9001, 27001, 14001, 45001, NABL, NABH, VAPT, and 5S consultancy delivered from a Ranchi-based team to industries across Jharkhand and Eastern India.",
+  "provider": { "@id": `${SITE}/#organization` },
+  "areaServed": { "@type": "State", "name": "Jharkhand" },
+  "url": PAGE_URL,
+};
+---
+<BaseLayout
+  title="ISO Consultant in Ranchi, Jharkhand | QualityNexus"
+  description="Ranchi-based ISO 9001, ISO 27001, NABL, VAPT, and PSU vendor compliance consultancy for Jharkhand and Eastern India industries. Senior auditors, on-site delivery, transparent timelines."
+  canonical="/iso-consultant-ranchi/"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(localBusinessLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />
+
+  <PageHero
+    eyebrow="Ranchi · Jharkhand · Eastern India"
+    title="ISO consultant in Ranchi"
+    accent="for Jharkhand industries."
+    lede="QualityNexus is a Ranchi-based ISO certification consultancy delivering ISO 9001, ISO 27001, ISO 14001, ISO 45001, NABL/NABH accreditation, VAPT, 5S, and PSU vendor compliance to manufacturers, public-sector units, laboratories, and growing enterprises across Jharkhand and Eastern India."
+    hasVisual={false}
+  />
+
+  <!-- ===== TL;DR ABOVE THE FOLD ===== -->
+  <section class="section section-soft local-tldr-section">
+    <div class="container local-tldr">
+      <div class="local-tldr-item">
+        <strong>13+</strong>
+        <span>Active PSU engagements</span>
+      </div>
+      <div class="local-tldr-item">
+        <strong>6–12 wks</strong>
+        <span>Typical ISO 9001 timeline</span>
+      </div>
+      <div class="local-tldr-item">
+        <strong>4 hrs</strong>
+        <span>Same-day reach to Jamshedpur / Bokaro</span>
+      </div>
+      <div class="local-tldr-item">
+        <strong>100+</strong>
+        <span>International standards covered</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY A LOCAL CONSULTANT ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Why local matters</span>
+        <h2>Why work with a Ranchi-based ISO consultant?</h2>
+        <p>Most large consultancies operate from Delhi, Mumbai, or Bangalore. For Jharkhand industries, that's a 2-flight, 2-day round trip every time evidence is needed on-site. We close that gap.</p>
+      </div>
+      <div class="local-why-grid">
+        {whyLocal.map((w) => (
+          <article class="local-why-card">
+            <span class="icon-halo"><Icon name={w.icon} /></span>
+            <h3>{w.title}</h3>
+            <p>{w.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES IN RANCHI ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Services we deliver in Ranchi</span>
+        <h2>End-to-end ISO and compliance consulting</h2>
+        <p>From gap analysis to certificate. From a single ISO standard to a full integrated management system. From training to long-term retainer.</p>
+      </div>
+      <div class="local-service-grid">
+        {services.map((s) => (
+          <article class="local-service-card">
+            <span class="local-service-code">{s.code}</span>
+            <span class="icon-halo"><Icon name={s.icon} /></span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </article>
+        ))}
+      </div>
+      <div class="local-service-cta">
+        <a href="/services/" class="link-arrow">See all 9 service lines <Icon name="arrow-right" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INDUSTRIES IN JHARKHAND ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Sectors in Jharkhand</span>
+        <h2>Industries we serve across the state</h2>
+        <p>Jharkhand's industrial economy is concentrated in six sector clusters. Our delivery model is built around them.</p>
+      </div>
+      <div class="local-industry-grid">
+        {industries.map((i) => (
+          <article class="local-industry-card">
+            <span class="local-industry-icon"><Icon name={i.icon} /></span>
+            <div>
+              <h3>{i.label}</h3>
+              <p>{i.note}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED LOCAL ENGAGEMENTS ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Featured engagements</span>
+        <h2>Public-sector clients with Jharkhand presence</h2>
+        <p>A subset of our PSU engagement portfolio that operates plants, projects, or supply-chain partners in Jharkhand and the wider Eastern India zone.</p>
+      </div>
+      <div class="local-client-grid">
+        {featuredPsus.map((c) => (
+          <article class="local-client-card">
+            <div class="local-client-logo-wrap">
+              <img src={c.logo} alt={`${c.name} logo`} class="local-client-logo" loading="lazy" decoding="async" width="120" height="60" />
+            </div>
+            <strong class="local-client-code">{c.code}</strong>
+            <h3>{c.name}</h3>
+            <p>{c.link}</p>
+          </article>
+        ))}
+      </div>
+      <div class="local-service-cta">
+        <a href="/clients/" class="link-arrow">See full client list <Icon name="arrow-right" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OFFICE & MAP ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Where we work from</span>
+        <h2>Our Ranchi office</h2>
+        <p>Walk-ins welcome with prior appointment. We host kickoff workshops, training batches, and CB pre-audit reviews at the office.</p>
+      </div>
+      <div class="local-office-row">
+        <div class="local-office-card">
+          <h3>QualityNexus Private Limited</h3>
+          <p>
+            Trade Centre, 1st Floor<br/>
+            Main Road, SSVM School<br/>
+            Ormanjhi, Ranchi 835219<br/>
+            Jharkhand, India
+          </p>
+          <ul class="local-office-meta">
+            <li><strong>Phone:</strong> <a href="tel:+919798082076">+91 97980 82076</a></li>
+            <li><strong>Email:</strong> <a href="mailto:Qualitynexusofficial@gmail.com">Qualitynexusofficial@gmail.com</a></li>
+            <li><strong>Hours:</strong> Mon–Sat, 10:00–18:00 IST</li>
+            <li><strong>CIN:</strong> U70200JH2025PTC024534</li>
+            <li><strong>GSTIN:</strong> 20AABCQ1018L1ZW</li>
+          </ul>
+          <a href="https://maps.app.goo.gl/28dYT4Ua476vPSfw7" target="_blank" rel="noopener" class="btn btn-accent">Open in Google Maps <Icon name="arrow-right" /></a>
+        </div>
+        <div class="local-office-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.1!2d85.478!3d23.489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDI5JzIxLjIiTiA4NcKwMjgnNDMuMSJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="QualityNexus Office Location — Ormanjhi, Ranchi"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQS ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Questions from Ranchi clients</span>
+        <h2>FAQs</h2>
+        <p>The questions that come up most often during scoping calls with Jharkhand-based industries.</p>
+      </div>
+      <div class="local-faqs">
+        {localFaqs.map((f, i) => (
+          <details class="local-faq" open={i === 0}>
+            <summary><span class="local-faq-num">{String(i + 1).padStart(2, "0")}</span> {f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading="Talk to a Ranchi-based ISO consultant"
+    body="Free 30-minute scoping call. We'll review your standard, scope, timeline, and tender requirements — and tell you honestly whether we're the right fit."
+    ctaLabel="Book a free consultation"
+    ctaHref="/contact/"
+    secondaryLabel="See all services"
+    secondaryHref="/services/"
+    source="ranchi-lp"
+  />
+</BaseLayout>
+
+<style>
+  /* ===== TL;DR strip ===== */
+  .local-tldr-section { padding: 32px 0; }
+  .local-tldr {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    text-align: center;
+  }
+  .local-tldr-item {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 22px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 1px 2px rgba(15,23,42,.04);
+  }
+  .local-tldr-item strong {
+    font-family: var(--font-display);
+    font-size: 30px;
+    color: var(--color-gold-strong);
+    line-height: 1;
+  }
+  .local-tldr-item span {
+    font-size: 13px;
+    color: var(--color-body);
+  }
+
+  /* ===== Why local cards ===== */
+  .local-why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .local-why-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    padding: 28px 26px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .local-why-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(15,23,42,.08);
+  }
+  .local-why-card h3 {
+    margin: 18px 0 10px;
+    font-size: 18px;
+    color: var(--color-heading);
+  }
+  .local-why-card p {
+    color: var(--color-body);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ===== Services grid ===== */
+  .local-service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .local-service-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    padding: 26px 24px;
+    position: relative;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .local-service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(15,23,42,.08);
+  }
+  .local-service-code {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-gold-strong);
+    background: rgba(212,175,55,0.10);
+    border: 1px solid rgba(212,175,55,0.30);
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin-bottom: 14px;
+  }
+  .local-service-card h3 {
+    margin: 14px 0 8px;
+    font-size: 18px;
+    color: var(--color-heading);
+  }
+  .local-service-card p {
+    color: var(--color-body);
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .local-service-cta {
+    text-align: center;
+    margin-top: 36px;
+  }
+
+  /* ===== Industries ===== */
+  .local-industry-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .local-industry-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .local-industry-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(16,185,129,0.10);
+    color: var(--color-accent-strong);
+  }
+  .local-industry-icon :global(svg) { width: 22px; height: 22px; }
+  .local-industry-card h3 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    color: var(--color-heading);
+  }
+  .local-industry-card p {
+    margin: 0;
+    color: var(--color-body);
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  /* ===== Featured clients ===== */
+  .local-client-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .local-client-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 22px 22px;
+  }
+  .local-client-logo-wrap {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 14px;
+  }
+  .local-client-logo {
+    max-height: 60px;
+    max-width: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(0.4);
+    opacity: 0.92;
+    transition: filter .25s ease, opacity .25s ease;
+  }
+  .local-client-card:hover .local-client-logo {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+  .local-client-code {
+    display: inline-block;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .local-client-card h3 {
+    margin: 0 0 8px;
+    font-size: 16.5px;
+    color: var(--color-heading);
+  }
+  .local-client-card p {
+    margin: 0;
+    color: var(--color-body);
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  /* ===== Office ===== */
+  .local-office-row {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+  .local-office-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    padding: 32px 30px;
+  }
+  .local-office-card h3 {
+    margin: 0 0 10px;
+    color: var(--color-heading);
+  }
+  .local-office-card > p {
+    color: var(--color-body);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  .local-office-meta {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .local-office-meta li {
+    font-size: 14px;
+    color: var(--color-body);
+  }
+  .local-office-meta a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .local-office-meta a:hover {
+    color: var(--color-accent-strong);
+  }
+  .local-office-map {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    min-height: 380px;
+    background: #f1f5f9;
+  }
+
+  /* ===== FAQs ===== */
+  .local-faqs {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .local-faq {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+  }
+  .local-faq summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 20px 24px;
+    font-weight: 600;
+    color: var(--color-heading);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 15.5px;
+  }
+  .local-faq summary::-webkit-details-marker { display: none; }
+  .local-faq[open] summary {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .local-faq-num {
+    font-family: var(--font-display);
+    color: var(--color-gold-strong);
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .local-faq p {
+    margin: 0;
+    padding: 18px 24px 24px;
+    color: var(--color-body);
+    line-height: 1.7;
+    font-size: 14.5px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 980px) {
+    .local-tldr { grid-template-columns: repeat(2, 1fr); }
+    .local-why-grid,
+    .local-service-grid,
+    .local-industry-grid,
+    .local-client-grid { grid-template-columns: repeat(2, 1fr); }
+    .local-office-row { grid-template-columns: 1fr; }
+    .local-office-map { min-height: 320px; }
+  }
+  @media (max-width: 640px) {
+    .local-tldr { grid-template-columns: repeat(2, 1fr); }
+    .local-why-grid,
+    .local-service-grid,
+    .local-industry-grid,
+    .local-client-grid { grid-template-columns: 1fr; }
+  }
+</style>
