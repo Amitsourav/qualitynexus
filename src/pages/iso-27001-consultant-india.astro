@@ -1,0 +1,663 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+import Icon from "../components/Icon.astro";
+import { breadcrumbLd, SITE } from "../lib/schema";
+
+const stats = [
+  { num: "93",     label: "Annex A controls in 2022 revision" },
+  { num: "4–6 mo", label: "Typical implementation timeline" },
+  { num: "₹2–9L",  label: "Total cost range for SME in India" },
+  { num: "2.4×",   label: "Tender qualification uplift in tender-heavy sectors" },
+];
+
+const regulatoryDrivers = [
+  {
+    icon: "shield-check",
+    title: "DPDP Act 2023",
+    body: "India's Digital Personal Data Protection Act mandates 'reasonable security safeguards' for personal data. ISO 27001:2022 + ISO 27701 (privacy) is the closest internationally-recognized scaffolding to demonstrate compliance to the Data Protection Board.",
+  },
+  {
+    icon: "lock",
+    title: "RBI Cyber Framework",
+    body: "RBI's Cyber Security Framework for banks, NBFCs, payment system operators, and ARC entities prescribes specific control families. ISO 27001 Annex A 2022 maps cleanly to most of them, with a few overlays (CISO function, table-top exercises, board reporting).",
+  },
+  {
+    icon: "scale",
+    title: "SEBI Cybersecurity",
+    body: "SEBI's Cybersecurity & Cyber Resilience Framework (CSCRF 2024) for regulated intermediaries, exchanges, and depositories explicitly references ISO 27001 as one credible benchmark for control coverage and ISMS maturity.",
+  },
+  {
+    icon: "trending-up",
+    title: "Enterprise procurement",
+    body: "Multinational customers, BFSI tier-1s, and PSU IT/OT procurement increasingly list ISO 27001 as pre-qualification. Without it, your bid is filtered out before technical evaluation begins.",
+  },
+];
+
+const annexAThemes = [
+  {
+    code: "A.5",
+    title: "Organizational Controls (37 controls)",
+    body: "Policies, roles and responsibilities, segregation of duties, threat intelligence, information security in supplier relationships, ICT readiness for business continuity, legal/regulatory/contractual obligations, intellectual property rights. The governance backbone.",
+  },
+  {
+    code: "A.6",
+    title: "People Controls (8 controls)",
+    body: "Screening, terms and conditions of employment, awareness training, disciplinary process, responsibilities after termination, confidentiality agreements, remote working, information security incident reporting. The human-factor controls.",
+  },
+  {
+    code: "A.7",
+    title: "Physical Controls (14 controls)",
+    body: "Physical security perimeters, secure office and facilities, monitoring physical access, protection against physical and environmental threats, working in secure areas, clear desk and clear screen, equipment siting, secure disposal, off-premises equipment.",
+  },
+  {
+    code: "A.8",
+    title: "Technological Controls (34 controls)",
+    body: "User endpoint devices, privileged access rights, information access restriction, secure development lifecycle, configuration management, information deletion, data leakage prevention, network security, web filtering, cryptography, vulnerability management, logging.",
+  },
+];
+
+const implementationSteps = [
+  { n: "01", title: "Scope definition workshop",                body: "Define ISMS scope — products, services, locations, third parties, exclusions. This single document drives every downstream artefact, from the SoA to the audit certificate language. Get it wrong here and the entire program drifts." },
+  { n: "02", title: "Gap analysis vs ISO 27001:2022",           body: "Walk-through of every Annex A control. Map current state, target state, evidence gaps. Output is a colour-coded register with effort estimates and owner assignments — what gets fixed, what's already in place, what's not applicable." },
+  { n: "03", title: "Risk assessment & treatment plan",         body: "Asset register → threats → vulnerabilities → impact + likelihood → residual risk. The risk methodology is yours to define (qualitative is fine), but it must be repeatable and documented. We use a tested framework that survives auditor scrutiny." },
+  { n: "04", title: "Statement of Applicability (SoA)",         body: "The contract between you and the auditor. Each of the 93 controls marked as Applied / Not Applied with justification. SoA is the most-inspected document at Stage 2 — typos and missing justifications are the most common minor non-conformances." },
+  { n: "05", title: "Policy & procedure authoring",             body: "Information security policy (board-approved), 10-15 supporting policies (acceptable use, access control, change management, supplier security, incident response, business continuity, cryptography, data classification, backup, secure development). Tailored to your stack — no boilerplate." },
+  { n: "06", title: "Control implementation",                   body: "Closing actual control gaps — MFA rollout, privileged access management, log aggregation, vulnerability scanning cadence, security awareness training, supplier security questionnaires, BCP exercises. The longest phase, typically 8–12 weeks." },
+  { n: "07", title: "Internal audit (round 1)",                 body: "Independent walk-through of all controls before CB Stage 1. Findings logged, root cause analysis done, corrective actions tracked to closure. Internal audit independence is a control in its own right — we run it as an external assessor would." },
+  { n: "08", title: "Management review",                        body: "Documented review by top management covering ISMS performance, audit results, threat landscape changes, resource adequacy, improvement opportunities. Minutes signed. Without this, Stage 2 fails on clause 9.3." },
+  { n: "09", title: "Stage 1 audit (documentation review)",     body: "CB assessor reviews ISMS documentation off-site and may do a brief site visit. Output is a Stage 1 report listing readiness gaps. We help close everything before Stage 2 — never go to Stage 2 with open Stage 1 findings." },
+  { n: "10", title: "Stage 2 audit (certification audit)",      body: "On-site control verification. Auditor interviews staff, samples records, observes operations. We attend, support evidence retrieval, manage scope of audit, and close any minor non-conformance inside the visit window where possible." },
+  { n: "11", title: "Non-conformance closure",                  body: "Any minor NCs raised — corrective action plans documented, root cause analysis, evidence of closure submitted to CB. Majors require re-audit and almost never happen with proper Stage 1 readiness." },
+  { n: "12", title: "Certificate issued · 3-year cycle begins", body: "ISO 27001 certificate valid for 3 years, with surveillance audits at year 1 and year 2 (lighter scope), and full re-certification at year 3. We can stay on retainer for surveillance or hand over cleanly to your internal team." },
+];
+
+const sectorUseCases = [
+  { icon: "battery",     name: "Banks & NBFCs",          body: "RBI Cyber Framework alignment, payment card environment scope carve-out, third-party risk for vendors, board cyber-risk reporting cadence." },
+  { icon: "trending-up", name: "Fintech & PayTech",      body: "Concurrent ISO 27001 + PCI DSS + DPDP coverage. NPCI vendor onboarding readiness, SOC 2 layered on for US/EU customers." },
+  { icon: "rocket",      name: "SaaS Exporters",         body: "ISO 27001 for EU/UK B2B procurement, SOC 2 Type II layered for US customers, multi-region data residency design, sub-processor management." },
+  { icon: "headphones",  name: "BPO / KPO / ITES",       body: "Client-specific scope statements per customer contract, US/UK/EU client audit support, secure transmission and remote access controls, US HIPAA overlay for healthcare-customer BPO." },
+  { icon: "cpu",         name: "IT Services & MSPs",     body: "ISMS scoped per service line, customer audit support, ITIL + 27001 integration, IT/OT supply for PSU contracts that increasingly require ISO 27001 baseline." },
+  { icon: "stethoscope", name: "Healthcare & HealthTech", body: "Patient data handling, electronic medical records, ISO 27799 (healthcare infosec) overlay, DPDP + sensitive personal data protection." },
+];
+
+const commonNcs = [
+  { title: "Inadequate Statement of Applicability", body: "Missing justification for excluded controls, or 'Applied' marked without evidence to back it. The single most common Stage 2 finding." },
+  { title: "Risk register not maintained",          body: "One-time exercise at certification, no quarterly refresh, no link to incident outcomes or threat intelligence. Auditors check timestamps." },
+  { title: "Supplier security gaps",                body: "Vendor list, but no contractual security clauses, no questionnaire response evidence, no quarterly review. Annex A.5.19–A.5.23 is heavily inspected post-2022." },
+  { title: "Access review cadence",                 body: "User access not reviewed quarterly, privileged accounts not segregated, leaver process incomplete. Easy NC to raise, hard to defend if records aren't there." },
+  { title: "Awareness training records",            body: "Training delivered but no completion evidence, no quiz/test, no role-specific content. Annex A.6.3 expects targeted, measurable training." },
+  { title: "Incident response gap",                 body: "Documented IR plan but no table-top exercise, no actual incidents logged, no post-incident review. Auditors look for a real or simulated event with documented learnings." },
+];
+
+const comparisonRows = [
+  { row: "Scope",              iso: "Entire ISMS — people, process, technology, suppliers", soc: "Specific services / Trust Service Criteria", dpdp: "Personal data handling only" },
+  { row: "Governing body",     iso: "ISO + IAF/NABCB-accredited CBs",                       soc: "AICPA + licensed CPA firms",                  dpdp: "Government of India (Data Protection Board)" },
+  { row: "Output",             iso: "3-year accredited certificate",                       soc: "Annual SOC report (Type I / Type II)",         dpdp: "No certificate — statutory obligation" },
+  { row: "Buyer expectation",  iso: "EU, UK, India enterprise, PSU",                       soc: "US enterprise, especially SaaS customers",     dpdp: "Indian regulators + customers" },
+  { row: "Includes pen-test?", iso: "Not by default — handled via A.8.8 / A.8.29",          soc: "Type II expects evidence of testing",          dpdp: "Implied via 'reasonable safeguards'" },
+];
+
+const certBodyTips = [
+  "IAF-recognized or NABCB-accredited only. Non-accredited certificates are rejected by enterprise procurement and PSU tenders.",
+  "Globally-recognized: BSI, TÜV Nord, TÜV SÜD, DNV, BVQI (Bureau Veritas), DEKRA, LRQA, SGS, Intertek.",
+  "India-strong: BSCIC, URS, IRQS, RINA, ICL, Indian Register Quality Systems.",
+  "Cost factor is real (CB fees range 1.5–4× between CBs) but DO NOT pick the cheapest. The audit experience and report quality matter for downstream customer trust.",
+];
+
+const isoFaqs = [
+  {
+    q: "What is ISO 27001 and why has the 2022 revision changed things?",
+    a: "ISO 27001 is the international standard for Information Security Management Systems (ISMS). The 2022 revision restructured Annex A from 14 control domains (114 controls) to 4 themes (93 controls), introduced 11 new controls explicitly addressing threat intelligence, cloud security, ICT readiness, data leakage prevention, web filtering, secure coding, and configuration management. Organizations certified to the 2013 version have until October 2025 to transition.",
+  },
+  {
+    q: "How is ISO 27001 different from SOC 2 — do I need both?",
+    a: "ISO 27001 is a management-system standard producing a 3-year accredited certificate. SOC 2 is a controls attestation (Type II = period of evidence) producing an annual report. ISO 27001 is the expectation in EU/UK/India and for most Indian PSU and enterprise procurement. SOC 2 is the expectation for US enterprise SaaS customers, especially for vendor risk reviews. Indian SaaS exporters to the US frequently maintain both — ISO 27001 as the management baseline, SOC 2 Type II as the US customer-facing attestation.",
+  },
+  {
+    q: "How does ISO 27001:2022 relate to DPDP Act 2023?",
+    a: "DPDP requires 'reasonable security safeguards' but doesn't prescribe controls. ISO 27001:2022 Annex A — with ISO 27701 (privacy) layered on — is the closest internationally-recognized framework that maps to DPDP's expectations: data classification (A.5.12, A.5.13), data subject rights workflows (A.5.34), breach notification procedures (A.5.24, A.5.27), and processor obligations (A.5.19, A.5.23). When the Data Protection Board issues compliance enforcement actions, ISO 27001 + ISO 27701 will be the documented baseline most defensible organizations point to.",
+  },
+  {
+    q: "How long does ISO 27001 implementation take for an Indian SME?",
+    a: "Typical timeline is 16–24 weeks (4–6 months) for an SME with no prior ISMS: weeks 1–3 scope and gap analysis, weeks 4–6 risk assessment and SoA, weeks 5–10 policy authoring (parallel), weeks 7–18 control implementation, weeks 18–20 internal audit and management review, weeks 21–24 Stage 1 + Stage 2 CB audits. Aggressive timelines of 10–12 weeks are possible for already-mature security operations but rarely advisable.",
+  },
+  {
+    q: "What's the realistic cost of ISO 27001 certification in India?",
+    a: "For an Indian SME (50–250 employees, single site, IT/SaaS scope): consultancy fees ₹1,50,000–₹4,50,000 depending on starting maturity and scope size; CB audit fees (Stage 1 + Stage 2) ₹1,00,000–₹2,50,000; tooling (vulnerability scanning, log aggregation, access management if absent) ₹50,000–₹2,00,000 first-year. Total ₹3,00,000–₹9,00,000 first year. Year-2 surveillance audit ₹60,000–₹1,20,000. Year-3 re-certification audit at near-original cost.",
+  },
+  {
+    q: "Does ISO 27001 require a penetration test?",
+    a: "ISO 27001 doesn't explicitly mandate a penetration test, but Annex A.8.8 (Management of technical vulnerabilities) and A.8.29 (Security testing in development and acceptance) effectively require periodic technical testing. In practice, most Stage 2 auditors expect to see evidence of a VAPT exercise within the audit window. We bundle VAPT into our ISO 27001 engagements — a single vendor handles ISMS + testing for consistency.",
+  },
+  {
+    q: "Can ISO 27001 be implemented for just one product line or business unit?",
+    a: "Yes — scope is defined by you. Common SME and mid-market approach is to certify a specific product, service line, or business unit (with its own people, premises if applicable, and infrastructure) rather than the entire entity. The scope statement on the certificate must match the audited scope precisely. Customers reading the certificate can see exactly what's covered, so scope clarity is also a sales asset.",
+  },
+  {
+    q: "What happens if the Stage 2 audit raises non-conformances?",
+    a: "Minor NCs (most common) require a documented corrective action plan and evidence of closure submitted to the CB within an agreed window (typically 30–90 days). The certificate is then issued. Major NCs require a re-audit before the certificate can be issued. With proper Stage 1 readiness, major NCs are rare — and one of the things we explicitly underwrite in our engagement model.",
+  },
+  {
+    q: "Which Indian industries are seeing the highest demand for ISO 27001 in 2026?",
+    a: "Sharpest growth: fintech and PayTech (RBI, NPCI, payment card environment scopes), BFSI back-office BPO (US/UK/EU customer audit demands), Indian SaaS exporters (EU/UK procurement, SOC 2 + 27001 combos), PSU IT/OT vendors (NTPC, ONGC, IOCL, Indian Railways IT supply increasingly cites 27001), and healthcare/HealthTech (ABDM, hospital chains, diagnostic networks).",
+  },
+  {
+    q: "How does QualityNexus deliver ISO 27001 engagements differently?",
+    a: "Three practical commitments: (1) Lead auditor on every call — no junior hand-off; (2) Fixed-price scoped engagement with milestone deliverables, no hourly billing surprises; (3) VAPT bundled in, so Stage 2 auditor sees consistent vendor evidence instead of stitching together two suppliers' work. We work CB-neutral and recommend the certification body based on your customer base and procurement requirements, not on referral commissions.",
+  },
+];
+
+// ---------- Schema ----------
+const PAGE_URL = `${SITE}/iso-27001-consultant-india/`;
+
+const crumbs = breadcrumbLd([
+  { name: "Home",                       href: "/" },
+  { name: "ISO 27001 Consultant India", href: "/iso-27001-consultant-india/" },
+]);
+
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${PAGE_URL}#service`,
+  "serviceType": "ISO 27001 Information Security Management Consultancy",
+  "name": "ISO 27001:2022 Implementation Consultancy in India",
+  "description": "End-to-end ISO 27001:2022 implementation consultancy for Indian banks, fintech, SaaS exporters, BPO, IT services, and healthcare — with bundled VAPT, DPDP Act 2023 overlay, and RBI/SEBI framework alignment.",
+  "provider": { "@id": `${SITE}/#organization` },
+  "areaServed": { "@type": "Country", "name": "India" },
+  "url": PAGE_URL,
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "BFSI, fintech, SaaS, BPO/KPO, IT services, healthcare, and PSU IT/OT vendors in India targeting ISO 27001 certification.",
+  },
+};
+
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `${PAGE_URL}#article`,
+  "headline": "ISO 27001 Consultant in India — 2026 Implementation Guide",
+  "description": "Definitive guide to ISO 27001:2022 implementation for Indian organizations — Annex A controls, RBI / SEBI / DPDP alignment, cost, timeline, and certification body selection.",
+  "author":    { "@id": `${SITE}/#organization` },
+  "publisher": { "@id": `${SITE}/#organization` },
+  "datePublished": "2026-05-18",
+  "dateModified":  "2026-05-18",
+  "mainEntityOfPage": PAGE_URL,
+  "image": `${SITE}/og/default.jpg`,
+  "about": [
+    { "@type": "Thing", "name": "ISO 27001" },
+    { "@type": "Thing", "name": "Information Security Management System" },
+    { "@type": "Thing", "name": "DPDP Act 2023" },
+    { "@type": "Thing", "name": "RBI Cyber Security Framework" },
+  ],
+  "inLanguage": "en-IN",
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": isoFaqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+---
+<BaseLayout
+  title="ISO 27001 Consultant in India — 2026 Implementation Guide"
+  description="Complete 2026 guide to ISO 27001:2022 implementation for Indian banks, fintech, SaaS, BPO, IT services, and healthcare. Annex A controls, RBI/SEBI/DPDP alignment, realistic cost, timelines."
+  canonical="/iso-27001-consultant-india/"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />
+
+  <PageHero
+    eyebrow="Pillar guide · India · ISO 27001:2022"
+    title="ISO 27001 consultant"
+    accent="for Indian organizations."
+    lede="A current, practical, India-specific guide to ISO 27001:2022 — the Annex A 2022 control framework, the 12-step implementation journey, alignment with DPDP Act 2023 and RBI/SEBI cyber frameworks, realistic cost and timeline for SMEs, and how to choose the right certification body."
+    hasVisual={false}
+  />
+
+  <!-- ===== STATS STRIP ===== -->
+  <section class="section section-soft psu-stats-section">
+    <div class="container psu-stats">
+      {stats.map((s) => (
+        <div class="psu-stat">
+          <strong>{s.num}</strong>
+          <span>{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== INTRO ===== -->
+  <section class="section">
+    <div class="container psu-prose">
+      <h2 id="overview">What ISO 27001:2022 actually is</h2>
+      <p>
+        ISO 27001:2022 is the international standard for Information Security Management Systems. It is not a checklist; it is a management framework that says: identify your information assets, assess threats and vulnerabilities, decide what risks are acceptable, select controls that bring residual risk to acceptable levels, document everything, audit yourself, and keep improving. The standard defines <em>requirements</em> in clauses 4–10 (mandatory) and a control catalogue in <em>Annex A</em> (93 controls, of which you apply or justify exclusion).
+      </p>
+      <p>
+        The 2022 revision restructured Annex A from 14 domains to 4 themes (Organizational, People, Physical, Technological) and introduced 11 new controls explicitly addressing threat intelligence, cloud security, configuration management, data leakage prevention, secure coding, and ICT readiness for business continuity. Organizations on the older ISO 27001:2013 version have until <strong>October 2025</strong> to transition; after that, 2013 certificates become invalid.
+      </p>
+      <p>
+        For Indian organizations in 2026, ISO 27001:2022 is becoming the default information-security baseline — driven by the <a href="#dpdp">DPDP Act 2023</a>, RBI and SEBI cyber frameworks, enterprise procurement pre-qualification, and increasingly PSU IT/OT supply contracts. This page is the definitive walk-through. If you'd rather jump to a scoping call, <a href="/contact/">contact us</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== WHY IT MATTERS — REGULATORY DRIVERS ===== -->
+  <section class="section section-soft" id="dpdp">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Regulatory drivers in India</span>
+        <h2>Four reasons ISO 27001 sits on the 2026 compliance roadmap</h2>
+        <p>None of these reasons existed in their current form three years ago. Together they make ISO 27001:2022 the most pragmatic single investment for information-security maturity in India.</p>
+      </div>
+      <div class="psu-clause-grid">
+        {regulatoryDrivers.map((d) => (
+          <article class="psu-clause-card">
+            <span class="icon-halo"><Icon name={d.icon} /></span>
+            <h3>{d.title}</h3>
+            <p>{d.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ANNEX A THEMES ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Annex A 2022</span>
+        <h2>The 4-theme control framework</h2>
+        <p>The 2022 revision restructured Annex A from 14 domains into 4 themes — 93 controls total. Each control is "applied" or "not applied with justification" on your Statement of Applicability.</p>
+      </div>
+      <div class="psu-sector-grid">
+        {annexAThemes.map((t) => (
+          <article class="psu-sector-card">
+            <div class="psu-sector-head">
+              <span class="icon-halo"><Icon name="shield-check" /></span>
+              <h3>{t.code} · {t.title}</h3>
+            </div>
+            <p class="psu-sector-note">{t.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 12-STEP JOURNEY ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Implementation journey</span>
+        <h2>The 12-step path to certificate</h2>
+        <p>The sequence we run on every ISO 27001 engagement. Realistic timing: 16–24 weeks from scope to certificate for an SME with no prior ISMS.</p>
+      </div>
+      <ol class="psu-journey">
+        {implementationSteps.map((s) => (
+          <li class="psu-journey-step">
+            <span class="psu-journey-num">{s.n}</span>
+            <div>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== SECTOR USE CASES ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Sector applications</span>
+        <h2>How ISO 27001 reads differently by sector</h2>
+        <p>Same standard. Different control emphasis, different audit scrutiny, different layered frameworks. Six sectors we deliver most frequently.</p>
+      </div>
+      <div class="psu-sector-grid">
+        {sectorUseCases.map((s) => (
+          <article class="psu-sector-card">
+            <div class="psu-sector-head">
+              <span class="icon-halo"><Icon name={s.icon} /></span>
+              <h3>{s.name}</h3>
+            </div>
+            <p class="psu-sector-note">{s.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMMON NON-CONFORMANCES ===== -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">What we see fail in audits</span>
+        <h2>Six most common Stage 2 non-conformances</h2>
+        <p>Patterns from active engagements. Each of these is preventable if the implementation phase treats them as load-bearing rather than checkbox.</p>
+      </div>
+      <div class="psu-clause-grid">
+        {commonNcs.map((n) => (
+          <article class="psu-clause-card">
+            <span class="icon-halo"><Icon name="alert-triangle" /></span>
+            <h3>{n.title}</h3>
+            <p>{n.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPARISON TABLE ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Framework comparison</span>
+        <h2>ISO 27001 vs SOC 2 vs DPDP — when which one</h2>
+        <p>Three frameworks that overlap but answer different questions. Most Indian organizations targeting global customers run two or three concurrently — ISO 27001 as the management spine, SOC 2 for US customer-facing attestation, DPDP for statutory obligations.</p>
+      </div>
+      <div class="iso-compare">
+        <table class="iso-compare-table">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>ISO 27001:2022</th>
+              <th>SOC 2</th>
+              <th>DPDP Act 2023</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((r) => (
+              <tr>
+                <th scope="row">{r.row}</th>
+                <td>{r.iso}</td>
+                <td>{r.soc}</td>
+                <td>{r.dpdp}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COST & TIMELINE ===== -->
+  <section class="section section-soft">
+    <div class="container psu-prose">
+      <h2 id="cost">Realistic cost and timeline for an Indian SME</h2>
+      <p>
+        Scope drives everything. The same standard applied to a 30-person SaaS exporter is wildly different in effort and cost from the same standard applied to a 500-person BPO with US bank customers and FedRAMP-adjacent controls. Below are the ranges we see most consistently in our engagements.
+      </p>
+      <ul class="psu-qap-list">
+        <li><span class="psu-qap-num">A</span> Consultancy (gap → certificate): <strong>₹1.5L – ₹4.5L</strong> for SMEs (50–250 employees, single site, IT/SaaS scope)</li>
+        <li><span class="psu-qap-num">B</span> CB Stage 1 + Stage 2 audit fees: <strong>₹1.0L – ₹2.5L</strong> (varies 1.5–4× between CBs)</li>
+        <li><span class="psu-qap-num">C</span> First-year tooling (VAPT, log aggregation, scanning, access mgmt if absent): <strong>₹0.5L – ₹2.0L</strong></li>
+        <li><span class="psu-qap-num">D</span> Internal staff time (CISO function, process owners, training): real but rarely costed — budget 20–40 person-days</li>
+        <li><span class="psu-qap-num">E</span> Year-2 surveillance audit: <strong>₹60K – ₹1.2L</strong></li>
+        <li><span class="psu-qap-num">F</span> Year-3 re-certification audit: similar to Stage 1+2 cost</li>
+        <li><span class="psu-qap-num">G</span> Timeline (scope to certificate): <strong>16–24 weeks</strong> for SME, 6–12 months for enterprise multi-site</li>
+        <li><span class="psu-qap-num">H</span> Total first-year all-in: <strong>₹3.0L – ₹9.0L</strong> typical SME band</li>
+      </ul>
+      <p>
+        Caveat — costs reflect 2026 Indian market for accredited CBs (BSI, TUV Nord, DNV, BVQI, DEKRA, LRQA, SGS, Intertek, BSCIC, IRQS, URS, RINA). Non-accredited certificates appear cheaper but are rejected by enterprise procurement and PSU tenders, making the apparent saving illusory.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CHOOSING A CB ===== -->
+  <section class="section">
+    <div class="container psu-prose">
+      <h2 id="cb">Choosing a certification body</h2>
+      <p>
+        We're CB-neutral. The right CB depends on your customer base, geographic reach, and procurement reality — not on referral commissions. Four practical rules we apply when recommending:
+      </p>
+      <ul class="psu-qap-list">
+        {certBodyTips.map((t, i) => (
+          <li><span class="psu-qap-num">{String(i + 1).padStart(2, "0")}</span> {t}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== CROSS-LINKS ===== -->
+  <section class="section section-soft">
+    <div class="container psu-cross-links">
+      <div class="section-head center">
+        <span class="eyebrow">Related deep dives</span>
+        <h2>What pairs with ISO 27001</h2>
+      </div>
+      <div class="psu-cross-grid">
+        <a href="/certifications/iso-27001/" class="psu-cross-card">
+          <strong>ISO 27001 — Standard overview</strong>
+          <span>The cert-page summary &amp; principles</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/psu-vendor-compliance/" class="psu-cross-card">
+          <strong>PSU Vendor Compliance</strong>
+          <span>Government &amp; PSU tender readiness</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/iso-consultant-ranchi/" class="psu-cross-card">
+          <strong>ISO Consultant in Ranchi</strong>
+          <span>Local delivery in Jharkhand &amp; East India</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/services/" class="psu-cross-card">
+          <strong>All services</strong>
+          <span>9 service lines including VAPT</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/team/" class="psu-cross-card">
+          <strong>Lead auditors</strong>
+          <span>IRCA + Exemplar Global credentials</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+        <a href="/clients/" class="psu-cross-card">
+          <strong>Client portfolio</strong>
+          <span>13+ active PSU &amp; enterprise engagements</span>
+          <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQS ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Frequently asked</span>
+        <h2>ISO 27001 FAQs from Indian clients</h2>
+        <p>The questions we hear most often during scoping calls with CTOs, CISOs, and operations leads.</p>
+      </div>
+      <div class="psu-faqs">
+        {isoFaqs.map((f, i) => (
+          <details class="psu-faq" open={i === 0}>
+            <summary><span class="psu-faq-num">{String(i + 1).padStart(2, "0")}</span> {f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading="Bring ISO 27001 inside in one engagement."
+    body="Tell us your scope and customer drivers (RBI / SEBI / DPDP / enterprise procurement). Within 48 hours we come back with a gap report, fixed-price proposal, and a realistic 4–6 month plan."
+    ctaLabel="Get an ISO 27001 plan"
+    ctaHref="/contact/"
+    secondaryLabel="See our lead auditors"
+    secondaryHref="/team/"
+    source="iso-27001-pillar"
+  />
+</BaseLayout>
+
+<style>
+  /* ===== Stats strip (reusing PSU pillar styles via local copies) ===== */
+  .psu-stats-section { padding: 32px 0; }
+  .psu-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; text-align: center; }
+  .psu-stat {
+    background: #fff; border: 1px solid var(--color-border); border-radius: 14px;
+    padding: 22px 14px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .psu-stat strong {
+    font-family: var(--font-display); font-size: 26px; color: var(--color-gold-strong); line-height: 1.1;
+  }
+  .psu-stat span { font-size: 13px; color: var(--color-body); }
+
+  /* Prose */
+  .psu-prose { max-width: 880px; }
+  .psu-prose h2 { margin-top: 8px; }
+  .psu-prose p { color: var(--color-body); line-height: 1.78; font-size: 16.5px; margin-bottom: 16px; }
+  .psu-prose a { color: var(--color-accent-strong); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .psu-prose a:hover { color: var(--color-primary); }
+  .psu-prose strong { color: var(--color-heading); }
+  .psu-prose em { font-style: italic; color: var(--color-heading); }
+
+  /* Clause grid (regulatory drivers, NCs) */
+  .psu-clause-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .psu-clause-card {
+    background: #fff; border: 1px solid var(--color-border); border-radius: 14px;
+    padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .psu-clause-card h3 { margin: 6px 0 0; font-size: 16.5px; color: var(--color-heading); }
+  .psu-clause-card p { margin: 0; color: var(--color-body); font-size: 14px; line-height: 1.6; }
+
+  /* Sector grid */
+  .psu-sector-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .psu-sector-card {
+    background: #fff; border: 1px solid var(--color-border); border-radius: 18px;
+    padding: 28px 28px; display: flex; flex-direction: column; gap: 14px;
+  }
+  .psu-sector-head { display: flex; align-items: center; gap: 14px; }
+  .psu-sector-head h3 { margin: 0; font-size: 18px; color: var(--color-heading); }
+  .psu-sector-note { margin: 0; color: var(--color-body); font-size: 14.5px; line-height: 1.65; }
+
+  /* Journey */
+  .psu-journey {
+    list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr;
+    gap: 14px; max-width: 920px; margin: 0 auto;
+  }
+  .psu-journey-step {
+    display: grid; grid-template-columns: 64px 1fr; gap: 24px;
+    background: #fff; border: 1px solid var(--color-border); border-radius: 16px;
+    padding: 22px 26px; align-items: flex-start;
+  }
+  .psu-journey-num {
+    font-family: var(--font-display); font-size: 28px; font-weight: 800;
+    color: var(--color-gold-strong); line-height: 1;
+  }
+  .psu-journey-step h3 { margin: 0 0 6px; font-size: 17px; color: var(--color-heading); }
+  .psu-journey-step p { margin: 0; color: var(--color-body); line-height: 1.65; font-size: 14.5px; }
+
+  /* QAP-style numbered list (cost + CB tips) */
+  .psu-qap-list {
+    list-style: none; padding: 0; margin: 18px 0 22px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 18px;
+    background: var(--color-bg-soft); border: 1px solid var(--color-border); border-radius: 16px;
+    padding: 22px 24px;
+  }
+  .psu-qap-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: var(--color-body); line-height: 1.55; }
+  .psu-qap-num {
+    font-family: var(--font-display); color: var(--color-gold-strong); font-weight: 800;
+    flex-shrink: 0; font-size: 13px; margin-top: 1px;
+  }
+
+  /* Cross-links */
+  .psu-cross-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .psu-cross-card {
+    background: #fff; border: 1px solid var(--color-border); border-radius: 14px;
+    padding: 20px 22px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto;
+    gap: 4px 14px; text-decoration: none; color: var(--color-body);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .psu-cross-card:hover {
+    transform: translateY(-2px); border-color: var(--color-accent-strong);
+    box-shadow: 0 10px 24px rgba(15,23,42,.08);
+  }
+  .psu-cross-card strong { grid-column: 1; font-family: var(--font-display); color: var(--color-primary); font-size: 16px; }
+  .psu-cross-card span:nth-of-type(1) { grid-column: 1; font-size: 13.5px; color: var(--color-body); }
+  .psu-cross-arrow { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--color-accent-strong); }
+  .psu-cross-arrow :global(svg) { width: 18px; height: 18px; }
+
+  /* FAQs */
+  .psu-faqs { max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .psu-faq { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; overflow: hidden; }
+  .psu-faq summary {
+    cursor: pointer; list-style: none; padding: 20px 24px; font-weight: 600;
+    color: var(--color-heading); display: flex; align-items: flex-start; gap: 14px; font-size: 15.5px;
+  }
+  .psu-faq summary::-webkit-details-marker { display: none; }
+  .psu-faq[open] summary { border-bottom: 1px solid var(--color-border); }
+  .psu-faq-num { font-family: var(--font-display); color: var(--color-gold-strong); font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+  .psu-faq p { margin: 0; padding: 18px 24px 24px; color: var(--color-body); line-height: 1.7; font-size: 14.5px; }
+
+  /* Comparison table */
+  .iso-compare {
+    max-width: 1080px; margin: 0 auto;
+    overflow-x: auto;
+  }
+  .iso-compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .iso-compare-table thead th {
+    background: var(--color-primary);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 14px;
+    text-align: left;
+    padding: 14px 18px;
+    font-weight: 700;
+  }
+  .iso-compare-table tbody th {
+    text-align: left;
+    padding: 14px 18px;
+    color: var(--color-heading);
+    background: var(--color-bg-soft);
+    font-size: 13.5px;
+    width: 18%;
+    font-weight: 700;
+  }
+  .iso-compare-table tbody td {
+    padding: 14px 18px;
+    color: var(--color-body);
+    font-size: 13.5px;
+    line-height: 1.55;
+    border-top: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+  .iso-compare-table tbody tr:not(:first-child) th,
+  .iso-compare-table tbody tr:not(:first-child) td {
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Responsive */
+  @media (max-width: 980px) {
+    .psu-stats { grid-template-columns: repeat(2, 1fr); }
+    .psu-sector-grid,
+    .psu-clause-grid { grid-template-columns: 1fr; }
+    .psu-cross-grid { grid-template-columns: repeat(2, 1fr); }
+    .psu-qap-list { grid-template-columns: 1fr; }
+    .iso-compare-table thead th,
+    .iso-compare-table tbody th,
+    .iso-compare-table tbody td { font-size: 12.5px; padding: 10px 12px; }
+  }
+  @media (max-width: 640px) {
+    .psu-stats { grid-template-columns: 1fr; }
+    .psu-cross-grid { grid-template-columns: 1fr; }
+    .psu-journey-step { grid-template-columns: 1fr; gap: 8px; }
+    .psu-journey-num { font-size: 22px; }
+  }
+</style>

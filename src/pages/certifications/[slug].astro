@@ -16,6 +16,12 @@ const detail = details[standard.slug];
 const hasDetail = Boolean(detail);
 const cat = standard.category;
 
+// Pillar guides — extend this map as new pillar pages ship.
+const pillarFor: Record<string, { href: string; label: string }> = {
+  "iso-27001": { href: "/iso-27001-consultant-india/", label: "ISO 27001 Consultant in India — full implementation guide" },
+};
+const pillar = pillarFor[standard.slug];
+
 const benefitIcons = ["users", "settings", "compass", "trending-up"];
 const whyIcons = ["check-circle", "shield-check", "graduation-cap", "scale", "rocket"];
 
@@ -125,6 +131,13 @@ const articleLd = hasDetail ? {
             <a href="/contact" class="btn btn-accent">Talk to a senior consultant</a>
             <a href="/certifications" class="btn btn-ghost">Back to all standards</a>
           </div>
+          {pillar && (
+            <a href={pillar.href} class="cert-pillar-link">
+              <Icon name="file-text" />
+              <span>{pillar.label}</span>
+              <Icon name="arrow-right" />
+            </a>
+          )}
         </div>
 
         <aside class="cert-hero-card">
@@ -350,6 +363,32 @@ const articleLd = hasDetail ? {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+  }
+  .cert-pillar-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 10px 16px;
+    background: rgba(212, 175, 55, 0.10);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 10px;
+    color: var(--color-heading);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .cert-pillar-link:hover {
+    background: rgba(212, 175, 55, 0.18);
+    border-color: var(--color-gold);
+    transform: translateY(-1px);
+  }
+  .cert-pillar-link :global(svg) {
+    width: 16px;
+    height: 16px;
+    color: var(--color-gold-strong);
+    flex-shrink: 0;
   }
 
   .cert-hero-card {
