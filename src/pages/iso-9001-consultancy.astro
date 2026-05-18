@@ -1,0 +1,94 @@
+---
+import ServicePage from "../components/ServicePage.astro";
+import type { ServiceData } from "../components/ServicePage.astro";
+
+const service: ServiceData = {
+  slug: "iso-9001-consultancy",
+  title: "ISO 9001 Consultancy Services in India | QualityNexus",
+  description: "End-to-end ISO 9001:2015 consultancy for Indian manufacturers, service firms, MSMEs, and PSU vendors. Fixed-price scoping, senior lead auditor delivery, accredited certification body coordination.",
+  breadcrumbLabel: "ISO 9001 Consultancy",
+  hero: {
+    eyebrow: "Service · ISO 9001:2015 · India",
+    title: "ISO 9001 consultancy",
+    accent: "delivered end to end.",
+    lede: "From gap analysis to certificate — a senior IRCA-trained lead auditor runs your ISO 9001:2015 engagement on a fixed-price scope. Pan-India delivery, accredited certification body coordination, internal audit support, and post-certification surveillance.",
+  },
+  stats: [
+    { num: "6–12 wk",  label: "Typical SME timeline" },
+    { num: "₹70K–₹2.5L", label: "Total cost band (SME)" },
+    { num: "100%",     label: "Stage-2 pass rate" },
+    { num: "48 hrs",   label: "From enquiry to plan" },
+  ],
+  intro: [
+    `ISO 9001:2015 is the world's most-recognized standard for quality management systems — and the baseline quality clause on almost every Indian PSU, government, and enterprise tender. We deliver ISO 9001 consultancy end to end, with a senior IRCA-trained lead auditor accountable on every call, fixed-price scoping, and direct coordination with accredited certification bodies (TUV, BSI, BVQI, DNV, Intertek, SGS, IRQS).`,
+    `Engagements run on a typical 6–12 week timeline for an SME at a single site, longer for multi-site or PSU contractor scopes. The engagement covers gap analysis, documentation, internal audit, Stage 1 and Stage 2 audit support — and if you've never been through certification before, we walk you through every line of the auditor's report so you understand exactly what was inspected and why.`,
+    `We're CB-neutral. We work with whichever IAF / NABCB-accredited body fits your customer base, export markets, and procurement requirements — not whichever one pays referral.`,
+  ],
+  scope: [
+    { icon: "search",          title: "Gap analysis against clauses 4–10",        body: "Walk-through of your current state against every ISO 9001:2015 clause. Output is a colour-coded register with what's already in place, what needs creating, and effort estimates per item." },
+    { icon: "file-text",       title: "Quality manual & process documentation",   body: "Quality manual aligned to Annex SL, process maps, work instructions, document control register, and the records list. Authored to your operations — not boilerplate." },
+    { icon: "shield-check",    title: "Risk-based thinking & opportunity register", body: "Risk register, opportunity log, and risk treatment plan integrated into the QMS — not bolted on the side. Sized to scope: a 30-person services firm is not a 500-person factory." },
+    { icon: "users",           title: "Awareness & internal auditor training",    body: "ISO 9001 awareness training for all staff; internal auditor training (IRCA-aligned, 2-day) for the people running internal audits going forward." },
+    { icon: "clipboard-check", title: "Internal audit + management review",       body: "First-cycle internal audit conducted as an external assessor would. Management review minutes drafted with leadership; this is the document Stage 2 auditors check first." },
+    { icon: "award",           title: "Stage 1 + Stage 2 CB audit support",       body: "We attend the CB audit on-site, support evidence retrieval, manage scope, and close any minor non-conformance inside the visit where possible. Goal: clean Stage 2 report on day one." },
+  ],
+  process: [
+    { n: "01", title: "Kickoff + gap analysis (week 1–2)",          body: "Scope workshop with leadership. On-site walk-through (or remote for services firms). Gap report delivered within 7 working days with detailed remediation plan." },
+    { n: "02", title: "Documentation + implementation (week 3–7)",  body: "Quality manual + procedures authored. Process owners trained. Risk register seeded. Records system stood up. This is the longest phase and where most engagements stall — we don't." },
+    { n: "03", title: "Internal audit + management review (week 8)", body: "Independent internal audit run by us. Findings logged, root cause analyzed, corrective actions tracked to closure. Management review meeting with documented minutes." },
+    { n: "04", title: "Stage 1 + Stage 2 CB audit (week 9–12)",      body: "CB Stage 1 (documentation review) — we close any readiness gaps. Stage 2 (on-site verification) — we attend. Certificate issued within 4–6 weeks of clean Stage 2." },
+  ],
+  deliverables: [
+    "ISO 9001:2015 Quality Manual (Annex SL aligned)",
+    "Documented procedures for all required clauses",
+    "Risk and opportunity register with treatment plan",
+    "Internal audit checklist library and audit report template",
+    "Management review meeting pack and signed minutes",
+    "Awareness training material (deck + handout) for all staff",
+    "Internal auditor training certificates for 2–4 nominees",
+    "Stage 1 + Stage 2 CB audit on-site support and NC closure",
+  ],
+  sectors: [
+    { icon: "cog",         name: "Manufacturing & MSME",        body: "Process documentation, NCR/CAPA system, supplier quality, in-process inspection records, calibration management. The clauses Stage 2 auditors inspect most." },
+    { icon: "hard-hat",    name: "PSU vendors & contractors",   body: "Contract-specific Quality Assurance Plans (QAPs) layered on top of ISO 9001 for NTPC, IOCL, ONGC, Indian Railways, NHPC, HAL supply contracts. We author the QAP, get customer approval, align SOPs." },
+    { icon: "stethoscope", name: "Healthcare & diagnostics",    body: "ISO 9001 as the baseline before NABH or NABL — patient process flows, document control, complaint handling, equipment management. We sequence the rollout." },
+    { icon: "headphones",  name: "Services & BPO",              body: "ISO 9001 for IT services, BPO, KPO, consulting firms — adapted to where 'product' is a deliverable, 'process' is a workflow, and 'customer satisfaction' is measurable through survey + retention." },
+  ],
+  pricing: [
+    { tier: "Single site · SME",  fit: "Most common", scope: "~30–250 employees, single location. Fixed-price ₹1.0L–₹1.8L consultancy + CB audit fees (₹70K–₹1.2L paid separately to TUV/BSI/BVQI/DNV/SGS)." },
+    { tier: "Multi-site / multi-standard", fit: "Group operations", scope: "Multi-location or integrated 9001+14001+45001. Fixed-price ₹2.0L–₹4.5L consultancy. Recommended for groups planning two or three standards together." },
+    { tier: "Retainer (post-certificate)", fit: "Ongoing surveillance", scope: "Monthly retainer covering surveillance audit prep, internal audit cycle, document control, and management review hosting. ₹15K–₹40K/month." },
+  ],
+  faqs: [
+    { q: "Do we need ISO 9001 if we already have a quality system in place?", a: "If your customers don't ask for the certificate, you don't strictly need it. If you're targeting PSU tenders, government supply, large enterprise procurement, or export — ISO 9001 from an accredited CB is almost always required in pre-qualification. Without the accredited certificate, your bid is filtered out before technical evaluation." },
+    { q: "How long does the entire process take?",                            a: "Typical timeline is 6–12 weeks for a single-site SME from kickoff to certificate. Multi-site or PSU contractor engagements run 12–16 weeks. The longest phase is documentation + implementation (weeks 3–7); we keep that on track with weekly check-ins and clear ownership." },
+    { q: "What's the total cost — consultancy + CB audit?",                   a: "For a single-site SME (30–250 employees): consultancy ₹1.0L–₹1.8L + CB Stage 1+2 audit fees ₹70K–₹1.2L. Total typically ₹1.7L–₹3.0L. Multi-site or large enterprise scopes run ₹2.5L–₹6L. We give you a fixed-price proposal after the scoping call — no surprises." },
+    { q: "Which certification bodies do you work with?",                      a: "All major IAF / NABCB-accredited CBs — TUV Nord, TUV SUD, BSI, BVQI (Bureau Veritas), DNV, Intertek, SGS, IRQS, RINA, URS, ICL. We recommend a CB based on your customer base, export markets, and procurement reality — not on referral commissions." },
+    { q: "Will you do the internal audit, or do we have to?",                  a: "We run the first internal audit as an independent assessor. We also train 2–4 of your team as internal auditors (IRCA-aligned 2-day) so subsequent cycles can be run in-house. ISO 9001 requires internal audit independence — we ensure the structure is right from year one." },
+    { q: "What happens after the certificate is issued?",                     a: "ISO 9001 certificates are valid for 3 years with surveillance audits at year 1 and year 2 (lighter scope, ~50% of original audit days) and full re-certification at year 3. We can stay on retainer or hand over cleanly to your internal team." },
+    { q: "What is the difference between consultancy and certification?",     a: "Consultancy is the implementation work — we help you build the QMS. Certification is the third-party audit — done by an accredited CB. By law (and by ISO's accreditation rules), the same body cannot do both. We are CB-neutral consultants; the CB issues the certificate after their independent audit." },
+    { q: "Can ISO 9001 be combined with ISO 14001 / 45001 / 27001?",          a: "Yes — and it's usually cheaper. Annex SL aligns the structure of 9001 / 14001 / 45001 / 27001, so an integrated management system shares clauses 4–10 and only diverges on Annex A controls. We typically save 25–40% versus running them sequentially." },
+  ],
+  crossLinks: [
+    { href: "/certifications/iso-9001/",   title: "ISO 9001 — standard overview",   sub: "What the standard is, principles, benefits" },
+    { href: "/psu-vendor-compliance/",     title: "PSU Vendor Compliance",         sub: "Tender-ready certification packs" },
+    { href: "/services/",                  title: "All services",                  sub: "9 service lines including training" },
+    { href: "/iso-consultant-ranchi/",     title: "ISO Consultant in Ranchi",      sub: "Local delivery in Jharkhand" },
+    { href: "/team/",                      title: "Lead auditors",                 sub: "IRCA + Exemplar Global credentials" },
+    { href: "/contact/",                   title: "Talk to us",                    sub: "Free 30-min scoping call" },
+  ],
+  cta: {
+    heading: "Start with a fixed-price ISO 9001 plan.",
+    body: "Tell us your scope, sites, and tender deadlines. Within 48 hours we come back with a fixed-price proposal and a realistic 6–12 week plan.",
+    ctaLabel: "Get a fixed-price plan",
+    secondaryLabel: "See ISO 9001 standard",
+    secondaryHref: "/certifications/iso-9001/",
+    source: "iso-9001-svc",
+  },
+  schemaServiceType: "ISO 9001 Quality Management System Consultancy",
+  schemaAudience: "Manufacturers, service firms, MSMEs, healthcare providers, and PSU vendors in India targeting ISO 9001:2015 certification",
+  articleHeadline: "ISO 9001 Consultancy Services in India — Fixed-Price, Senior Lead Auditor Delivery",
+  articleAbout: ["ISO 9001", "Quality Management System", "ISO 9001:2015", "QMS Consultancy"],
+};
+---
+<ServicePage service={service} />

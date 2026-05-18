@@ -1,0 +1,365 @@
+---
+/**
+ * ServicePage.astro — shared template for transactional service pages.
+ *
+ * Each /xxx-consultancy or /xxx-services page is a thin data file that
+ * imports this component and passes a `service` prop. This template renders
+ * the full page: hero, stats, intro, scope, process, deliverables, sectors,
+ * pricing tiers, FAQs, cross-links, CTA, and emits Service + Article +
+ * FAQPage + BreadcrumbList JSON-LD.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "./PageHero.astro";
+import CtaStrip from "./CtaStrip.astro";
+import Icon from "./Icon.astro";
+import { breadcrumbLd, SITE } from "../lib/schema";
+
+export type ServiceData = {
+  slug: string;
+  title: string;
+  description: string;
+  breadcrumbLabel: string;
+  hero: { eyebrow: string; title: string; accent: string; lede: string; };
+  stats: Array<{ num: string; label: string }>;
+  intro: string[];
+  scope: Array<{ icon: string; title: string; body: string }>;
+  process: Array<{ n: string; title: string; body: string }>;
+  deliverables: string[];
+  sectors: Array<{ icon: string; name: string; body: string }>;
+  pricing: Array<{ tier: string; fit: string; scope: string }>;
+  faqs: Array<{ q: string; a: string }>;
+  crossLinks: Array<{ href: string; title: string; sub: string }>;
+  cta: {
+    heading: string; body: string; ctaLabel: string;
+    secondaryLabel?: string; secondaryHref?: string; source: string;
+  };
+  schemaServiceType: string;
+  schemaAudience: string;
+  articleHeadline: string;
+  articleAbout: string[];
+};
+
+interface Props { service: ServiceData; }
+const { service } = Astro.props;
+
+const PAGE_URL = `${SITE}/${service.slug}/`;
+
+const crumbs = breadcrumbLd([
+  { name: "Home", href: "/" },
+  { name: service.breadcrumbLabel, href: `/${service.slug}/` },
+]);
+
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${PAGE_URL}#service`,
+  "serviceType": service.schemaServiceType,
+  "name": service.articleHeadline,
+  "description": service.description,
+  "provider":   { "@id": `${SITE}/#organization` },
+  "areaServed": { "@type": "Country", "name": "India" },
+  "url": PAGE_URL,
+  "audience": { "@type": "BusinessAudience", "audienceType": service.schemaAudience },
+};
+
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": `${PAGE_URL}#article`,
+  "headline": service.articleHeadline,
+  "description": service.description,
+  "author":    { "@id": `${SITE}/#organization` },
+  "publisher": { "@id": `${SITE}/#organization` },
+  "datePublished": "2026-05-19",
+  "dateModified":  "2026-05-19",
+  "mainEntityOfPage": PAGE_URL,
+  "image": `${SITE}/og/default.jpg`,
+  "about": service.articleAbout.map((name) => ({ "@type": "Thing", name })),
+  "inLanguage": "en-IN",
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": service.faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+---
+<BaseLayout title={service.title} description={service.description} canonical={`/${service.slug}/`}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(serviceLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleLd)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqLd)} />
+
+  <PageHero {...service.hero} hasVisual={false} />
+
+  <section class="section section-soft svc-stats-section">
+    <div class="container svc-stats">
+      {service.stats.map((s) => (
+        <div class="svc-stat"><strong>{s.num}</strong><span>{s.label}</span></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container svc-prose">
+      {service.intro.map((p) => <p set:html={p} />)}
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">What's in scope</span>
+        <h2>What this engagement covers</h2>
+        <p>Six explicit scope areas — what you can expect, end to end, on a typical engagement.</p>
+      </div>
+      <div class="svc-card-grid svc-card-grid--2">
+        {service.scope.map((s) => (
+          <article class="svc-card">
+            <span class="icon-halo"><Icon name={s.icon} /></span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">How we deliver</span>
+        <h2>The 4-stage delivery process</h2>
+        <p>From kickoff to handover. Senior lead auditor accountable end to end.</p>
+      </div>
+      <ol class="svc-journey">
+        {service.process.map((p) => (
+          <li class="svc-journey-step">
+            <span class="svc-journey-num">{p.n}</span>
+            <div><h3>{p.title}</h3><p>{p.body}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container svc-deliverables-wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Deliverables</span>
+        <h2>What you walk away with</h2>
+        <p>Concrete artefacts handed over at engagement close — not slides, not summaries.</p>
+      </div>
+      <ul class="svc-deliverables">
+        {service.deliverables.map((d, i) => (
+          <li><span class="svc-deliv-num">{String(i + 1).padStart(2, "0")}</span> {d}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Sector use cases</span>
+        <h2>Where this engagement most often fits</h2>
+        <p>Same service. Different control emphasis, different audit scrutiny.</p>
+      </div>
+      <div class="svc-card-grid svc-card-grid--2">
+        {service.sectors.map((s) => (
+          <article class="svc-card">
+            <div class="svc-card-head">
+              <span class="icon-halo"><Icon name={s.icon} /></span>
+              <h3>{s.name}</h3>
+            </div>
+            <p>{s.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Pricing model</span>
+        <h2>How engagements are scoped and priced</h2>
+        <p>Fixed-price wherever scope is well-defined; T&amp;M or retainer where ongoing work needs flexibility.</p>
+      </div>
+      <div class="svc-pricing-grid">
+        {service.pricing.map((p) => (
+          <article class="svc-pricing-card">
+            <strong class="svc-pricing-tier">{p.tier}</strong>
+            <span class="svc-pricing-fit">{p.fit}</span>
+            <p>{p.scope}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Frequently asked</span>
+        <h2>FAQs</h2>
+      </div>
+      <div class="svc-faqs">
+        {service.faqs.map((f, i) => (
+          <details class="svc-faq" open={i === 0}>
+            <summary><span class="svc-faq-num">{String(i + 1).padStart(2, "0")}</span> {f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Related</span>
+        <h2>Pairs well with</h2>
+      </div>
+      <div class="svc-cross-grid">
+        {service.crossLinks.map((c) => (
+          <a href={c.href} class="svc-cross-card">
+            <strong>{c.title}</strong>
+            <span>{c.sub}</span>
+            <span class="svc-cross-arrow"><Icon name="arrow-right" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading={service.cta.heading}
+    body={service.cta.body}
+    ctaLabel={service.cta.ctaLabel}
+    ctaHref="/contact/"
+    secondaryLabel={service.cta.secondaryLabel}
+    secondaryHref={service.cta.secondaryHref}
+    source={service.cta.source}
+  />
+</BaseLayout>
+
+<style>
+  .svc-stats-section { padding: 32px 0; }
+  .svc-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; text-align: center; }
+  .svc-stat {
+    background: #fff; border: 1px solid var(--color-border); border-radius: 14px;
+    padding: 22px 14px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .svc-stat strong {
+    font-family: var(--font-display); font-size: 26px; color: var(--color-gold-strong); line-height: 1.1;
+  }
+  .svc-stat span { font-size: 13px; color: var(--color-body); }
+
+  .svc-prose { max-width: 880px; }
+  .svc-prose p { color: var(--color-body); line-height: 1.78; font-size: 16.5px; margin-bottom: 16px; }
+  .svc-prose p :global(a) { color: var(--color-accent-strong); text-decoration: underline; text-underline-offset: 3px; }
+  .svc-prose p :global(strong) { color: var(--color-heading); }
+
+  .svc-card-grid { display: grid; gap: 20px; }
+  .svc-card-grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .svc-card {
+    background: #fff; border: 1px solid var(--color-border); border-radius: 14px;
+    padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .svc-card h3 { margin: 6px 0 0; font-size: 16.5px; color: var(--color-heading); }
+  .svc-card p { margin: 0; color: var(--color-body); font-size: 14.5px; line-height: 1.65; }
+  .svc-card-head { display: flex; align-items: center; gap: 14px; }
+  .svc-card-head h3 { margin: 0; font-size: 17px; }
+
+  .svc-journey {
+    list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr;
+    gap: 14px; max-width: 900px; margin: 0 auto;
+  }
+  .svc-journey-step {
+    display: grid; grid-template-columns: 56px 1fr; gap: 22px;
+    background: #fff; border: 1px solid var(--color-border); border-radius: 16px;
+    padding: 22px 26px; align-items: flex-start;
+  }
+  .svc-journey-num {
+    font-family: var(--font-display); font-size: 26px; font-weight: 800;
+    color: var(--color-gold-strong); line-height: 1;
+  }
+  .svc-journey-step h3 { margin: 0 0 6px; font-size: 17px; color: var(--color-heading); }
+  .svc-journey-step p { margin: 0; color: var(--color-body); line-height: 1.65; font-size: 14.5px; }
+
+  .svc-deliverables-wrap { max-width: 880px; }
+  .svc-deliverables {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 18px;
+    background: #fff; border: 1px solid var(--color-border); border-radius: 16px;
+    padding: 24px 26px;
+  }
+  .svc-deliverables li { display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: var(--color-body); line-height: 1.55; }
+  .svc-deliv-num { font-family: var(--font-display); color: var(--color-gold-strong); font-weight: 800; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+
+  .svc-pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .svc-pricing-card {
+    background: #fff; border: 1px solid var(--color-border); border-radius: 16px;
+    padding: 24px 26px; display: flex; flex-direction: column; gap: 8px;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .svc-pricing-card:hover {
+    transform: translateY(-2px); border-color: var(--color-accent-strong);
+    box-shadow: 0 10px 24px rgba(15,23,42,.08);
+  }
+  .svc-pricing-tier {
+    display: inline-block;
+    font-family: var(--font-display); color: var(--color-primary);
+    font-size: 18px;
+  }
+  .svc-pricing-fit {
+    color: var(--color-gold-strong); font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px;
+  }
+  .svc-pricing-card p { margin: 0; color: var(--color-body); font-size: 14px; line-height: 1.6; }
+
+  .svc-faqs { max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .svc-faq { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; overflow: hidden; }
+  .svc-faq summary {
+    cursor: pointer; list-style: none; padding: 20px 24px; font-weight: 600;
+    color: var(--color-heading); display: flex; align-items: flex-start; gap: 14px; font-size: 15.5px;
+  }
+  .svc-faq summary::-webkit-details-marker { display: none; }
+  .svc-faq[open] summary { border-bottom: 1px solid var(--color-border); }
+  .svc-faq-num { font-family: var(--font-display); color: var(--color-gold-strong); font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+  .svc-faq p { margin: 0; padding: 18px 24px 24px; color: var(--color-body); line-height: 1.7; font-size: 14.5px; }
+
+  .svc-cross-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .svc-cross-card {
+    background: #fff; border: 1px solid var(--color-border); border-radius: 14px;
+    padding: 20px 22px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto;
+    gap: 4px 14px; text-decoration: none; color: var(--color-body);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .svc-cross-card:hover {
+    transform: translateY(-2px); border-color: var(--color-accent-strong);
+    box-shadow: 0 10px 24px rgba(15,23,42,.08);
+  }
+  .svc-cross-card strong { grid-column: 1; font-family: var(--font-display); color: var(--color-primary); font-size: 16px; }
+  .svc-cross-card span:nth-of-type(1) { grid-column: 1; font-size: 13.5px; color: var(--color-body); }
+  .svc-cross-arrow { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--color-accent-strong); }
+  .svc-cross-arrow :global(svg) { width: 18px; height: 18px; }
+
+  @media (max-width: 980px) {
+    .svc-stats { grid-template-columns: repeat(2, 1fr); }
+    .svc-card-grid--2 { grid-template-columns: 1fr; }
+    .svc-deliverables { grid-template-columns: 1fr; }
+    .svc-pricing-grid { grid-template-columns: 1fr; }
+    .svc-cross-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .svc-stats { grid-template-columns: 1fr; }
+    .svc-cross-grid { grid-template-columns: 1fr; }
+    .svc-journey-step { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>

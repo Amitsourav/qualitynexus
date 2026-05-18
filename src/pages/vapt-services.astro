@@ -1,0 +1,94 @@
+---
+import ServicePage from "../components/ServicePage.astro";
+import type { ServiceData } from "../components/ServicePage.astro";
+
+const service: ServiceData = {
+  slug: "vapt-services",
+  title: "VAPT Services in India — Vulnerability Assessment & Penetration Testing",
+  description: "VAPT services in India for web, mobile, API, network, and cloud — for banks, fintech, SaaS, BPO, and PSU IT/OT supply. Aligned to OWASP, PTES, CERT-In, and ISO 27001 Annex A.8.8/A.8.29 evidence requirements.",
+  breadcrumbLabel: "VAPT Services",
+  hero: {
+    eyebrow: "Service · VAPT · OWASP · PTES",
+    title: "VAPT services",
+    accent: "for Indian organizations.",
+    lede: "Vulnerability assessment and penetration testing across web applications, mobile apps, APIs, infrastructure, and cloud. Aligned to OWASP Top 10, PTES, CERT-In empanelment guidelines, and ISO 27001 Annex A.8.8 / A.8.29 evidence requirements.",
+  },
+  stats: [
+    { num: "OWASP · PTES", label: "Methodology baseline" },
+    { num: "2–6 wk",       label: "Typical engagement" },
+    { num: "₹35K–₹3.5L",   label: "Scope-based pricing band" },
+    { num: "Re-test",      label: "Included as standard" },
+  ],
+  intro: [
+    `VAPT (Vulnerability Assessment and Penetration Testing) is the technical security testing layer that sits beneath ISO 27001 and underpins regulatory expectations from RBI, SEBI, IRDAI, CERT-In, and increasingly the DPDP Act. We deliver VAPT across five target categories — web applications, mobile (Android + iOS), APIs, network infrastructure, and cloud configuration — with deliverables formatted for CB Stage 2 audit evidence, RBI / SEBI submission, customer audit response, or internal stakeholder readiness.`,
+    `Engagements are fixed-price per scope, delivered with a documented methodology (OWASP Web Security Testing Guide, OWASP MASTG for mobile, PTES for network, and cloud configuration benchmarks). The report is technical-but-readable: every finding ranked by CVSS, reproduction steps, remediation guidance, and an executive summary that a CISO can share with the board.`,
+    `We bundle VAPT into our <a href="/iso-27001-consultancy/">ISO 27001 engagements</a> for consistency at Stage 2 audit, but VAPT runs equally as a standalone service — common drivers are RBI / SEBI annual testing requirements, customer audit responses, or pre-launch security validation for product releases.`,
+  ],
+  scope: [
+    { icon: "globe",        title: "Web application testing",      body: "OWASP Top 10 + WSTG-aligned testing of web applications. Authentication, authorization, session management, input validation, business-logic flaws, third-party library exposure. Black-box, grey-box, or white-box per scope." },
+    { icon: "cpu",          title: "Mobile (Android + iOS)",       body: "OWASP MASTG-aligned mobile testing. Local storage, transport security, code obfuscation, jailbreak/root detection, deep links, IPC, certificate pinning, and reverse-engineering resistance. APK/IPA review + dynamic runtime testing." },
+    { icon: "compass",      title: "API & microservice testing",   body: "OWASP API Security Top 10 — broken authorization, mass assignment, rate limiting, security misconfiguration, BOLA / BFLA. REST, GraphQL, gRPC. Documented endpoints + discovery for undocumented surface." },
+    { icon: "shield-check", title: "Network & infrastructure",     body: "Internal and external infrastructure VAPT — host enumeration, service-level vulnerability scanning, exploit verification (ethical), privilege escalation, lateral movement. PTES-aligned methodology. Includes Active Directory and segmentation testing." },
+    { icon: "lock",         title: "Cloud configuration review",   body: "AWS / Azure / GCP configuration benchmarks against CIS, vendor-published baselines, and your own policy. IAM analysis, public-exposure scanning, encryption posture, logging adequacy, separation between environments." },
+    { icon: "file-text",    title: "Remediation guidance + re-test", body: "Every finding ships with reproduction steps, screenshot evidence (responsibly redacted), CVSS v3.1 score, and concrete remediation guidance. Re-test of remediated findings included as standard — no surprise add-on cost." },
+  ],
+  process: [
+    { n: "01", title: "Scoping + rules of engagement (week 1)", body: "Scope workshop: targets, IP ranges, in-scope vs out-of-scope, test windows, escalation paths, customer authorization letters. Rules of Engagement document signed by both sides before any testing begins." },
+    { n: "02", title: "Testing (week 2–4)",                     body: "Reconnaissance, vulnerability identification, exploit verification (ethical, non-destructive). Daily standup with your security team. Critical findings reported live, not at end-of-engagement." },
+    { n: "03", title: "Report + readout (week 5)",              body: "Technical report (per-finding) + executive summary (board-level). Joint readout call with your team to walk through every finding, answer questions, and align on remediation priority. Report ships in PDF + structured CSV/JSON for ticketing import." },
+    { n: "04", title: "Re-test + closure (week 6)",             body: "After your team remediates, we re-test every finding marked 'fixed' — verify the fix, validate no regression. Final clean report issued for stakeholder distribution (CB audit, customer, regulator, board)." },
+  ],
+  deliverables: [
+    "Rules of Engagement (RoE) document signed pre-engagement",
+    "Technical finding report with per-issue reproduction + remediation",
+    "Executive summary suitable for board / CB auditor / customer",
+    "CVSS v3.1 ranking and prioritized remediation roadmap",
+    "Structured export (CSV / JSON) for ticketing system import",
+    "Re-test of remediated findings included as standard",
+    "Final clean-state report after re-test for stakeholder distribution",
+    "Attestation letter usable for customer audit response",
+  ],
+  sectors: [
+    { icon: "battery",     name: "Banks, NBFCs & PSPs",     body: "RBI Cyber Framework annual testing requirement, payment card environment scope, NPCI vendor expectations. Reports formatted for RBI / NPCI submission and board reporting." },
+    { icon: "trending-up", name: "Fintech & PayTech",       body: "Mobile + web + API combined scope, PCI DSS scope-overlap testing, KYC/eKYC flow validation, transaction integrity testing. Often quarterly cadence." },
+    { icon: "rocket",      name: "SaaS Exporters",          body: "Pre-launch security validation, annual penetration testing for SOC 2 Type II + ISO 27001 evidence, customer-requested testing per enterprise procurement asks." },
+    { icon: "headphones",  name: "BPO / KPO / ITeS",        body: "Client-specific testing per customer contract, customer audit response support, secure transmission validation for sensitive data flows." },
+  ],
+  pricing: [
+    { tier: "Single application",  fit: "Web OR mobile OR API", scope: "One web app, one mobile platform, or one API surface. Fixed-price ₹35K–₹1.0L depending on complexity, authentication tiers, and business logic surface." },
+    { tier: "Combined scope",      fit: "Multi-target product", scope: "Web + mobile (iOS+Android) + API + cloud configuration for a single product. Fixed-price ₹1.2L–₹2.5L. Most common engagement size for fintech / SaaS." },
+    { tier: "Enterprise / network", fit: "Infrastructure-heavy", scope: "Internal + external network VAPT, AD + segmentation testing, cloud configuration review, multi-site. ₹2.0L–₹3.5L. Suitable for banks, large SaaS, regulated entities." },
+  ],
+  faqs: [
+    { q: "What is the difference between vulnerability assessment and penetration testing?",  a: "Vulnerability assessment is broad-and-shallow — automated scanning + manual review to identify potential weaknesses. Penetration testing is narrow-and-deep — ethical exploitation to demonstrate real-world impact and prove which findings are exploitable in your environment. We deliver both as a single engagement: VA gives you breadth, PT gives you proof. Reports rank findings by exploitability, not just CVSS, because regulators and auditors care about the difference." },
+    { q: "Is your VAPT report acceptable for RBI / SEBI / CERT-In submission?",                a: "Yes for RBI Cyber Framework annual testing requirements (banks, NBFCs, PSPs) and SEBI CSCRF expectations. CERT-In requires testing performed by CERT-In empanelled auditors for specific use cases — we coordinate with CERT-In empanelled testing partners on request for those scenarios." },
+    { q: "Will the testing disrupt our production systems?",                                  a: "No — non-destructive testing is the default, and we agree the rules of engagement explicitly before testing begins. For high-risk targets (production payment systems, live trading platforms), we test in staging environments or schedule low-traffic windows. We never run automated brute-force or denial-of-service tests in production without explicit authorization." },
+    { q: "How long does a typical engagement take?",                                          a: "Single web application: 1–2 weeks. Combined web + mobile + API: 3–4 weeks. Network + infrastructure VAPT: 2–4 weeks. Add 1 week for report delivery and 1 week for re-test cycle. Total typical engagement window 4–8 weeks." },
+    { q: "Is re-test included?",                                                              a: "Yes — re-test of every finding your team marks 'fixed' is included as standard. We verify the fix, confirm no regression, and re-issue a clean-state report after closure. No surprise add-on cost." },
+    { q: "Do you provide an attestation letter for customer audit response?",                  a: "Yes. Post re-test, we issue an attestation letter summarizing scope, methodology, dates of testing, and final remediation state. This is what most enterprise customers ask for in vendor security questionnaires — readable to procurement / GRC teams without exposing the full technical detail." },
+    { q: "Can VAPT be bundled into an ISO 27001 engagement?",                                  a: "Yes — and it's our recommended approach. ISO 27001 Annex A.8.8 (vulnerability management) and A.8.29 (security testing) effectively require periodic technical testing. Bundling VAPT into the ISO 27001 engagement gives the CB Stage 2 auditor consistent evidence from one supplier. Standalone VAPT also works fine if you already have ISMS in place." },
+    { q: "What if the test finds something critical mid-engagement?",                          a: "Critical findings (CVSS ≥ 9.0 or active exploitation pathways) are reported within 24 hours of confirmation — not at end of engagement. Reported via signed communication to a named recipient. We pause testing in the affected area while your team contains. Engagement resumes once the immediate exposure is controlled." },
+  ],
+  crossLinks: [
+    { href: "/iso-27001-consultancy/",      title: "ISO 27001 Consultancy",          sub: "VAPT bundled into ISMS" },
+    { href: "/iso-27001-consultant-india/", title: "ISO 27001 Implementation Guide", sub: "Pillar — DPDP, RBI, Annex A" },
+    { href: "/certifications/iso-27001/",   title: "ISO 27001 — standard overview",  sub: "What the standard requires" },
+    { href: "/services/",                   title: "All services",                   sub: "9 service lines" },
+    { href: "/team/",                       title: "Lead consultants",               sub: "Senior security testing leads" },
+    { href: "/contact/",                    title: "Talk to us",                     sub: "Free 30-min scoping call" },
+  ],
+  cta: {
+    heading: "Get a VAPT proposal in 48 hours.",
+    body: "Tell us your target scope (web / mobile / API / network / cloud), authentication model, and reporting deadline. We come back with a fixed-price proposal and a 4–8 week schedule.",
+    ctaLabel: "Get a VAPT proposal",
+    secondaryLabel: "See ISO 27001 service",
+    secondaryHref: "/iso-27001-consultancy/",
+    source: "vapt-svc",
+  },
+  schemaServiceType: "Vulnerability Assessment and Penetration Testing Services",
+  schemaAudience: "Banks, NBFCs, fintech, SaaS exporters, BPO/KPO, IT services, and PSU IT/OT vendors in India requiring VAPT for RBI / SEBI / CERT-In / ISO 27001 / customer audit response",
+  articleHeadline: "VAPT Services in India — OWASP, PTES, RBI / SEBI / ISO 27001 Aligned",
+  articleAbout: ["VAPT", "Vulnerability Assessment", "Penetration Testing", "OWASP Top 10", "RBI Cyber Framework"],
+};
+---
+<ServicePage service={service} />

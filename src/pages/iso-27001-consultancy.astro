@@ -1,0 +1,94 @@
+---
+import ServicePage from "../components/ServicePage.astro";
+import type { ServiceData } from "../components/ServicePage.astro";
+
+const service: ServiceData = {
+  slug: "iso-27001-consultancy",
+  title: "ISO 27001 Consultancy Services in India — ISMS Implementation",
+  description: "End-to-end ISO 27001:2022 consultancy for Indian banks, fintech, SaaS exporters, BPO, IT services, and healthcare. Senior lead auditor delivery, bundled VAPT, DPDP overlay, RBI/SEBI framework alignment.",
+  breadcrumbLabel: "ISO 27001 Consultancy",
+  hero: {
+    eyebrow: "Service · ISO 27001:2022 · ISMS",
+    title: "ISO 27001 consultancy",
+    accent: "with VAPT bundled in.",
+    lede: "End-to-end ISO 27001:2022 ISMS implementation for Indian organizations. Senior IRCA / Exemplar Global lead auditor on every call, Annex A 2022 controls coverage, bundled VAPT, DPDP Act 2023 overlay, and accredited certification body coordination on a fixed-price scope.",
+  },
+  stats: [
+    { num: "93",       label: "Annex A 2022 controls" },
+    { num: "16–24 wk", label: "Typical SME timeline" },
+    { num: "₹3–9L",    label: "Total first-year cost band" },
+    { num: "VAPT",     label: "Bundled, not subcontracted" },
+  ],
+  intro: [
+    `ISO 27001:2022 is the international standard for Information Security Management Systems. For Indian organizations in 2026, it's increasingly the de-facto compliance baseline — driven by the <a href="/iso-27001-consultant-india/">DPDP Act 2023, RBI Cyber Framework, SEBI CSCRF</a>, and enterprise procurement that filters bids before technical evaluation.`,
+    `We deliver ISO 27001 consultancy with three commitments unusual in this market: (1) Senior lead auditor on every call — no junior hand-off; (2) VAPT bundled into the engagement so Stage 2 sees consistent vendor evidence instead of stitched-together work from two suppliers; (3) Fixed-price scoping with no hourly-billing surprises. We are CB-neutral.`,
+    `If you'd like the full implementation walk-through with regulatory context (DPDP, RBI, SEBI, comparison vs SOC 2), read our <a href="/iso-27001-consultant-india/">ISO 27001 implementation pillar</a>. This page is the service offering — what's in scope, deliverables, timeline, pricing.`,
+  ],
+  scope: [
+    { icon: "search",          title: "Scope definition + gap analysis",            body: "Define ISMS scope — products, locations, third parties, exclusions. Walk-through of all 93 Annex A 2022 controls. Output is a SoA-ready register with current state, target state, and effort estimates." },
+    { icon: "shield-check",    title: "Risk assessment + treatment plan",          body: "Asset register → threats → vulnerabilities → impact + likelihood → residual risk. Repeatable methodology, documented, audit-defensible. Risk treatment plan with control selection rationale." },
+    { icon: "file-text",       title: "Policy suite + Statement of Applicability",  body: "Information security policy (board-approved) + 10–15 supporting policies (acceptable use, access control, change, supplier security, IR, BCP, crypto, classification, backup, secure dev). Tailored to your stack." },
+    { icon: "cpu",             title: "Control implementation support",             body: "MFA rollout, privileged access management, log aggregation, vulnerability scanning cadence, security awareness training, supplier security questionnaires, BCP exercises. We co-implement, not just advise." },
+    { icon: "lock",            title: "VAPT — bundled, not subcontracted",          body: "Annex A.8.8 + A.8.29 require periodic technical testing. We bundle VAPT into the engagement — single vendor, consistent evidence, single point of accountability at Stage 2. No vendor-stitching." },
+    { icon: "award",           title: "Internal audit + CB audit support",          body: "First-cycle internal audit run as an external assessor would. Management review hosted. CB Stage 1 (documentation) + Stage 2 (on-site) attended; minor NCs closed inside the visit where possible." },
+  ],
+  process: [
+    { n: "01", title: "Scope + gap (week 1–3)",                     body: "Scope workshop with leadership. Gap analysis vs 93 Annex A controls. Risk methodology documented. Deliver gap report with detailed remediation plan." },
+    { n: "02", title: "Policy + SoA + implementation (week 4–12)",  body: "Policy suite authored. Statement of Applicability drafted. Control implementation runs in parallel: access management, logging, vulnerability scanning, awareness training, supplier security." },
+    { n: "03", title: "VAPT + internal audit + review (week 13–18)", body: "Penetration testing and vulnerability assessment delivered. Internal audit independent walk-through. Findings closed. Management review hosted. NC-free state achieved before CB audit." },
+    { n: "04", title: "Stage 1 + Stage 2 CB audit (week 19–24)",    body: "CB Stage 1 documentation review. We close any gaps. Stage 2 on-site control verification. We attend, manage scope, close minor NCs. Certificate issued within 4–8 weeks of clean Stage 2." },
+  ],
+  deliverables: [
+    "ISMS scope statement and Statement of Applicability (SoA)",
+    "Risk register, risk treatment plan, and methodology document",
+    "Information security policy + 10–15 supporting policies",
+    "VAPT report (external + internal) with remediation guidance",
+    "Awareness training material and completion records",
+    "Internal audit checklist, audit report, and CAPA register",
+    "Management review pack with signed minutes",
+    "Stage 1 + Stage 2 CB audit on-site support and NC closure",
+  ],
+  sectors: [
+    { icon: "battery",     name: "Banks & NBFCs",          body: "RBI Cyber Framework alignment, PCI DSS environment scope carve-out, third-party risk programme, board cyber-risk reporting cadence, table-top incident exercises." },
+    { icon: "trending-up", name: "Fintech & PayTech",      body: "Concurrent ISO 27001 + PCI DSS + DPDP coverage. NPCI vendor onboarding readiness. SOC 2 layered on for US/EU customer attestation." },
+    { icon: "rocket",      name: "SaaS Exporters",         body: "ISO 27001 for EU/UK B2B procurement. SOC 2 Type II layered for US customers. Multi-region data residency design. Sub-processor management programme." },
+    { icon: "headphones",  name: "BPO / KPO / ITeS",       body: "Client-specific scope statements per customer contract. US/UK/EU client audit support. Secure transmission and remote access controls. HIPAA overlay for healthcare-customer BPO." },
+  ],
+  pricing: [
+    { tier: "SME · single site",     fit: "Most common",       scope: "30–250 employees, single location, IT/SaaS scope. Fixed-price consultancy ₹1.5L–₹3.0L + CB audit fees ₹1.0L–₹2.0L (paid separately to BSI/TUV/DNV/BVQI etc.). VAPT bundled." },
+    { tier: "Mid-market / multi-site", fit: "Distributed teams", scope: "Multi-site or distributed-remote team. Fixed-price consultancy ₹3.0L–₹6.0L + CB fees. Includes deeper VAPT scope and supplier security programme rollout." },
+    { tier: "Retainer (post-cert)",   fit: "Ongoing ISMS run", scope: "Monthly retainer covering surveillance prep, quarterly risk review, internal audit cycle, supplier reviews, IR exercises. ₹35K–₹80K/month depending on scope." },
+  ],
+  faqs: [
+    { q: "How is ISO 27001 different from SOC 2 — do we need both?",             a: "ISO 27001 is a management-system standard producing a 3-year accredited certificate. SOC 2 is a controls attestation producing an annual report. ISO 27001 is the expectation in EU/UK/India enterprise and PSU procurement; SOC 2 is the US SaaS-customer expectation. Indian SaaS exporters to the US frequently maintain both — ISO 27001 as management spine, SOC 2 Type II for US customer-facing attestation." },
+    { q: "How does ISO 27001 relate to DPDP Act 2023?",                            a: "DPDP mandates 'reasonable security safeguards' but doesn't prescribe controls. ISO 27001:2022 Annex A — with ISO 27701 layered on — is the closest internationally-recognized framework that maps to DPDP's expectations (data classification, breach notification, processor obligations). When the Data Protection Board issues enforcement actions, ISO 27001 + 27701 is the documented baseline most defensible organizations will point to." },
+    { q: "What does 'VAPT bundled' actually mean?",                                a: "ISO 27001 Annex A.8.8 (vulnerability management) and A.8.29 (security testing) effectively require periodic technical testing. Most consultants do ISMS implementation only and ask you to engage a separate VAPT vendor. We do both — single engagement, consistent methodology, single point of accountability at Stage 2. The CB auditor sees one coherent evidence package, not two suppliers' stitched-together work." },
+    { q: "How long does the entire process take?",                                a: "Realistic timeline: 16–24 weeks (4–6 months) for an SME with no prior ISMS. Aggressive 10–12 week timelines are possible for already-mature security operations but rarely advisable. Multi-site or regulated entities (banks, NBFCs, payment system operators) typically run 24–36 weeks." },
+    { q: "What's the realistic all-in cost?",                                     a: "For an Indian SME (50–250 employees, single site, IT/SaaS scope): consultancy ₹1.5L–₹3.0L + CB Stage 1+2 audit fees ₹1.0L–₹2.0L + VAPT (bundled) included + first-year tooling (if absent) ₹50K–₹2.0L. Total first-year ₹3.0L–₹9.0L. Year-2 surveillance ₹60K–₹1.2L." },
+    { q: "Which certification bodies do you work with?",                          a: "All major IAF / NABCB-accredited bodies — BSI, TUV Nord, TUV SUD, DNV, BVQI (Bureau Veritas), DEKRA, LRQA, SGS, Intertek, IRQS, URS, RINA, BSCIC. We recommend a CB based on your customer base, export markets, and procurement requirements — not on referral commissions." },
+    { q: "Can ISO 27001 be combined with ISO 9001 or ISO 27701?",                  a: "Yes — and it's often cheaper. Annex SL alignment means 9001 / 14001 / 45001 / 27001 share clauses 4–10 and only diverge on annex controls. ISO 27701 (privacy) is a direct overlay on 27001 — typically 25–40% incremental effort for the combined engagement vs running them sequentially." },
+    { q: "What happens if Stage 2 raises non-conformances?",                       a: "Minor NCs (most common) — documented corrective action plan and evidence of closure submitted to CB within 30–90 days; certificate then issued. Major NCs require a re-audit before certification. With proper Stage 1 readiness, majors are rare. We explicitly underwrite this in our engagement model." },
+  ],
+  crossLinks: [
+    { href: "/iso-27001-consultant-india/", title: "ISO 27001 Implementation Guide", sub: "Full pillar — DPDP, RBI, Annex A walk-through" },
+    { href: "/certifications/iso-27001/",   title: "ISO 27001 — standard overview",  sub: "What the standard requires" },
+    { href: "/vapt-services/",              title: "VAPT Services",                  sub: "Pen-testing and vulnerability assessment" },
+    { href: "/services/",                   title: "All services",                   sub: "9 service lines" },
+    { href: "/team/",                       title: "Lead auditors",                  sub: "IRCA + Exemplar Global credentials" },
+    { href: "/contact/",                    title: "Talk to us",                     sub: "Free 30-min scoping call" },
+  ],
+  cta: {
+    heading: "ISMS + VAPT in one engagement.",
+    body: "Tell us your scope and customer drivers (RBI / SEBI / DPDP / enterprise procurement). Within 48 hours we come back with a fixed-price proposal.",
+    ctaLabel: "Get an ISO 27001 plan",
+    secondaryLabel: "Read the implementation guide",
+    secondaryHref: "/iso-27001-consultant-india/",
+    source: "iso-27001-svc",
+  },
+  schemaServiceType: "ISO 27001 Information Security Management System Consultancy with bundled VAPT",
+  schemaAudience: "BFSI, fintech, SaaS, BPO/KPO, IT services, healthcare, and PSU IT/OT vendors in India targeting ISO 27001:2022 certification",
+  articleHeadline: "ISO 27001 Consultancy Services in India — ISMS with Bundled VAPT",
+  articleAbout: ["ISO 27001", "ISO 27001:2022", "Information Security Management System", "VAPT", "DPDP Act 2023"],
+};
+---
+<ServicePage service={service} />

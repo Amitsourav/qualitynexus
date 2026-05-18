@@ -1,0 +1,94 @@
+---
+import ServicePage from "../components/ServicePage.astro";
+import type { ServiceData } from "../components/ServicePage.astro";
+
+const service: ServiceData = {
+  slug: "health-safety-audit",
+  title: "Health & Safety Audit Services — ISO 45001 & Indian H&S Compliance",
+  description: "Occupational health and safety audits for Indian manufacturers, mining, construction, power, oil & gas, and chemicals. ISO 45001:2018, Factories Act 1948, DGMS, PESO, and contractor safety audits — on-site delivery across India.",
+  breadcrumbLabel: "Health & Safety Audit",
+  hero: {
+    eyebrow: "Service · ISO 45001 · OSHA · DGMS",
+    title: "Health & safety audits",
+    accent: "for high-risk operations.",
+    lede: "Independent health and safety audits aligned to ISO 45001:2018, the Factories Act 1948, DGMS / PESO sector regulations, and major-customer safety expectations. For mining, steel, construction, power, oil & gas, chemicals, pharma, and heavy engineering.",
+  },
+  stats: [
+    { num: "ISO 45001:2018", label: "Primary framework" },
+    { num: "1–3 wk",         label: "Typical audit window" },
+    { num: "₹50K–₹2.5L",     label: "Scope-based pricing band" },
+    { num: "On-site",        label: "Audit delivery mode" },
+  ],
+  intro: [
+    `Health and safety audits in India sit at the intersection of three regimes — the international management-system standard (ISO 45001:2018), the statutory regime (Factories Act 1948, the new Occupational Safety, Health and Working Conditions Code 2020, sector regulators like DGMS for mining and PESO for petroleum/chemicals), and customer expectations (PSU contractor safety, multinational supply-chain audits, insurer surveys). Each one looks at a different layer of the same operation.`,
+    `We deliver three audit types: (1) Internal audit of an existing ISO 45001-aligned HSMS for certification-cycle compliance; (2) Independent statutory and regulatory compliance audit covering Factories Act / OSHWC Code / DGMS / PESO / state pollution requirements; (3) Contractor safety audit for PSU customers, multinational principals, or insurance underwriters. Each audit ends with a findings report ranked by risk, root cause, and remediation owner.`,
+    `For Jharkhand and Eastern India clients, we deliver on-site from our <a href="/iso-consultant-ranchi/">Ranchi office</a> — same-day reach to Jamshedpur, Bokaro, Dhanbad, Patna, and the wider regional cluster.`,
+  ],
+  scope: [
+    { icon: "search",          title: "ISO 45001 internal audit",                  body: "Independent walk-through of HSMS against ISO 45001:2018 clauses 4–10. Worker participation evidence, hazard identification and risk assessment quality, operational controls, emergency preparedness, leading and lagging indicators. Output is a clause-by-clause findings register." },
+    { icon: "shield-check",    title: "Statutory & regulatory compliance audit",   body: "Factories Act 1948 / OSHWC Code 2020 compliance, sector-specific overlays (DGMS for mining, PESO for petroleum/chemicals, IBR for boilers), state pollution and waste regulations. Maps registers, returns, certificates, and inspection records to the obligation that drives them." },
+    { icon: "hard-hat",        title: "Process safety + hazard review",            body: "HAZOP, JHA / JSA, and risk register review. Hierarchy of controls verification. Permit-to-work system audit. Confined space, working-at-height, hot work, energy isolation (LOTO), and high-risk activity control verification. The controls Stage 2 auditors and customer assessors check first." },
+    { icon: "users",           title: "Contractor + sub-contractor safety",        body: "Contractor pre-qualification document verification, induction records, on-site competency observation, near-miss reporting culture review. Increasingly a separate audit type asked for by PSU principals and multinational customers." },
+    { icon: "alert-triangle",  title: "Incident investigation review",             body: "Past incident records reviewed for completeness, root cause depth, action closure tracking. We test investigation rigour with the most recent serious incident — most safety systems look fine on paper until you trace a single real event end-to-end." },
+    { icon: "clipboard-check", title: "Audit report + closure tracking",           body: "Findings ranked by risk (critical / major / minor / observation), with root cause, corrective action, and verification deadline. Optional closure-tracking retainer for 90 days post-audit to ensure findings actually close — not just get logged." },
+  ],
+  process: [
+    { n: "01", title: "Audit scoping (week 1)",                       body: "Define audit type, scope, regulatory regime, sites in scope, document reach-back period. Pre-audit document request issued. Audit plan agreed with leadership. Worker representative participation arranged where applicable." },
+    { n: "02", title: "On-site audit (week 2)",                       body: "Document review, leadership interviews, worker interviews, on-floor observation, physical inspection, sample-based record retrieval. Daily debrief with site leadership. Critical findings flagged live, not held for end-of-audit." },
+    { n: "03", title: "Report + readout (week 3)",                    body: "Audit report drafted with findings ranked, root cause analyzed, corrective action recommendations, and verification timelines. Joint readout meeting with leadership and HSE team to walk through every finding and align on owner + due date." },
+    { n: "04", title: "Closure verification (optional retainer)",     body: "90-day closure tracking with monthly check-ins. Each finding verified to closure via documented evidence. Final closure-state report issued — useful for board reporting, customer audit response, or regulatory submission." },
+  ],
+  deliverables: [
+    "Audit plan and scope document agreed pre-audit",
+    "Findings register ranked by risk (critical/major/minor/observation)",
+    "Root cause analysis per finding with corrective action recommendation",
+    "Statutory and regulatory compliance gap register",
+    "Leading and lagging indicator analysis (LTIFR, severity, near-miss)",
+    "Permit-to-work and high-risk activity control verification report",
+    "Executive summary readable to board / customer / regulator",
+    "Optional 90-day closure verification with monthly tracking",
+  ],
+  sectors: [
+    { icon: "hard-hat",   name: "Mining, Steel & Metals",      body: "DGMS-overlay audits for coal and metalliferous mines, SAIL/HCL/NMDC vendor safety expectations, blasting and underground operation safety. DGMS Form A returns and statutory committee evidence." },
+    { icon: "zap",        name: "Power & Energy",              body: "Thermal, hydro, and transmission contractor safety — working at height, energy isolation (LOTO), confined space, hot work permits. NTPC, NHPC, NEEPCO, PGCIL contractor safety audit expectations." },
+    { icon: "battery",    name: "Oil, Gas & Petroleum",        body: "OISD-overlay audits, PESO compliance for explosive handling, process safety management for refineries and depots. IOCL, ONGC, GAIL, NRL contractor and supplier safety audit support." },
+    { icon: "cog",        name: "Manufacturing & Pharma",      body: "Factories Act compliance, machine guarding, ergonomic risk, chemical handling (MSDS-aligned), pharma cleanroom safety overlay where applicable. WHO-GMP-adjacent operations." },
+  ],
+  pricing: [
+    { tier: "Single-site audit",   fit: "Standard scope",         scope: "Single manufacturing, lab, or operational site. Fixed-price ₹50K–₹1.2L depending on size, regulatory complexity, and audit type. 1–2 weeks elapsed time." },
+    { tier: "Multi-site / regional", fit: "Group operations",      scope: "Multiple sites in Jharkhand / Eastern India or pan-India. Fixed-price ₹1.5L–₹2.5L. Common for PSU contractor audits, multi-plant manufacturing groups, multi-site mining operations." },
+    { tier: "Audit + closure retainer", fit: "Findings to closure", scope: "Audit + 90-day closure verification retainer. ₹1.0L–₹3.0L depending on audit scope and number of findings tracked. Common for customer / regulator submission timelines." },
+  ],
+  faqs: [
+    { q: "What's the difference between ISO 45001 audit and a Factories Act compliance audit?",  a: "ISO 45001 audits a management system — does the organization have processes to identify hazards, manage risk, train workers, respond to incidents, and continually improve. The Factories Act audits statutory compliance — does the organization meet specific Indian law obligations (licence, returns, registers, statutory committees, qualified persons, working hours, welfare amenities). Many operations need both; the audits look at the same site from very different angles." },
+    { q: "Are you independent — can you also do certification?",                                a: "We are independent consultants and auditors, not a certification body. ISO 45001 certification can only be issued by an IAF / NABCB-accredited certification body, and the same body cannot do both consulting and certification — that's the basic rule of accreditation. We coordinate with CBs (TUV, BSI, DNV, BVQI, SGS) when certification is the goal." },
+    { q: "What sector regulations do you cover beyond ISO 45001?",                              a: "Factories Act 1948 and the OSHWC Code 2020, DGMS for mines (coal and metalliferous), PESO for petroleum and explosives, IBR for boilers, state pollution control board (effluent, hazardous waste, air emission), electricity rules under CEA / state inspectorate, fire NOC compliance. We tailor the scope based on your operation and the audit driver." },
+    { q: "How long does a typical audit take?",                                                  a: "Single-site internal audit or contractor safety audit: 3–7 working days on-site + 1 week for report. Multi-site or combined ISO 45001 + statutory compliance audit: 2–4 weeks. Closure-verification retainer adds 90 days of monthly tracking after the audit closes." },
+    { q: "Can you audit a contractor or supplier on our behalf?",                                a: "Yes. Contractor safety audits on behalf of PSU principals, multinational customers, or insurance underwriters are a common engagement type. We audit your contractor / supplier site, deliver the findings report to you (the principal), and optionally retain to verify closure before the contractor is allowed to resume or expand work scope." },
+    { q: "Will the audit be confrontational with workers and supervisors?",                      a: "Audits succeed when workers feel safe to talk honestly. Our protocol: worker representative involvement, confidential interview rooms, no manager presence during front-line interviews, escalation pathway for retaliation concerns. We've seen sites where management was unaware of the highest-risk practices; that information only surfaces when interviews are run right." },
+    { q: "Do you cover behaviour-based safety (BBS) observations?",                              a: "We audit BBS programmes (presence, structure, observation quality, data analysis, intervention effectiveness) — we don't typically deliver the BBS programme itself. If you're standing up a BBS programme from scratch, we'll point you to specialist firms; if it already exists, we audit its rigour as part of the HSMS audit." },
+    { q: "Can audit findings be shared with customers or regulators?",                            a: "Yes — the final report is yours to share. We can also issue an attestation letter summarising scope, methodology, dates, and final state without exposing internal detail. Many PSU customers and insurance underwriters accept an attestation letter without requiring the full findings register." },
+  ],
+  crossLinks: [
+    { href: "/certifications/iso-45001/",  title: "ISO 45001 — standard overview",   sub: "What the standard requires" },
+    { href: "/iso-9001-consultancy/",      title: "ISO 9001 Consultancy",            sub: "Quality system baseline" },
+    { href: "/services/",                  title: "All services",                    sub: "9 service lines" },
+    { href: "/iso-consultant-ranchi/",     title: "ISO Consultant in Ranchi",        sub: "Local delivery in Jharkhand" },
+    { href: "/psu-vendor-compliance/",     title: "PSU Vendor Compliance",           sub: "Contractor safety for PSU tenders" },
+    { href: "/contact/",                   title: "Talk to us",                      sub: "Free 30-min scoping call" },
+  ],
+  cta: {
+    heading: "Get an independent safety audit.",
+    body: "Tell us the site, the audit driver (internal / statutory / customer / certification), and the deadline. Within 48 hours we come back with a fixed-price proposal and an audit plan.",
+    ctaLabel: "Get a safety audit plan",
+    secondaryLabel: "See ISO 45001 standard",
+    secondaryHref: "/certifications/iso-45001/",
+    source: "hs-audit-svc",
+  },
+  schemaServiceType: "Occupational Health and Safety Audit Services (ISO 45001 + Indian H&S compliance)",
+  schemaAudience: "Manufacturers, mining, steel, power, oil & gas, chemicals, pharma, and heavy engineering operators in India requiring independent occupational health and safety audits",
+  articleHeadline: "Health & Safety Audit Services in India — ISO 45001, Factories Act, DGMS, PESO",
+  articleAbout: ["ISO 45001", "Occupational Health and Safety", "Factories Act 1948", "DGMS", "Safety Audit"],
+};
+---
+<ServicePage service={service} />
