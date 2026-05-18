@@ -1,0 +1,299 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import CtaStrip from "../../components/CtaStrip.astro";
+import Icon from "../../components/Icon.astro";
+import { breadcrumbLd, SITE } from "../../lib/schema";
+import { getAllPosts, notionConfigured } from "../../lib/notion";
+
+const posts = await getAllPosts();
+const featured = posts[0];
+const rest = posts.slice(1);
+
+const crumbs = breadcrumbLd([
+  { name: "Home", href: "/" },
+  { name: "Blog", href: "/blog/" },
+]);
+
+const blogLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": `${SITE}/blog/#blog`,
+  "name": "QualityNexus Blog",
+  "description": "Insights and guides on ISO certification, NABL, VAPT, PSU vendor compliance, and information security from QualityNexus senior auditors.",
+  "url": `${SITE}/blog/`,
+  "publisher": { "@id": `${SITE}/#organization` },
+  "blogPost": posts.slice(0, 20).map((p) => ({
+    "@type": "BlogPosting",
+    "headline": p.title,
+    "url": `${SITE}/blog/${p.slug}/`,
+    "datePublished": p.publishedDate,
+    "author": { "@type": "Person", "name": p.author },
+  })),
+};
+---
+<BaseLayout
+  title="Blog — ISO, NABL, VAPT & Compliance Insights | QualityNexus"
+  description="Senior-auditor perspective on ISO certification, NABL accreditation, VAPT, DPDP compliance, PSU vendor readiness, and Indian compliance regulation."
+  canonical="/blog/"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(blogLd)} />
+
+  <PageHero
+    eyebrow="Insights · guides · case notes"
+    title="QualityNexus blog"
+    accent="from our lead auditors."
+    lede="Practical, current, India-specific perspectives on ISO certification, NABL accreditation, VAPT, DPDP Act, PSU vendor compliance, and the regulatory landscape we navigate daily. No marketing fluff — written by the people running the engagements."
+    hasVisual={false}
+  />
+
+  {posts.length === 0 ? (
+    <section class="section">
+      <div class="container blog-empty">
+        <h2>{notionConfigured ? "No posts yet" : "Blog is being set up"}</h2>
+        <p>
+          {notionConfigured
+            ? "Our editorial team is publishing the first wave of insights right now. Check back soon, or get in touch directly while we're getting set up."
+            : "The blog is connected to a Notion workspace and will populate once content is published. In the meantime, browse our service pages or get in touch."}
+        </p>
+        <a href="/contact/" class="btn btn-accent">Talk to a senior consultant <Icon name="arrow-right" /></a>
+      </div>
+    </section>
+  ) : (
+    <Fragment>
+      {/* ===== FEATURED POST ===== */}
+      {featured && (
+        <section class="section">
+          <div class="container">
+            <a href={`/blog/${featured.slug}/`} class="blog-feat">
+              {featured.coverUrl && (
+                <div class="blog-feat-cover">
+                  <img src={featured.coverUrl} alt="" loading="eager" decoding="async" />
+                </div>
+              )}
+              <div class="blog-feat-body">
+                <div class="blog-feat-meta">
+                  <span class="blog-feat-eyebrow">Featured</span>
+                  {featured.tags[0] && <span class="blog-tag">{featured.tags[0]}</span>}
+                </div>
+                <h2>{featured.title}</h2>
+                {featured.excerpt && <p>{featured.excerpt}</p>}
+                <div class="blog-feat-foot">
+                  <span><strong>{featured.author}</strong></span>
+                  <span class="blog-dot" aria-hidden="true">·</span>
+                  <span>{featured.publishedDateFormatted}</span>
+                  <span class="blog-feat-readmore">Read article <Icon name="arrow-right" /></span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
+      )}
+
+      {/* ===== POST GRID ===== */}
+      {rest.length > 0 && (
+        <section class="section section-soft">
+          <div class="container">
+            <div class="section-head">
+              <h2>Latest posts</h2>
+            </div>
+            <div class="blog-grid">
+              {rest.map((p) => (
+                <a href={`/blog/${p.slug}/`} class="blog-card">
+                  {p.coverUrl && (
+                    <div class="blog-card-cover">
+                      <img src={p.coverUrl} alt="" loading="lazy" decoding="async" />
+                    </div>
+                  )}
+                  <div class="blog-card-body">
+                    {p.tags[0] && <span class="blog-tag">{p.tags[0]}</span>}
+                    <h3>{p.title}</h3>
+                    {p.excerpt && <p>{p.excerpt}</p>}
+                    <div class="blog-card-foot">
+                      <span>{p.author}</span>
+                      <span class="blog-dot" aria-hidden="true">·</span>
+                      <span>{p.publishedDateFormatted}</span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </Fragment>
+  )}
+
+  <CtaStrip
+    heading="Need help applying what you read?"
+    body="Most posts are based on real engagements. If a topic matches your situation, talk to the senior auditor who'd run the work."
+    ctaLabel="Book a free 30-min call"
+    ctaHref="/contact/"
+    source="blog-index"
+  />
+</BaseLayout>
+
+<style>
+  .blog-empty {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 32px 0;
+  }
+  .blog-empty h2 { margin-bottom: 14px; color: var(--color-heading); }
+  .blog-empty p { color: var(--color-body); line-height: 1.7; margin-bottom: 24px; }
+
+  /* ===== Featured post ===== */
+  .blog-feat {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 22px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .blog-feat:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-accent-strong);
+    box-shadow: 0 16px 40px rgba(15,23,42,.10);
+  }
+  .blog-feat-cover {
+    background: var(--color-bg-soft);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  .blog-feat-cover img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+  }
+  .blog-feat:hover .blog-feat-cover img { transform: scale(1.04); }
+  .blog-feat-body { padding: 36px 36px 32px; display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+  .blog-feat-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .blog-feat-eyebrow {
+    color: var(--color-gold-strong);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .blog-feat-body h2 {
+    margin: 0;
+    font-size: 28px;
+    line-height: 1.25;
+    color: var(--color-heading);
+  }
+  .blog-feat-body p {
+    color: var(--color-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    margin: 0;
+  }
+  .blog-feat-foot {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    color: var(--color-body);
+    font-size: 13.5px;
+    margin-top: 6px;
+  }
+  .blog-feat-readmore {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-accent-strong);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .blog-feat-readmore :global(svg) { width: 16px; height: 16px; }
+
+  /* ===== Grid ===== */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .blog-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .blog-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-accent-strong);
+    box-shadow: 0 12px 28px rgba(15,23,42,.08);
+  }
+  .blog-card-cover {
+    background: var(--color-bg-soft);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+  .blog-card-cover img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+  }
+  .blog-card:hover .blog-card-cover img { transform: scale(1.04); }
+  .blog-card-body {
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .blog-card-body h3 {
+    margin: 4px 0 0;
+    font-size: 17.5px;
+    line-height: 1.35;
+    color: var(--color-heading);
+  }
+  .blog-card-body p {
+    color: var(--color-body);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+  .blog-card-foot {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: var(--color-body);
+    font-size: 12.5px;
+    margin-top: 4px;
+  }
+
+  /* ===== Tag chip ===== */
+  .blog-tag {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 4px 10px;
+    background: rgba(16,185,129,0.10);
+    color: var(--color-accent-strong);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .blog-dot { opacity: 0.5; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 980px) {
+    .blog-feat { grid-template-columns: 1fr; }
+    .blog-feat-cover { aspect-ratio: 16 / 9; }
+    .blog-feat-body { padding: 28px 28px; }
+    .blog-feat-body h2 { font-size: 24px; }
+    .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .blog-grid { grid-template-columns: 1fr; }
+  }
+</style>

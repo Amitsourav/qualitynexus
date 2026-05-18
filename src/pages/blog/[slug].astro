@@ -1,0 +1,366 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaStrip from "../../components/CtaStrip.astro";
+import Icon from "../../components/Icon.astro";
+import { breadcrumbLd, SITE } from "../../lib/schema";
+import { getAllPosts, getPostBySlug } from "../../lib/notion";
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return posts.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = await getPostBySlug(slug as string);
+
+if (!post) {
+  return Astro.redirect("/blog/");
+}
+
+// Up to 3 most-recent related posts (excluding current).
+const all = await getAllPosts();
+const related = all.filter((p) => p.slug !== post.slug).slice(0, 3);
+
+const PAGE_URL = `${SITE}/blog/${post.slug}/`;
+
+const crumbs = breadcrumbLd([
+  { name: "Home", href: "/" },
+  { name: "Blog", href: "/blog/" },
+  { name: post.title, href: `/blog/${post.slug}/` },
+]);
+
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": `${PAGE_URL}#article`,
+  "headline": post.title,
+  "description": post.seoDescription || post.excerpt,
+  "image": post.coverUrl ? [post.coverUrl] : [`${SITE}/og/default.jpg`],
+  "author": { "@type": "Person", "name": post.author },
+  "publisher": { "@id": `${SITE}/#organization` },
+  "datePublished": post.publishedDate,
+  "dateModified": post.publishedDate,
+  "mainEntityOfPage": PAGE_URL,
+  "keywords": post.tags.join(", "),
+  "inLanguage": "en-IN",
+};
+---
+<BaseLayout
+  title={`${post.seoTitle} | QualityNexus`}
+  description={post.seoDescription || post.excerpt}
+  canonical={`/blog/${post.slug}/`}
+  image={post.coverUrl ?? "/og/default.jpg"}
+  type="article"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleLd)} />
+
+  <article class="post">
+    <header class="post-hero">
+      <div class="container">
+        <nav class="post-crumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">›</span>
+          <a href="/blog/">Blog</a>
+        </nav>
+        {post.tags.length > 0 && (
+          <div class="post-tags">
+            {post.tags.map((t) => <span class="post-tag">{t}</span>)}
+          </div>
+        )}
+        <h1>{post.title}</h1>
+        {post.excerpt && <p class="post-lede">{post.excerpt}</p>}
+        <div class="post-meta">
+          <span><strong>{post.author}</strong></span>
+          <span aria-hidden="true" class="post-dot">·</span>
+          <time datetime={post.publishedDate}>{post.publishedDateFormatted}</time>
+        </div>
+      </div>
+    </header>
+
+    {post.coverUrl && (
+      <div class="container post-cover-wrap">
+        <img src={post.coverUrl} alt="" class="post-cover" loading="eager" decoding="async" />
+      </div>
+    )}
+
+    <div class="container">
+      <div class="post-body" set:html={post.html} />
+    </div>
+
+    {related.length > 0 && (
+      <section class="section section-soft">
+        <div class="container">
+          <div class="section-head">
+            <h2>More from the blog</h2>
+          </div>
+          <div class="post-related-grid">
+            {related.map((r) => (
+              <a href={`/blog/${r.slug}/`} class="post-related-card">
+                {r.coverUrl && (
+                  <div class="post-related-cover">
+                    <img src={r.coverUrl} alt="" loading="lazy" decoding="async" />
+                  </div>
+                )}
+                <div class="post-related-body">
+                  {r.tags[0] && <span class="post-tag">{r.tags[0]}</span>}
+                  <h3>{r.title}</h3>
+                  <span class="post-related-meta">{r.publishedDateFormatted}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </article>
+
+  <CtaStrip
+    heading="Discuss this with a senior consultant"
+    body="Most posts are based on live engagement experience. If a topic is relevant to your situation, talk to the lead auditor who'd handle the work."
+    ctaLabel="Book a free 30-min call"
+    ctaHref="/contact/"
+    secondaryLabel="See all blog posts"
+    secondaryHref="/blog/"
+    source={`blog-post-${post.slug}`}
+  />
+</BaseLayout>
+
+<style>
+  /* ===== Hero ===== */
+  .post-hero {
+    padding: 56px 0 36px;
+    background: linear-gradient(to bottom, var(--color-bg-soft), transparent);
+  }
+  .post-crumb {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--color-body); font-size: 13px;
+    margin-bottom: 18px;
+  }
+  .post-crumb a { color: var(--color-body); text-decoration: none; }
+  .post-crumb a:hover { color: var(--color-accent-strong); }
+  .post-crumb span { opacity: 0.5; }
+
+  .post-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .post-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(16,185,129,0.10);
+    color: var(--color-accent-strong);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .post-hero h1 {
+    font-size: clamp(28px, 4.2vw, 44px);
+    line-height: 1.18;
+    color: var(--color-heading);
+    margin: 0 0 18px;
+    max-width: 880px;
+  }
+  .post-lede {
+    color: var(--color-body);
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 760px;
+    margin: 0 0 24px;
+  }
+  .post-meta {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--color-body); font-size: 14px;
+  }
+  .post-dot { opacity: 0.5; }
+
+  /* ===== Cover ===== */
+  .post-cover-wrap {
+    margin-top: 12px;
+    margin-bottom: 36px;
+  }
+  .post-cover {
+    width: 100%;
+    max-height: 540px;
+    object-fit: cover;
+    border-radius: 18px;
+    display: block;
+  }
+
+  /* ===== Body prose ===== */
+  .post-body {
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--color-body);
+    font-size: 17px;
+    line-height: 1.78;
+    padding-bottom: 64px;
+  }
+  .post-body :global(h2) {
+    font-size: 26px;
+    line-height: 1.3;
+    color: var(--color-heading);
+    margin: 48px 0 16px;
+  }
+  .post-body :global(h3) {
+    font-size: 21px;
+    line-height: 1.35;
+    color: var(--color-heading);
+    margin: 36px 0 12px;
+  }
+  .post-body :global(h4) {
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--color-heading);
+    margin: 28px 0 10px;
+    font-weight: 700;
+  }
+  .post-body :global(p) {
+    margin: 0 0 18px;
+  }
+  .post-body :global(p > a),
+  .post-body :global(li > a) {
+    color: var(--color-accent-strong);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .post-body :global(p > a:hover),
+  .post-body :global(li > a:hover) {
+    color: var(--color-primary);
+  }
+  .post-body :global(strong) {
+    color: var(--color-heading);
+    font-weight: 700;
+  }
+  .post-body :global(em) {
+    color: var(--color-heading);
+  }
+  .post-body :global(ul),
+  .post-body :global(ol) {
+    padding-left: 22px;
+    margin: 0 0 18px;
+  }
+  .post-body :global(li) {
+    margin-bottom: 8px;
+  }
+  .post-body :global(blockquote) {
+    border-left: 3px solid var(--color-gold);
+    padding: 4px 0 4px 22px;
+    margin: 24px 0;
+    color: var(--color-heading);
+    font-style: italic;
+    background: linear-gradient(to right, rgba(212,175,55,0.04), transparent);
+  }
+  .post-body :global(blockquote p) { margin-bottom: 8px; }
+  .post-body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+    margin: 22px 0;
+    display: block;
+  }
+  .post-body :global(figure) { margin: 22px 0; }
+  .post-body :global(figcaption) {
+    font-size: 13px;
+    color: var(--color-body);
+    text-align: center;
+    margin-top: 8px;
+  }
+  .post-body :global(hr) {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    margin: 36px 0;
+  }
+  .post-body :global(code) {
+    background: var(--color-bg-soft);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: 'Menlo', 'Monaco', monospace;
+    font-size: 14px;
+    color: var(--color-heading);
+  }
+  .post-body :global(pre) {
+    background: var(--color-heading);
+    color: #E2E8F0;
+    padding: 18px 22px;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 22px 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .post-body :global(pre code) {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+  }
+  .post-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 22px 0;
+    font-size: 14.5px;
+  }
+  .post-body :global(table th),
+  .post-body :global(table td) {
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    text-align: left;
+  }
+  .post-body :global(table th) {
+    background: var(--color-bg-soft);
+    color: var(--color-heading);
+    font-weight: 700;
+  }
+
+  /* ===== Related ===== */
+  .post-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .post-related-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .post-related-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent-strong);
+    box-shadow: 0 10px 24px rgba(15,23,42,.08);
+  }
+  .post-related-cover {
+    aspect-ratio: 16 / 9;
+    background: var(--color-bg-soft);
+    overflow: hidden;
+  }
+  .post-related-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .post-related-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .post-related-body h3 {
+    margin: 4px 0 0;
+    font-size: 16px;
+    line-height: 1.35;
+    color: var(--color-heading);
+  }
+  .post-related-meta {
+    color: var(--color-body);
+    font-size: 12.5px;
+  }
+
+  @media (max-width: 880px) {
+    .post-related-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .post-related-grid { grid-template-columns: 1fr; }
+    .post-cover { max-height: 360px; }
+  }
+</style>
