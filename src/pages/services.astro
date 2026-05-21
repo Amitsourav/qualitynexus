@@ -15,7 +15,7 @@ const services = [
     icon: "award",
     title: "Certifications & Accreditations",
     body: "ISO certification and lab/hospital accreditation, end-to-end.",
-    bullets: ["ISO Certification (9001 · 14001 · 45001 · others)", "NABL Accreditation", "NABH Accreditation", "Green Certifications"],
+    bullets: ["ISO Certification (9001 · 14001 · 45001 · others)", "NABL Accreditation", "NABH Accreditation"],
   },
   {
     icon: "shield-check",
@@ -31,21 +31,15 @@ const services = [
   },
   {
     icon: "leaf",
-    title: "Compliance & Strategy",
-    body: "Regulatory and sustainability advisory for forward-looking organizations.",
-    bullets: ["ESG Services", "Legal Compliance"],
+    title: "ESG & Sustainability",
+    body: "Sustainability advisory for forward-looking organizations.",
+    bullets: ["ESG Services", "Sustainability Reporting", "Carbon & Water Accounting"],
   },
   {
     icon: "rocket",
     title: "Business Setup & Documentation",
-    body: "From incorporation paperwork to export readiness.",
-    bullets: ["Startup Registration", "Company Registration", "Documentation", "Export Services"],
-  },
-  {
-    icon: "scale",
-    title: "Financial Services",
-    body: "Tax and statutory filings handled by certified professionals.",
-    bullets: ["GST Filing", "Income Tax Returns (ITR)", "TDS Compliance"],
+    body: "Incorporation paperwork through to export readiness.",
+    bullets: ["Company Registration", "Documentation", "Export Services"],
   },
 ];
 
@@ -57,7 +51,7 @@ const engagement = [
   { n: "05", icon: "award",           title: "Certificate",      body: "Stage 2 closure. Surveillance plan handed over." },
 ];
 
-const orbitServices = ["award", "shield-check", "graduation-cap", "leaf", "rocket", "scale"];
+const orbitServices = ["award", "shield-check", "graduation-cap", "leaf", "rocket"];
 
 const proofPoints = [
   { num: "20",   suffix: "+",    label: "Service lines under one roof" },
@@ -67,14 +61,14 @@ const proofPoints = [
 ---
 <BaseLayout
   title="Services — ISO, NABL, Audits, Training & Business Support"
-  description="QualityNexus offers ISO Certification, NABL & NABH Accreditation, Cybersecurity, ESG, Safety Audits, Lean Six Sigma, Financial Services, and Legal Compliance across India."
+  description="QualityNexus offers ISO Certification, NABL & NABH Accreditation, Cybersecurity Audits, ESG, Safety Audits, Water Audit, Lean Six Sigma, and 5S Implementation across India."
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbs)} />
   <PageHero
     eyebrow="What we do"
-    title="Six service lines."
+    title="Five service lines."
     accent="One trusted partner."
-    lede="From ISO certification and NABL accreditation to financial filings, legal compliance, and training — we deliver compliance, efficiency, and growth as a single engagement, not three vendors."
+    lede="From ISO certification and NABL accreditation to safety audits, ESG, training, and 5S — we deliver compliance, efficiency, and growth as a single engagement, not three vendors."
     hasVisual={true}
   >
     <div slot="visual" class="services-visual">
@@ -85,7 +79,7 @@ const proofPoints = [
         <span class="sv-hub-pulse" aria-hidden="true"><span></span></span>
         <Icon name="compass" />
         <strong>One partner</strong>
-        <span>7 service lines</span>
+        <span>5 service lines</span>
       </div>
 
       {orbitServices.map((iconName, i) => (
