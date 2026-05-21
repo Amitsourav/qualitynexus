@@ -23,23 +23,23 @@ import { breadcrumbLd, SITE } from "../lib/schema";
 const roles = [
   {
     icon: "check-circle",
-    title: "Lead Auditor — Quality Management",
+    title: "Lead Auditor - Quality Management",
     standards: ["ISO 9001", "ISO 13485", "IATF 16949", "AS 9100", "ISO/TS 22163"],
     summary: "QMS implementation, internal audits, certification body audit preparation, and contract-specific QAP authoring for manufacturing, medical devices, automotive, and aerospace clients.",
     expectation: "Direct accountability for your engagement. Available on call during gap audit, Stage-1, and Stage-2 inspections.",
   },
   {
     icon: "lock",
-    title: "Lead Auditor — Information Security",
+    title: "Lead Auditor - Information Security",
     standards: ["ISO 27001:2022", "ISO 27017", "ISO 27018", "ISO 27701", "SOC 2"],
     summary: "ISMS rollout, Annex A 2022 controls mapping, DPDP Act 2023 overlay, third-party risk reviews, and VAPT coordination. Banks, fintech, SaaS, BPO, and IT/ITeS engagements.",
-    expectation: "Risk register, SoA, ISMS scope, and management review pack delivered to audit-ready state — not as a documentation dump.",
+    expectation: "Risk register, SoA, ISMS scope, and management review pack delivered to audit-ready state - not as a documentation dump.",
   },
   {
     icon: "scale",
-    title: "Senior Consultant — NABL & NABH",
+    title: "Senior Consultant - NABL & NABH",
     standards: ["ISO/IEC 17025", "ISO 15189", "NABL 100/112/151", "NABH"],
-    summary: "Lab and healthcare establishment accreditation — scope definition, measurement uncertainty, proficiency testing planning, method validation, on-site assessment readiness.",
+    summary: "Lab and healthcare establishment accreditation - scope definition, measurement uncertainty, proficiency testing planning, method validation, on-site assessment readiness.",
     expectation: "Technical document authoring (Quality Manual, SOPs, equipment master) led by someone who has been on the assessor side of the table.",
   },
   {
@@ -47,7 +47,7 @@ const roles = [
     title: "Compliance & Documentation Lead",
     standards: ["ISO 14001", "ISO 45001", "ISO 50001", "5S", "Sectoral (DGMS, PESO, BIS)"],
     summary: "Environmental, safety, and energy management systems. 5S deployment, sector-specific approvals coordination (DGMS for mining, PESO for petroleum, BIS product certification), and tender documentation packs.",
-    expectation: "All compliance evidence indexed and ready for any TPI or PSU inspector — no last-minute scrambling on inspection day.",
+    expectation: "All compliance evidence indexed and ready for any TPI or PSU inspector - no last-minute scrambling on inspection day.",
   },
 ];
 
@@ -88,13 +88,13 @@ const aboutPageLd = {
   "@type": "AboutPage",
   "@id": `${PAGE_URL}#aboutpage`,
   "name": "Meet the QualityNexus Team",
-  "description": "The senior auditors and consultants behind QualityNexus engagements — IRCA-trained lead auditors, Exemplar Global certified ISMS specialists, NABL technical assessors, and compliance leads with 12+ years average sector experience.",
+  "description": "The senior auditors and consultants behind QualityNexus engagements - IRCA-trained lead auditors, Exemplar Global certified ISMS specialists, NABL technical assessors, and compliance leads with 12+ years average sector experience.",
   "url": PAGE_URL,
   "mainEntity": { "@id": `${SITE}/#organization` },
 };
 ---
 <BaseLayout
-  title="Our Team — Lead Auditors, ISMS Specialists & NABL Assessors | QualityNexus"
+  title="Our Team - Lead Auditors, ISMS Specialists & NABL Assessors | QualityNexus"
   description="Meet the senior IRCA-trained lead auditors, Exemplar Global certified ISMS specialists, and NABL technical assessors behind every QualityNexus engagement. 12+ years average sector experience across power, oil & gas, defence, railways, and healthcare."
   canonical="/team/"
 >
@@ -105,7 +105,7 @@ const aboutPageLd = {
     eyebrow="The team behind QualityNexus"
     title="Senior auditors."
     accent="Not a sales funnel."
-    lede="Every QualityNexus engagement is led by a senior lead auditor or technical assessor — no junior hand-offs, no offshore documentation factory. The person who scopes the work signs off on the certificate."
+    lede="Every QualityNexus engagement is led by a senior lead auditor or technical assessor - no junior hand-offs, no offshore documentation factory. The person who scopes the work signs off on the certificate."
     hasVisual={false}
   />
 
@@ -115,7 +115,7 @@ const aboutPageLd = {
       <div class="section-head center team-cred-head">
         <span class="eyebrow">What our auditors hold</span>
         <h2>The credential floor for every engagement</h2>
-        <p>QualityNexus engagements are staffed from a pool that holds — at minimum — the credentials below. Specialist assignments add sector certifications on top.</p>
+        <p>QualityNexus engagements are staffed from a pool that holds - at minimum - the credentials below. Specialist assignments add sector certifications on top.</p>
       </div>
       <div class="team-cred-grid">
         {credentials.map((c) => (
@@ -171,7 +171,7 @@ const aboutPageLd = {
       <div class="section-head center">
         <span class="eyebrow">How we work</span>
         <h2>Three commitments on every engagement</h2>
-        <p>The expectations we set on call one — and don't walk back later.</p>
+        <p>The expectations we set on call one - and don't walk back later.</p>
       </div>
       <div class="team-promise-grid">
         {engagementPromises.map((p, i) => (

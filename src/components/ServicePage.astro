@@ -1,6 +1,6 @@
 ---
 /**
- * ServicePage.astro — shared template for transactional service pages.
+ * ServicePage.astro - shared template for transactional service pages.
  *
  * Each /xxx-consultancy or /xxx-services page is a thin data file that
  * imports this component and passes a `service` prop. This template renders
@@ -115,7 +115,7 @@ const faqLd = {
       <div class="section-head center">
         <span class="eyebrow">What's in scope</span>
         <h2>What this engagement covers</h2>
-        <p>Six explicit scope areas — what you can expect, end to end, on a typical engagement.</p>
+        <p>Six explicit scope areas - what you can expect, end to end, on a typical engagement.</p>
       </div>
       <div class="svc-card-grid svc-card-grid--2">
         {service.scope.map((s) => (
@@ -152,7 +152,7 @@ const faqLd = {
       <div class="section-head center">
         <span class="eyebrow">Deliverables</span>
         <h2>What you walk away with</h2>
-        <p>Concrete artefacts handed over at engagement close — not slides, not summaries.</p>
+        <p>Concrete artefacts handed over at engagement close - not slides, not summaries.</p>
       </div>
       <ul class="svc-deliverables">
         {service.deliverables.map((d, i) => (

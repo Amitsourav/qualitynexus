@@ -27,24 +27,24 @@
 
 ## Flagship standards (hand-authored detail pages)
 
-- [ISO 9001 — Quality Management Systems](https://www.qualitynexus.in/certifications/iso-9001/)
-- [ISO 14001 — Environmental Management Systems](https://www.qualitynexus.in/certifications/iso-14001/)
-- [ISO 45001 — Occupational Health & Safety](https://www.qualitynexus.in/certifications/iso-45001/)
-- [ISO 27001 — Information Security Management](https://www.qualitynexus.in/certifications/iso-27001/)
-- [ISO 13485 — Medical Devices QMS](https://www.qualitynexus.in/certifications/iso-13485/)
-- [ISO 22000 — Food Safety Management](https://www.qualitynexus.in/certifications/iso-22000/)
-- [ISO 50001 — Energy Management Systems](https://www.qualitynexus.in/certifications/iso-50001/)
-- [ISO/IEC 17025 — Testing & Calibration Laboratories](https://www.qualitynexus.in/certifications/iso-17025/)
+- [ISO 9001 - Quality Management Systems](https://www.qualitynexus.in/certifications/iso-9001/)
+- [ISO 14001 - Environmental Management Systems](https://www.qualitynexus.in/certifications/iso-14001/)
+- [ISO 45001 - Occupational Health & Safety](https://www.qualitynexus.in/certifications/iso-45001/)
+- [ISO 27001 - Information Security Management](https://www.qualitynexus.in/certifications/iso-27001/)
+- [ISO 13485 - Medical Devices QMS](https://www.qualitynexus.in/certifications/iso-13485/)
+- [ISO 22000 - Food Safety Management](https://www.qualitynexus.in/certifications/iso-22000/)
+- [ISO 50001 - Energy Management Systems](https://www.qualitynexus.in/certifications/iso-50001/)
+- [ISO/IEC 17025 - Testing & Calibration Laboratories](https://www.qualitynexus.in/certifications/iso-17025/)
 
 ## Engagement model
 
 Five stages, average 60 days from gap to certificate:
 
-1. Gap Analysis — clause-by-clause assessment against the target standard
-2. Implementation — documents, controls, and routines built for daily use
-3. Internal Audit — trial audit cycle; findings closed before Stage 1
-4. Stage 1 & 2 Audit — readiness review and the certification body audit
-5. Certification — certificate issued, surveillance plan handed over
+1. Gap Analysis - clause-by-clause assessment against the target standard
+2. Implementation - documents, controls, and routines built for daily use
+3. Internal Audit - trial audit cycle; findings closed before Stage 1
+4. Stage 1 & 2 Audit - readiness review and the certification body audit
+5. Certification - certificate issued, surveillance plan handed over
 
 ## Sectors served
 
@@ -56,4 +56,4 @@ Indian Oil Corporation Ltd (IOCL), Hindustan Aeronautics Ltd (HAL), NHPC Limited
 
 ## Recognition & registrations
 
-Government of India recognition under MSME (Udyam), DIPP (Startup India), GST, and MCA — registered as a Private Limited company.
+Government of India recognition under MSME (Udyam), DIPP (Startup India), GST, and MCA - registered as a Private Limited company.

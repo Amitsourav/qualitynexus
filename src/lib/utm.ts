@@ -3,15 +3,15 @@
  *
  * Convention:
  *   utm_source   = always "site"      (this is our own website)
- *   utm_medium   = surface that hosted the click — e.g. "cta-strip-primary",
+ *   utm_medium   = surface that hosted the click - e.g. "cta-strip-primary",
  *                                                      "hero-cta",
  *                                                      "floating-fab"
- *   utm_campaign = page/feature that owns the surface — e.g. "home",
+ *   utm_campaign = page/feature that owns the surface - e.g. "home",
  *                                                            "psu-pillar",
  *                                                            "ranchi-lp"
  *
  * Only internal links get UTM appended. External URLs (wa.me, tel:, mailto:,
- * https://...) are left alone — these have their own tagging conventions.
+ * https://...) are left alone - these have their own tagging conventions.
  *
  * Once GA4 / Plausible is wired, every lead will be attributable to the
  * surface + page that produced it.
@@ -19,8 +19,8 @@
 
 export type UtmOpts = {
   source?: string;   // default "site"
-  medium: string;    // required — the surface
-  campaign?: string; // optional — page / feature
+  medium: string;    // required - the surface
+  campaign?: string; // optional - page / feature
 };
 
 export function withUtm(href: string, opts: UtmOpts): string {

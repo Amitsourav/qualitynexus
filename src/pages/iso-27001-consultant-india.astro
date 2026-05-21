@@ -59,17 +59,17 @@ const annexAThemes = [
 ];
 
 const implementationSteps = [
-  { n: "01", title: "Scope definition workshop",                body: "Define ISMS scope — products, services, locations, third parties, exclusions. This single document drives every downstream artefact, from the SoA to the audit certificate language. Get it wrong here and the entire program drifts." },
-  { n: "02", title: "Gap analysis vs ISO 27001:2022",           body: "Walk-through of every Annex A control. Map current state, target state, evidence gaps. Output is a colour-coded register with effort estimates and owner assignments — what gets fixed, what's already in place, what's not applicable." },
+  { n: "01", title: "Scope definition workshop",                body: "Define ISMS scope - products, services, locations, third parties, exclusions. This single document drives every downstream artefact, from the SoA to the audit certificate language. Get it wrong here and the entire program drifts." },
+  { n: "02", title: "Gap analysis vs ISO 27001:2022",           body: "Walk-through of every Annex A control. Map current state, target state, evidence gaps. Output is a colour-coded register with effort estimates and owner assignments - what gets fixed, what's already in place, what's not applicable." },
   { n: "03", title: "Risk assessment & treatment plan",         body: "Asset register → threats → vulnerabilities → impact + likelihood → residual risk. The risk methodology is yours to define (qualitative is fine), but it must be repeatable and documented. We use a tested framework that survives auditor scrutiny." },
-  { n: "04", title: "Statement of Applicability (SoA)",         body: "The contract between you and the auditor. Each of the 93 controls marked as Applied / Not Applied with justification. SoA is the most-inspected document at Stage 2 — typos and missing justifications are the most common minor non-conformances." },
-  { n: "05", title: "Policy & procedure authoring",             body: "Information security policy (board-approved), 10-15 supporting policies (acceptable use, access control, change management, supplier security, incident response, business continuity, cryptography, data classification, backup, secure development). Tailored to your stack — no boilerplate." },
-  { n: "06", title: "Control implementation",                   body: "Closing actual control gaps — MFA rollout, privileged access management, log aggregation, vulnerability scanning cadence, security awareness training, supplier security questionnaires, BCP exercises. The longest phase, typically 8–12 weeks." },
-  { n: "07", title: "Internal audit (round 1)",                 body: "Independent walk-through of all controls before CB Stage 1. Findings logged, root cause analysis done, corrective actions tracked to closure. Internal audit independence is a control in its own right — we run it as an external assessor would." },
+  { n: "04", title: "Statement of Applicability (SoA)",         body: "The contract between you and the auditor. Each of the 93 controls marked as Applied / Not Applied with justification. SoA is the most-inspected document at Stage 2 - typos and missing justifications are the most common minor non-conformances." },
+  { n: "05", title: "Policy & procedure authoring",             body: "Information security policy (board-approved), 10-15 supporting policies (acceptable use, access control, change management, supplier security, incident response, business continuity, cryptography, data classification, backup, secure development). Tailored to your stack - no boilerplate." },
+  { n: "06", title: "Control implementation",                   body: "Closing actual control gaps - MFA rollout, privileged access management, log aggregation, vulnerability scanning cadence, security awareness training, supplier security questionnaires, BCP exercises. The longest phase, typically 8–12 weeks." },
+  { n: "07", title: "Internal audit (round 1)",                 body: "Independent walk-through of all controls before CB Stage 1. Findings logged, root cause analysis done, corrective actions tracked to closure. Internal audit independence is a control in its own right - we run it as an external assessor would." },
   { n: "08", title: "Management review",                        body: "Documented review by top management covering ISMS performance, audit results, threat landscape changes, resource adequacy, improvement opportunities. Minutes signed. Without this, Stage 2 fails on clause 9.3." },
-  { n: "09", title: "Stage 1 audit (documentation review)",     body: "CB assessor reviews ISMS documentation off-site and may do a brief site visit. Output is a Stage 1 report listing readiness gaps. We help close everything before Stage 2 — never go to Stage 2 with open Stage 1 findings." },
+  { n: "09", title: "Stage 1 audit (documentation review)",     body: "CB assessor reviews ISMS documentation off-site and may do a brief site visit. Output is a Stage 1 report listing readiness gaps. We help close everything before Stage 2 - never go to Stage 2 with open Stage 1 findings." },
   { n: "10", title: "Stage 2 audit (certification audit)",      body: "On-site control verification. Auditor interviews staff, samples records, observes operations. We attend, support evidence retrieval, manage scope of audit, and close any minor non-conformance inside the visit window where possible." },
-  { n: "11", title: "Non-conformance closure",                  body: "Any minor NCs raised — corrective action plans documented, root cause analysis, evidence of closure submitted to CB. Majors require re-audit and almost never happen with proper Stage 1 readiness." },
+  { n: "11", title: "Non-conformance closure",                  body: "Any minor NCs raised - corrective action plans documented, root cause analysis, evidence of closure submitted to CB. Majors require re-audit and almost never happen with proper Stage 1 readiness." },
   { n: "12", title: "Certificate issued · 3-year cycle begins", body: "ISO 27001 certificate valid for 3 years, with surveillance audits at year 1 and year 2 (lighter scope), and full re-certification at year 3. We can stay on retainer for surveillance or hand over cleanly to your internal team." },
 ];
 
@@ -92,11 +92,11 @@ const commonNcs = [
 ];
 
 const comparisonRows = [
-  { row: "Scope",              iso: "Entire ISMS — people, process, technology, suppliers", soc: "Specific services / Trust Service Criteria", dpdp: "Personal data handling only" },
+  { row: "Scope",              iso: "Entire ISMS - people, process, technology, suppliers", soc: "Specific services / Trust Service Criteria", dpdp: "Personal data handling only" },
   { row: "Governing body",     iso: "ISO + IAF/NABCB-accredited CBs",                       soc: "AICPA + licensed CPA firms",                  dpdp: "Government of India (Data Protection Board)" },
-  { row: "Output",             iso: "3-year accredited certificate",                       soc: "Annual SOC report (Type I / Type II)",         dpdp: "No certificate — statutory obligation" },
+  { row: "Output",             iso: "3-year accredited certificate",                       soc: "Annual SOC report (Type I / Type II)",         dpdp: "No certificate - statutory obligation" },
   { row: "Buyer expectation",  iso: "EU, UK, India enterprise, PSU",                       soc: "US enterprise, especially SaaS customers",     dpdp: "Indian regulators + customers" },
-  { row: "Includes pen-test?", iso: "Not by default — handled via A.8.8 / A.8.29",          soc: "Type II expects evidence of testing",          dpdp: "Implied via 'reasonable safeguards'" },
+  { row: "Includes pen-test?", iso: "Not by default - handled via A.8.8 / A.8.29",          soc: "Type II expects evidence of testing",          dpdp: "Implied via 'reasonable safeguards'" },
 ];
 
 const certBodyTips = [
@@ -112,12 +112,12 @@ const isoFaqs = [
     a: "ISO 27001 is the international standard for Information Security Management Systems (ISMS). The 2022 revision restructured Annex A from 14 control domains (114 controls) to 4 themes (93 controls), introduced 11 new controls explicitly addressing threat intelligence, cloud security, ICT readiness, data leakage prevention, web filtering, secure coding, and configuration management. Organizations certified to the 2013 version have until October 2025 to transition.",
   },
   {
-    q: "How is ISO 27001 different from SOC 2 — do I need both?",
-    a: "ISO 27001 is a management-system standard producing a 3-year accredited certificate. SOC 2 is a controls attestation (Type II = period of evidence) producing an annual report. ISO 27001 is the expectation in EU/UK/India and for most Indian PSU and enterprise procurement. SOC 2 is the expectation for US enterprise SaaS customers, especially for vendor risk reviews. Indian SaaS exporters to the US frequently maintain both — ISO 27001 as the management baseline, SOC 2 Type II as the US customer-facing attestation.",
+    q: "How is ISO 27001 different from SOC 2 - do I need both?",
+    a: "ISO 27001 is a management-system standard producing a 3-year accredited certificate. SOC 2 is a controls attestation (Type II = period of evidence) producing an annual report. ISO 27001 is the expectation in EU/UK/India and for most Indian PSU and enterprise procurement. SOC 2 is the expectation for US enterprise SaaS customers, especially for vendor risk reviews. Indian SaaS exporters to the US frequently maintain both - ISO 27001 as the management baseline, SOC 2 Type II as the US customer-facing attestation.",
   },
   {
     q: "How does ISO 27001:2022 relate to DPDP Act 2023?",
-    a: "DPDP requires 'reasonable security safeguards' but doesn't prescribe controls. ISO 27001:2022 Annex A — with ISO 27701 (privacy) layered on — is the closest internationally-recognized framework that maps to DPDP's expectations: data classification (A.5.12, A.5.13), data subject rights workflows (A.5.34), breach notification procedures (A.5.24, A.5.27), and processor obligations (A.5.19, A.5.23). When the Data Protection Board issues compliance enforcement actions, ISO 27001 + ISO 27701 will be the documented baseline most defensible organizations point to.",
+    a: "DPDP requires 'reasonable security safeguards' but doesn't prescribe controls. ISO 27001:2022 Annex A - with ISO 27701 (privacy) layered on - is the closest internationally-recognized framework that maps to DPDP's expectations: data classification (A.5.12, A.5.13), data subject rights workflows (A.5.34), breach notification procedures (A.5.24, A.5.27), and processor obligations (A.5.19, A.5.23). When the Data Protection Board issues compliance enforcement actions, ISO 27001 + ISO 27701 will be the documented baseline most defensible organizations point to.",
   },
   {
     q: "How long does ISO 27001 implementation take for an Indian SME?",
@@ -129,15 +129,15 @@ const isoFaqs = [
   },
   {
     q: "Does ISO 27001 require a penetration test?",
-    a: "ISO 27001 doesn't explicitly mandate a penetration test, but Annex A.8.8 (Management of technical vulnerabilities) and A.8.29 (Security testing in development and acceptance) effectively require periodic technical testing. In practice, most Stage 2 auditors expect to see evidence of a VAPT exercise within the audit window. We bundle VAPT into our ISO 27001 engagements — a single vendor handles ISMS + testing for consistency.",
+    a: "ISO 27001 doesn't explicitly mandate a penetration test, but Annex A.8.8 (Management of technical vulnerabilities) and A.8.29 (Security testing in development and acceptance) effectively require periodic technical testing. In practice, most Stage 2 auditors expect to see evidence of a VAPT exercise within the audit window. We bundle VAPT into our ISO 27001 engagements - a single vendor handles ISMS + testing for consistency.",
   },
   {
     q: "Can ISO 27001 be implemented for just one product line or business unit?",
-    a: "Yes — scope is defined by you. Common SME and mid-market approach is to certify a specific product, service line, or business unit (with its own people, premises if applicable, and infrastructure) rather than the entire entity. The scope statement on the certificate must match the audited scope precisely. Customers reading the certificate can see exactly what's covered, so scope clarity is also a sales asset.",
+    a: "Yes - scope is defined by you. Common SME and mid-market approach is to certify a specific product, service line, or business unit (with its own people, premises if applicable, and infrastructure) rather than the entire entity. The scope statement on the certificate must match the audited scope precisely. Customers reading the certificate can see exactly what's covered, so scope clarity is also a sales asset.",
   },
   {
     q: "What happens if the Stage 2 audit raises non-conformances?",
-    a: "Minor NCs (most common) require a documented corrective action plan and evidence of closure submitted to the CB within an agreed window (typically 30–90 days). The certificate is then issued. Major NCs require a re-audit before the certificate can be issued. With proper Stage 1 readiness, major NCs are rare — and one of the things we explicitly underwrite in our engagement model.",
+    a: "Minor NCs (most common) require a documented corrective action plan and evidence of closure submitted to the CB within an agreed window (typically 30–90 days). The certificate is then issued. Major NCs require a re-audit before the certificate can be issued. With proper Stage 1 readiness, major NCs are rare - and one of the things we explicitly underwrite in our engagement model.",
   },
   {
     q: "Which Indian industries are seeing the highest demand for ISO 27001 in 2026?",
@@ -145,7 +145,7 @@ const isoFaqs = [
   },
   {
     q: "How does QualityNexus deliver ISO 27001 engagements differently?",
-    a: "Three practical commitments: (1) Lead auditor on every call — no junior hand-off; (2) Fixed-price scoped engagement with milestone deliverables, no hourly billing surprises; (3) VAPT bundled in, so Stage 2 auditor sees consistent vendor evidence instead of stitching together two suppliers' work. We work CB-neutral and recommend the certification body based on your customer base and procurement requirements, not on referral commissions.",
+    a: "Three practical commitments: (1) Lead auditor on every call - no junior hand-off; (2) Fixed-price scoped engagement with milestone deliverables, no hourly billing surprises; (3) VAPT bundled in, so Stage 2 auditor sees consistent vendor evidence instead of stitching together two suppliers' work. We work CB-neutral and recommend the certification body based on your customer base and procurement requirements, not on referral commissions.",
   },
 ];
 
@@ -163,7 +163,7 @@ const serviceLd = {
   "@id": `${PAGE_URL}#service`,
   "serviceType": "ISO 27001 Information Security Management Consultancy",
   "name": "ISO 27001:2022 Implementation Consultancy in India",
-  "description": "End-to-end ISO 27001:2022 implementation consultancy for Indian banks, fintech, SaaS exporters, BPO, IT services, and healthcare — with bundled VAPT, DPDP Act 2023 overlay, and RBI/SEBI framework alignment.",
+  "description": "End-to-end ISO 27001:2022 implementation consultancy for Indian banks, fintech, SaaS exporters, BPO, IT services, and healthcare - with bundled VAPT, DPDP Act 2023 overlay, and RBI/SEBI framework alignment.",
   "provider": { "@id": `${SITE}/#organization` },
   "areaServed": { "@type": "Country", "name": "India" },
   "url": PAGE_URL,
@@ -177,8 +177,8 @@ const articleLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "@id": `${PAGE_URL}#article`,
-  "headline": "ISO 27001 Consultant in India — 2026 Implementation Guide",
-  "description": "Definitive guide to ISO 27001:2022 implementation for Indian organizations — Annex A controls, RBI / SEBI / DPDP alignment, cost, timeline, and certification body selection.",
+  "headline": "ISO 27001 Consultant in India - 2026 Implementation Guide",
+  "description": "Definitive guide to ISO 27001:2022 implementation for Indian organizations - Annex A controls, RBI / SEBI / DPDP alignment, cost, timeline, and certification body selection.",
   "author":    { "@id": `${SITE}/#organization` },
   "publisher": { "@id": `${SITE}/#organization` },
   "datePublished": "2026-05-18",
@@ -205,7 +205,7 @@ const faqLd = {
 };
 ---
 <BaseLayout
-  title="ISO 27001 Consultant in India — 2026 Implementation Guide"
+  title="ISO 27001 Consultant in India - 2026 Implementation Guide"
   description="Complete 2026 guide to ISO 27001:2022 implementation for Indian banks, fintech, SaaS, BPO, IT services, and healthcare. Annex A controls, RBI/SEBI/DPDP alignment, realistic cost, timelines."
   canonical="/iso-27001-consultant-india/"
 >
@@ -218,7 +218,7 @@ const faqLd = {
     eyebrow="Pillar guide · India · ISO 27001:2022"
     title="ISO 27001 consultant"
     accent="for Indian organizations."
-    lede="A current, practical, India-specific guide to ISO 27001:2022 — the Annex A 2022 control framework, the 12-step implementation journey, alignment with DPDP Act 2023 and RBI/SEBI cyber frameworks, realistic cost and timeline for SMEs, and how to choose the right certification body."
+    lede="A current, practical, India-specific guide to ISO 27001:2022 - the Annex A 2022 control framework, the 12-step implementation journey, alignment with DPDP Act 2023 and RBI/SEBI cyber frameworks, realistic cost and timeline for SMEs, and how to choose the right certification body."
     hasVisual={false}
   />
 
@@ -245,12 +245,12 @@ const faqLd = {
         The 2022 revision restructured Annex A from 14 domains to 4 themes (Organizational, People, Physical, Technological) and introduced 11 new controls explicitly addressing threat intelligence, cloud security, configuration management, data leakage prevention, secure coding, and ICT readiness for business continuity. Organizations on the older ISO 27001:2013 version have until <strong>October 2025</strong> to transition; after that, 2013 certificates become invalid.
       </p>
       <p>
-        For Indian organizations in 2026, ISO 27001:2022 is becoming the default information-security baseline — driven by the <a href="#dpdp">DPDP Act 2023</a>, RBI and SEBI cyber frameworks, enterprise procurement pre-qualification, and increasingly PSU IT/OT supply contracts. This page is the definitive walk-through. If you'd rather jump to a scoping call, <a href="/contact/">contact us</a>.
+        For Indian organizations in 2026, ISO 27001:2022 is becoming the default information-security baseline - driven by the <a href="#dpdp">DPDP Act 2023</a>, RBI and SEBI cyber frameworks, enterprise procurement pre-qualification, and increasingly PSU IT/OT supply contracts. This page is the definitive walk-through. If you'd rather jump to a scoping call, <a href="/contact/">contact us</a>.
       </p>
     </div>
   </section>
 
-  <!-- ===== WHY IT MATTERS — REGULATORY DRIVERS ===== -->
+  <!-- ===== WHY IT MATTERS - REGULATORY DRIVERS ===== -->
   <section class="section section-soft" id="dpdp">
     <div class="container">
       <div class="section-head center">
@@ -276,7 +276,7 @@ const faqLd = {
       <div class="section-head center">
         <span class="eyebrow">Annex A 2022</span>
         <h2>The 4-theme control framework</h2>
-        <p>The 2022 revision restructured Annex A from 14 domains into 4 themes — 93 controls total. Each control is "applied" or "not applied with justification" on your Statement of Applicability.</p>
+        <p>The 2022 revision restructured Annex A from 14 domains into 4 themes - 93 controls total. Each control is "applied" or "not applied with justification" on your Statement of Applicability.</p>
       </div>
       <div class="psu-sector-grid">
         {annexAThemes.map((t) => (
@@ -361,8 +361,8 @@ const faqLd = {
     <div class="container">
       <div class="section-head center">
         <span class="eyebrow">Framework comparison</span>
-        <h2>ISO 27001 vs SOC 2 vs DPDP — when which one</h2>
-        <p>Three frameworks that overlap but answer different questions. Most Indian organizations targeting global customers run two or three concurrently — ISO 27001 as the management spine, SOC 2 for US customer-facing attestation, DPDP for statutory obligations.</p>
+        <h2>ISO 27001 vs SOC 2 vs DPDP - when which one</h2>
+        <p>Three frameworks that overlap but answer different questions. Most Indian organizations targeting global customers run two or three concurrently - ISO 27001 as the management spine, SOC 2 for US customer-facing attestation, DPDP for statutory obligations.</p>
       </div>
       <div class="iso-compare">
         <table class="iso-compare-table">
@@ -400,14 +400,14 @@ const faqLd = {
         <li><span class="psu-qap-num">A</span> Consultancy (gap → certificate): <strong>₹1.5L – ₹4.5L</strong> for SMEs (50–250 employees, single site, IT/SaaS scope)</li>
         <li><span class="psu-qap-num">B</span> CB Stage 1 + Stage 2 audit fees: <strong>₹1.0L – ₹2.5L</strong> (varies 1.5–4× between CBs)</li>
         <li><span class="psu-qap-num">C</span> First-year tooling (VAPT, log aggregation, scanning, access mgmt if absent): <strong>₹0.5L – ₹2.0L</strong></li>
-        <li><span class="psu-qap-num">D</span> Internal staff time (CISO function, process owners, training): real but rarely costed — budget 20–40 person-days</li>
+        <li><span class="psu-qap-num">D</span> Internal staff time (CISO function, process owners, training): real but rarely costed - budget 20–40 person-days</li>
         <li><span class="psu-qap-num">E</span> Year-2 surveillance audit: <strong>₹60K – ₹1.2L</strong></li>
         <li><span class="psu-qap-num">F</span> Year-3 re-certification audit: similar to Stage 1+2 cost</li>
         <li><span class="psu-qap-num">G</span> Timeline (scope to certificate): <strong>16–24 weeks</strong> for SME, 6–12 months for enterprise multi-site</li>
         <li><span class="psu-qap-num">H</span> Total first-year all-in: <strong>₹3.0L – ₹9.0L</strong> typical SME band</li>
       </ul>
       <p>
-        Caveat — costs reflect 2026 Indian market for accredited CBs (BSI, TUV Nord, DNV, BVQI, DEKRA, LRQA, SGS, Intertek, BSCIC, IRQS, URS, RINA). Non-accredited certificates appear cheaper but are rejected by enterprise procurement and PSU tenders, making the apparent saving illusory.
+        Caveat - costs reflect 2026 Indian market for accredited CBs (BSI, TUV Nord, DNV, BVQI, DEKRA, LRQA, SGS, Intertek, BSCIC, IRQS, URS, RINA). Non-accredited certificates appear cheaper but are rejected by enterprise procurement and PSU tenders, making the apparent saving illusory.
       </p>
     </div>
   </section>
@@ -417,7 +417,7 @@ const faqLd = {
     <div class="container psu-prose">
       <h2 id="cb">Choosing a certification body</h2>
       <p>
-        We're CB-neutral. The right CB depends on your customer base, geographic reach, and procurement reality — not on referral commissions. Four practical rules we apply when recommending:
+        We're CB-neutral. The right CB depends on your customer base, geographic reach, and procurement reality - not on referral commissions. Four practical rules we apply when recommending:
       </p>
       <ul class="psu-qap-list">
         {certBodyTips.map((t, i) => (
@@ -436,7 +436,7 @@ const faqLd = {
       </div>
       <div class="psu-cross-grid">
         <a href="/certifications/iso-27001/" class="psu-cross-card">
-          <strong>ISO 27001 — Standard overview</strong>
+          <strong>ISO 27001 - Standard overview</strong>
           <span>The cert-page summary &amp; principles</span>
           <span class="psu-cross-arrow"><Icon name="arrow-right" /></span>
         </a>

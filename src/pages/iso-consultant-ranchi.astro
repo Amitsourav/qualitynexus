@@ -6,18 +6,18 @@ import Icon from "../components/Icon.astro";
 import { breadcrumbLd, SITE } from "../lib/schema";
 
 const services = [
-  { icon: "check-circle", code: "ISO 9001",  title: "Quality Management",            body: "End-to-end ISO 9001:2015 implementation for Ranchi manufacturers, service firms, and PSU vendors — gap analysis, documentation, internal audits, and certification body coordination." },
+  { icon: "check-circle", code: "ISO 9001",  title: "Quality Management",            body: "End-to-end ISO 9001:2015 implementation for Ranchi manufacturers, service firms, and PSU vendors - gap analysis, documentation, internal audits, and certification body coordination." },
   { icon: "lock",         code: "ISO 27001", title: "Information Security",          body: "ISO 27001:2022 ISMS rollout for Jharkhand IT/ITeS firms, BFSI back-offices, and SaaS exporters. Includes Annex A 2022 controls and DPDP Act 2023 alignment." },
-  { icon: "leaf",         code: "ISO 14001", title: "Environmental Management",      body: "Environmental management systems for mining, steel, power, and chemicals — the sectors that dominate Jharkhand's industrial base. Compliance with JSPCB obligations built in." },
-  { icon: "hard-hat",     code: "ISO 45001", title: "Occupational Health & Safety",  body: "Worker-safety management systems for high-risk industries — mining (HCL, CCL), steel (Bokaro, Jamshedpur), construction, and heavy engineering. DGMS-aligned where applicable." },
-  { icon: "scale",        code: "NABL",      title: "NABL & NABH Accreditation",     body: "ISO/IEC 17025 testing/calibration lab accreditation and NABH for healthcare establishments — for Ranchi medical labs, pathology centres, and quality testing facilities." },
-  { icon: "shield-check", code: "VAPT",      title: "VAPT & Cybersecurity Audit",    body: "Vulnerability assessment and penetration testing coordination — for Jharkhand banks, fintech, government departments, and IT services firms tendering for state contracts." },
+  { icon: "leaf",         code: "ISO 14001", title: "Environmental Management",      body: "Environmental management systems for mining, steel, power, and chemicals - the sectors that dominate Jharkhand's industrial base. Compliance with JSPCB obligations built in." },
+  { icon: "hard-hat",     code: "ISO 45001", title: "Occupational Health & Safety",  body: "Worker-safety management systems for high-risk industries - mining (HCL, CCL), steel (Bokaro, Jamshedpur), construction, and heavy engineering. DGMS-aligned where applicable." },
+  { icon: "scale",        code: "NABL",      title: "NABL & NABH Accreditation",     body: "ISO/IEC 17025 testing/calibration lab accreditation and NABH for healthcare establishments - for Ranchi medical labs, pathology centres, and quality testing facilities." },
+  { icon: "shield-check", code: "VAPT",      title: "VAPT & Cybersecurity Audit",    body: "Vulnerability assessment and penetration testing coordination - for Jharkhand banks, fintech, government departments, and IT services firms tendering for state contracts." },
 ];
 
 const whyLocal = [
-  { icon: "compass",       title: "On-site within hours, not days", body: "From our Ormanjhi office we can be at your plant in Tupudana, Adityapur, Jamshedpur, Bokaro, or Dhanbad the same working day. Stage-1 and gap audits require physical evidence — local presence makes that feasible." },
-  { icon: "users",         title: "Familiarity with regional CBs",  body: "We know the regional offices of the certification bodies (TUV Nord, BSI, BVQI, DNV, Intertek, IRQS) that serve Eastern India — including their audit calendars, lead auditors' style, and common non-conformance patterns in Jharkhand industries." },
-  { icon: "trending-up",   title: "Built for the regional economy", body: "Mining, steel, thermal power, public-sector engineering, MSME manufacturing — the standard reads differently in each. Our team has implemented across all of them in Jharkhand and the East-India PSU corridor." },
+  { icon: "compass",       title: "On-site within hours, not days", body: "From our Ormanjhi office we can be at your plant in Tupudana, Adityapur, Jamshedpur, Bokaro, or Dhanbad the same working day. Stage-1 and gap audits require physical evidence - local presence makes that feasible." },
+  { icon: "users",         title: "Familiarity with regional CBs",  body: "We know the regional offices of the certification bodies (TUV Nord, BSI, BVQI, DNV, Intertek, IRQS) that serve Eastern India - including their audit calendars, lead auditors' style, and common non-conformance patterns in Jharkhand industries." },
+  { icon: "trending-up",   title: "Built for the regional economy", body: "Mining, steel, thermal power, public-sector engineering, MSME manufacturing - the standard reads differently in each. Our team has implemented across all of them in Jharkhand and the East-India PSU corridor." },
 ];
 
 const industries = [
@@ -26,12 +26,12 @@ const industries = [
   { icon: "cog",         label: "Manufacturing & MSME",         note: "Adityapur GIDA, Tupudana Industrial Area, Bokaro Industrial Area" },
   { icon: "stethoscope", label: "Pharma & Healthcare",          note: "Patratu Pharma Park, Ranchi diagnostic labs, NABH-track hospitals" },
   { icon: "cpu",         label: "IT, ITeS & SaaS",              note: "Software Tech Park of India (STPI) Ranchi, BIT Mesra ecosystem firms" },
-  { icon: "file-text",   label: "Government & PSU Tendering",   note: "CMPDI, HEC, RPCL, Jharkhand Govt departments — ISO requirements in pre-qualification" },
+  { icon: "file-text",   label: "Government & PSU Tendering",   note: "CMPDI, HEC, RPCL, Jharkhand Govt departments - ISO requirements in pre-qualification" },
 ];
 
 const featuredPsus = [
-  { code: "HCL",   name: "Hindustan Copper Ltd",        logo: "/images/clients/hindustan-copper.jpg", link: "Operates in Ghatsila, East Singhbhum — Jharkhand's only integrated copper producer" },
-  { code: "NTPC",  name: "NTPC Limited",                logo: "/images/clients/ntpc.png",             link: "Patratu Super Thermal Power Project — 4,000 MW under construction in Jharkhand" },
+  { code: "HCL",   name: "Hindustan Copper Ltd",        logo: "/images/clients/hindustan-copper.jpg", link: "Operates in Ghatsila, East Singhbhum - Jharkhand's only integrated copper producer" },
+  { code: "NTPC",  name: "NTPC Limited",                logo: "/images/clients/ntpc.png",             link: "Patratu Super Thermal Power Project - 4,000 MW under construction in Jharkhand" },
   { code: "IOCL",  name: "Indian Oil Corporation Ltd",  logo: "/images/clients/iocl.png",             link: "Distribution and depot operations across Jharkhand; Barauni refinery serves the state" },
   { code: "IR",    name: "Indian Railways",             logo: "/images/clients/Indian-Railway.png",   link: "East Central Railway zone covers Jharkhand; supplier base spans Ranchi, Jamshedpur, Dhanbad" },
   { code: "HAL",   name: "Hindustan Aeronautics Ltd",   logo: "/images/clients/hal.jpeg",             link: "Components and ancillary supply chain extends into Jharkhand engineering MSMEs" },
@@ -41,7 +41,7 @@ const featuredPsus = [
 const localFaqs = [
   {
     q: "Do you only serve clients in Ranchi?",
-    a: "No. Ranchi is our base, but we deliver engagements across India — Patna, Kolkata, Bhubaneswar, Jamshedpur, Dhanbad, Bokaro, Guwahati, and the metros. Roughly 60% of active engagements are in Jharkhand and the Eastern PSU corridor; the remainder span pan-India.",
+    a: "No. Ranchi is our base, but we deliver engagements across India - Patna, Kolkata, Bhubaneswar, Jamshedpur, Dhanbad, Bokaro, Guwahati, and the metros. Roughly 60% of active engagements are in Jharkhand and the Eastern PSU corridor; the remainder span pan-India.",
   },
   {
     q: "How long does ISO 9001 certification take in Jharkhand?",
@@ -49,11 +49,11 @@ const localFaqs = [
   },
   {
     q: "Is ISO certification mandatory for Jharkhand state tenders or PSU vendor registration?",
-    a: "For most major tenders — yes, in practice. CMPDI, HEC, JBVNL, JSEB, and Jharkhand state PSU tenders increasingly list ISO 9001 (and often ISO 14001 / 45001 for industrial supply) as pre-qualification criteria. NTPC, NHPC, IOCL, and other central PSUs operating in Jharkhand have similar requirements in their vendor onboarding. We help you map the exact certification stack each tender expects.",
+    a: "For most major tenders - yes, in practice. CMPDI, HEC, JBVNL, JSEB, and Jharkhand state PSU tenders increasingly list ISO 9001 (and often ISO 14001 / 45001 for industrial supply) as pre-qualification criteria. NTPC, NHPC, IOCL, and other central PSUs operating in Jharkhand have similar requirements in their vendor onboarding. We help you map the exact certification stack each tender expects.",
   },
   {
     q: "Can you visit our plant in Jamshedpur, Dhanbad, or Bokaro?",
-    a: "Yes — on-site presence is part of every engagement we run in the region. Same-day travel from Ranchi to Jamshedpur (130 km), Dhanbad (160 km), or Bokaro (110 km) is routine. We schedule full-day or multi-day on-site blocks for gap audits, document walks, internal audits, and CB audit preparation.",
+    a: "Yes - on-site presence is part of every engagement we run in the region. Same-day travel from Ranchi to Jamshedpur (130 km), Dhanbad (160 km), or Bokaro (110 km) is routine. We schedule full-day or multi-day on-site blocks for gap audits, document walks, internal audits, and CB audit preparation.",
   },
   {
     q: "What does ISO certification cost in Ranchi compared to Delhi or Mumbai?",
@@ -61,7 +61,7 @@ const localFaqs = [
   },
   {
     q: "Which certification bodies do you work with in Eastern India?",
-    a: "We're CB-neutral and have working relationships with all the major accredited bodies operating in Eastern India: TUV Nord, TUV SUD, BSI, BVQI (Bureau Veritas), DNV, Intertek, IRQS, RINA, URS, and SGS. The right CB depends on your customer base, export markets, and accreditation expectations — we recommend, you decide.",
+    a: "We're CB-neutral and have working relationships with all the major accredited bodies operating in Eastern India: TUV Nord, TUV SUD, BSI, BVQI (Bureau Veritas), DNV, Intertek, IRQS, RINA, URS, and SGS. The right CB depends on your customer base, export markets, and accreditation expectations - we recommend, you decide.",
   },
   {
     q: "Can you help with NABL accreditation for a Ranchi-based testing lab?",
@@ -69,7 +69,7 @@ const localFaqs = [
   },
   {
     q: "Do you offer training for internal teams in Ranchi?",
-    a: "Yes — we conduct ISO 9001 / 27001 / 14001 / 45001 awareness training and internal auditor training (IRCA-aligned) at client sites in Ranchi, Jamshedpur, and the wider Jharkhand region. Public batches are scheduled periodically at our Ormanjhi office for individual professionals.",
+    a: "Yes - we conduct ISO 9001 / 27001 / 14001 / 45001 awareness training and internal auditor training (IRCA-aligned) at client sites in Ranchi, Jamshedpur, and the wider Jharkhand region. Public batches are scheduled periodically at our Ormanjhi office for individual professionals.",
   },
 ];
 
@@ -85,7 +85,7 @@ const localBusinessLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "@id": `${PAGE_URL}#localbusiness`,
-  "name": "QualityNexus — ISO Consultant in Ranchi",
+  "name": "QualityNexus - ISO Consultant in Ranchi",
   "image": `${SITE}/og/default.jpg`,
   "url": PAGE_URL,
   "telephone": "+91-9798082076",
@@ -312,7 +312,7 @@ const serviceLd = {
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="QualityNexus Office Location — Ormanjhi, Ranchi"
+            title="QualityNexus Office Location - Ormanjhi, Ranchi"
           ></iframe>
         </div>
       </div>
@@ -340,7 +340,7 @@ const serviceLd = {
 
   <CtaStrip
     heading="Talk to a Ranchi-based ISO consultant"
-    body="Free 30-minute scoping call. We'll review your standard, scope, timeline, and tender requirements — and tell you honestly whether we're the right fit."
+    body="Free 30-minute scoping call. We'll review your standard, scope, timeline, and tender requirements - and tell you honestly whether we're the right fit."
     ctaLabel="Book a free consultation"
     ctaHref="/contact/"
     secondaryLabel="See all services"

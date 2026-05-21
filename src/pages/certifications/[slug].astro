@@ -16,9 +16,9 @@ const detail = details[standard.slug];
 const hasDetail = Boolean(detail);
 const cat = standard.category;
 
-// Pillar guides — extend this map as new pillar pages ship.
+// Pillar guides - extend this map as new pillar pages ship.
 const pillarFor: Record<string, { href: string; label: string }> = {
-  "iso-27001": { href: "/iso-27001-consultant-india/", label: "ISO 27001 Consultant in India — full implementation guide" },
+  "iso-27001": { href: "/iso-27001-consultant-india/", label: "ISO 27001 Consultant in India - full implementation guide" },
 };
 const pillar = pillarFor[standard.slug];
 
@@ -54,7 +54,7 @@ const serviceLd = {
   "@context": "https://schema.org",
   "@type": "Service",
   "serviceType": `${standard.name} Certification Consulting`,
-  "name": `${standard.code} — ${standard.name} Consulting & Implementation`,
+  "name": `${standard.code} - ${standard.name} Consulting & Implementation`,
   "description": metaDescription,
   "provider": { "@id": "https://www.qualitynexus.in/#organization" },
   "areaServed": { "@type": "Country", "name": "India" },
@@ -63,7 +63,7 @@ const serviceLd = {
   "category": cat.title,
 };
 
-// Article schema — emitted only for flagship (hand-authored) cert pages.
+// Article schema - emitted only for flagship (hand-authored) cert pages.
 // datePublished: when the flagship detail content first shipped (2026-05-05).
 // dateModified:  bump this when content is updated; freshness signal for Google.
 const CERT_PUBLISHED = "2026-05-05";
@@ -73,7 +73,7 @@ const articleLd = hasDetail ? {
   "@context": "https://schema.org",
   "@type": "Article",
   "@id": `${canonicalUrl}#article`,
-  "headline": `${standard.code} — ${standard.name}`,
+  "headline": `${standard.code} - ${standard.name}`,
   "description": metaDescription,
   "author":     { "@id": "https://www.qualitynexus.in/#organization" },
   "publisher":  { "@id": "https://www.qualitynexus.in/#organization" },
@@ -90,7 +90,7 @@ const articleLd = hasDetail ? {
 } : null;
 ---
 <BaseLayout
-  title={`${standard.code} — ${standard.name} | QualityNexus`}
+  title={`${standard.code} - ${standard.name} | QualityNexus`}
   description={metaDescription}
   noindex={!hasDetail}
 >
@@ -125,7 +125,7 @@ const articleLd = hasDetail ? {
           </h1>
           {hasDetail
             ? <p class="cert-hero-lede">{detail.intro}</p>
-            : <p class="cert-hero-lede">QualityNexus supports {standard.code} ({standard.name}) end-to-end — gap analysis, documentation, internal audit, certification audit support, and post-certification surveillance. Contact us for a tailored scope discussion.</p>
+            : <p class="cert-hero-lede">QualityNexus supports {standard.code} ({standard.name}) end-to-end - gap analysis, documentation, internal audit, certification audit support, and post-certification surveillance. Contact us for a tailored scope discussion.</p>
           }
           <div class="cert-hero-actions">
             <a href="/contact" class="btn btn-accent">Talk to a senior consultant</a>
@@ -186,7 +186,7 @@ const articleLd = hasDetail ? {
           <div class="section-head">
             <span class="eyebrow">Why it matters</span>
             <h2>What {standard.code} unlocks.</h2>
-            <p>The reasons organizations actually pursue this certification — beyond the badge on the website.</p>
+            <p>The reasons organizations actually pursue this certification - beyond the badge on the website.</p>
           </div>
           <div class="why-grid">
             {detail.why.map((w, i) => (
@@ -245,7 +245,7 @@ const articleLd = hasDetail ? {
         <div class="stub-card">
           <span class="eyebrow">Detailed reference in progress</span>
           <h2>We're preparing a full reference for {standard.code}.</h2>
-          <p>In the meantime, we already consult, train, implement, and audit against {standard.code} — the structured page is on its way. For a scope discussion specific to your organization, reach out and a senior consultant will respond within 48 hours.</p>
+          <p>In the meantime, we already consult, train, implement, and audit against {standard.code} - the structured page is on its way. For a scope discussion specific to your organization, reach out and a senior consultant will respond within 48 hours.</p>
           <div class="stub-bullets">
             <div>
               <span class="stub-bullet-icon" aria-hidden="true"><Icon name="check-circle" /></span>

@@ -7,14 +7,14 @@
 @import "@fontsource/plus-jakarta-sans/800.css";
 
 :root {
-  /* Palette M — Hunter Green primary + Emerald accent + Gold buttons */
+  /* Palette M - Hunter Green primary + Emerald accent + Gold buttons */
   --color-primary: #0E3B2E;
   --color-primary-soft: #1F5538;
   --color-accent: #10B981;
   --color-accent-strong: #059669;
   --color-accent-soft: rgba(16, 185, 129, 0.14);
   --color-accent-tint: rgba(16, 185, 129, 0.08);
-  /* Gold — reserved for CTA buttons only */
+  /* Gold - reserved for CTA buttons only */
   --color-gold: #D4AF37;
   --color-gold-strong: #B8902E;
   --color-text: #475569;

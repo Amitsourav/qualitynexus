@@ -5,20 +5,20 @@
  * them to HTML for static site generation.
  *
  * Required env vars (set in Vercel project settings):
- *   NOTION_TOKEN        — integration secret (starts with "ntn_" or "secret_")
- *   NOTION_DATABASE_ID  — 32-char database id (with or without dashes)
+ *   NOTION_TOKEN        - integration secret (starts with "ntn_" or "secret_")
+ *   NOTION_DATABASE_ID  - 32-char database id (with or without dashes)
  *
  * Expected Notion database schema (column types):
- *   Title             — Title       (post title)
- *   Slug              — Text        (URL slug; lowercase, hyphenated)
- *   Status            — Select      (Draft / Published — only "Published" is built)
- *   Excerpt           — Text        (short description for listing + meta)
- *   Cover             — Files       (header image — optional)
- *   SEO Title         — Text        (optional override for <title>)
- *   SEO Description   — Text        (optional override for meta description)
- *   Tags              — Multi-select (categories)
- *   Author            — Text        (author name)
- *   Published Date    — Date        (date published)
+ *   Title             - Title       (post title)
+ *   Slug              - Text        (URL slug; lowercase, hyphenated)
+ *   Status            - Select      (Draft / Published - only "Published" is built)
+ *   Excerpt           - Text        (short description for listing + meta)
+ *   Cover             - Files       (header image - optional)
+ *   SEO Title         - Text        (optional override for <title>)
+ *   SEO Description   - Text        (optional override for meta description)
+ *   Tags              - Multi-select (categories)
+ *   Author            - Text        (author name)
+ *   Published Date    - Date        (date published)
  */
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";

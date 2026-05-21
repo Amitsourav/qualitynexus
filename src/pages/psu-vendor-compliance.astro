@@ -32,7 +32,7 @@ const sectors = [
     name: "Defence & Aerospace",
     psus: "HAL · BEL · BEML · BDL · MIDHANI · Mazagon Dock · GRSE · Garden Reach",
     typicalStack: ["ISO 9001 + AS 9100/AS 9120", "ISO 14001", "ISO 45001", "ISO 27001", "MIL-STD references", "DGAQA / DGNAI inspection"],
-    notes: "Defence vendors face an additional layer beyond ISO — DGAQA (for army/DRDO supply), DGNAI (naval), CEMILAC (aerospace airworthiness). AS 9100 is non-negotiable for aerospace. Component traceability documentation is heavily inspected.",
+    notes: "Defence vendors face an additional layer beyond ISO - DGAQA (for army/DRDO supply), DGNAI (naval), CEMILAC (aerospace airworthiness). AS 9100 is non-negotiable for aerospace. Component traceability documentation is heavily inspected.",
   },
   {
     icon: "hard-hat",
@@ -45,7 +45,7 @@ const sectors = [
     icon: "compass",
     name: "Railways & Transport",
     psus: "Indian Railways · RDSO · ICF · RCF · MCF · DLW · IRCON · RVNL · DMRC · KMRC",
-    typicalStack: ["ISO 9001", "ISO/TS 22163 (IRIS — rail QMS)", "ISO 14001", "ISO 45001", "RDSO product approvals", "Vendor directory listing"],
+    typicalStack: ["ISO 9001", "ISO/TS 22163 (IRIS - rail QMS)", "ISO 14001", "ISO 45001", "RDSO product approvals", "Vendor directory listing"],
     notes: "RDSO (Research Designs & Standards Organisation) vendor approval is the gateway for most rolling stock, signalling, and track components. RDSO Part-1 and Part-2 vendor categories carry different audit depths. IRIS (ISO/TS 22163) is increasingly required.",
   },
   {
@@ -61,22 +61,22 @@ const journey = [
   {
     n: "01",
     title: "Pre-qualification readiness assessment",
-    body: "We start by reading the actual tender documents or vendor enlistment criteria — not generic checklists. Each PSU publishes specific clauses on quality systems, financial turnover, technical experience, and HSE requirements. We map your current state against those clauses and produce a gap report with timeline estimates.",
+    body: "We start by reading the actual tender documents or vendor enlistment criteria - not generic checklists. Each PSU publishes specific clauses on quality systems, financial turnover, technical experience, and HSE requirements. We map your current state against those clauses and produce a gap report with timeline estimates.",
   },
   {
     n: "02",
     title: "Certification stack rollout",
-    body: "Most PSU tenders require ISO 9001 as baseline, plus 14001 + 45001 (the integrated EHS triad), and increasingly ISO 27001 for IT/OT supply. We sequence the rollout based on tender deadlines — fastest path to certificate without compromising audit defensibility.",
+    body: "Most PSU tenders require ISO 9001 as baseline, plus 14001 + 45001 (the integrated EHS triad), and increasingly ISO 27001 for IT/OT supply. We sequence the rollout based on tender deadlines - fastest path to certificate without compromising audit defensibility.",
   },
   {
     n: "03",
     title: "Quality Assurance Plan (QAP) authoring",
-    body: "Most PSU contracts ask for a contract-specific QAP — a document mapping every manufacturing/inspection stage, the standard referenced, the responsible party, and the record evidence. We author the QAP, get customer approval, and align internal SOPs to match.",
+    body: "Most PSU contracts ask for a contract-specific QAP - a document mapping every manufacturing/inspection stage, the standard referenced, the responsible party, and the record evidence. We author the QAP, get customer approval, and align internal SOPs to match.",
   },
   {
     n: "04",
     title: "Inspection, test, and audit support",
-    body: "We accompany PSU customer inspections (often Third Party Inspection agencies like RITES, TUV, BVQI, Lloyd's), pre-dispatch inspections, and surveillance audits. The goal is zero non-conformances at inspection — anything raised is closed inside the same visit.",
+    body: "We accompany PSU customer inspections (often Third Party Inspection agencies like RITES, TUV, BVQI, Lloyd's), pre-dispatch inspections, and surveillance audits. The goal is zero non-conformances at inspection - anything raised is closed inside the same visit.",
   },
 ];
 
@@ -92,7 +92,7 @@ const tenderClauses = [
 ];
 
 const qapElements = [
-  "Manufacturing stage list — raw material in to finished good out",
+  "Manufacturing stage list - raw material in to finished good out",
   "Standard/specification referenced at each stage",
   "Inspection method (visual / dimensional / NDT / functional / metallurgical)",
   "Inspection sample plan (100% / AQL / batch)",
@@ -109,7 +109,7 @@ const psuFaqs = [
   },
   {
     q: "What is a Quality Assurance Plan (QAP) and why do PSUs require one?",
-    a: "A QAP is a contract-specific document that maps every manufacturing or service stage to the applicable standard, the inspection method, the sampling plan, the responsible party, and the record evidence. PSUs require a customer-approved QAP before the first inspection because it operationalizes the contract's quality clauses — generic ISO 9001 documentation is not enough. A typical QAP for a PSU supply contract has 15–40 line items spanning raw material in to finished good dispatch.",
+    a: "A QAP is a contract-specific document that maps every manufacturing or service stage to the applicable standard, the inspection method, the sampling plan, the responsible party, and the record evidence. PSUs require a customer-approved QAP before the first inspection because it operationalizes the contract's quality clauses - generic ISO 9001 documentation is not enough. A typical QAP for a PSU supply contract has 15–40 line items spanning raw material in to finished good dispatch.",
   },
   {
     q: "Can MSMEs and startups become PSU vendors?",
@@ -117,11 +117,11 @@ const psuFaqs = [
   },
   {
     q: "How does GeM portal registration relate to PSU vendor compliance?",
-    a: "GeM (Government e-Marketplace) is a unified procurement portal where Central and State Government buyers — including most PSUs — issue tenders. Vendor registration on GeM is free but requires PAN, GST, bank, Udyam (if MSME), and uploaded ISO certificates where applicable. GeM does not replace individual PSU vendor enlistment for high-value or specialized contracts — for those, you still need to register directly with the PSU (NTPC, IOCL, ONGC, HAL, etc.) through their vendor portal.",
+    a: "GeM (Government e-Marketplace) is a unified procurement portal where Central and State Government buyers - including most PSUs - issue tenders. Vendor registration on GeM is free but requires PAN, GST, bank, Udyam (if MSME), and uploaded ISO certificates where applicable. GeM does not replace individual PSU vendor enlistment for high-value or specialized contracts - for those, you still need to register directly with the PSU (NTPC, IOCL, ONGC, HAL, etc.) through their vendor portal.",
   },
   {
     q: "What is RDSO vendor approval and how does it differ from ISO certification?",
-    a: "RDSO (Research Designs & Standards Organisation) is Indian Railways' technical authority. RDSO vendor approval is product-and-source-specific: a vendor is approved to supply a specific item from a specific manufacturing facility, after RDSO inspects the facility and approves the manufacturing process. This is separate from and additional to ISO 9001 certification — ISO certifies your management system; RDSO approves your right to supply a specific item. Most railway tenders require both.",
+    a: "RDSO (Research Designs & Standards Organisation) is Indian Railways' technical authority. RDSO vendor approval is product-and-source-specific: a vendor is approved to supply a specific item from a specific manufacturing facility, after RDSO inspects the facility and approves the manufacturing process. This is separate from and additional to ISO 9001 certification - ISO certifies your management system; RDSO approves your right to supply a specific item. Most railway tenders require both.",
   },
   {
     q: "How long does it take to become a PSU vendor from a standing start?",
@@ -129,7 +129,7 @@ const psuFaqs = [
   },
   {
     q: "Do PSU tenders accept any ISO 9001 certificate, or only specific ones?",
-    a: "Only certificates issued by certification bodies accredited by IAF members are accepted. In India, NABCB (National Accreditation Board for Certification Bodies) is the IAF-recognized accreditor. Most PSU tenders explicitly state \"ISO 9001 from NABCB-accredited or equivalent IAF-recognized accreditation body\" — non-accredited or self-issued certificates are rejected at the bid scrutiny stage. We only work with CBs that hold valid IAF/NABCB accreditation.",
+    a: "Only certificates issued by certification bodies accredited by IAF members are accepted. In India, NABCB (National Accreditation Board for Certification Bodies) is the IAF-recognized accreditor. Most PSU tenders explicitly state \"ISO 9001 from NABCB-accredited or equivalent IAF-recognized accreditation body\" - non-accredited or self-issued certificates are rejected at the bid scrutiny stage. We only work with CBs that hold valid IAF/NABCB accreditation.",
   },
   {
     q: "What is the cost range to become PSU-tender-ready for a Jharkhand MSME?",
@@ -137,7 +137,7 @@ const psuFaqs = [
   },
   {
     q: "How do you support PSU customer inspections and Third Party Inspections (TPI)?",
-    a: "Our consultants attend customer and TPI inspections on-site. We rehearse the inspection beforehand: walk-through of the QAP, evidence file review, equipment calibration check, operator readiness. During the inspection we close any minor observation inside the visit — material substitution justification, missing record retrieval, calibration certificate cross-check. The goal is a clean inspection report on day one. Common TPI agencies: RITES, TUV Nord, BVQI, Lloyd's Register, DNV, SGS, Intertek.",
+    a: "Our consultants attend customer and TPI inspections on-site. We rehearse the inspection beforehand: walk-through of the QAP, evidence file review, equipment calibration check, operator readiness. During the inspection we close any minor observation inside the visit - material substitution justification, missing record retrieval, calibration certificate cross-check. The goal is a clean inspection report on day one. Common TPI agencies: RITES, TUV Nord, BVQI, Lloyd's Register, DNV, SGS, Intertek.",
   },
   {
     q: "Which PSU sectors does QualityNexus have the most depth in?",
@@ -159,7 +159,7 @@ const serviceLd = {
   "@id": `${PAGE_URL}#service`,
   "serviceType": "PSU Vendor Compliance Consultancy",
   "name": "PSU Vendor Compliance Consultancy in India",
-  "description": "ISO 9001, 14001, 45001 certification and contract-specific Quality Assurance Plan (QAP) authoring for vendors targeting Indian PSU tenders — NTPC, IOCL, HAL, ONGC, BHEL, SAIL, HCL, Indian Railways, NHPC, NEEPCO and more.",
+  "description": "ISO 9001, 14001, 45001 certification and contract-specific Quality Assurance Plan (QAP) authoring for vendors targeting Indian PSU tenders - NTPC, IOCL, HAL, ONGC, BHEL, SAIL, HCL, Indian Railways, NHPC, NEEPCO and more.",
   "provider": { "@id": `${SITE}/#organization` },
   "areaServed": { "@type": "Country", "name": "India" },
   "url": PAGE_URL,
@@ -183,7 +183,7 @@ const articleLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "@id": `${PAGE_URL}#article`,
-  "headline": "PSU Vendor Compliance in India — A 2026 Implementation Guide",
+  "headline": "PSU Vendor Compliance in India - A 2026 Implementation Guide",
   "description": "Definitive guide to ISO certifications, Quality Assurance Plans, and sector-specific compliance required to qualify as a vendor for Indian Public Sector Undertakings.",
   "author": { "@id": `${SITE}/#organization` },
   "publisher": { "@id": `${SITE}/#organization` },
@@ -194,7 +194,7 @@ const articleLd = {
 };
 ---
 <BaseLayout
-  title="PSU Vendor Compliance in India — ISO 9001, QAP & Sector Approvals Guide"
+  title="PSU Vendor Compliance in India - ISO 9001, QAP & Sector Approvals Guide"
   description="Complete 2026 guide to ISO certifications, Quality Assurance Plans, and sector-specific compliance (DGMS, PESO, DGAQA, RDSO) needed to qualify as a vendor for NTPC, IOCL, HAL, ONGC, SAIL, Indian Railways, and other Indian PSUs."
   canonical="/psu-vendor-compliance/"
 >
@@ -207,7 +207,7 @@ const articleLd = {
     eyebrow="Pillar guide · India · 2026"
     title="PSU vendor compliance"
     accent="without the guesswork."
-    lede="A practical, current guide to ISO certification, Quality Assurance Plans, and sector-specific approvals needed to qualify for tenders and vendor enlistment with India's central and state Public Sector Undertakings — across power, oil & gas, defence, aerospace, railways, steel, mining, and heavy engineering."
+    lede="A practical, current guide to ISO certification, Quality Assurance Plans, and sector-specific approvals needed to qualify for tenders and vendor enlistment with India's central and state Public Sector Undertakings - across power, oil & gas, defence, aerospace, railways, steel, mining, and heavy engineering."
     hasVisual={false}
   />
 
@@ -228,13 +228,13 @@ const articleLd = {
     <div class="container psu-prose">
       <h2 id="overview">What "PSU vendor compliance" actually means</h2>
       <p>
-        India's 300+ Central Public Sector Enterprises (CPSEs) and several hundred State PSUs together procure goods, services, and works worth more than ₹13 lakh crore every year. To bid for or supply on those contracts, your organization has to clear a pre-qualification layer that is unmistakably different from a private enterprise tender. The clauses are explicit, documentation-heavy, and inspected — and a single missing certificate disqualifies an otherwise winning bid.
+        India's 300+ Central Public Sector Enterprises (CPSEs) and several hundred State PSUs together procure goods, services, and works worth more than ₹13 lakh crore every year. To bid for or supply on those contracts, your organization has to clear a pre-qualification layer that is unmistakably different from a private enterprise tender. The clauses are explicit, documentation-heavy, and inspected - and a single missing certificate disqualifies an otherwise winning bid.
       </p>
       <p>
-        Three documents form the spine of that compliance layer: <strong>(1)</strong> a recognized accredited <a href="/certifications/iso-9001/">ISO 9001</a> management-system certificate, <strong>(2)</strong> typically <a href="/certifications/iso-14001/">ISO 14001</a> + <a href="/certifications/iso-45001/">ISO 45001</a> alongside, and <strong>(3)</strong> a contract-specific Quality Assurance Plan (QAP) approved by the customer. Layered on top are sector-specific approvals — DGMS for mining, PESO for petroleum, RDSO for railways, DGAQA for defence — and product-specific certifications (BIS marks, API monograms).
+        Three documents form the spine of that compliance layer: <strong>(1)</strong> a recognized accredited <a href="/certifications/iso-9001/">ISO 9001</a> management-system certificate, <strong>(2)</strong> typically <a href="/certifications/iso-14001/">ISO 14001</a> + <a href="/certifications/iso-45001/">ISO 45001</a> alongside, and <strong>(3)</strong> a contract-specific Quality Assurance Plan (QAP) approved by the customer. Layered on top are sector-specific approvals - DGMS for mining, PESO for petroleum, RDSO for railways, DGAQA for defence - and product-specific certifications (BIS marks, API monograms).
       </p>
       <p>
-        This page maps the territory: which standards each PSU sector typically requires, how the 4-stage vendor-readiness journey works, what goes into a QAP, the common pre-qualification clauses we see in tender documents, and how MSMEs in particular can use the Public Procurement Policy to enter the PSU supply chain. If you've read past it once and want to start, <a href="/contact/">talk to us</a> — first scoping call is free.
+        This page maps the territory: which standards each PSU sector typically requires, how the 4-stage vendor-readiness journey works, what goes into a QAP, the common pre-qualification clauses we see in tender documents, and how MSMEs in particular can use the Public Procurement Policy to enter the PSU supply chain. If you've read past it once and want to start, <a href="/contact/">talk to us</a> - first scoping call is free.
       </p>
     </div>
   </section>
@@ -245,7 +245,7 @@ const articleLd = {
       <div class="section-head center">
         <span class="eyebrow">PSU sector compliance map</span>
         <h2>Six PSU sectors and the certification stack each demands</h2>
-        <p>Generic ISO 9001 alone is rarely enough. Each PSU sector adds its own overlay — DGMS for mining, RDSO for railways, OISD for oil &amp; gas, DGAQA for defence. Below is the realistic compliance stack we see in current tender documents.</p>
+        <p>Generic ISO 9001 alone is rarely enough. Each PSU sector adds its own overlay - DGMS for mining, RDSO for railways, OISD for oil &amp; gas, DGAQA for defence. Below is the realistic compliance stack we see in current tender documents.</p>
       </div>
       <div class="psu-sector-grid">
         {sectors.map((s) => (
@@ -276,7 +276,7 @@ const articleLd = {
       <div class="section-head center">
         <span class="eyebrow">How we deliver</span>
         <h2>The 4-stage PSU vendor readiness journey</h2>
-        <p>The same engagement framework used for our active PSU clients — from gap to first awarded tender.</p>
+        <p>The same engagement framework used for our active PSU clients - from gap to first awarded tender.</p>
       </div>
       <ol class="psu-journey">
         {journey.map((j) => (
@@ -393,7 +393,7 @@ const articleLd = {
 
   <CtaStrip
     heading="Bid-ready for your next PSU tender."
-    body="Tell us the tender, the PSU, and the deadline. We come back with a gap report and a sequenced certification plan within 48 hours — fixed-price, no surprises."
+    body="Tell us the tender, the PSU, and the deadline. We come back with a gap report and a sequenced certification plan within 48 hours - fixed-price, no surprises."
     ctaLabel="Get a PSU readiness plan"
     ctaHref="/contact/"
     secondaryLabel="See our PSU clients"
