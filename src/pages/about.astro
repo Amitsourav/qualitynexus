@@ -166,28 +166,36 @@ const credentialBadges = [
       </div>
       <div class="recog-grid">
         <article class="recog-badge">
-          <span class="recog-badge-icon" aria-hidden="true"><Icon name="award" /></span>
+          <span class="recog-badge-icon recog-badge-icon--logo" aria-hidden="true">
+            <img src="/images/badges/mca.png" alt="" loading="lazy" decoding="async" width="200" height="200" />
+          </span>
           <strong class="recog-badge-label">MCA Incorporation</strong>
           <span class="recog-badge-sub">Ministry of Corporate Affairs</span>
           <code class="recog-badge-id">CIN · U70200JH2025PTC024534</code>
           <a href="/images/events/cert-mca-incorp.jpg" target="_blank" rel="noopener" class="recog-badge-link">View certificate <Icon name="arrow-right" /></a>
         </article>
         <article class="recog-badge">
-          <span class="recog-badge-icon" aria-hidden="true"><Icon name="shield-check" /></span>
+          <span class="recog-badge-icon recog-badge-icon--logo" aria-hidden="true">
+            <img src="/images/badges/msme.png" alt="" loading="lazy" decoding="async" width="200" height="200" />
+          </span>
           <strong class="recog-badge-label">MSME · Udyam</strong>
           <span class="recog-badge-sub">Ministry of MSME</span>
           <code class="recog-badge-id">UDYAM · JH-20-0101391</code>
           <a href="/images/events/cert-msme-udyam.jpg" target="_blank" rel="noopener" class="recog-badge-link">View certificate <Icon name="arrow-right" /></a>
         </article>
         <article class="recog-badge">
-          <span class="recog-badge-icon" aria-hidden="true"><Icon name="rocket" /></span>
+          <span class="recog-badge-icon recog-badge-icon--logo recog-badge-icon--wide" aria-hidden="true">
+            <img src="/images/badges/startup-india.png" alt="" loading="lazy" decoding="async" width="200" height="120" />
+          </span>
           <strong class="recog-badge-label">Startup India</strong>
           <span class="recog-badge-sub">DPIIT recognized</span>
           <code class="recog-badge-id">Certificate of Recognition</code>
           <a href="/images/events/cert-startup-india.jpg" target="_blank" rel="noopener" class="recog-badge-link">View certificate <Icon name="arrow-right" /></a>
         </article>
         <article class="recog-badge">
-          <span class="recog-badge-icon" aria-hidden="true"><Icon name="file-text" /></span>
+          <span class="recog-badge-icon recog-badge-icon--logo" aria-hidden="true">
+            <img src="/images/badges/gst.png" alt="" loading="lazy" decoding="async" width="220" height="220" />
+          </span>
           <strong class="recog-badge-label">GST Registration</strong>
           <span class="recog-badge-sub">Form REG-06</span>
           <code class="recog-badge-id">GSTIN · 20AABCQ1018L1ZW</code>
@@ -674,6 +682,28 @@ const credentialBadges = [
     z-index: 1;
   }
   .recog-badge-icon :global(svg) { width: 22px; height: 22px; }
+  /* Logo variant — swap dark gradient for a clean white plate, contain-fit the image. */
+  .recog-badge-icon--logo {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    padding: 4px;
+    width: 54px;
+    height: 54px;
+  }
+  .recog-badge-icon--logo img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  /* Wide variant — for landscape wordmarks (Startup India) */
+  .recog-badge-icon--wide {
+    width: 88px;
+    height: 54px;
+    border-radius: 10px;
+  }
   .recog-badge-label {
     color: var(--color-heading);
     font-size: 16px;

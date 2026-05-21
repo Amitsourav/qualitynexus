@@ -5,10 +5,10 @@ import Icon from "../components/Icon.astro";
 import { breadcrumbLd } from "../lib/schema";
 
 const channels = [
-  { icon: "headphones", label: "Email",    value: "Qualitynexusofficial@gmail.com",   href: "mailto:Qualitynexusofficial@gmail.com", note: "Best for detailed enquiries" },
-  { icon: "globe",      label: "Phone",    value: "+91 97980 82076",                  href: "tel:+919798082076",                     note: "Alt: +91 77177 62084 · +91 82526 68667" },
-  { icon: "rocket",     label: "WhatsApp", value: "Chat with us on WhatsApp",         href: "https://wa.me/919798082076",            note: "Quick scoping questions" },
-  { icon: "compass",    label: "Office",   value: "Trade Centre, 1st Floor, Ormanjhi", href: "https://maps.app.goo.gl/28dYT4Ua476vPSfw7", note: "Main Road, SSVM School, Ranchi 835219, Jharkhand" },
+  { logo: "/images/channels/gmail.svg",    alt: "Gmail logo",         label: "Email",    value: "Qualitynexusofficial@gmail.com",   href: "mailto:Qualitynexusofficial@gmail.com", note: "Best for detailed enquiries" },
+  { logo: "/images/channels/phone.svg",    alt: "Phone",              label: "Phone",    value: "+91 97980 82076",                  href: "tel:+919798082076",                     note: "Alt: +91 77177 62084 · +91 82526 68667" },
+  { logo: "/images/channels/whatsapp.svg", alt: "WhatsApp logo",      label: "WhatsApp", value: "Chat with us on WhatsApp",         href: "https://wa.me/919798082076",            note: "Quick scoping questions" },
+  { logo: "/images/channels/maps.svg",     alt: "Google Maps pin",    label: "Office",   value: "Trade Centre, 1st Floor, Ormanjhi", href: "https://maps.app.goo.gl/28dYT4Ua476vPSfw7", note: "Main Road, SSVM School, Ranchi 835219, Jharkhand" },
 ];
 
 const fastFaqs = [
@@ -141,7 +141,9 @@ const faqLd = {
       <div class="channel-grid">
         {channels.map((c) => (
           <article class="channel-card">
-            <span class="channel-icon"><Icon name={c.icon} /></span>
+            <span class="channel-icon channel-icon--logo">
+              <img src={c.logo} alt={c.alt} loading="lazy" decoding="async" width="40" height="40" />
+            </span>
             <span class="channel-label">{c.label}</span>
             {c.href
               ? <a href={c.href} class="channel-value">{c.value}</a>
@@ -440,6 +442,16 @@ const faqLd = {
     color: var(--color-accent-strong);
     font-size: 20px;
     margin-bottom: 18px;
+  }
+  .channel-icon--logo {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    padding: 6px;
+  }
+  .channel-icon--logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   .channel-label {
     display: block;

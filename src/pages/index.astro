@@ -38,14 +38,10 @@ const coreServices = [
 ];
 
 const whyChooseUs = [
-  { icon: "users",          title: "Experienced Industry Consultants",     body: "Senior consultants with sector-specific backgrounds across power, manufacturing, BFSI, healthcare, and labs." },
-  { icon: "rocket",         title: "Practical Implementation Approach",    body: "We build systems your team will actually use - not 200-page binders that gather dust." },
-  { icon: "shield-check",   title: "End-to-End Compliance Support",        body: "Gap analysis to certificate, plus surveillance and re-certification - one accountable partner." },
-  { icon: "globe",          title: "PAN India Services",                   body: "Consultants travel on-site across India - from Ranchi HQ to client sites in any state." },
-  { icon: "file-text",      title: "Audit-Ready Documentation",            body: "Every artefact survives third-party scrutiny - SOPs, registers, and records aligned to clauses." },
-  { icon: "graduation-cap", title: "Professional Training & Guidance",     body: "Lead-auditor and awareness programs delivered by IRCA / Exemplar Global associated professionals." },
-  { icon: "compass",        title: "Industry-Focused Solutions",           body: "PSU, manufacturing, lab, healthcare, and IT engagements - sector context, not generic templates." },
-  { icon: "lock",           title: "IT Security & Compliance Expertise",   body: "ISO 27001, VAPT coordination, and cybersecurity audits delivered alongside management systems." },
+  { logo: "/images/why-icons/consultants.svg", logoAlt: "Team of consultants",          title: "Experienced Industry Consultants",   body: "Senior consultants with sector-specific backgrounds across power, manufacturing, BFSI, healthcare, and labs.",  image: "/images/team-meeting.jpg",  imageAlt: "Senior consultants in a working meeting" },
+  { logo: "/images/why-icons/compliance.svg",  logoAlt: "Compliance shield with check", title: "End-to-End Compliance Support",      body: "Gap analysis to certificate, plus surveillance and re-certification - one accountable partner.",            image: "/images/team-collab.jpg",   imageAlt: "Team collaborating on a compliance engagement" },
+  { logo: "/images/why-icons/india.svg",       logoAlt: "Map of India",                 title: "PAN India Services",                 body: "Consultants travel on-site across India - from Ranchi HQ to client sites in any state.",                    image: "/images/office-modern.jpg", imageAlt: "A modern professional office space" },
+  { logo: "/images/why-icons/industry.svg",    logoAlt: "Industrial facility",          title: "Industry-Focused Solutions",         body: "PSU, manufacturing, laboratory, and healthcare engagements - sector context, not generic templates.",            image: "/images/events/site-audit.jpg", imageAlt: "On-site industrial audit walk-through" },
 ];
 
 const recognitions = [
@@ -185,13 +181,17 @@ const clientLogos = trustedClients.filter((c) => c.logo);
       <div class="section-head center">
         <span class="eyebrow eyebrow-on-dark">Why us</span>
         <h2>Why Choose Quality Nexus?</h2>
-        <p class="why-lede">Eight reasons clients keep coming back - and bringing their next certification with us.</p>
+        <p class="why-lede">Four reasons clients keep coming back - and bringing their next certification with us.</p>
       </div>
       <ul class="why-grid">
         {whyChooseUs.map((f) => (
           <li class="why-item">
-            <span class="feature-icon-halo"><Icon name={f.icon} /></span>
-            <div>
+            <img src={f.image} alt={f.imageAlt} class="why-item-img" loading="lazy" decoding="async" width="600" height="800" />
+            <span class="why-item-overlay" aria-hidden="true"></span>
+            <span class="feature-icon-halo feature-icon-halo--logo">
+              <img src={f.logo} alt={f.logoAlt} loading="lazy" decoding="async" width="40" height="40" />
+            </span>
+            <div class="why-item-body">
               <h4>{f.title}</h4>
               <p>{f.body}</p>
             </div>
@@ -532,36 +532,88 @@ const clientLogos = trustedClients.filter((c) => c.logo);
   }
   .why-grid {
     list-style: none;
-    margin: 36px 0 0;
+    margin: 44px 0 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 22px;
   }
   .why-item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 14px;
-    align-items: flex-start;
+    position: relative;
+    isolation: isolate;
+    aspect-ratio: 3 / 4;
+    min-height: 320px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 22px;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .why-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  }
+  .why-item-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    transition: transform .5s ease;
+  }
+  .why-item:hover .why-item-img {
+    transform: scale(1.06);
+  }
+  .why-item-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(14, 59, 46, 0.55) 0%, rgba(14, 59, 46, 0.92) 70%, rgba(14, 59, 46, 0.97) 100%);
   }
   .feature-icon-halo {
     width: 44px; height: 44px;
     border-radius: 12px;
-    background: rgba(16, 185, 129, 0.18);
-    color: var(--color-accent);
+    background: rgba(212, 175, 55, 0.20);
+    color: var(--color-gold);
     display: grid; place-items: center;
     flex-shrink: 0;
+    border: 1px solid rgba(212, 175, 55, 0.30);
+    backdrop-filter: blur(4px);
   }
   .feature-icon-halo :global(svg) { width: 20px; height: 20px; }
+  .feature-icon-halo--logo {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(255, 255, 255, 0.35);
+    padding: 6px;
+  }
+  .feature-icon-halo--logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .why-item-body {
+    margin-top: auto;
+  }
   .why-item h4 {
     color: #fff;
-    margin-bottom: 6px;
-    font-size: 16px;
+    margin: 0 0 8px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
   }
   .why-item p {
-    color: #94A3B8;
+    color: rgba(226, 232, 240, 0.92);
     font-size: 13.5px;
-    line-height: 1.55;
+    line-height: 1.6;
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   }
 
   /* ========== TRUSTED BY ========== */

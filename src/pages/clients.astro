@@ -73,7 +73,12 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
             <li class={`log-row ${i === 0 ? "is-active" : ""}`} data-log-i={i}>
               <span class="log-bar" aria-hidden="true"></span>
               <div class="log-row-main">
-                <span class="log-avatar">{entry.abbr}</span>
+                <span class={`log-avatar ${entry.logo ? "log-avatar--logo" : ""}`}>
+                  {entry.logo
+                    ? <img src={entry.logo} alt={`${entry.name} logo`} loading="lazy" decoding="async" width="36" height="36" />
+                    : entry.abbr
+                  }
+                </span>
                 <div class="log-meta">
                   <strong class="log-name">{entry.name}</strong>
                   <span class="log-sector">{entry.sector}</span>
@@ -370,6 +375,18 @@ const sectorMaxCount = Math.max(...sectors.map((s) => s.count));
   }
   .log-row.is-active .log-avatar {
     box-shadow: 0 6px 14px rgba(16, 185, 129, 0.30);
+  }
+  .log-avatar--logo {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    padding: 3px;
+    overflow: hidden;
+  }
+  .log-avatar--logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
   }
   .log-meta { display: grid; gap: 1px; min-width: 0; }
   .log-name {
