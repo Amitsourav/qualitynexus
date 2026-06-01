@@ -20,11 +20,11 @@
   --color-text: #475569;
   --color-text-muted: #64748B;
   --color-heading: #0F172A;
-  --color-bg: #FFFFFF;
-  --color-bg-soft: #F8FAFC;
-  --color-bg-section: #F1F5F9;
-  --color-border: #E2E8F0;
-  --color-border-soft: #EEF2F6;
+  --color-bg: #FBF8F1;
+  --color-bg-soft: #F5EFE0;
+  --color-bg-section: #EFE7CF;
+  --color-border: #E5DDC7;
+  --color-border-soft: #ECE5D2;
 
   --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-heading: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;

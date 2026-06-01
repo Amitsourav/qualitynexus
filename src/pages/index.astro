@@ -81,11 +81,76 @@ const trustedClients = [
 
 // Subset used in the hero marquee (auto-scrolling band)
 const clientLogos = trustedClients.filter((c) => c.logo);
+
+// ===== Google reviews (verified, sourced from Google Business Profile) =====
+const reviews = [
+  {
+    name: "Deepak Thakur",
+    initial: "D",
+    avatarColor: "#10B981",
+    rating: 5,
+    timeAgo: "a year ago",
+    text: "Our experience with Quality Nexus Private Limited for ISO 9001 implementation and certification was excellent. Their team not only guided us step-by-step but also provided professional support at every stage. The quality of documentation, training, and internal audits was of the highest standard, enabling us to achieve ISO 9001 certification smoothly and without any major non-conformities.",
+    summary: "ISO 9001 implementation and certification",
+  },
+  {
+    name: "Avanit Manohar Agrawal",
+    initial: "A",
+    avatarColor: "#DC2626",
+    rating: 5,
+    timeAgo: "2 months ago",
+    isLocalGuide: true,
+    text: "Very effective lead auditor training conducted by Sh. Vishwadeep Tiwary Sir. Highly recommend M/s Quality Nexus to other organisations as well.",
+    summary: "Lead auditor training",
+  },
+  {
+    name: "Marun Dutta",
+    initial: "M",
+    avatarColor: "#DB2777",
+    rating: 5,
+    timeAgo: "2 months ago",
+    text: "I would like to sincerely thank Vishwadeep Tiwary Sir of Quality Nexus Pvt Ltd for conducting lead auditor training program of ISO 50001: 2018 energy management system.",
+    summary: "ISO 50001 lead auditor training",
+  },
+  {
+    name: "Raj Kumar",
+    initial: "R",
+    avatarColor: "#0E3B2E",
+    rating: 5,
+    timeAgo: "2 months ago",
+    text: "The company works professionally in ISO and quality-related services. Management is supportive and work is done in a systematic manner. Good exposure to quality systems and audits.",
+    summary: "ISO and quality services",
+  },
+];
+
+const avgRating = (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
+
+const reviewsLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.qualitynexus.in/#organization",
+  "name": "Quality Nexus Private Limited",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": avgRating,
+    "reviewCount": reviews.length,
+    "bestRating": "5",
+    "worstRating": "1",
+  },
+  "review": reviews.map((r) => ({
+    "@type": "Review",
+    "author": { "@type": "Person", "name": r.name },
+    "reviewRating": { "@type": "Rating", "ratingValue": r.rating, "bestRating": 5 },
+    "reviewBody": r.text,
+  })),
+};
 ---
 <BaseLayout
   title="ISO, NABL, IT Security & Compliance Consultancy in India · QualityNexus"
   description="QualityNexus - ISO certification consultancy, NABL implementation, IT security audit, VAPT, 5S, water audit, and compliance training across India. Based in Ranchi."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(reviewsLd)} />
+
   <!-- ========== HERO ========== -->
   <section class="hero">
     <div class="hero-bg-grid" aria-hidden="true"></div>
@@ -247,6 +312,72 @@ const clientLogos = trustedClients.filter((c) => c.logo);
           </li>
         ))}
       </ul>
+    </div>
+  </section>
+
+  <!-- ========== CLIENT REVIEWS (verified Google) ========== -->
+  <section class="section section-soft reviews-section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Client reviews</span>
+        <h2>What our clients say.</h2>
+        <div class="reviews-summary" aria-label={`Rated ${avgRating} out of 5 on Google, ${reviews.length} verified reviews`}>
+          <span class="reviews-rating-num">{avgRating}</span>
+          <span class="reviews-stars" aria-hidden="true">
+            {Array.from({ length: 5 }).map(() => (
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#F5B400"><path d="M12 2l2.92 6.91 7.47.65-5.66 4.93 1.71 7.29L12 17.77l-6.44 3.99 1.71-7.29L1.61 9.56l7.47-.65z"/></svg>
+            ))}
+          </span>
+          <span class="reviews-summary-meta">
+            <span>{reviews.length} verified reviews</span>
+            <span class="reviews-summary-dot">·</span>
+            <span class="reviews-summary-source">
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.61z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+              </svg>
+              via Google
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        {reviews.map((r) => (
+          <article class="review-card">
+            <header class="review-card-head">
+              <span class="review-avatar" style={`background:${r.avatarColor}`} aria-hidden="true">{r.initial}</span>
+              <div class="review-meta">
+                <strong class="review-name">{r.name}</strong>
+                <span class="review-sub">
+                  {r.isLocalGuide ? <span class="review-guide">Local Guide</span> : null}
+                  <span>{r.timeAgo}</span>
+                </span>
+              </div>
+              <span class="review-source" aria-label="Verified Google review">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.61z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+              </span>
+            </header>
+
+            <div class="review-stars" aria-label={`${r.rating} out of 5 stars`}>
+              {Array.from({ length: r.rating }).map(() => (
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="#F5B400" aria-hidden="true"><path d="M12 2l2.92 6.91 7.47.65-5.66 4.93 1.71 7.29L12 17.77l-6.44 3.99 1.71-7.29L1.61 9.56l7.47-.65z"/></svg>
+              ))}
+            </div>
+
+            <p class="review-body">{r.text}</p>
+
+            {r.summary && <span class="review-tag">{r.summary}</span>}
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -805,5 +936,158 @@ const clientLogos = trustedClients.filter((c) => c.logo);
     .why-grid { grid-template-columns: 1fr; }
     .trust-logos { grid-template-columns: repeat(2, 1fr); }
     .industries-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ===== CLIENT REVIEWS ===== */
+  .reviews-summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 14px;
+    padding: 10px 18px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+  }
+  .reviews-rating-num {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--color-heading);
+    line-height: 1;
+  }
+  .reviews-stars {
+    display: inline-flex;
+    gap: 1px;
+  }
+  .reviews-summary-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text-muted);
+    font-size: 13px;
+  }
+  .reviews-summary-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-heading);
+    font-weight: 600;
+  }
+  .reviews-summary-source :global(svg) { vertical-align: -2px; }
+  .reviews-summary-dot { opacity: 0.5; }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-top: 40px;
+  }
+  .review-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 26px 26px 22px;
+    box-shadow: 0 2px 10px rgba(15, 59, 46, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .review-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(15, 59, 46, 0.08);
+    border-color: var(--color-accent);
+  }
+  .review-card-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+  .review-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .review-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .review-name {
+    font-family: var(--font-heading);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--color-heading);
+    line-height: 1.25;
+  }
+  .review-sub {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .review-guide {
+    color: var(--color-accent-strong);
+    font-weight: 600;
+  }
+  .review-guide::after {
+    content: "·";
+    margin-left: 6px;
+    opacity: 0.5;
+  }
+  .review-source {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+  }
+  .review-stars {
+    display: inline-flex;
+    gap: 2px;
+  }
+  .review-body {
+    color: var(--color-text);
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin: 0;
+    flex: 1;
+  }
+  .review-tag {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent-strong);
+    background: var(--color-accent-soft);
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .reviews-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
+    .review-card { padding: 22px 20px 20px; }
+    .reviews-summary { padding: 8px 14px; }
+    .reviews-rating-num { font-size: 18px; }
   }
 </style>
