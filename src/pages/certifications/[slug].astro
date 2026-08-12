@@ -109,9 +109,9 @@ const articleLd = hasDetail ? {
       <nav class="cert-crumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span aria-hidden="true">›</span>
-        <a href="/certifications">Certifications</a>
+        <a href="/certifications/">Certifications</a>
         <span aria-hidden="true">›</span>
-        <a href={`/certifications#${cat.id}`}>{cat.title}</a>
+        <a href={`/certifications/#${cat.id}`}>{cat.title}</a>
         <span aria-hidden="true">›</span>
         <span class="cert-crumb-current">{standard.code}</span>
       </nav>
@@ -128,8 +128,8 @@ const articleLd = hasDetail ? {
             : <p class="cert-hero-lede">QualityNexus supports {standard.code} ({standard.name}) end-to-end - gap analysis, documentation, internal audit, certification audit support, and post-certification surveillance. Contact us for a tailored scope discussion.</p>
           }
           <div class="cert-hero-actions">
-            <a href="/contact" class="btn btn-accent">Talk to a senior consultant</a>
-            <a href="/certifications" class="btn btn-ghost">Back to all standards</a>
+            <a href="/contact/" class="btn btn-accent">Talk to a senior consultant</a>
+            <a href="/certifications/" class="btn btn-ghost">Back to all standards</a>
           </div>
           {pillar && (
             <a href={pillar.href} class="cert-pillar-link">
@@ -233,7 +233,7 @@ const articleLd = hasDetail ? {
               <h2>Is {standard.code} relevant for you?</h2>
               <p>{detail.audience}</p>
             </div>
-            <a href="/contact" class="btn btn-accent audience-cta">Get a fit assessment</a>
+            <a href="/contact/" class="btn btn-accent audience-cta">Get a fit assessment</a>
           </div>
         </div>
       </section>
@@ -264,8 +264,8 @@ const articleLd = hasDetail ? {
             </div>
           </div>
           <div class="stub-actions">
-            <a href="/contact" class="btn btn-accent">Talk to a senior consultant</a>
-            <a href="/certifications" class="btn btn-ghost">See all standards</a>
+            <a href="/contact/" class="btn btn-accent">Talk to a senior consultant</a>
+            <a href="/certifications/" class="btn btn-ghost">See all standards</a>
           </div>
         </div>
       </div>

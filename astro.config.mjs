@@ -9,6 +9,10 @@ const indexableCertSlugs = new Set(
 
 export default defineConfig({
   site: "https://www.qualitynexus.in",
+  // One canonical URL form sitewide. Paired with `"trailingSlash": true` in
+  // vercel.json, which 308-redirects /about -> /about/ at the edge so Google
+  // never sees two 200-OK variants of the same page.
+  trailingSlash: "always",
   integrations: [
     sitemap({
       filter: (page) => {

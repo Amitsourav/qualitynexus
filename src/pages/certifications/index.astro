@@ -92,7 +92,7 @@ const crumbs = breadcrumbLd([
         </div>
         <div class="cert-grid">
           {c.standards.map((s) => (
-            <a href={`/certifications/${slugify(s.code)}`} class="cert-card">
+            <a href={`/certifications/${slugify(s.code)}/`} class="cert-card">
               <span class="cert-code">{s.code}</span>
               <span class="cert-name">{s.name}</span>
               <span class="cert-arrow"><Icon name="arrow-right" /></span>

@@ -1,11 +1,11 @@
 ---
 const links = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/certifications", label: "Certifications" },
-  { href: "/clients", label: "Clients" },
-  { href: "/blog", label: "Blog" },
+  { href: "/about/", label: "About" },
+  { href: "/services/", label: "Services" },
+  { href: "/certifications/", label: "Certifications" },
+  { href: "/clients/", label: "Clients" },
+  { href: "/blog/", label: "Blog" },
 ];
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
@@ -17,13 +17,18 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
     </a>
     <nav class="primary-nav" aria-label="Primary">
       {links.map((l) => {
-        const active = l.href === "/" ? path === "/" : path.startsWith(l.href);
+        // Compare on the slash-stripped form so trailing-slash hrefs still match
+        // the normalised `path`, and so /services never matches /services-foo.
+        const target = l.href.replace(/\/$/, "") || "/";
+        const active = target === "/"
+          ? path === "/"
+          : path === target || path.startsWith(`${target}/`);
         return (
           <a href={l.href} class={active ? "active" : ""}>{l.label}</a>
         );
       })}
     </nav>
-    <a href="/contact" class="btn btn-accent header-cta">Get in touch</a>
+    <a href="/contact/" class="btn btn-accent header-cta">Get in touch</a>
   </div>
 </header>
 
